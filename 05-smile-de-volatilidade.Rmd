@@ -12,48 +12,62 @@ Nem sempre é interessante plotar o smile contra os _strikes_ propriamente ditos
 
 Lembrando que em precificação de opções estamos no mundo neutro ao risco, vamos definir o valor _forward_, $F$ do subjacente como o valor corrente composto pela taxa livre de risco até a maturidade da opção, ou seja:
 
-$$F=e^{r\tau}S$$
+\begin{equation}
+F=e^{r\tau}S
+\end{equation}
 
 A **volatilidade (implícita) total** pode ser definida como a volatiliade reescalada pela raiz do tempo, que nos dá uma informação da volatiliade esperada para o subjacente do período corrente até a maturidade. Da mesma forma, a **variância total**. Denotanto a volatilidade total por $\theta$ e a variância total por $w$, temos:
 
-$$\theta=\sigma_{imp}\cdot \sqrt{\tau} 
-(\#eq:voltotal)$$
+\begin{equation}
+\theta=\sigma_{imp}\cdot \sqrt{\tau} 
+(\#eq:voltotal)
+\end{equation}
 
 e
 
-$$w=\sigma_{imp}^2\cdot\tau
-(\#eq:vartotal)$$
+\begin{equation}
+w=\sigma_{imp}^2\cdot\tau
+(\#eq:vartotal)
+\end{equation}
 
 Vamos também definir a medida _forward log-moneyness_ e denotá-la por $k$. Esta será a medida de _moneyness_ que iremos utilizar ao longo deste e de outros artigo, portanto iremos utilizar este termo para designar o _forward log-moneyness_ a não ser que expresso de forma contrária no texto.
 
-$$k=\ln\left(\frac{K}{S}\right)-r\tau=\ln\left(\frac{K}{F}\right)
-(\#eq:flmoneyness)$$
+\begin{equation}
+k=\ln\left(\frac{K}{S}\right)-r\tau=\ln\left(\frac{K}{F}\right)
+(\#eq:flmoneyness)
+\end{equation}
 
 Logo, o _strike_ está relacionado ao _moneyness_ de forma que: $K=Fe^k$.
 
 Podemos agora reparametrizar as expressões $d1$ e $d2$ do modelo B&S de forma que serão mais facilmente trabalhadas em modelos de volatilidade. Lembrando destas expressões que já foram apresentadas no Capítulo \@ref(bsm):
 
-$$\begin{aligned}
+\begin{align}
 &d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(\tau)}{\sigma {\sqrt {\tau}}}}\\
 &d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(\tau)}{\sigma {\sqrt {\tau}}}}=d_1-\sigma\sqrt{\tau}
-\end{aligned}$$
+\end{align}
 
 Substituindo as expressões para _forward log-moneyness_ e volatilidade total nas definições acima temos as novas parametrizações para $d1$ e $d2$:
 
-$$d_{1}={-\frac{k}{\theta}+\frac{\theta}{2}}
-(\#eq:d1mod)$$
+\begin{equation}
+d_{1}={-\frac{k}{\theta}+\frac{\theta}{2}}
+(\#eq:d1mod)
+\end{equation}
 
-$$d_{2}={-\frac{k}{\theta}-\frac{\theta}{2}}=d_1-\theta
-(\#eq:d2mod)$$
+\begin{equation}
+d_{2}={-\frac{k}{\theta}-\frac{\theta}{2}}=d_1-\theta
+(\#eq:d2mod)
+\end{equation}
 
 Retomando o valor da opção do tipo Call no modelo B&S, podemos reescrever sua fórmula de apreçamento da seguinte forma:
 
-$$\begin{aligned}
+\begin{equation}
+\begin{aligned}
 C(K, \tau)=&SN(d1)-Ke^{-r\tau}N(d2)\\
 e^{r\tau}C(K, \tau)=&FN(d1)-KN(d2)\\
 C_B=&F\left[N(d1)-e^kN(d2)\right]
 \end{aligned}
-(\#eq:cblack)$$
+(\#eq:cblack)
+\end{equation}
 
 Esta equação é conhecida como a forma de Black de precificação _(Black Call price formula)_, que relaciona os valores _forward_ da opção (também conhecido como valor não descontado), do subjacente e do _strike_. Esta formulação é particularmente útil quando formos extrair a distribuição neutra ao risco do subjacente que está implícita nos preços de mercado das opções.
 
@@ -128,11 +142,15 @@ knitr::include_graphics("img/trava_alta.png")
 
 É claro que quanto mais ITM estejam as opções, maior seu preço e quanto mais fora do dinheiro menor será seu valor até o limite inferior zero. Se levarmos a diferença entre os _strikes_, $dK$ a zero temos que:
 
-$$\frac{\partial C}{\partial K}\leq 0$$
+\begin{equation}
+\frac{\partial C}{\partial K}\leq 0
+\end{equation}
 
 Este é o limite de arbitragem para travas de alta ou, mais conhecido pelo termo em inglês _call spread no-arbitrage_ e impõe que os preços das calls devem ser uma função descrescente no _strike_. De forma equivalente e através da [paridade compra-venda](#putcalparity) este limite de arbitragem para as puts é:
 
-$$\frac{\partial P}{\partial K}\geq 0$$
+\begin{equation}
+\frac{\partial P}{\partial K}\geq 0
+\end{equation}
 
 ### Arbitragem de borboleta
 
@@ -148,19 +166,19 @@ Seguindo a mesma linha de raciocínio anterior, como o _payoff_ da borboleta é 
 
 Agora imagine que escalamos a estratégia de forma que um lote de compras (na venda são dois lotes) seja de tamanho $1/dK^2$, o valor para a montagem desta operação deve ser, portanto:
 
-$$
+\begin{equation}
 \pi_B=\frac{C(K-dK)-2C(K)+C(K+dK)}{dK^2}
-$$
+\end{equation}
 
 E se levarmos ao limite em que $dK\rightarrow 0$, a equação acima torna-se justamente a segunda derivada do preço da call no _strike_ $K$.
 
-$$
+\begin{equation}
 \begin{aligned}
 \frac{\partial^2 C(K)}{\partial K^2}=& \pi_B\\
 \geq & 0
 \end{aligned}
 (\#eq:arbborboleta)
-$$
+\end{equation}
 
 Ou seja, os preços das calls são uma função **convexa** nos _strikes_. O mesmo raciocínio pode ser feito para uma borboleta com puts e o resultado será equivalente, o preço das puts também deve ser uma função convexa nos _strikes_.
 
@@ -174,10 +192,10 @@ Dado que a relação de **volatilidade total** implícita e preço de uma opçã
 
 Esta relação pode ser expressa através da seguinte equação para uma call precificada através de B&S:
 
-$$
+\begin{equation}
 \frac{\partial C_{BS}(k, \theta(\tau))}{\partial \tau}=\partial_\theta C_{BS}\cdot\partial_\tau \theta \geq 0
 (\#eq:arbcalendario)
-$$
+\end{equation}
 
 onde $\partial_\theta C_{BS}$ é a derivada parcial do preço da call em relação a volatilidade total implícita, que já demonstramos ser positiva e $\partial_\tau \theta$ é a derivada parcial da volatilidade total implícita em relação ao tempo para maturidade que, portanto, deve ser maior ou igual a zero para obedecer a restrição imposta ao preço da call.
 
@@ -203,19 +221,19 @@ Certamente não é uma log-normal. Na verdade, a densidade da distribuição que
 
 Pode-se obter este resultado a partir da definição do valor de uma call e é conhecido como a fórmula de @Breeden1978. O valor de uma call é o valor esperado do _payoff_ terminal desta call ponderado pela densidade neutra ao risco do subjacente. Ou seja:
 
-$$
+\begin{equation}
 C(S, t)=e^{-r\tau}\int\limits_{0}^\infty p(S,t,S_T,T)\max\{S_T-K, 0\}dS_T
-$$
+\end{equation}
 
 onde $p(\cdot)$ é a densidade neutra ao risco e estamos supondo uma taxa de juros livre de risco constante durante o período de vida da opção. Como o _payoff_ da call é não linear, sendo zero para qualquer valor de $S_T \leq K$ e igual a $S_T-K$ quando $S_T > K$, podemos escrever esta equação como:
 
-$$
+\begin{equation}
 C(S, t)=e^{-r\tau}\int\limits_{K}^\infty p(S,t,S_T,T)(S_T-K)dS_T
-$$
+\end{equation}
 
 que pode ser rearranjada, com alguma simplificação na notação, da seguinte forma.
 
-$$
+\begin{equation}
 \begin{aligned}
 \frac{\partial C}{\partial K}=& -e^{-r\tau}\int\limits_{K}^\infty p(S_T)dS_T\\
 e^{r\tau}\frac{\partial C}{\partial K}=& \int\limits_{-\infty}^K p(S_T)dS_T\\
@@ -223,7 +241,7 @@ e^{r\tau}\frac{\partial^2 C}{\partial K^2}=& \ p(K)\\
 \frac{\partial^2 C_B}{\partial K^2}=& \ p(K)
 \end{aligned}
 (\#eq:distimplicita)
-$$
+\end{equation}
 
 Onde usou-se a notação $C_B$ para denotar a formulação de Black para o preço de uma call. Ou seja, a segunda derivada em relação ao strike do preço não descontado de uma call é a distribuição neutra ao risco do ativo subjacente, e é válida para todos preços de exercício.
 

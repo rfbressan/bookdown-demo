@@ -20,7 +20,7 @@ Suponha um processo de Markov, que para fins de simplificação consideraremos e
 
 Para tempos discretos, $T\in\mathbb{Z}$ este é o processo do passeio aleatório (_Random Walk_), entretanto para tempo contínuo quando $T\in\mathbb{R}$ com incrementos acontecendo em intervalos de tempo infinitesimalmente pequenos, este é o Movimento Browniano - MB, que também é largamente conhecido como processo de Wiener. 
 
-```{r brownian_plot, echo=TRUE}
+```{r brownian_plot, echo=TRUE, cache=TRUE}
 t <- 0:500
 m <- 5 # Numero de simulacoes
 mc_names <- paste0("Sim", seq_len(m)) # Nomes das simulacoes
@@ -49,7 +49,7 @@ ggplot(mb, aes(x = t, y = value, color = sim)) +
   theme_economist_white()
 ```
 
-```{r mc_brown, include=FALSE}
+```{r mc_brown, include=FALSE, cache=TRUE}
 # Simulação de MC de um MB
 n <- 1000
 realizations <- matrix(nrow = n, ncol = length(t))
@@ -73,7 +73,10 @@ A figura acima mostra 5 realizações de um *mesmo* processo estocástico com m�
 
 Agora que já foi passada a intuição sobre processos estocásticos, pode-se partir para definições mais formais sobre estes processos. Vamos adotar a notação do cálculo para tanto, e generalizar nosso MB possibilitando-o que tenha média diferente de zero ($\mu$) e variância qualquer ($\sigma^2$), mantendo estas constantes ao longo do tempo, entretanto. Desta forma um movimento Browniano com deriva pode ser descrito através da seguinte equação diferencial estocástica - EDE:
 
-$$dX_t = \mu dt + \sigma dB_t$$
+\begin{equation}
+dX_t = \mu dt + \sigma dB_t
+(\#eq:mb)
+\end{equation}
 
 onde $dB_t$ é nosso MB padrão em um intervalo de tempo infinitesimal, $dt$.
 
@@ -87,23 +90,32 @@ A deriva pode ser interpretada como o valor esperado do retorno da ação em um 
 
 A solução para estes dois problemas é modelar o preço como um processo estocástico conhecido como Movimento Browniano Geométrico. Ele difere do MB padrão pois assume que o **logaritmo** da variável aleatória possui distribuição Normal.  O MBG é a resolução para a seguinte EDE:
 
-$$dX_t = \mu X_t dt + \sigma X_t dB_t$$
+\begin{equation}
+dX_t = \mu X_t dt + \sigma X_t dB_t
+(\#eq:mbg)
+\end{equation}
 
 Veja que este é basicamente o mesmo processo MB, porém a deriva, termo que multiplica $dt$, varia linearmente com o valor do processo ($\mu X_t$) assim como a volatilidade instantânea ($\sigma X_t$).
 
 A solução para esta EDE, para um valor inicial qualquer de $X$ ($X_0 > 0$) é dada por:
 
-$$X_t = X_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma B_t\right)$$
+\begin{equation}
+X_t = X_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma B_t\right)
+(\#eq:mbgsol)
+\end{equation}
 
 A variável aleatória $X$ segue um MB ao longo de uma trajetória exponencial. É fácil verificar que, por ser exponencial, $X_t$ nunca terá valor negativo.
 
 Esta é uma forma conveniente de representar a evolução de preços de um ativo pois naturalmente surge o conceito de retornos logarítmos. O log-retorno de $X$ é dado por $r_t=\ln(X_t/X_0)$ de onde inferimos que se o processo de formação de preço de um ativo segue um MBG, então seus log-retornos serão normalmente distribuídos com média $\mu-\frac{\sigma^2}{2}$ e volatilidade $\sigma$ em uma unidade de período considerado. Se escalarmos o período de tempo considerado para $T$, temos então que os retornos logarítmicos do ativo $X$ seguem a seguinte distribuição normal:
 
-$$r_T \sim\phi\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)$$
+\begin{equation}
+r_T \sim\phi\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)
+(\#eq:rT)
+\end{equation}
 
 Abaixo apresentamos 5 realizações de um MBG com valor de deriva $\mu = 0,6\% a.p.$ e variância $\sigma^2=1\% a.p.$.
 
-```{r mbg_plot, echo=TRUE}
+```{r mbg_plot, echo=TRUE, cache=TRUE}
 t <- 0:500
 m <- 5 # Numero de simulacoes
 mc_names <- paste0("Sim", seq_len(m)) # Nomes das simulacoes

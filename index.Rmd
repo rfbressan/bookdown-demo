@@ -45,4 +45,15 @@ for (s in pkgs_att) {
   if (!library(s, character.only = TRUE, logical.return = TRUE)) 
     stop("Error loading packages.")
 }
+
+# Instala o pacote R tinytex se nao estiver instalado
+# Em seguida instala o tinytex Latex com os pacotes discriminados
+if (knitr:::is_latex_output() && 
+    !("tinytex" %in% .packages(all.available = TRUE))) {
+  install.packages("tinytex")
+  tinytex::install_tinytex(force = TRUE, 
+                           extra_packages = c("babel", 
+                                              "booktabs", 
+                                              "indentfirst"))
+}
 ```

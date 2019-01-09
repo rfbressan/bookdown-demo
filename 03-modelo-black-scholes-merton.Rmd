@@ -1,0 +1,278 @@
+# Modelo Black-Scholes-Merton {#bsm}
+
+Neste artigo desenvolveremos o modelo para precificação de opções do tipo europeias proposto @Black1973 e posteriormente expandido por @Merton1976. A derivação deste modelo se baseia nos conceitos apresentados sobre processos estocásticos do Capítulo \@ref(processos-estocasticos).
+
+Antes de entrar na modelagem desenvolvida pelos autores acima citados, iremos tratar de algumas definições essenciais, como por exemplo a precificação de ativos em um mundo neutro ao risco (_risk neutral valuation_) e portfólio de replicação (_replicating portfolio_), que são largamente utilizados na precificação de quaisquer derivativos, e não somente opções. 
+
+## Portfólio de replicação
+
+Suponha que se deseja precificar uma opção de compra sobre uma ação, vamos denotar o preço desta _call_ de $f_t$. Sabemos que na data de expiração, $T$, da opção de compra seu preço será: $f_T=max(S_T - K, 0)$, onde $S_T$ é o preço da ação subjacente na data $T$ e $K$ é o preço de exercício da opção. Podemos criar um portfólio que envolva um ativo livre de risco, com preço $B_t$ e a ação objeto do derivativo, $S_t$, que recrie o mesmo valor de pagamento que a opção na data de expiração. Ou seja, criamos o portfólio de replicação $P_t=\Delta S_t + b B_t$, no qual devemos escolher os valores de $\Delta$ e $b$ de tal forma que $f_T = P_T$.
+
+De fato, para apenas um período a frente, podemos tomar emprestado a taxa de juros livre de risco[^1], $r$ um valor igual ao preço corrente da ação, $S_0$ e comprá-la, ao mesmo tempo em que se "trava" (faz _hedge_) deste portfólio vendendo a opção. O lucro desta operação em $T$ deve ser zero, pois é um portfólio travado. Com estas premissas é possível calcular o preço do prêmio da opção a ser cobrado no período inicial para que o valor esperado da operação como um todo seja zero.
+
+Este portfólio formado pela venda do ativo livre de risco e compra do ativo objeto é denominado *portfólio de replicação*, pois, ele fornece um fluxo de caixa igual ao derivativo que buscamos precificar. Ao adicionarmos ao portfólio de replicação a venda (ou seja, o negativo) do derivativo, temos um portfólio _hedgeado_, onde não existe mais incerteza com relação ao seu retorno esperado.
+
+## Precificação neutra ao risco
+
+A metodologia de precificação de derivativos dentro do _mundo neutro ao risco_[^2] é o carro-chefe das metodologias para se avaliar estes instrumentos. O princípio de precificação neutra ao risco afirma que um derivativo pode ser valorado através das seguintes suposições:
+
+- o retorno esperado do ativo objeto é a taxa livre de risco, e
+- o valor esperado do derivativo na expiração deve ser descontado pela taxa livre de risco para trazê-lo a valor presente.
+
+É claro que o mundo real não é neutro ao risco, entretanto uma das provas que a metodologia faz é que, ao precificarmos um derivativo de forma relativa ao preço do ativo objeto, a precificação neutra ao risco encontra o mesmo valor para o derivativo que uma metodologia que leve em conta as preferências ao risco dos investidores. Entretanto, precificar um derivativo assumindo neutralidade ao risco é muito mais simples que encarar um modelo baseado no mundo real.
+
+De fato a neutralidade ao risco soa um tanto quanto estranha a primeira vez. Porém, ela tem uma explicação lógica de sua validade nas circunstâncias em que é desenvolvida. Se os investidores forem avessos ao risco, por exemplo, os retornos esperados para o ativo objeto terão embutidos um prêmio pelo risco. Acontece que este prêmio pelo risco também deverá estar na taxa de desconto do valor esperado de pagamento do derivativo, de forma que este prêmio ao risco é cancelado.
+
+É comum na literatura de derivativos encontrarmos os termos mundo-P e mundo-Q. O mundo-P se refere ao mundo real, com probabilidades P reais de ocorrência de eventos, equanto que o mundo-Q é o mundo neutro ao risco, onde as probabilidades Q são ajustadas (tecnicamente suas medidas são alteradas) para refletir esta neutralidade. No mundo-Q é comum denotarmos o valor esperado de alguma variável aleatória com a seguinte notação: $\mathbb{E_Q}[\cdot]$.
+
+Assim, a precificação de derivativos supondo um mundo neutro ao risco chega no preço correto para todos os mundos.  
+
+## Encontrando a equação de Black-Scholes
+
+Vamos partir do princípio que nossa ação, objeto da opção que desejamos precificar, siga um MBG conforme descrito no [capítulo anterior](#processos-estocasticos). Portanto, o preço de nossa ação no período $t$ deve observar a seguinte equação diferencial estocástica:
+
+$$
+\begin{equation}
+dS_t=\mu S_t+\sigma S_t dW_t 
+(\#eq:ds)
+\end{equation}
+$$
+
+onde $dW_t$ é o movimento Browniano, ou processo de Wiener.
+
+Esta equação resume as principais hipóteses do modelo Black&Scholes de precificação de opções, são elas:
+
+- O preço do ativo objeto é um processo estocástico e segue uma distribuição log-normal;
+- O retorno esperado ($\mu$) e a volatilidade ($\sigma$) deste ativo são **constantes**, tanto no tempo quanto com relação ao próprio nível de preço do ativo objeto.
+
+Ademais destas hipóteses, temos aquelas relacionadas a racionalidade dos mercados e ao princípio de ausência de oportunidades de arbitragem. Estas hipóteses nos levam a validade do mundo neutro ao risco e portanto, a resolução do modelo da forma como descreveremos abaixo.
+
+Nossa opção será descrita por um portfólio de replicação, e se tomarmos seu preço no instante $t$, então a opção também deve seguir uma equação diferencial estocástica da forma:
+
+$$
+\begin{equation}
+df_t=\Delta dS_t+b\,dB_t 
+(\#eq:df1)
+\end{equation}
+$$
+
+aqui $dB_t$ representa a variação do ativo livre de risco (dinheiro) dentro de um período de tempo $dt$. Sabemos que o valor do ativo livre de risco não envolve incerteza alguma, é determinístico, e seu rendimento é a taxa de juros livre de risco. Assim, para uma taxa continuamente composta $r$ uma unidade de $B$ evolui através de $B_t=e^{rt}$, logo:
+
+$$
+\begin{equation}
+dB_t=rBdt
+(\#eq:db)
+\end{equation}
+$$
+
+De acordo com o [lema de Ito](https://pt.wikipedia.org/wiki/Lema_de_It%C5%8D) o diferencial de uma função que dependa do tempo e de um processo estocástico pode ser encontrado da seguinte forma:
+
+$$
+\begin{equation}
+df_t=\frac{\partial f}{\partial t}dt + \frac{\partial f}{\partial S}dS + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}dS^2
+(\#eq:df2)
+\end{equation}
+$$
+
+onde $dS^2$ é a variação quadrática de nosso processo $S_t$ que é um movimento browniano geométrico, logo $dS^2=\sigma^2S^2dt$.
+
+Igualando as equações \@ref(eq:df1) e \@ref(eq:df2), fazendo as devidas substituições trazidas pelas equações \@ref(eq:ds) e \@ref(eq:db) e por fim rearranjando os termos, chegamos na seguinte relação:
+
+$$
+\begin{equation}
+\left( \frac{\partial f}{\partial t} + \frac{\partial f}{\partial S}\mu S + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2 S^2 - \Delta\mu S - rbB \right)dt + \left( \frac{\partial f}{\partial S}\sigma S - \Delta \sigma S \right)dW = 0 
+(\#eq:nome)
+\end{equation}
+$$
+
+que para ser válida para todo $t$, cada termo entre parênteses deve ser igual a zero simultaneamente. Rapidamente chegamos aos valores necessários de nosso portfólio de replicação. 
+
+$$
+\begin{equation}
+\Delta = \frac{\partial f}{\partial S} 
+(\#eq:delta)
+\end{equation}
+$$
+
+$$
+\begin{equation}
+rbB = \frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2S^2 
+(\#eq:rbb1)
+\end{equation}
+$$
+
+Através da equação \@ref(eq:df1), integrando-a, chegamos na relação $bB = f - \Delta S$ e pré-multiplicando ambos os lados por $r$ temos então que:
+
+$$
+\begin{equation}
+rbB = r(f-\Delta S) 
+(\#eq:rbb2)
+\end{equation}
+$$
+
+Finalmente, igualando as equações \@ref(eq:rbb1) e \@ref(eq:rbb2) e substituindo o valor de $\Delta$ encontramos a famigerada equação diferencial parcial - EDP - de Black&Scholes:
+
+$$
+\begin{equation}
+\frac{\partial f}{\partial t}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 f}{\partial S^2}+rS\frac{\partial f}{\partial S} - rf = 0
+(\#eq:BS)
+\end{equation}
+$$
+
+## Solução analítica
+
+A equação possui diferentes formas de resolução[^3], a precificação do derivativo irá depender da forma que resolvermos a equação \@ref(eq:BS). O Modelo Black&Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos _payoffs_. Para uma call:
+
+$$
+\begin{equation}
+\displaystyle f(S,T)=\max(S-K,0)
+(\#eq:cpayoff)
+\end{equation}
+$$
+
+
+Já no caso de uma put: 
+
+$$
+\begin{equation}
+\displaystyle f(S,T)=\max(K-S,0)
+(\#eq:ppayoff)
+\end{equation}
+$$
+
+Onde:
+
+- T é a data de vencimento da opção,
+- K é o preço de exercício, e
+- S é o preço do ativo subjacente.
+
+Utilizando os _payoffs_ dados  nas equações \@ref(eq:cpayoff) e \@ref(eq:ppayoff), e resolvendo a EDP de Black&Scholes \@ref(eq:BS), iremos obter o modelo para se precificar os derivativos citados.
+
+Para uma Call temos que:
+
+$$
+\begin{equation}
+C(S,t)=SN(d_{1})-Ke^{-r(T-t)}N(d_{2})
+(\#eq:call)
+\end{equation}
+$$
+
+Já para um Put chegamos a:  
+
+$$
+\begin{equation}
+P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
+(\#eq:put)
+\end{equation}
+$$
+
+onde:
+
+$$d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
+(\#eq:d1)
+$$
+
+$$d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
+(\#eq:d2)
+$$
+
+É a partir das equações \@ref(eq:call) e \@ref(eq:put) que se obtém as chamadas gregas, que são as sensibilidades do preço do derivativo em relação a alterações nos parâmetros do modelo. Explicaremos as gregas em maiores detalhes mais adiante.
+
+## Paridade compra e venda {#putcallparity}
+
+Agora vamos falar um pouco sobre a paridade entre opções de compra e venda, algo que nos ajuda a precificar algum derivativo quando já conhecemos o preço de outro derivativo com especificações semelhantes. 
+
+Assumindo ausência de oportunidade de arbitragem, com um ativo subjacente que tenha liquidez, iremos verificar a paridade Call-Put que define uma relação entre os preços de uma call e put do tipo europeu, desde que possuam o **mesmo tempo de maturidade** e **preço de strike**. Aqui possuiremos menos premissas que o modelo Black\&Scholes e premissas mais simples, tal relação poderá ser utilizada para encontrar o valor justo de uma opção. Com a ausência de arbitragem observe que dois portfolios que sempre geram o mesmo payoff em um instante T devem ter o mesmo valor em qualquer instante intermediário.
+
+Imagine um primeiro portfólio onde o investidor compre uma opção de compra C, a qual possui tempo de maturidade T e preço de strike K, sobre algum ativo subjacente que chamaremos de S e compre um título B que seu valor no período T seja de <span class="tex2jax_ignore">\$</span>30. E um segundo portfolio onde tenha o próprio ativo subjacente S que esteja sendo negociado a <span class="tex2jax_ignore">\$</span>25 e compre uma put P com um preço de strike K e maturidade T. Estes são porfólios de replicação entre si, eles terão exatamente o mesmo _payoff_ no período T, e na ausência de arbitragem, podemos calcular seus retornos através da precificação neutra ao risco. Teremos uma relação onde os valores dos nossos portfolios serão:
+
+$$
+\begin{equation}
+\mathbb{E_Q}[S_t + P_t] = \mathbb{E_Q}[C_t + B_t]; \quad t \leq T
+(\#eq:parity)
+\end{equation}
+$$
+
+Como estamos em um mundo neutro ao risco, $P_t$ e $C_t$ são os preços da put e da call dados pelo modelo B&S, enquanto $\mathbb{E_Q}[B_t]$ se resume a $Ke^{-r(T-t)}$, ou seja, a posição atual em ativo livre de risco deve ser o valor presente do strike das opções. O preço do subjacente é o próprio preço atualmente observado.
+
+Como $S_t$ e $B_t=Ke^{-r(T-t)}$ são conhecidos, se no mercado existir um preço $C_t$ então podemos calcular $P_t$ e vice-versa. Esta é a essência da paridade compra e venda.
+ 
+Observe que se essa relação não for mantida, teremos arbitragem: Suponhamos que $S_t > B_t$ e que a put esteja com um premio mais alto que a call no entanto ambos possuem um preço de strike <span class="tex2jax_ignore">\$</span>30 e maturidade T, que os prêmios sejam <span class="tex2jax_ignore">\$</span>20 e <span class="tex2jax_ignore">\$</span>15 respectivamente teremos então: 30 + 20 = 15 + 25, nesse caso teremos 50 $\neq$ 40, então vende-se o que está mais caro, no caso a ação e a put e compraria o título e a call, chegando ao um lucro de 50-40=10, de <span class="tex2jax_ignore">\$</span>10 sem risco. Observe que independentemente de a ação subir acima ou cair abaixo do strike, o lucro obtido nesta operação será sempre de <span class="tex2jax_ignore">\$</span>10.
+
+## As Gregas {#gregas}
+	
+As letras gregas utilizadas no mercado de opções são usadas para denotar as sensibilidades do preço da opção com relação a variação de alguma das variáveis do modelo, a seguir entraremos em detalhes sobre as principais gregas usadas para a análise de opções. 
+
+### Delta
+
+Já havíamos definido o delta anteriormente ao encontrarmos a EDP de Black&Scholes, isto é:
+
+$$
+\begin{equation}
+\Delta = \frac{\partial f}{\partial S}
+(\#eq:delta)
+\end{equation}
+$$
+
+O delta mede a taxa com que o preço da opção muda conforme o valor do ativo subjacente oscila, seu valor pode variar entre 1 e 0 para call e entre 0 e -1 para put. 
+
+Exemplo: imagine uma opção de compra de 100 ações que possui um delta de 0,72, caso o ativo subjacente aumente <span class="tex2jax_ignore">\$</span>1 o valor da opção aumentará <span class="tex2jax_ignore">\$</span>72 (pois representa 100 ações), e caso o valor do ativo subjacente diminua o preço da opção diminuirá <span class="tex2jax_ignore">\$</span>72.
+
+O mesmo acontece com opções de venda, só que de uma forma inversamente proporcional pelo seu delta ser negativo. Uma opção de venda de 100 ações que possui um delta de -0,40 vai valer menos <span class="tex2jax_ignore">\$</span>40 caso o preço do seu ativo subjacente aumente <span class="tex2jax_ignore">\$</span>1, e vai valer mais <span class="tex2jax_ignore">\$</span>40 caso o preço do seu ativo subjacente diminua <span class="tex2jax_ignore">\$</span>1.
+	
+O strike da opção influência o delta diretamente, quanto mais in-the-money for uma opção, call ou put, maior será o seu delta em valor absoluto, e quanto mais out-the-money, menor será o módulo de seu delta. 
+
+### Gamma
+
+$$
+\begin{equation}
+\Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 f}{\partial S^2}
+(\#eq:gamma)
+\end{equation}
+$$
+
+  
+O gamma mede a taxa com que o delta muda a cada oscilação do preço do ativo subjacente, seu impacto aumenta conforme o valor atual do ativo se aproxima do strike, sendo responsável pela convexidade do valor da opção. Opções de alto gamma são chamadas de explosivas, uma vez que mesmo pequenas variações no preço do ativo se traduzem em grandes oscilações no preço da opção.
+
+### Theta
+
+$$
+\begin{equation}
+\Theta = -\frac{\partial f}{\partial \tau}, \quad \tau=T-t
+(\#eq:theta)
+\end{equation}
+$$
+
+  
+O Theta é uma taxa que mede o efeito do tempo sobre o preço da opção. Como as opções tem um maior valor de acordo com a quantidade de tempo até a data de vencimento, seu valor também diminui conforme o tempo passa, theta é a letra que mede essa variação (que sempre é negativa). O valor de theta representa a quantidade de dinheiro perdida no prêmio da opção a cada dia que passa.
+
+### Vega
+
+$$
+\begin{equation}
+\displaystyle {\mathcal {V}}=\frac{\partial f}{\partial \sigma} 
+(\#eq:vega)
+\end{equation}
+$$
+
+  
+O vega é uma taxa que mede o efeito da mudança da volatilidade no preço da opção. Seu valor é praticamente constante em opções com a mesma data de vencimento, esse valor aumenta em datas de vencimento mais distantes devido ao maior espaço de tempo em que a volatilidade atua, devido ao maior intervalo de tempo que há para ocorrer mudanças nos preços.
+
+### Rho
+
+$$
+\begin{equation}
+\displaystyle \rho =\frac{\partial f}{\partial r}
+(\#eq:rho)
+\end{equation}
+$$
+
+  
+O rho é uma taxa que mede a sensitividade do preço da ação em relação à taxa livre de risco, caso o valor de de rho determinada opção seja 0,7, para cada aumento de 1% da taxa livre de risco o valor da opção aumentará 0,7%. Essa taxa influi principalmente no preço de opções com uma data de vencimento extremamente distante, não afetando muito o preço de opções cuja data de vencimento é próxima.
+
+
+[^1]: Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.
+
+[^2]: A precificação dentro do mundo neutro ao risco mereceria um, ou mais, _posts_ por si só. Aqui lançaremos apenas os principais resultados que nos permitem encontrar o modelo de B&S.
+
+[^3]: Uma demonstração completa de como encontrar a solução para a EDP de Black&Schole pode ser encontrada em [https://planetmath.org/AnalyticSolutionOfBlackScholesPDE](https://planetmath.org/AnalyticSolutionOfBlackScholesPDE)

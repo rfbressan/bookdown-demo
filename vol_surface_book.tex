@@ -1,0 +1,1376 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Introdução a Superfície de Volatilidade},
+            pdfauthor={Rafael Felipe Bressan},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Introdução a Superfície de Volatilidade}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Rafael Felipe Bressan}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{2019-01-09}
+
+\usepackage{booktabs}
+\usepackage{amsthm}
+\usepackage[english, portuges]{babel}
+\usepackage{indentfirst}
+% O tamanho da identação do parágrafo é dado por:
+\setlength{\parindent}{2.5cm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\chapter*{Prefácio}\label{prefacio}
+\addcontentsline{toc}{chapter}{Prefácio}
+
+Este é um pequeno resumo, elaborado na forma de livro, sobre os estudos
+realizados pelo núcleo de derivativos e riscos do
+\href{https://clubedefinancas.com.br}{Clube de finanças ESAG}.
+
+Os estudos realizados pelos membros do núcleo foram sendo apresentados
+na forma de artigos no blog do Clube. A partir destes artigos foi feita
+esta coletânea de forma a apresentar todo o conteúdo em local único para
+facilitar a assimilação dos membros futuros e leitores de nosso blog.
+
+\chapter*{Sobre os Autores}\label{sobre-os-autores}
+\addcontentsline{toc}{chapter}{Sobre os Autores}
+
+\section*{Rafael Felipe Bressan}\label{rafael-felipe-bressan}
+\addcontentsline{toc}{section}{Rafael Felipe Bressan}
+
+Formado em Engenharia de Controle e Automação Industrial pela UFSC e
+aluno de graduação do curso de Ciências Econômicas na UDESC/Esag. Membro
+do Clube de Finanças Esag e gerente do núcleo de pesquisa em riscos e
+derivativos.
+
+Se interessa por finanças quantitativas, modelagem e controle de riscos
+e desenvolveu, durante a elaboração deste livro, grande curiosidade
+sobre precificação de derivativos. Gosta de programar em
+\href{https://cran.r-project.org/}{R}, liguagem com a qual elaborou este
+próprio livro e está aprendendo \href{https://www.python.org/}{Python}.
+
+\hypertarget{processos-estocasticos}{\chapter{Processos Estocásticos em
+Finanças}\label{processos-estocasticos}}
+
+Neste artigo abordaremos um assunto técnico, mas muito utilizado e de
+fudamental importância para a precificação de instrumentos derivativos.
+Será apresentado o conceito de processos estocásticos - PE, e sua
+aplicação no mundo das finanças.
+
+Um processo estocástico é a evolução temporal de uma determinada
+variável de interesse que pode assumir valores aleatórios em cada ponto
+no tempo. Em outras palavras, o caminho que a variável segue ao longo do
+tempo evolui de maneira incerta. Estes processos podem se dar em tempo
+discreto ou em tempo contínuo. Processo em tempo discreto são aqueles
+onde o valor da variável pode se alterar somente em intervalos
+pré-definidos de tempo, por exemplo ao final do dia. Em processos em
+tempo contínuo, o valor de nossa variável está constantemente em
+mudança, de forma aleatória seguindo alguma distribuição de
+probabilidades.
+
+Estes processos são muito importantes em finanças pois, é amplamente
+aceito que a evolução do preço de ativos financeiros pode ser modelado
+por um PE em tempo contínuo, sendo este modelo portanto, a base para a
+teoria de precificação de ativos e da qual os derivativos fazem extenso
+uso. Aprender sobre a evolução temporal do preço de uma ação através de
+um processo estocástico é o primeiro passo para saber como atribuir um
+preço a uma opção sobre esta ação, por exemplo.
+
+Deve ser notado também que apesar de o preço dos ativos serem
+\textbf{observados} apenas em intervalos discretos de tempo (apenas
+quando existe transação) e assumirem valores também discretos (múltiplos
+de um centavo), o preço e sua evolução estão ocorrendo continuamente,
+nossas observações que são discretas. Desta forma os processos em tempo
+contínuos são ideais para este tipo de modelagem.
+
+\section{Processos de Markov}\label{markov}
+
+Uma primeira definição de deve-se fazer para estudar PE aplicados a
+evolução do preço de ações é o conceito de processo de Markov. Este tipo
+de processo é tal que o histórico do processo que o levou até seu estado
+atual, é \textbf{irrelevante} para a previsão de seu estado futuro. Ou
+seja, toda a informação da história do processo já está contida no seu
+valor atual. Quando consideramos que preços de ativos seguem um processo
+de Markov, estamos assumindo válida pelo menos a forma fraca de mercados
+eficientes.
+
+Uma implicação desta suposição, verificada empiricamente, é que não se
+pode obter lucros apenas seguindo padrões históricos do preço e
+extrapolando-os no futuro. Outra, mais importante para nossos processos,
+é que as distribuições de probabilidade que a variável aleatória segue
+em cada ponto no tempo são \textbf{independentes}.
+
+\section{Movimento Browniano}\label{mb}
+
+Suponha um processo de Markov, que para fins de simplificação
+consideraremos em tempo discretos. Se a distribuição de probabilidade
+para o próximo incremento no valor do processo for uma Normal com média
+zero e variância unitária, podemos representar este incremento por
+\(\phi(0, 1)\). Como este é um processo de Markov, o segundo incremento
+será independente do primeiro e terá novamente a mesma distribuição de
+probabilidade. Qual seria então, a partir do período inicial até o
+segundo período, a distribuição de probabilidade dos possíveis valores
+de nosso hipotético processo? A reposta é a soma de duas normais
+\(\phi(0, 1)\) que resulta em \(\phi(0, 2)\). Se assim continuarmos a
+fazer previsões para T períodos a frente, nossa distribuição terá
+densidade \(\phi(0, T)\).
+
+Para tempos discretos, \(T\in\mathbb{Z}\) este é o processo do passeio
+aleatório (\emph{Random Walk}), entretanto para tempo contínuo quando
+\(T\in\mathbb{R}\) com incrementos acontecendo em intervalos de tempo
+infinitesimalmente pequenos, este é o Movimento Browniano - MB, que
+também é largamente conhecido como processo de Wiener.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t <-}\StringTok{ }\DecValTok{0}\OperatorTok{:}\DecValTok{500}
+\NormalTok{m <-}\StringTok{ }\DecValTok{5} \CommentTok{# Numero de simulacoes}
+\NormalTok{mc_names <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"Sim"}\NormalTok{, }\KeywordTok{seq_len}\NormalTok{(m)) }\CommentTok{# Nomes das simulacoes}
+\NormalTok{sigma2 <-}\StringTok{ }\DecValTok{1}
+\NormalTok{mu <-}\StringTok{ }\DecValTok{0}
+\NormalTok{brown_t <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{nrow =} \KeywordTok{length}\NormalTok{(t), }\DataTypeTok{ncol =}\NormalTok{ m)}
+\CommentTok{# MC Simulation}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{543210}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_len}\NormalTok{(m)) \{}
+\NormalTok{  increments <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\KeywordTok{length}\NormalTok{(t) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, mu, }\KeywordTok{sqrt}\NormalTok{(sigma2))}
+\NormalTok{  brown_t[, i] <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{cumsum}\NormalTok{(increments))}
+\NormalTok{\}}
+
+\KeywordTok{colnames}\NormalTok{(brown_t) <-}\StringTok{ }\NormalTok{mc_names}
+\NormalTok{mb <-}\StringTok{ }\KeywordTok{as.tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(t, brown_t)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ sim, }\DataTypeTok{value =}\NormalTok{ value, }\OperatorTok{-}\NormalTok{t)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: `as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).
+## This warning is displayed once per session.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(mb, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ t, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{color =}\NormalTok{ sim)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\CommentTok{#  geom_point(data = dens_tbl, aes(x = x, y = y), size = 1) +}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"5 realizações Movimento Browniano"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Tempo"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Valor"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_economist_white}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vol_surface_book_files/figure-latex/brownian_plot-1.pdf}
+
+A figura acima mostra 5 realizações de um \emph{mesmo} processo
+estocástico com média zero e variância unitária. É importante frisar que
+o processo que gerou as cinco séries é exatamente o mesmo, sendo elas
+tão distintas umas das outras ou não. Esta é uma importante
+característica dos processos estocásticos nas aplicações reais, o que
+nós observamos é apenas uma realização do processo, dentre as infinitas
+possíveis.
+
+\section{Definição}\label{definicao}
+
+Agora que já foi passada a intuição sobre processos estocásticos,
+pode-se partir para definições mais formais sobre estes processos. Vamos
+adotar a notação do cálculo para tanto, e generalizar nosso MB
+possibilitando-o que tenha média diferente de zero (\(\mu\)) e variância
+qualquer (\(\sigma^2\)), mantendo estas constantes ao longo do tempo,
+entretanto. Desta forma um movimento Browniano com deriva pode ser
+descrito através da seguinte equação diferencial estocástica - EDE:
+
+\begin{equation}
+dX_t = \mu dt + \sigma dB_t
+\label{eq:mb}
+\end{equation}
+
+onde \(dB_t\) é nosso MB padrão em um intervalo de tempo infinitesimal,
+\(dt\).
+
+O processo \(X_t\) possui uma taxa de deriva (média instantânea) igual a
+\(\mu\) e volatilidade instantânea igual a \(\sigma\). Quando um PE
+possui deriva igual a zero, como nosso MB padrão, o valor esperado deste
+processo para qualquer período futuro será zero. Este fato deixa de ser
+verdade no processo generalizado, com taxa de deriva diferente de zero.
+Neste caso o processo evoluirá seguindo uma taxa crescente (se
+\(\mu > 0\)) ou decrescente (se \(\mu < 0\)). Assim é possível, a partir
+de um MB padrão, modelar outros PE que possuam tendência temporal e
+variâncias diferentes.
+
+\section{Movimento Browniano Geométrico}\label{mbg}
+
+Apesar de o processo \(X_t\) ser bastante flexível e cobrir uma grande
+gama de usos, ele ainda não é adequado para modelar o preço de ativos, e
+isto se dá em função de o processo de Wiener, mesmo com deriva positiva,
+poder atingir valores negativos com probabilidade maior que zero. Isto
+implicaria na possibilidade do preço de uma ação ser negativo, algo que
+obviamente não ocorre. Além desta impossibilidade, existe um outro
+empecilho para se utilizar o MB para modelar o processo de preços, e
+este é a deriva constante \(\mu\) com relação ao preço da ação.
+
+A deriva pode ser interpretada como o valor esperado do retorno da ação
+em um dado período de tempo. Este retorno esperado ele é pode ser
+constante em termos percentuais (em um modelo simplificado), mas não em
+termos absolutos! Ou seja, dependendo do preço da ação, R\$ 1,00 ou R\$
+100,00, a deriva \(\mu\) deve ser diferente para que em termos
+percentuais a relação seja constante.
+
+A solução para estes dois problemas é modelar o preço como um processo
+estocástico conhecido como Movimento Browniano Geométrico. Ele difere do
+MB padrão pois assume que o \textbf{logaritmo} da variável aleatória
+possui distribuição Normal. O MBG é a resolução para a seguinte EDE:
+
+\begin{equation}
+dX_t = \mu X_t dt + \sigma X_t dB_t
+\label{eq:mbg}
+\end{equation}
+
+Veja que este é basicamente o mesmo processo MB, porém a deriva, termo
+que multiplica \(dt\), varia linearmente com o valor do processo
+(\(\mu X_t\)) assim como a volatilidade instantânea (\(\sigma X_t\)).
+
+A solução para esta EDE, para um valor inicial qualquer de \(X\)
+(\(X_0 > 0\)) é dada por:
+
+\begin{equation}
+X_t = X_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma B_t\right)
+\label{eq:mbgsol}
+\end{equation}
+
+A variável aleatória \(X\) segue um MB ao longo de uma trajetória
+exponencial. É fácil verificar que, por ser exponencial, \(X_t\) nunca
+terá valor negativo.
+
+Esta é uma forma conveniente de representar a evolução de preços de um
+ativo pois naturalmente surge o conceito de retornos logarítmos. O
+log-retorno de \(X\) é dado por \(r_t=\ln(X_t/X_0)\) de onde inferimos
+que se o processo de formação de preço de um ativo segue um MBG, então
+seus log-retornos serão normalmente distribuídos com média
+\(\mu-\frac{\sigma^2}{2}\) e volatilidade \(\sigma\) em uma unidade de
+período considerado. Se escalarmos o período de tempo considerado para
+\(T\), temos então que os retornos logarítmicos do ativo \(X\) seguem a
+seguinte distribuição normal:
+
+\begin{equation}
+r_T \sim\phi\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)
+\label{eq:rT}
+\end{equation}
+
+Abaixo apresentamos 5 realizações de um MBG com valor de deriva
+\(\mu = 0,6\% a.p.\) e variância \(\sigma^2=1\% a.p.\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t <-}\StringTok{ }\DecValTok{0}\OperatorTok{:}\DecValTok{500}
+\NormalTok{m <-}\StringTok{ }\DecValTok{5} \CommentTok{# Numero de simulacoes}
+\NormalTok{mc_names <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"Sim"}\NormalTok{, }\KeywordTok{seq_len}\NormalTok{(m)) }\CommentTok{# Nomes das simulacoes}
+\NormalTok{sigma2 <-}\StringTok{ }\FloatTok{0.01}
+\NormalTok{mu <-}\StringTok{ }\FloatTok{0.006} \CommentTok{# c(0.098, 0.099, 0.1, 0.101, 0.102) / 10}
+\NormalTok{brown_t <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\DataTypeTok{nrow =} \KeywordTok{length}\NormalTok{(t), }\DataTypeTok{ncol =}\NormalTok{ m)}
+\CommentTok{# MC Simulation}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234567}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_len}\NormalTok{(m)) \{}
+\NormalTok{  log_ret <-}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\KeywordTok{length}\NormalTok{(t) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, mu }\OperatorTok{-}\StringTok{ }\NormalTok{(sigma2 }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{), }\KeywordTok{sqrt}\NormalTok{(sigma2))}
+\NormalTok{  brown_t[, i] <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\KeywordTok{cumprod}\NormalTok{(}\KeywordTok{exp}\NormalTok{(log_ret)))}
+\NormalTok{\}}
+
+\KeywordTok{colnames}\NormalTok{(brown_t) <-}\StringTok{ }\NormalTok{mc_names}
+\NormalTok{mb <-}\StringTok{ }\KeywordTok{as.tibble}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(t, brown_t)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ sim, }\DataTypeTok{value =}\NormalTok{ value, }\OperatorTok{-}\NormalTok{t)}
+  
+\KeywordTok{ggplot}\NormalTok{(mb, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ t, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{color =}\NormalTok{ sim)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"5 realizações Movimento Browniano Geométrico"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Tempo"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Valor"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \DecValTok{0}\OperatorTok{:}\DecValTok{10}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_economist_white}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vol_surface_book_files/figure-latex/mbg_plot-1.pdf}
+
+O Movimento Browniano Geométrico aqui demonstrado serve de base para o
+famoso modelo \textbf{Black \& Scholes} de precificação de opções, o
+qual assume que o ativo subjacente à opção (por exemplo, a ação de uma
+empresa) tem seu preço formado por um processo MBG.
+
+\hypertarget{bsm}{\chapter{Modelo Black-Scholes-Merton}\label{bsm}}
+
+Neste artigo desenvolveremos o modelo para precificação de opções do
+tipo europeias proposto \citet{Black1973} e posteriormente expandido por
+\citet{Merton1976}. A derivação deste modelo se baseia nos conceitos
+apresentados sobre processos estocásticos do Capítulo
+\ref{processos-estocasticos}.
+
+Antes de entrar na modelagem desenvolvida pelos autores acima citados,
+iremos tratar de algumas definições essenciais, como por exemplo a
+precificação de ativos em um mundo neutro ao risco (\emph{risk neutral
+valuation}) e portfólio de replicação (\emph{replicating portfolio}),
+que são largamente utilizados na precificação de quaisquer derivativos,
+e não somente opções.
+
+\section{Portfólio de replicação}\label{portfolio-de-replicacao}
+
+Suponha que se deseja precificar uma opção de compra sobre uma ação,
+vamos denotar o preço desta \emph{call} de \(f_t\). Sabemos que na data
+de expiração, \(T\), da opção de compra seu preço será:
+\(f_T=max(S_T - K, 0)\), onde \(S_T\) é o preço da ação subjacente na
+data \(T\) e \(K\) é o preço de exercício da opção. Podemos criar um
+portfólio que envolva um ativo livre de risco, com preço \(B_t\) e a
+ação objeto do derivativo, \(S_t\), que recrie o mesmo valor de
+pagamento que a opção na data de expiração. Ou seja, criamos o portfólio
+de replicação \(P_t=\Delta S_t + b B_t\), no qual devemos escolher os
+valores de \(\Delta\) e \(b\) de tal forma que \(f_T = P_T\).
+
+De fato, para apenas um período a frente, podemos tomar emprestado a
+taxa de juros livre de risco\footnote{Esta é uma suposição do modelo,
+  pode não ser verdade para algum investidor qualquer mas se for para
+  algum outro investidor representativo, o princípio de ausência de
+  arbitragem passa a valer, uma vez que este segundo investidor
+  explorará o mercado e levará o preço do derivativo para o resultado
+  requerido.}, \(r\) um valor igual ao preço corrente da ação, \(S_0\) e
+comprá-la, ao mesmo tempo em que se ``trava'' (faz \emph{hedge}) deste
+portfólio vendendo a opção. O lucro desta operação em \(T\) deve ser
+zero, pois é um portfólio travado. Com estas premissas é possível
+calcular o preço do prêmio da opção a ser cobrado no período inicial
+para que o valor esperado da operação como um todo seja zero.
+
+Este portfólio formado pela venda do ativo livre de risco e compra do
+ativo objeto é denominado \emph{portfólio de replicação}, pois, ele
+fornece um fluxo de caixa igual ao derivativo que buscamos precificar.
+Ao adicionarmos ao portfólio de replicação a venda (ou seja, o negativo)
+do derivativo, temos um portfólio \emph{hedgeado}, onde não existe mais
+incerteza com relação ao seu retorno esperado.
+
+\section{Precificação neutra ao
+risco}\label{precificacao-neutra-ao-risco}
+
+A metodologia de precificação de derivativos dentro do \emph{mundo
+neutro ao risco}\footnote{A precificação dentro do mundo neutro ao risco
+  mereceria um, ou mais, \emph{posts} por si só. Aqui lançaremos apenas
+  os principais resultados que nos permitem encontrar o modelo de B\&S.}
+é o carro-chefe das metodologias para se avaliar estes instrumentos. O
+princípio de precificação neutra ao risco afirma que um derivativo pode
+ser valorado através das seguintes suposições:
+
+\begin{itemize}
+\tightlist
+\item
+  o retorno esperado do ativo objeto é a taxa livre de risco, e
+\item
+  o valor esperado do derivativo na expiração deve ser descontado pela
+  taxa livre de risco para trazê-lo a valor presente.
+\end{itemize}
+
+É claro que o mundo real não é neutro ao risco, entretanto uma das
+provas que a metodologia faz é que, ao precificarmos um derivativo de
+forma relativa ao preço do ativo objeto, a precificação neutra ao risco
+encontra o mesmo valor para o derivativo que uma metodologia que leve em
+conta as preferências ao risco dos investidores. Entretanto, precificar
+um derivativo assumindo neutralidade ao risco é muito mais simples que
+encarar um modelo baseado no mundo real.
+
+De fato a neutralidade ao risco soa um tanto quanto estranha a primeira
+vez. Porém, ela tem uma explicação lógica de sua validade nas
+circunstâncias em que é desenvolvida. Se os investidores forem avessos
+ao risco, por exemplo, os retornos esperados para o ativo objeto terão
+embutidos um prêmio pelo risco. Acontece que este prêmio pelo risco
+também deverá estar na taxa de desconto do valor esperado de pagamento
+do derivativo, de forma que este prêmio ao risco é cancelado.
+
+É comum na literatura de derivativos encontrarmos os termos mundo-P e
+mundo-Q. O mundo-P se refere ao mundo real, com probabilidades P reais
+de ocorrência de eventos, equanto que o mundo-Q é o mundo neutro ao
+risco, onde as probabilidades Q são ajustadas (tecnicamente suas medidas
+são alteradas) para refletir esta neutralidade. No mundo-Q é comum
+denotarmos o valor esperado de alguma variável aleatória com a seguinte
+notação: \(\mathbb{E_Q}[\cdot]\).
+
+Assim, a precificação de derivativos supondo um mundo neutro ao risco
+chega no preço correto para todos os mundos.
+
+\section{Encontrando a equação de
+Black-Scholes}\label{encontrando-a-equacao-de-black-scholes}
+
+Vamos partir do princípio que nossa ação, objeto da opção que desejamos
+precificar, siga um MBG conforme descrito no
+\protect\hyperlink{processos-estocasticos}{capítulo anterior}. Portanto,
+o preço de nossa ação no período \(t\) deve observar a seguinte equação
+diferencial estocástica:
+
+\begin{equation}
+dS_t=\mu S_t+\sigma S_t dW_t 
+\label{eq:ds}
+\end{equation}
+
+onde \(dW_t\) é o movimento Browniano, ou processo de Wiener.
+
+Esta equação resume as principais hipóteses do modelo Black\&Scholes de
+precificação de opções, são elas:
+
+\begin{itemize}
+\tightlist
+\item
+  O preço do ativo objeto é um processo estocástico e segue uma
+  distribuição log-normal;
+\item
+  O retorno esperado (\(\mu\)) e a volatilidade (\(\sigma\)) deste ativo
+  são \textbf{constantes}, tanto no tempo quanto com relação ao próprio
+  nível de preço do ativo objeto.
+\end{itemize}
+
+Ademais destas hipóteses, temos aquelas relacionadas a racionalidade dos
+mercados e ao princípio de ausência de oportunidades de arbitragem.
+Estas hipóteses nos levam a validade do mundo neutro ao risco e
+portanto, a resolução do modelo da forma como descreveremos abaixo.
+
+Nossa opção será descrita por um portfólio de replicação, e se tomarmos
+seu preço no instante \(t\), então a opção também deve seguir uma
+equação diferencial estocástica da forma:
+
+\begin{equation}
+df_t=\Delta dS_t+b\,dB_t 
+\label{eq:df1}
+\end{equation}
+
+aqui \(dB_t\) representa a variação do ativo livre de risco (dinheiro)
+dentro de um período de tempo \(dt\). Sabemos que o valor do ativo livre
+de risco não envolve incerteza alguma, é determinístico, e seu
+rendimento é a taxa de juros livre de risco. Assim, para uma taxa
+continuamente composta \(r\) uma unidade de \(B\) evolui através de
+\(B_t=e^{rt}\), logo:
+
+\begin{equation}
+dB_t=rBdt
+\label{eq:db}
+\end{equation}
+
+De acordo com o
+\href{https://pt.wikipedia.org/wiki/Lema_de_It\%C5\%8D}{lema de Ito} o
+diferencial de uma função que dependa do tempo e de um processo
+estocástico pode ser encontrado da seguinte forma:
+
+\begin{equation}
+df_t=\frac{\partial f}{\partial t}dt + \frac{\partial f}{\partial S}dS + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}dS^2
+\label{eq:df2}
+\end{equation}
+
+onde \(dS^2\) é a variação quadrática de nosso processo \(S_t\) que é um
+movimento browniano geométrico, logo \(dS^2=\sigma^2S^2dt\).
+
+Igualando as equações \eqref{eq:df1} e \eqref{eq:df2}, fazendo as devidas
+substituições trazidas pelas equações \eqref{eq:ds} e \eqref{eq:db} e por
+fim rearranjando os termos, chegamos na seguinte relação:
+
+\begin{equation}
+\left( \frac{\partial f}{\partial t} + \frac{\partial f}{\partial S}\mu S + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2 S^2 - \Delta\mu S - rbB \right)dt + \left( \frac{\partial f}{\partial S}\sigma S - \Delta \sigma S \right)dW = 0 
+\end{equation}
+
+que para ser válida para todo \(t\), cada termo entre parênteses deve
+ser igual a zero simultaneamente. Rapidamente chegamos aos valores
+necessários de nosso portfólio de replicação.
+
+\begin{equation}
+\Delta = \frac{\partial f}{\partial S} 
+\label{eq:delta}
+\end{equation}
+
+\begin{equation}
+rbB = \frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2S^2 
+\label{eq:rbb1}
+\end{equation}
+
+Através da equação \eqref{eq:df1}, integrando-a, chegamos na relação
+\(bB = f - \Delta S\) e pré-multiplicando ambos os lados por \(r\) temos
+então que:
+
+\begin{equation}
+rbB = r(f-\Delta S) 
+\label{eq:rbb2}
+\end{equation}
+
+Finalmente, igualando as equações \eqref{eq:rbb1} e \eqref{eq:rbb2} e
+substituindo o valor de \(\Delta\) encontramos a famigerada equação
+diferencial parcial - EDP - de Black\&Scholes:
+
+\begin{equation}
+\frac{\partial f}{\partial t}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 f}{\partial S^2}+rS\frac{\partial f}{\partial S} - rf = 0
+\label{eq:BS}
+\end{equation}
+
+\section{Solução analítica}\label{solucao-analitica}
+
+A equação possui diferentes formas de resolução\footnote{Uma
+  demonstração completa de como encontrar a solução para a EDP de
+  Black\&Schole pode ser encontrada em
+  \url{https://planetmath.org/AnalyticSolutionOfBlackScholesPDE}}, a
+precificação do derivativo irá depender da forma que resolvermos a
+equação \eqref{eq:BS}. O Modelo Black\&Scholes é famoso por conseguir
+precificar opções call e put europeias, onde a resolução da equação fará
+uso dos \emph{payoffs}. Para uma call:
+
+\begin{equation}
+\displaystyle f(S,T)=\max(S-K,0)
+\label{eq:cpayoff}
+\end{equation}
+
+Já no caso de uma put:
+
+\begin{equation}
+\displaystyle f(S,T)=\max(K-S,0)
+\label{eq:ppayoff}
+\end{equation}
+
+Onde:
+
+\begin{itemize}
+\tightlist
+\item
+  T é a data de vencimento da opção,
+\item
+  K é o preço de exercício, e
+\item
+  S é o preço do ativo subjacente.
+\end{itemize}
+
+Utilizando os \emph{payoffs} dados nas equações \eqref{eq:cpayoff} e
+\eqref{eq:ppayoff}, e resolvendo a EDP de Black\&Scholes \eqref{eq:BS},
+iremos obter o modelo para se precificar os derivativos citados.
+
+Para uma Call temos que:
+
+\begin{equation}
+C(S,t)=SN(d_{1})-Ke^{-r(T-t)}N(d_{2})
+\label{eq:call}
+\end{equation}
+
+Já para um Put chegamos a:
+
+\begin{equation}
+P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
+\label{eq:put}
+\end{equation}
+
+onde:
+
+\begin{equation}d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
+\label{eq:d1}
+\end{equation}
+
+\begin{equation}d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
+\label{eq:d2}
+\end{equation}
+
+É a partir das equações \eqref{eq:call} e \eqref{eq:put} que se obtém as
+chamadas gregas, que são as sensibilidades do preço do derivativo em
+relação a alterações nos parâmetros do modelo. Explicaremos as gregas em
+maiores detalhes mais adiante.
+
+\section{Paridade compra e venda}\label{putcallparity}
+
+Agora vamos falar um pouco sobre a paridade entre opções de compra e
+venda, algo que nos ajuda a precificar algum derivativo quando já
+conhecemos o preço de outro derivativo com especificações semelhantes.
+
+Assumindo ausência de oportunidade de arbitragem, com um ativo
+subjacente que tenha liquidez, iremos verificar a paridade Call-Put que
+define uma relação entre os preços de uma call e put do tipo europeu,
+desde que possuam o \textbf{mesmo tempo de maturidade} e \textbf{preço
+de strike}. Aqui possuiremos menos premissas que o modelo Black\&Scholes
+e premissas mais simples, tal relação poderá ser utilizada para
+encontrar o valor justo de uma opção. Com a ausência de arbitragem
+observe que dois portfolios que sempre geram o mesmo payoff em um
+instante T devem ter o mesmo valor em qualquer instante intermediário.
+
+Imagine um primeiro portfólio onde o investidor compre uma opção de
+compra C, a qual possui tempo de maturidade T e preço de strike K, sobre
+algum ativo subjacente que chamaremos de S e compre um título B que seu
+valor no período T seja de {\$}30. E um segundo portfolio onde tenha o
+próprio ativo subjacente S que esteja sendo negociado a {\$}25 e compre
+uma put P com um preço de strike K e maturidade T. Estes são porfólios
+de replicação entre si, eles terão exatamente o mesmo \emph{payoff} no
+período T, e na ausência de arbitragem, podemos calcular seus retornos
+através da precificação neutra ao risco. Teremos uma relação onde os
+valores dos nossos portfolios serão:
+
+\begin{equation}
+\mathbb{E_Q}[S_t + P_t] = \mathbb{E_Q}[C_t + B_t]; \quad t \leq T
+\label{eq:parity}
+\end{equation}
+
+Como estamos em um mundo neutro ao risco, \(P_t\) e \(C_t\) são os
+preços da put e da call dados pelo modelo B\&S, enquanto
+\(\mathbb{E_Q}[B_t]\) se resume a \(Ke^{-r(T-t)}\), ou seja, a posição
+atual em ativo livre de risco deve ser o valor presente do strike das
+opções. O preço do subjacente é o próprio preço atualmente observado.
+
+Como \(S_t\) e \(B_t=Ke^{-r(T-t)}\) são conhecidos, se no mercado
+existir um preço \(C_t\) então podemos calcular \(P_t\) e vice-versa.
+Esta é a essência da paridade compra e venda.
+
+Observe que se essa relação não for mantida, teremos arbitragem:
+Suponhamos que \(S_t > B_t\) e que a put esteja com um premio mais alto
+que a call no entanto ambos possuem um preço de strike {\$}30 e
+maturidade T, que os prêmios sejam {\$}20 e {\$}15 respectivamente
+teremos então: 30 + 20 = 15 + 25, nesse caso teremos 50 \(\neq\) 40,
+então vende-se o que está mais caro, no caso a ação e a put e compraria
+o título e a call, chegando ao um lucro de 50-40=10, de {\$}10 sem
+risco. Observe que independentemente de a ação subir acima ou cair
+abaixo do strike, o lucro obtido nesta operação será sempre de {\$}10.
+
+\section{As Gregas}\label{gregas}
+
+As letras gregas utilizadas no mercado de opções são usadas para denotar
+as sensibilidades do preço da opção com relação a variação de alguma das
+variáveis do modelo, a seguir entraremos em detalhes sobre as principais
+gregas usadas para a análise de opções.
+
+\subsection{Delta}\label{delta}
+
+Já havíamos definido o delta anteriormente ao encontrarmos a EDP de
+Black\&Scholes, isto é:
+
+\begin{equation}
+\Delta = \frac{\partial f}{\partial S}
+\label{eq:delta}
+\end{equation}
+
+O delta mede a taxa com que o preço da opção muda conforme o valor do
+ativo subjacente oscila, seu valor pode variar entre 1 e 0 para call e
+entre 0 e -1 para put.
+
+Exemplo: imagine uma opção de compra de 100 ações que possui um delta de
+0,72, caso o ativo subjacente aumente {\$}1 o valor da opção aumentará
+{\$}72 (pois representa 100 ações), e caso o valor do ativo subjacente
+diminua o preço da opção diminuirá {\$}72.
+
+O mesmo acontece com opções de venda, só que de uma forma inversamente
+proporcional pelo seu delta ser negativo. Uma opção de venda de 100
+ações que possui um delta de -0,40 vai valer menos {\$}40 caso o preço
+do seu ativo subjacente aumente {\$}1, e vai valer mais {\$}40 caso o
+preço do seu ativo subjacente diminua {\$}1.
+
+O strike da opção influência o delta diretamente, quanto mais
+in-the-money for uma opção, call ou put, maior será o seu delta em valor
+absoluto, e quanto mais out-the-money, menor será o módulo de seu delta.
+
+\subsection{Gamma}\label{gamma}
+
+\begin{equation}
+\Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 f}{\partial S^2}
+\label{eq:gamma}
+\end{equation}
+
+O gamma mede a taxa com que o delta muda a cada oscilação do preço do
+ativo subjacente, seu impacto aumenta conforme o valor atual do ativo se
+aproxima do strike, sendo responsável pela convexidade do valor da
+opção. Opções de alto gamma são chamadas de explosivas, uma vez que
+mesmo pequenas variações no preço do ativo se traduzem em grandes
+oscilações no preço da opção.
+
+\subsection{Theta}\label{theta}
+
+\begin{equation}
+\Theta = -\frac{\partial f}{\partial \tau}, \quad \tau=T-t
+\label{eq:theta}
+\end{equation}
+
+O Theta é uma taxa que mede o efeito do tempo sobre o preço da opção.
+Como as opções tem um maior valor de acordo com a quantidade de tempo
+até a data de vencimento, seu valor também diminui conforme o tempo
+passa, theta é a letra que mede essa variação (que sempre é negativa). O
+valor de theta representa a quantidade de dinheiro perdida no prêmio da
+opção a cada dia que passa.
+
+\subsection{Vega}\label{vega}
+
+\begin{equation}
+\displaystyle {\mathcal {V}}=\frac{\partial f}{\partial \sigma} 
+\label{eq:vega}
+\end{equation}
+
+O vega é uma taxa que mede o efeito da mudança da volatilidade no preço
+da opção. Seu valor é praticamente constante em opções com a mesma data
+de vencimento, esse valor aumenta em datas de vencimento mais distantes
+devido ao maior espaço de tempo em que a volatilidade atua, devido ao
+maior intervalo de tempo que há para ocorrer mudanças nos preços.
+
+\subsection{Rho}\label{rho}
+
+\begin{equation}
+\displaystyle \rho =\frac{\partial f}{\partial r}
+\label{eq:rho}
+\end{equation}
+
+O rho é uma taxa que mede a sensitividade do preço da ação em relação à
+taxa livre de risco, caso o valor de de rho determinada opção seja 0,7,
+para cada aumento de 1\% da taxa livre de risco o valor da opção
+aumentará 0,7\%. Essa taxa influi principalmente no preço de opções com
+uma data de vencimento extremamente distante, não afetando muito o preço
+de opções cuja data de vencimento é próxima.
+
+\chapter{Smile de Volatilidade}\label{smile}
+
+A volatilidade instantânea, \(\sigma\), do ativo subjacente é a única
+variável no modelo B\&S que não pode ser diretamente observada. De fato,
+a volatilidade (ou equivalentemente a variância) de um ativo é dita uma
+variável \textbf{latente}. Sabemos que ela existe e possui algum valor
+no processo gerador, o processo pelo qual os preços são formados, porém
+não conseguimos observá-la diretamente, apenas estimá-la. Uma das formas
+de estimação de volatilidade pode ser a partir de dados históricos, mas
+várias outras formas existem, entre elas processos GARCH, volatilidade
+realizada, volatilidade estocástica, etc.
+
+Uma vez que a volatilidade não pode ser diretamente observada, a prática
+comum no mercado é fazer o caminho inverso. Considerar os preços de
+mercado para as opções como dado, e a partir do modelo
+\protect\hyperlink{bsm}{B\&S} inverter a equação de preço da Call ou Put
+para encontrar a volatilidade deste modelo que é compatível com os
+preços de mercado. A esta volatilidade encontrada damos o nome de
+\textbf{volatilidade implícita}.
+
+Portanto, o smile de volatilidade que tratamos neste post é na verdade
+um gráfico entre a volatilidade implícita, retirada de opções Européias
+(baunilhas, do inglês vanilla options) a partir do modelo B\&S, contra
+os \emph{strikes} destas opções.
+
+\section{Reparametrizando B\&S e definição de
+moneyness}\label{reparametrizando}
+
+Nem sempre é interessante plotar o smile contra os \emph{strikes}
+propriamente ditos, uma forma de avaliar o quanto uma opção está
+``dentro, fora ou no dinheiro'' pode ser a grega Delta ou então o
+chamado \emph{moneyness} (por favor, se alguém tiver uma boa tradução
+para este termo, deixe nos comentários). Tradicionalmente a medida de
+\emph{moneyness} é a relação \(K/S\), ou seja o strike contra o preço
+corrente do subjacente. Porém existem outras definições mais
+interessantes para se trabalhar, entretanto, antes devemos fazer uso de
+algumas definições e vamos reparametrizar as expressões \(d1\) e \(d2\)
+do modelo \protect\hyperlink{bsm}{B\&S}.
+
+Lembrando que em precificação de opções estamos no mundo neutro ao
+risco, vamos definir o valor \emph{forward}, \(F\) do subjacente como o
+valor corrente composto pela taxa livre de risco até a maturidade da
+opção, ou seja:
+
+\begin{equation}
+F=e^{r\tau}S
+\end{equation}
+
+A \textbf{volatilidade (implícita) total} pode ser definida como a
+volatiliade reescalada pela raiz do tempo, que nos dá uma informação da
+volatiliade esperada para o subjacente do período corrente até a
+maturidade. Da mesma forma, a \textbf{variância total}. Denotanto a
+volatilidade total por \(\theta\) e a variância total por \(w\), temos:
+
+\begin{equation}
+\theta=\sigma_{imp}\cdot \sqrt{\tau} 
+\label{eq:voltotal}
+\end{equation}
+
+e
+
+\begin{equation}
+w=\sigma_{imp}^2\cdot\tau
+\label{eq:vartotal}
+\end{equation}
+
+Vamos também definir a medida \emph{forward log-moneyness} e denotá-la
+por \(k\). Esta será a medida de \emph{moneyness} que iremos utilizar ao
+longo deste e de outros artigo, portanto iremos utilizar este termo para
+designar o \emph{forward log-moneyness} a não ser que expresso de forma
+contrária no texto.
+
+\begin{equation}
+k=\ln\left(\frac{K}{S}\right)-r\tau=\ln\left(\frac{K}{F}\right)
+\label{eq:flmoneyness}
+\end{equation}
+
+Logo, o \emph{strike} está relacionado ao \emph{moneyness} de forma que:
+\(K=Fe^k\).
+
+Podemos agora reparametrizar as expressões \(d1\) e \(d2\) do modelo
+B\&S de forma que serão mais facilmente trabalhadas em modelos de
+volatilidade. Lembrando destas expressões que já foram apresentadas no
+Capítulo \ref{bsm}:
+
+\begin{align}
+&d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(\tau)}{\sigma {\sqrt {\tau}}}}\\
+&d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(\tau)}{\sigma {\sqrt {\tau}}}}=d_1-\sigma\sqrt{\tau}
+\end{align}
+
+Substituindo as expressões para \emph{forward log-moneyness} e
+volatilidade total nas definições acima temos as novas parametrizações
+para \(d1\) e \(d2\):
+
+\begin{equation}
+d_{1}={-\frac{k}{\theta}+\frac{\theta}{2}}
+\label{eq:d1mod}
+\end{equation}
+
+\begin{equation}
+d_{2}={-\frac{k}{\theta}-\frac{\theta}{2}}=d_1-\theta
+\label{eq:d2mod}
+\end{equation}
+
+Retomando o valor da opção do tipo Call no modelo B\&S, podemos
+reescrever sua fórmula de apreçamento da seguinte forma:
+
+\begin{equation}
+\begin{aligned}
+C(K, \tau)=&SN(d1)-Ke^{-r\tau}N(d2)\\
+e^{r\tau}C(K, \tau)=&FN(d1)-KN(d2)\\
+C_B=&F\left[N(d1)-e^kN(d2)\right]
+\end{aligned}
+\label{eq:cblack}
+\end{equation}
+
+Esta equação é conhecida como a forma de Black de precificação
+\emph{(Black Call price formula)}, que relaciona os valores
+\emph{forward} da opção (também conhecido como valor não descontado), do
+subjacente e do \emph{strike}. Esta formulação é particularmente útil
+quando formos extrair a distribuição neutra ao risco do subjacente que
+está implícita nos preços de mercado das opções.
+
+\section{Características de smiles de volatilidade}\label{caracsmile}
+
+Caso o modelo de Black, Schole e Merton estivesse em acordo com a
+realidade, e os ativos tivessem seus preços formados a partir de um
+verdadeiro MBG, a volatilidade implícita seria uma constante. O gráfico
+do smile de volatilidade seria uma reta horizontal, com a mesma
+volatilidade para qualquer nível de \emph{moneyness} e se considerarmos
+a superfície toda (que leva em conta os diversos tempos para expiração)
+esta seria paralela ao domínio \((k, \tau)\). Não estaríamos escrevendo
+(e você lendo) este artigo se este fosse o caso\ldots{}
+
+O fato é que o modelo B\&S é um modelo muito restritivo, com inúmeras
+suposições que não se verificam no mundo real e que por conseguinte,
+tornam os resultados do modelo pouco acurados. Entretanto este é um
+modelo muito conhecido, de fácil assimilação por parte dos agentes de
+mercado e que virou a língua franca nos mercados de derivativos. Se
+todos os \emph{traders} conversarem em termos do modelo B\&S, todos se
+entenderão, mesmo que internamente cada um possua seu próprio modelo de
+apreçamento.
+
+Entre as características tipicamente observadas em smiles (e
+superfícies) de volatilidades pode-se citar:
+
+\begin{itemize}
+\tightlist
+\item
+  As volatilidades implícitas variam conforme o \emph{strike} e prazo de
+  expiração
+\item
+  Smiles apresentam \emph{skew}. Maior inclinação em uma das asas,
+  representando uma maior probabilidade daqueles \emph{strikes}
+  acontecerem
+\item
+  Smiles de equity tipicamente são negativos
+\item
+  Mercados diferentes apresentam padrões de smile diferentes
+\end{itemize}
+
+\subsection{Mercados cambiais}\label{mercados-cambiais}
+
+Opções sobre moedas possuem tipicamente um smile de volatilidade
+conforme mostrado na figura \ref{fig:smile-cambial} abaixo. A
+volatilidade implícita é relativamente baixa para opções ATM. Esta
+torna-se progressivamente maior quando a opção se move para dentro do
+dinheiro ou para fora.
+
+\begin{figure}
+\centering
+\includegraphics{img/smile_cambial.png}
+\caption{\label{fig:smile-cambial}Smile típico de um mercado cambial.}
+\end{figure}
+
+Caso a distribuição dos preços do ativo subjacente, neste caso uma taxa
+de câmbio fosse perfeitamente log-normal como no modelo B\&S, o smile
+não teria esta curvatura. Desta forma podemos afirmar que o mercado, ao
+precificar as opções, acredita que a distribuição deste ativo possui
+caudas com maior densidade que supõe a log-normal, existem maiores
+probabilidades de retornos muito baixos ou muito altos.
+
+\subsection{\texorpdfstring{Mercados de
+\emph{equities}}{Mercados de equities}}\label{mercados-de-equities}
+
+Nos mercados de \emph{equities}, ações, índices de ações e ETFs, por
+exemplo, o smile apresenta uma característica de assimetria (skew, em
+inglês) negativa. A asa esquerda (parte onde as puts estão fora do
+dinheiro) apresenta valores de volatilidade implícita muito maiores que
+suas contrapartes no lado das calls. Este comportamento reflete a
+percepção de mercado de uma maior probabilidade de grandes perdas nas
+ações que altos ganhos, gerando portanto, uma distribuição de preços
+assimétrica. Como existe uma maior probabilidade de perdas extremas, o
+seguro para estas, ou seja, uma put é relativamente mais cara que uma
+call.
+
+\begin{figure}
+\centering
+\includegraphics{img/smile_equities.png}
+\caption{\label{fig:smile-equities}Smile típico de uma ação ou índice de
+ações.}
+\end{figure}
+
+\section{Smile como forma de precificação}\label{smileprecificacao}
+
+Analisando a equação de B\&S com a parametrização para \(d1\) e \(d2\)
+dada no início deste artigo é possível verificar que existe uma relação
+direta entre volatilidade implícita e preço de uma opção, seja esta uma
+call ou put.
+
+Como \(d1\) é estritamente crescente em \(\theta\) e \(d2\) é
+estritamente decrescente e ao mesmo tempo o preço de uma opção é
+crescente em d1 e decrescente em d2, logo, temos uma relação direta
+entre o preço de uma opção e sua volatilidade implícita para uma dada
+maturidade. Em outras palavras, em um smile, tudo o mais constante,
+quanto maior a volatilidade implícita maior o preço da opção naquele
+\emph{strike}.
+
+Outra forma de verificar esta relação é perceber que a grega Vega, que é
+calculada da mesma forma para calls e puts, é sempre positiva. Ou seja,
+um aumento no valor da volatiliade sempre leva a elevações no preço de
+uma opção.
+
+Desta forma é normal entre os praticantes de mercado fazer a
+precificação de opções em termos de ``pontos de volatilidade'' e não em
+valores monetários propriamente ditos. Isto porque o modelo B\&S, apesar
+de não ser o modelo correto (nenhum é) para a precificação de opções, é
+conhecido e de fácil entendimento para todos. Então todos os praticantes
+podem fazer suas cotações em termos de volatilidades implícitas, que são
+extraídas de opções baunilhas com o modelo B\&S, e somente na hora de
+fechar um negócio e liquidar o pagamento, o preço efetivo a ser pago é
+acordado entre as partes.
+
+\section{Estrutura a termo}\label{estrutura-a-termo}
+
+O mercado precifica a volatilidade implícita de forma que esta dependa
+também do tempo até expiração, bem como do preço de exercício, agregando
+uma segunda dimensão ao smile e transformando-o na famigerada
+\textbf{superfície de volatilidade implícita}.
+
+A volatilidade implícita tende a ser uma função crescente da maturidade
+quando as volatilidades de curto prazo são historicamente baixas e
+função decrescente da maturidade quando as volatilidades de curto prazo
+são historicamente altas. Isso porque existe uma expectativa de reversão
+a uma média de longo prazo embutida na volatilidade. Esta característica
+é explorada explicitamente por alguns modelos de volatilidade, como em
+\citet{Heston1993}.
+
+As superfícies de volatilidade combinam smiles com a estrutura a termo
+de volatilidade para tabular valores apropriados para precificar uma
+opção com qualquer preço de exercício e prazo de expiração.
+
+Da mesma forma como a curva de juros em um dado momento é uma descrição
+concisa dos preços dos títulos negociados naquele mercado, assim, para
+um ativo subjacente em particular em determinado momento, a superfície
+de volatilidade implícita fornece uma descrição resumida de seu mercado
+de opções. Considerando que os rendimentos dos títulos são diferenciados
+pelo seu tempo até o vencimento, as opções são diferenciadas por seu
+tempo até a expiração e o \emph{strike}, logo requerem uma superfície ao
+invés de uma curva.
+
+A figura \ref{fig:superficie} demonstra uma superfície de volatilidade
+implícita do \texttt{SPX} em 15/09/2005, conforme apresentado em
+\citet{Gatheral2011}.
+
+\begin{figure}
+\centering
+\includegraphics{img/spx_vol_surface.png}
+\caption{\label{fig:superficie}Superfície de volatilidade implícita.}
+\end{figure}
+
+\section{Arbitragem estática}\label{arbestatica}
+
+Antes de definir o que é arbitragem estática que pode estar presente em
+uma superfície de volatilidade (ou na superfície de preço de opções),
+vamos partir para a intuição por trás desta definição.
+
+O princípio de ausência de arbitragem é dominante na teoria financeira.
+Este princípio nos informa que não deve existir lucro sem que se incorra
+em algum tipo de risco, o lucro sempre é a remuneração do investidor que
+aceitou carregar alguma forma de risco durante o investimento. Portanto,
+não devem existir perfis de lucro acima da taxa livre de risco
+(\emph{payoffs} positivos) com probabilidade de 100\%.
+
+Primeiro consideramos uma trava de alta com opções do tipo call.
+Excluindo-se os custos de transação, esta operação sempre oferece um
+retorno positivo ou zero, conforme a figura \ref{fig:trava-alta}. Por
+mais que esta estratégia esteja montada fora do dinheiro, sempre existe
+uma possibilidade de ela ter lucro, \(S_T>K\) e portanto seu preço deve
+ser sempre maior que zero.
+
+\begin{figure}
+\centering
+\includegraphics{img/trava_alta.png}
+\caption{\label{fig:trava-alta}Perfil de lucro de uma trava de alta.}
+\end{figure}
+
+É claro que quanto mais ITM estejam as opções, maior seu preço e quanto
+mais fora do dinheiro menor será seu valor até o limite inferior zero.
+Se levarmos a diferença entre os \emph{strikes}, \(dK\) a zero temos
+que:
+
+\begin{equation}
+\frac{\partial C}{\partial K}\leq 0
+\end{equation}
+
+Este é o limite de arbitragem para travas de alta ou, mais conhecido
+pelo termo em inglês \emph{call spread no-arbitrage} e impõe que os
+preços das calls devem ser uma função descrescente no \emph{strike}. De
+forma equivalente e através da \protect\hyperlink{putcalparity}{paridade
+compra-venda} este limite de arbitragem para as puts é:
+
+\begin{equation}
+\frac{\partial P}{\partial K}\geq 0
+\end{equation}
+
+\subsection{Arbitragem de borboleta}\label{arbitragem-de-borboleta}
+
+Também deve ser imposta uma restrição na segunda derivada do preço das
+opções em relação ao \emph{strike}, e esta é conhecida como limite de
+arbitragem para borboletas. Vejamos porquê.
+
+Considere uma estratégia do tipo borboleta, onde se compra uma quantia
+de calls no \emph{strike} \(K-dK\), vende-se duas vezes esta quantia em
+\(K\) e compra-se novamente um lote em \(K+dK\), o perfil de lucro desta
+operação no vencimento está representado na figura \ref{fig:borboleta}.
+
+\begin{figure}
+\centering
+\includegraphics{img/borboleta.png}
+\caption{\label{fig:borboleta}Borboleta realizada com calls.}
+\end{figure}
+
+Seguindo a mesma linha de raciocínio anterior, como o \emph{payoff} da
+borboleta é sempre não negativo também deve ser o seu valor para
+qualquer período anterior a expiração. Se denotarmos \(\pi_B\) o valor
+da borboleta, então \(\pi_B\geq0\).
+
+Agora imagine que escalamos a estratégia de forma que um lote de compras
+(na venda são dois lotes) seja de tamanho \(1/dK^2\), o valor para a
+montagem desta operação deve ser, portanto:
+
+\begin{equation}
+\pi_B=\frac{C(K-dK)-2C(K)+C(K+dK)}{dK^2}
+\end{equation}
+
+E se levarmos ao limite em que \(dK\rightarrow 0\), a equação acima
+torna-se justamente a segunda derivada do preço da call no \emph{strike}
+\(K\).
+
+\begin{equation}
+\begin{aligned}
+\frac{\partial^2 C(K)}{\partial K^2}=& \pi_B\\
+\geq & 0
+\end{aligned}
+\label{eq:arbborboleta}
+\end{equation}
+
+Ou seja, os preços das calls são uma função \textbf{convexa} nos
+\emph{strikes}. O mesmo raciocínio pode ser feito para uma borboleta com
+puts e o resultado será equivalente, o preço das puts também deve ser
+uma função convexa nos \emph{strikes}.
+
+\subsection{Arbitragem de calendário}\label{arbitragem-de-calendario}
+
+Passamos agora a analisar os limites de arbitragem na estrutura a termo
+da superfície de volatilidade. A arbitragem de calendário normalmente é
+expressa em termos de monotonicidade dos preços em relação ao período
+para expiração. Ou seja, quanto maior o prazo de maturidade de uma opção
+para um mesmo preço de exercício, maior deve ser seu valor.
+
+É fácil de entender este limite com base nas probabilidades de
+exercício. Como sabemos, em um
+\protect\hyperlink{processos-estocasticos}{processo estocástico} do tipo
+MBG a variância do processo cresce conforme a \textbf{raiz do tempo},
+\(\sqrt{\tau}\). Quanto maior a variância do ativo subjacente, maior a
+probabilidade deste alcançar um determinado preço, mais elevado ou não.
+Assim, seja uma call ou put OTM quanto mais distante estiver seu prazo
+de maturidade, maior a probabilidade de exercício e portanto, maior seu
+valor.
+
+Dado que a relação de \textbf{volatilidade total} implícita e preço de
+uma opção também é direta e positiva, conforme demonstrado na Seção
+\ref{smileprecificacao}, segue que a volatilidade total deve ser não
+decrescente no tempo para expiração.
+
+Esta relação pode ser expressa através da seguinte equação para uma call
+precificada através de B\&S:
+
+\begin{equation}
+\frac{\partial C_{BS}(k, \theta(\tau))}{\partial \tau}=\partial_\theta C_{BS}\cdot\partial_\tau \theta \geq 0
+\label{eq:arbcalendario}
+\end{equation}
+
+onde \(\partial_\theta C_{BS}\) é a derivada parcial do preço da call em
+relação a volatilidade total implícita, que já demonstramos ser positiva
+e \(\partial_\tau \theta\) é a derivada parcial da volatilidade total
+implícita em relação ao tempo para maturidade que, portanto, deve ser
+maior ou igual a zero para obedecer a restrição imposta ao preço da
+call.
+
+\section{Limites de inclinação}\label{limites-de-inclinacao}
+
+Se mantivermos a volatilidade implícita constante para todos os
+\emph{strikes}, os preços das calls no modelo B\&S devem ser
+decrescentes. Por outro lado, para um \emph{strike} fixo, o preço de uma
+call se eleva à medida que a volatilidade implícita aumenta. Suponha por
+um momento que a volatilidade implícita varia com o \emph{strike} como é
+o caso nos smiles. À medida que o \emph{strike} aumenta, se a
+volatilidade implícita aumentar muito rapidamente, seu efeito sobre o
+preço da call pode mais que compensar o declínio no preço devido a
+elevação do preço de exercício e, assim, levar a um aumento líquido no
+preço da opção. Isso violaria o requisito de que
+\(\partial C /\partial K \leq 0\) e, portanto, leva a um limite superior
+na taxa em que a volatilidade implícita pode aumentar com o strike.
+
+Novamente, o mesmo raciocínio pode ser imposto para o lado das puts. A
+volatilidade implícita não pode se elevar tão rapidamente quando os
+\emph{strikes} se reduzem de forma que uma put de \emph{strike} menor
+tenha valor mais elevado que outra que esteja mais próxima do dinheiro.
+
+Finalmente, um sumário dos limites impostos a uma superfície de preços
+de opções (calls no caso apresentado), que implicam em limites para a
+superfície de volatilidade é apresentado abaixo\footnote{Retirado de
+  \citet{Aurell2014}, p.~25.}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\partial_\tau C \geq 0\)
+\item
+  \(\lim\limits_{K\rightarrow\infty}C(K, \tau)=0\)
+\item
+  \(\lim\limits_{K\rightarrow-\infty}C(K, \tau)+K=a, \quad a \in \mathbb R\)
+\item
+  \(C(K, \tau)\) é convexa em \(K\)
+\item
+  \(C(K, \tau)\) é não-negativa
+\end{enumerate}
+
+\section{Distribuição implícita}\label{distribuicao-implicita}
+
+O modelo B\&S é baseado na suposição que o ativo subjacente segue uma
+distribuição log-normal em seus preços. Caso esta suposição fosse de
+fato realizada no mercado, o smile de volatilidade seria uma reta
+completamente horizontal, não haveria variação na volatilidade implícita
+conforme o preço de exercício. Entretanto, esta não é a realidade dos
+smiles e podemos fazer a pergunta inversa portanto, qual a distribuição
+neutra ao risco que está implícita no smile de volatilidade?
+
+Certamente não é uma log-normal. Na verdade, a densidade da distribuição
+que está implícita em um smile nada mais é que a convexidade deste
+smile, ou seja, sua segunda derivada em relação ao \emph{strike}. Esta
+distribuição implícita também é por vezes chamada de RND \emph{(risk
+neutral density)} e é muito útil para fazer a precificação de outras
+opções que não são observadas no smile ou extrair probabilidades de
+ocorrência de eventos precificadas pelo mercado.
+
+Pode-se obter este resultado a partir da definição do valor de uma call
+e é conhecido como a fórmula de \citet{Breeden1978}. O valor de uma call
+é o valor esperado do \emph{payoff} terminal desta call ponderado pela
+densidade neutra ao risco do subjacente. Ou seja:
+
+\begin{equation}
+C(S, t)=e^{-r\tau}\int\limits_{0}^\infty p(S,t,S_T,T)\max\{S_T-K, 0\}dS_T
+\end{equation}
+
+onde \(p(\cdot)\) é a densidade neutra ao risco e estamos supondo uma
+taxa de juros livre de risco constante durante o período de vida da
+opção. Como o \emph{payoff} da call é não linear, sendo zero para
+qualquer valor de \(S_T \leq K\) e igual a \(S_T-K\) quando \(S_T > K\),
+podemos escrever esta equação como:
+
+\begin{equation}
+C(S, t)=e^{-r\tau}\int\limits_{K}^\infty p(S,t,S_T,T)(S_T-K)dS_T
+\end{equation}
+
+que pode ser rearranjada, com alguma simplificação na notação, da
+seguinte forma.
+
+\begin{equation}
+\begin{aligned}
+\frac{\partial C}{\partial K}=& -e^{-r\tau}\int\limits_{K}^\infty p(S_T)dS_T\\
+e^{r\tau}\frac{\partial C}{\partial K}=& \int\limits_{-\infty}^K p(S_T)dS_T\\
+e^{r\tau}\frac{\partial^2 C}{\partial K^2}=& \ p(K)\\
+\frac{\partial^2 C_B}{\partial K^2}=& \ p(K)
+\end{aligned}
+\label{eq:distimplicita}
+\end{equation}
+
+Onde usou-se a notação \(C_B\) para denotar a formulação de Black para o
+preço de uma call. Ou seja, a segunda derivada em relação ao strike do
+preço não descontado de uma call é a distribuição neutra ao risco do
+ativo subjacente, e é válida para todos preços de exercício.
+
+Portanto, se desejarmos saber qual a distribuição de probabilidades de
+preços do ativo subjacente em uma data futura que possua vencimento de
+opções, basta encontrarmos a convexidade do smile dos preços
+\emph{forward} daquele vencimento\footnote{Simples em teoria, muito mais
+  complicado na prática, com diversos problemas para a extrapolação do
+  smile para \emph{strikes} extremos.}.
+
+\section{Conclusão}\label{conclusao}
+
+O modelo de Black-Scholes-Merton, pode ser considerado a pedra
+fundamental para a precifição de opções. Entretanto, este modelo
+apresenta uma séries de limitações que fazem com que os praticantes de
+mercado utilizem outras técnicas neste mercado. Uma destas é o uso do
+smile de volatilidade e sua interpretação como forma de precificar
+opções e extrair informações implícitas nos preços.
+
+A assimetria do smile e suas asas informam que as distribuições de
+probabilidades para o ativo subjacente não são exatamente log-normais, e
+podem apresentar discrepâncias significativas, especialmente nas caudas
+da distribuição que muito interessam a gestão de risco, por exemplo.
+
+Este foi um artigo denso, porém com vários conceitos importantes para a
+compreensão do comportamento da superfície de volatilidade. A estrutura
+a termo também é existente na volatilidade implícita e está limitada
+pela ausência de arbitragem do tipo calendário. O smile de volatilidade,
+que é uma fatia da superfície com prazo de expiração constante, possui
+suas próprias limitações de forma, com a ausência de arbitragem do tipo
+borboleta e limitações quanto a inclinação.
+
+Por fim, foi demonstrado como a convexidade do smile de preços fornece a
+distribuição implícita para os preços do ativo subjacente para a data de
+expiração das opções.
+
+\bibliography{library.bib}
+
+
+\end{document}

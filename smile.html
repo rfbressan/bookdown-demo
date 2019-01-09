@@ -174,34 +174,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">3.1</span> Reparametrizando B&amp;S e definição de moneyness</h2>
 <p>Nem sempre é interessante plotar o smile contra os <em>strikes</em> propriamente ditos, uma forma de avaliar o quanto uma opção está “dentro, fora ou no dinheiro” pode ser a grega Delta ou então o chamado <em>moneyness</em> (por favor, se alguém tiver uma boa tradução para este termo, deixe nos comentários). Tradicionalmente a medida de <em>moneyness</em> é a relação <span class="math inline">\(K/S\)</span>, ou seja o strike contra o preço corrente do subjacente. Porém existem outras definições mais interessantes para se trabalhar, entretanto, antes devemos fazer uso de algumas definições e vamos reparametrizar as expressões <span class="math inline">\(d1\)</span> e <span class="math inline">\(d2\)</span> do modelo <a href="bsm.html#bsm">B&amp;S</a>.</p>
 <p>Lembrando que em precificação de opções estamos no mundo neutro ao risco, vamos definir o valor <em>forward</em>, <span class="math inline">\(F\)</span> do subjacente como o valor corrente composto pela taxa livre de risco até a maturidade da opção, ou seja:</p>
-<p><span class="math display">\[F=e^{r\tau}S\]</span></p>
+<span class="math display">\[\begin{equation}
+F=e^{r\tau}S
+\end{equation}\]</span>
 <p>A <strong>volatilidade (implícita) total</strong> pode ser definida como a volatiliade reescalada pela raiz do tempo, que nos dá uma informação da volatiliade esperada para o subjacente do período corrente até a maturidade. Da mesma forma, a <strong>variância total</strong>. Denotanto a volatilidade total por <span class="math inline">\(\theta\)</span> e a variância total por <span class="math inline">\(w\)</span>, temos:</p>
-<p><span class="math display" id="eq:voltotal">\[\theta=\sigma_{imp}\cdot \sqrt{\tau} 
-\tag{3.1}\]</span></p>
+<span class="math display" id="eq:voltotal">\[\begin{equation}
+\theta=\sigma_{imp}\cdot \sqrt{\tau} 
+\tag{3.1}
+\end{equation}\]</span>
 <p>e</p>
-<p><span class="math display" id="eq:vartotal">\[w=\sigma_{imp}^2\cdot\tau
-\tag{3.2}\]</span></p>
+<span class="math display" id="eq:vartotal">\[\begin{equation}
+w=\sigma_{imp}^2\cdot\tau
+\tag{3.2}
+\end{equation}\]</span>
 <p>Vamos também definir a medida <em>forward log-moneyness</em> e denotá-la por <span class="math inline">\(k\)</span>. Esta será a medida de <em>moneyness</em> que iremos utilizar ao longo deste e de outros artigo, portanto iremos utilizar este termo para designar o <em>forward log-moneyness</em> a não ser que expresso de forma contrária no texto.</p>
-<p><span class="math display" id="eq:flmoneyness">\[k=\ln\left(\frac{K}{S}\right)-r\tau=\ln\left(\frac{K}{F}\right)
-\tag{3.3}\]</span></p>
+<span class="math display" id="eq:flmoneyness">\[\begin{equation}
+k=\ln\left(\frac{K}{S}\right)-r\tau=\ln\left(\frac{K}{F}\right)
+\tag{3.3}
+\end{equation}\]</span>
 <p>Logo, o <em>strike</em> está relacionado ao <em>moneyness</em> de forma que: <span class="math inline">\(K=Fe^k\)</span>.</p>
 <p>Podemos agora reparametrizar as expressões <span class="math inline">\(d1\)</span> e <span class="math inline">\(d2\)</span> do modelo B&amp;S de forma que serão mais facilmente trabalhadas em modelos de volatilidade. Lembrando destas expressões que já foram apresentadas no Capítulo <a href="bsm.html#bsm">2</a>:</p>
-<p><span class="math display">\[\begin{aligned}
+<span class="math display">\[\begin{align}
 &amp;d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(\tau)}{\sigma {\sqrt {\tau}}}}\\
 &amp;d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(\tau)}{\sigma {\sqrt {\tau}}}}=d_1-\sigma\sqrt{\tau}
-\end{aligned}\]</span></p>
+\end{align}\]</span>
 <p>Substituindo as expressões para <em>forward log-moneyness</em> e volatilidade total nas definições acima temos as novas parametrizações para <span class="math inline">\(d1\)</span> e <span class="math inline">\(d2\)</span>:</p>
-<p><span class="math display" id="eq:d1mod">\[d_{1}={-\frac{k}{\theta}+\frac{\theta}{2}}
-\tag{3.4}\]</span></p>
-<p><span class="math display" id="eq:d2mod">\[d_{2}={-\frac{k}{\theta}-\frac{\theta}{2}}=d_1-\theta
-\tag{3.5}\]</span></p>
+<span class="math display" id="eq:d1mod">\[\begin{equation}
+d_{1}={-\frac{k}{\theta}+\frac{\theta}{2}}
+\tag{3.4}
+\end{equation}\]</span>
+<span class="math display" id="eq:d2mod">\[\begin{equation}
+d_{2}={-\frac{k}{\theta}-\frac{\theta}{2}}=d_1-\theta
+\tag{3.5}
+\end{equation}\]</span>
 <p>Retomando o valor da opção do tipo Call no modelo B&amp;S, podemos reescrever sua fórmula de apreçamento da seguinte forma:</p>
-<p><span class="math display" id="eq:cblack">\[\begin{aligned}
+<span class="math display" id="eq:cblack">\[\begin{equation}
+\begin{aligned}
 C(K, \tau)=&amp;SN(d1)-Ke^{-r\tau}N(d2)\\
 e^{r\tau}C(K, \tau)=&amp;FN(d1)-KN(d2)\\
 C_B=&amp;F\left[N(d1)-e^kN(d2)\right]
 \end{aligned}
-\tag{3.6}\]</span></p>
+\tag{3.6}
+\end{equation}\]</span>
 <p>Esta equação é conhecida como a forma de Black de precificação <em>(Black Call price formula)</em>, que relaciona os valores <em>forward</em> da opção (também conhecido como valor não descontado), do subjacente e do <em>strike</em>. Esta formulação é particularmente útil quando formos extrair a distribuição neutra ao risco do subjacente que está implícita nos preços de mercado das opções.</p>
 </div>
 <div id="caracsmile" class="section level2">
@@ -270,9 +284,13 @@ Figura 3.4: Perfil de lucro de uma trava de alta.
 </p>
 </div>
 <p>É claro que quanto mais ITM estejam as opções, maior seu preço e quanto mais fora do dinheiro menor será seu valor até o limite inferior zero. Se levarmos a diferença entre os <em>strikes</em>, <span class="math inline">\(dK\)</span> a zero temos que:</p>
-<p><span class="math display">\[\frac{\partial C}{\partial K}\leq 0\]</span></p>
+<span class="math display">\[\begin{equation}
+\frac{\partial C}{\partial K}\leq 0
+\end{equation}\]</span>
 <p>Este é o limite de arbitragem para travas de alta ou, mais conhecido pelo termo em inglês <em>call spread no-arbitrage</em> e impõe que os preços das calls devem ser uma função descrescente no <em>strike</em>. De forma equivalente e através da <a href="#putcalparity">paridade compra-venda</a> este limite de arbitragem para as puts é:</p>
-<p><span class="math display">\[\frac{\partial P}{\partial K}\geq 0\]</span></p>
+<span class="math display">\[\begin{equation}
+\frac{\partial P}{\partial K}\geq 0
+\end{equation}\]</span>
 <div id="arbitragem-de-borboleta" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Arbitragem de borboleta</h3>
 <p>Também deve ser imposta uma restrição na segunda derivada do preço das opções em relação ao <em>strike</em>, e esta é conhecida como limite de arbitragem para borboletas. Vejamos porquê.</p>
@@ -285,17 +303,17 @@ Figura 3.5: Borboleta realizada com calls.
 </div>
 <p>Seguindo a mesma linha de raciocínio anterior, como o <em>payoff</em> da borboleta é sempre não negativo também deve ser o seu valor para qualquer período anterior a expiração. Se denotarmos <span class="math inline">\(\pi_B\)</span> o valor da borboleta, então <span class="math inline">\(\pi_B\geq0\)</span>.</p>
 <p>Agora imagine que escalamos a estratégia de forma que um lote de compras (na venda são dois lotes) seja de tamanho <span class="math inline">\(1/dK^2\)</span>, o valor para a montagem desta operação deve ser, portanto:</p>
-<p><span class="math display">\[
+<span class="math display">\[\begin{equation}
 \pi_B=\frac{C(K-dK)-2C(K)+C(K+dK)}{dK^2}
-\]</span></p>
+\end{equation}\]</span>
 <p>E se levarmos ao limite em que <span class="math inline">\(dK\rightarrow 0\)</span>, a equação acima torna-se justamente a segunda derivada do preço da call no <em>strike</em> <span class="math inline">\(K\)</span>.</p>
-<p><span class="math display" id="eq:arbborboleta">\[
+<span class="math display" id="eq:arbborboleta">\[\begin{equation}
 \begin{aligned}
 \frac{\partial^2 C(K)}{\partial K^2}=&amp; \pi_B\\
 \geq &amp; 0
 \end{aligned}
 \tag{3.7}
-\]</span></p>
+\end{equation}\]</span>
 <p>Ou seja, os preços das calls são uma função <strong>convexa</strong> nos <em>strikes</em>. O mesmo raciocínio pode ser feito para uma borboleta com puts e o resultado será equivalente, o preço das puts também deve ser uma função convexa nos <em>strikes</em>.</p>
 </div>
 <div id="arbitragem-de-calendario" class="section level3">
@@ -304,10 +322,10 @@ Figura 3.5: Borboleta realizada com calls.
 <p>É fácil de entender este limite com base nas probabilidades de exercício. Como sabemos, em um <a href="processos-estocasticos.html#processos-estocasticos">processo estocástico</a> do tipo MBG a variância do processo cresce conforme a <strong>raiz do tempo</strong>, <span class="math inline">\(\sqrt{\tau}\)</span>. Quanto maior a variância do ativo subjacente, maior a probabilidade deste alcançar um determinado preço, mais elevado ou não. Assim, seja uma call ou put OTM quanto mais distante estiver seu prazo de maturidade, maior a probabilidade de exercício e portanto, maior seu valor.</p>
 <p>Dado que a relação de <strong>volatilidade total</strong> implícita e preço de uma opção também é direta e positiva, conforme demonstrado na Seção <a href="smile.html#smileprecificacao">3.3</a>, segue que a volatilidade total deve ser não decrescente no tempo para expiração.</p>
 <p>Esta relação pode ser expressa através da seguinte equação para uma call precificada através de B&amp;S:</p>
-<p><span class="math display" id="eq:arbcalendario">\[
+<span class="math display" id="eq:arbcalendario">\[\begin{equation}
 \frac{\partial C_{BS}(k, \theta(\tau))}{\partial \tau}=\partial_\theta C_{BS}\cdot\partial_\tau \theta \geq 0
 \tag{3.8}
-\]</span></p>
+\end{equation}\]</span>
 <p>onde <span class="math inline">\(\partial_\theta C_{BS}\)</span> é a derivada parcial do preço da call em relação a volatilidade total implícita, que já demonstramos ser positiva e <span class="math inline">\(\partial_\tau \theta\)</span> é a derivada parcial da volatilidade total implícita em relação ao tempo para maturidade que, portanto, deve ser maior ou igual a zero para obedecer a restrição imposta ao preço da call.</p>
 </div>
 </div>
@@ -329,15 +347,15 @@ Figura 3.5: Borboleta realizada com calls.
 <p>O modelo B&amp;S é baseado na suposição que o ativo subjacente segue uma distribuição log-normal em seus preços. Caso esta suposição fosse de fato realizada no mercado, o smile de volatilidade seria uma reta completamente horizontal, não haveria variação na volatilidade implícita conforme o preço de exercício. Entretanto, esta não é a realidade dos smiles e podemos fazer a pergunta inversa portanto, qual a distribuição neutra ao risco que está implícita no smile de volatilidade?</p>
 <p>Certamente não é uma log-normal. Na verdade, a densidade da distribuição que está implícita em um smile nada mais é que a convexidade deste smile, ou seja, sua segunda derivada em relação ao <em>strike</em>. Esta distribuição implícita também é por vezes chamada de RND <em>(risk neutral density)</em> e é muito útil para fazer a precificação de outras opções que não são observadas no smile ou extrair probabilidades de ocorrência de eventos precificadas pelo mercado.</p>
 <p>Pode-se obter este resultado a partir da definição do valor de uma call e é conhecido como a fórmula de <span class="citation">Breeden and Litzenberger (<a href="#ref-Breeden1978">1978</a>)</span>. O valor de uma call é o valor esperado do <em>payoff</em> terminal desta call ponderado pela densidade neutra ao risco do subjacente. Ou seja:</p>
-<p><span class="math display">\[
+<span class="math display">\[\begin{equation}
 C(S, t)=e^{-r\tau}\int\limits_{0}^\infty p(S,t,S_T,T)\max\{S_T-K, 0\}dS_T
-\]</span></p>
+\end{equation}\]</span>
 <p>onde <span class="math inline">\(p(\cdot)\)</span> é a densidade neutra ao risco e estamos supondo uma taxa de juros livre de risco constante durante o período de vida da opção. Como o <em>payoff</em> da call é não linear, sendo zero para qualquer valor de <span class="math inline">\(S_T \leq K\)</span> e igual a <span class="math inline">\(S_T-K\)</span> quando <span class="math inline">\(S_T &gt; K\)</span>, podemos escrever esta equação como:</p>
-<p><span class="math display">\[
+<span class="math display">\[\begin{equation}
 C(S, t)=e^{-r\tau}\int\limits_{K}^\infty p(S,t,S_T,T)(S_T-K)dS_T
-\]</span></p>
+\end{equation}\]</span>
 <p>que pode ser rearranjada, com alguma simplificação na notação, da seguinte forma.</p>
-<p><span class="math display" id="eq:distimplicita">\[
+<span class="math display" id="eq:distimplicita">\[\begin{equation}
 \begin{aligned}
 \frac{\partial C}{\partial K}=&amp; -e^{-r\tau}\int\limits_{K}^\infty p(S_T)dS_T\\
 e^{r\tau}\frac{\partial C}{\partial K}=&amp; \int\limits_{-\infty}^K p(S_T)dS_T\\
@@ -345,7 +363,7 @@ e^{r\tau}\frac{\partial^2 C}{\partial K^2}=&amp; \ p(K)\\
 \frac{\partial^2 C_B}{\partial K^2}=&amp; \ p(K)
 \end{aligned}
 \tag{3.9}
-\]</span></p>
+\end{equation}\]</span>
 <p>Onde usou-se a notação <span class="math inline">\(C_B\)</span> para denotar a formulação de Black para o preço de uma call. Ou seja, a segunda derivada em relação ao strike do preço não descontado de uma call é a distribuição neutra ao risco do ativo subjacente, e é válida para todos preços de exercício.</p>
 <p>Portanto, se desejarmos saber qual a distribuição de probabilidades de preços do ativo subjacente em uma data futura que possua vencimento de opções, basta encontrarmos a convexidade do smile dos preços <em>forward</em> daquele vencimento<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>.</p>
 </div>

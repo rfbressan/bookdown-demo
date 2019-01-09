@@ -213,7 +213,10 @@ mb &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(<span class="
 <div id="definicao" class="section level2">
 <h2><span class="header-section-number">1.3</span> Definição</h2>
 <p>Agora que já foi passada a intuição sobre processos estocásticos, pode-se partir para definições mais formais sobre estes processos. Vamos adotar a notação do cálculo para tanto, e generalizar nosso MB possibilitando-o que tenha média diferente de zero (<span class="math inline">\(\mu\)</span>) e variância qualquer (<span class="math inline">\(\sigma^2\)</span>), mantendo estas constantes ao longo do tempo, entretanto. Desta forma um movimento Browniano com deriva pode ser descrito através da seguinte equação diferencial estocástica - EDE:</p>
-<p><span class="math display">\[dX_t = \mu dt + \sigma dB_t\]</span></p>
+<span class="math display" id="eq:mb">\[\begin{equation}
+dX_t = \mu dt + \sigma dB_t
+\tag{1.1}
+\end{equation}\]</span>
 <p>onde <span class="math inline">\(dB_t\)</span> é nosso MB padrão em um intervalo de tempo infinitesimal, <span class="math inline">\(dt\)</span>.</p>
 <p>O processo <span class="math inline">\(X_t\)</span> possui uma taxa de deriva (média instantânea) igual a <span class="math inline">\(\mu\)</span> e volatilidade instantânea igual a <span class="math inline">\(\sigma\)</span>. Quando um PE possui deriva igual a zero, como nosso MB padrão, o valor esperado deste processo para qualquer período futuro será zero. Este fato deixa de ser verdade no processo generalizado, com taxa de deriva diferente de zero. Neste caso o processo evoluirá seguindo uma taxa crescente (se <span class="math inline">\(\mu &gt; 0\)</span>) ou decrescente (se <span class="math inline">\(\mu &lt; 0\)</span>). Assim é possível, a partir de um MB padrão, modelar outros PE que possuam tendência temporal e variâncias diferentes.</p>
 </div>
@@ -222,13 +225,22 @@ mb &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(<span class="
 <p>Apesar de o processo <span class="math inline">\(X_t\)</span> ser bastante flexível e cobrir uma grande gama de usos, ele ainda não é adequado para modelar o preço de ativos, e isto se dá em função de o processo de Wiener, mesmo com deriva positiva, poder atingir valores negativos com probabilidade maior que zero. Isto implicaria na possibilidade do preço de uma ação ser negativo, algo que obviamente não ocorre. Além desta impossibilidade, existe um outro empecilho para se utilizar o MB para modelar o processo de preços, e este é a deriva constante <span class="math inline">\(\mu\)</span> com relação ao preço da ação.</p>
 <p>A deriva pode ser interpretada como o valor esperado do retorno da ação em um dado período de tempo. Este retorno esperado ele é pode ser constante em termos percentuais (em um modelo simplificado), mas não em termos absolutos! Ou seja, dependendo do preço da ação, R$ 1,00 ou R$ 100,00, a deriva <span class="math inline">\(\mu\)</span> deve ser diferente para que em termos percentuais a relação seja constante.</p>
 <p>A solução para estes dois problemas é modelar o preço como um processo estocástico conhecido como Movimento Browniano Geométrico. Ele difere do MB padrão pois assume que o <strong>logaritmo</strong> da variável aleatória possui distribuição Normal. O MBG é a resolução para a seguinte EDE:</p>
-<p><span class="math display">\[dX_t = \mu X_t dt + \sigma X_t dB_t\]</span></p>
+<span class="math display" id="eq:mbg">\[\begin{equation}
+dX_t = \mu X_t dt + \sigma X_t dB_t
+\tag{1.2}
+\end{equation}\]</span>
 <p>Veja que este é basicamente o mesmo processo MB, porém a deriva, termo que multiplica <span class="math inline">\(dt\)</span>, varia linearmente com o valor do processo (<span class="math inline">\(\mu X_t\)</span>) assim como a volatilidade instantânea (<span class="math inline">\(\sigma X_t\)</span>).</p>
 <p>A solução para esta EDE, para um valor inicial qualquer de <span class="math inline">\(X\)</span> (<span class="math inline">\(X_0 &gt; 0\)</span>) é dada por:</p>
-<p><span class="math display">\[X_t = X_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma B_t\right)\]</span></p>
+<span class="math display" id="eq:mbgsol">\[\begin{equation}
+X_t = X_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma B_t\right)
+\tag{1.3}
+\end{equation}\]</span>
 <p>A variável aleatória <span class="math inline">\(X\)</span> segue um MB ao longo de uma trajetória exponencial. É fácil verificar que, por ser exponencial, <span class="math inline">\(X_t\)</span> nunca terá valor negativo.</p>
 <p>Esta é uma forma conveniente de representar a evolução de preços de um ativo pois naturalmente surge o conceito de retornos logarítmos. O log-retorno de <span class="math inline">\(X\)</span> é dado por <span class="math inline">\(r_t=\ln(X_t/X_0)\)</span> de onde inferimos que se o processo de formação de preço de um ativo segue um MBG, então seus log-retornos serão normalmente distribuídos com média <span class="math inline">\(\mu-\frac{\sigma^2}{2}\)</span> e volatilidade <span class="math inline">\(\sigma\)</span> em uma unidade de período considerado. Se escalarmos o período de tempo considerado para <span class="math inline">\(T\)</span>, temos então que os retornos logarítmicos do ativo <span class="math inline">\(X\)</span> seguem a seguinte distribuição normal:</p>
-<p><span class="math display">\[r_T \sim\phi\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)\]</span></p>
+<span class="math display" id="eq:rT">\[\begin{equation}
+r_T \sim\phi\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)
+\tag{1.4}
+\end{equation}\]</span>
 <p>Abaixo apresentamos 5 realizações de um MBG com valor de deriva <span class="math inline">\(\mu = 0,6\% a.p.\)</span> e variância <span class="math inline">\(\sigma^2=1\% a.p.\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">500</span>
 m &lt;-<span class="st"> </span><span class="dv">5</span> <span class="co"># Numero de simulacoes</span>

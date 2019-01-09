@@ -190,12 +190,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="encontrando-a-equacao-de-black-scholes" class="section level2">
 <h2><span class="header-section-number">2.3</span> Encontrando a equação de Black-Scholes</h2>
 <p>Vamos partir do princípio que nossa ação, objeto da opção que desejamos precificar, siga um MBG conforme descrito no <a href="processos-estocasticos.html#processos-estocasticos">capítulo anterior</a>. Portanto, o preço de nossa ação no período <span class="math inline">\(t\)</span> deve observar a seguinte equação diferencial estocástica:</p>
-<p><span class="math display" id="eq:ds">\[
-\begin{equation}
+<span class="math display" id="eq:ds">\[\begin{equation}
 dS_t=\mu S_t+\sigma S_t dW_t 
 \tag{2.1}
-\end{equation}
-\]</span></p>
+\end{equation}\]</span>
 <p>onde <span class="math inline">\(dW_t\)</span> é o movimento Browniano, ou processo de Wiener.</p>
 <p>Esta equação resume as principais hipóteses do modelo Black&amp;Scholes de precificação de opções, são elas:</p>
 <ul>
@@ -204,119 +202,92 @@ dS_t=\mu S_t+\sigma S_t dW_t
 </ul>
 <p>Ademais destas hipóteses, temos aquelas relacionadas a racionalidade dos mercados e ao princípio de ausência de oportunidades de arbitragem. Estas hipóteses nos levam a validade do mundo neutro ao risco e portanto, a resolução do modelo da forma como descreveremos abaixo.</p>
 <p>Nossa opção será descrita por um portfólio de replicação, e se tomarmos seu preço no instante <span class="math inline">\(t\)</span>, então a opção também deve seguir uma equação diferencial estocástica da forma:</p>
-<p><span class="math display" id="eq:df1">\[
-\begin{equation}
+<span class="math display" id="eq:df1">\[\begin{equation}
 df_t=\Delta dS_t+b\,dB_t 
 \tag{2.2}
-\end{equation}
-\]</span></p>
+\end{equation}\]</span>
 <p>aqui <span class="math inline">\(dB_t\)</span> representa a variação do ativo livre de risco (dinheiro) dentro de um período de tempo <span class="math inline">\(dt\)</span>. Sabemos que o valor do ativo livre de risco não envolve incerteza alguma, é determinístico, e seu rendimento é a taxa de juros livre de risco. Assim, para uma taxa continuamente composta <span class="math inline">\(r\)</span> uma unidade de <span class="math inline">\(B\)</span> evolui através de <span class="math inline">\(B_t=e^{rt}\)</span>, logo:</p>
-<p><span class="math display" id="eq:db">\[
-\begin{equation}
+<span class="math display" id="eq:db">\[\begin{equation}
 dB_t=rBdt
 \tag{2.3}
-\end{equation}
-\]</span></p>
+\end{equation}\]</span>
 <p>De acordo com o <a href="https://pt.wikipedia.org/wiki/Lema_de_It%C5%8D">lema de Ito</a> o diferencial de uma função que dependa do tempo e de um processo estocástico pode ser encontrado da seguinte forma:</p>
-<p><span class="math display" id="eq:df2">\[
-\begin{equation}
+<span class="math display" id="eq:df2">\[\begin{equation}
 df_t=\frac{\partial f}{\partial t}dt + \frac{\partial f}{\partial S}dS + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}dS^2
 \tag{2.4}
-\end{equation}
-\]</span></p>
+\end{equation}\]</span>
 <p>onde <span class="math inline">\(dS^2\)</span> é a variação quadrática de nosso processo <span class="math inline">\(S_t\)</span> que é um movimento browniano geométrico, logo <span class="math inline">\(dS^2=\sigma^2S^2dt\)</span>.</p>
 <p>Igualando as equações <a href="bsm.html#eq:df1">(2.2)</a> e <a href="bsm.html#eq:df2">(2.4)</a>, fazendo as devidas substituições trazidas pelas equações <a href="bsm.html#eq:ds">(2.1)</a> e <a href="bsm.html#eq:db">(2.3)</a> e por fim rearranjando os termos, chegamos na seguinte relação:</p>
-<p><span class="math display" id="eq:nome">\[
-\begin{equation}
+<span class="math display">\[\begin{equation}
 \left( \frac{\partial f}{\partial t} + \frac{\partial f}{\partial S}\mu S + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2 S^2 - \Delta\mu S - rbB \right)dt + \left( \frac{\partial f}{\partial S}\sigma S - \Delta \sigma S \right)dW = 0 
-\tag{2.5}
-\end{equation}
-\]</span></p>
+\end{equation}\]</span>
 <p>que para ser válida para todo <span class="math inline">\(t\)</span>, cada termo entre parênteses deve ser igual a zero simultaneamente. Rapidamente chegamos aos valores necessários de nosso portfólio de replicação.</p>
-<p><span class="math display" id="eq:delta">\[
-\begin{equation}
+<span class="math display" id="eq:delta">\[\begin{equation}
 \Delta = \frac{\partial f}{\partial S} 
-\tag{2.6}
-\end{equation}
-\]</span></p>
-<p><span class="math display" id="eq:rbb1">\[
-\begin{equation}
+\tag{2.5}
+\end{equation}\]</span>
+<span class="math display" id="eq:rbb1">\[\begin{equation}
 rbB = \frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2S^2 
-\tag{2.7}
-\end{equation}
-\]</span></p>
+\tag{2.6}
+\end{equation}\]</span>
 <p>Através da equação <a href="bsm.html#eq:df1">(2.2)</a>, integrando-a, chegamos na relação <span class="math inline">\(bB = f - \Delta S\)</span> e pré-multiplicando ambos os lados por <span class="math inline">\(r\)</span> temos então que:</p>
-<p><span class="math display" id="eq:rbb2">\[
-\begin{equation}
+<span class="math display" id="eq:rbb2">\[\begin{equation}
 rbB = r(f-\Delta S) 
-\tag{2.8}
-\end{equation}
-\]</span></p>
-<p>Finalmente, igualando as equações <a href="bsm.html#eq:rbb1">(2.7)</a> e <a href="bsm.html#eq:rbb2">(2.8)</a> e substituindo o valor de <span class="math inline">\(\Delta\)</span> encontramos a famigerada equação diferencial parcial - EDP - de Black&amp;Scholes:</p>
-<p><span class="math display" id="eq:BS">\[
-\begin{equation}
+\tag{2.7}
+\end{equation}\]</span>
+<p>Finalmente, igualando as equações <a href="bsm.html#eq:rbb1">(2.6)</a> e <a href="bsm.html#eq:rbb2">(2.7)</a> e substituindo o valor de <span class="math inline">\(\Delta\)</span> encontramos a famigerada equação diferencial parcial - EDP - de Black&amp;Scholes:</p>
+<span class="math display" id="eq:BS">\[\begin{equation}
 \frac{\partial f}{\partial t}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 f}{\partial S^2}+rS\frac{\partial f}{\partial S} - rf = 0
-\tag{2.9}
-\end{equation}
-\]</span></p>
+\tag{2.8}
+\end{equation}\]</span>
 </div>
 <div id="solucao-analitica" class="section level2">
 <h2><span class="header-section-number">2.4</span> Solução analítica</h2>
-<p>A equação possui diferentes formas de resolução<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>, a precificação do derivativo irá depender da forma que resolvermos a equação <a href="bsm.html#eq:BS">(2.9)</a>. O Modelo Black&amp;Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos <em>payoffs</em>. Para uma call:</p>
-<p><span class="math display" id="eq:cpayoff">\[
-\begin{equation}
+<p>A equação possui diferentes formas de resolução<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>, a precificação do derivativo irá depender da forma que resolvermos a equação <a href="bsm.html#eq:BS">(2.8)</a>. O Modelo Black&amp;Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos <em>payoffs</em>. Para uma call:</p>
+<span class="math display" id="eq:cpayoff">\[\begin{equation}
 \displaystyle f(S,T)=\max(S-K,0)
-\tag{2.10}
-\end{equation}
-\]</span></p>
+\tag{2.9}
+\end{equation}\]</span>
 <p>Já no caso de uma put:</p>
-<p><span class="math display" id="eq:ppayoff">\[
-\begin{equation}
+<span class="math display" id="eq:ppayoff">\[\begin{equation}
 \displaystyle f(S,T)=\max(K-S,0)
-\tag{2.11}
-\end{equation}
-\]</span></p>
+\tag{2.10}
+\end{equation}\]</span>
 <p>Onde:</p>
 <ul>
 <li>T é a data de vencimento da opção,</li>
 <li>K é o preço de exercício, e</li>
 <li>S é o preço do ativo subjacente.</li>
 </ul>
-<p>Utilizando os <em>payoffs</em> dados nas equações <a href="bsm.html#eq:cpayoff">(2.10)</a> e <a href="bsm.html#eq:ppayoff">(2.11)</a>, e resolvendo a EDP de Black&amp;Scholes <a href="bsm.html#eq:BS">(2.9)</a>, iremos obter o modelo para se precificar os derivativos citados.</p>
+<p>Utilizando os <em>payoffs</em> dados nas equações <a href="bsm.html#eq:cpayoff">(2.9)</a> e <a href="bsm.html#eq:ppayoff">(2.10)</a>, e resolvendo a EDP de Black&amp;Scholes <a href="bsm.html#eq:BS">(2.8)</a>, iremos obter o modelo para se precificar os derivativos citados.</p>
 <p>Para uma Call temos que:</p>
-<p><span class="math display" id="eq:call">\[
-\begin{equation}
+<span class="math display" id="eq:call">\[\begin{equation}
 C(S,t)=SN(d_{1})-Ke^{-r(T-t)}N(d_{2})
-\tag{2.12}
-\end{equation}
-\]</span></p>
+\tag{2.11}
+\end{equation}\]</span>
 <p>Já para um Put chegamos a:</p>
-<p><span class="math display" id="eq:put">\[
-\begin{equation}
+<span class="math display" id="eq:put">\[\begin{equation}
 P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
-\tag{2.13}
-\end{equation}
-\]</span></p>
+\tag{2.12}
+\end{equation}\]</span>
 <p>onde:</p>
-<p><span class="math display" id="eq:d1">\[d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
+<span class="math display" id="eq:d1">\[\begin{equation}d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
+\tag{2.13}
+\end{equation}\]</span>
+<span class="math display" id="eq:d2">\[\begin{equation}d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
 \tag{2.14}
-\]</span></p>
-<p><span class="math display" id="eq:d2">\[d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
-\tag{2.15}
-\]</span></p>
-<p>É a partir das equações <a href="bsm.html#eq:call">(2.12)</a> e <a href="bsm.html#eq:put">(2.13)</a> que se obtém as chamadas gregas, que são as sensibilidades do preço do derivativo em relação a alterações nos parâmetros do modelo. Explicaremos as gregas em maiores detalhes mais adiante.</p>
+\end{equation}\]</span>
+<p>É a partir das equações <a href="bsm.html#eq:call">(2.11)</a> e <a href="bsm.html#eq:put">(2.12)</a> que se obtém as chamadas gregas, que são as sensibilidades do preço do derivativo em relação a alterações nos parâmetros do modelo. Explicaremos as gregas em maiores detalhes mais adiante.</p>
 </div>
 <div id="putcallparity" class="section level2">
 <h2><span class="header-section-number">2.5</span> Paridade compra e venda</h2>
 <p>Agora vamos falar um pouco sobre a paridade entre opções de compra e venda, algo que nos ajuda a precificar algum derivativo quando já conhecemos o preço de outro derivativo com especificações semelhantes.</p>
 <p>Assumindo ausência de oportunidade de arbitragem, com um ativo subjacente que tenha liquidez, iremos verificar a paridade Call-Put que define uma relação entre os preços de uma call e put do tipo europeu, desde que possuam o <strong>mesmo tempo de maturidade</strong> e <strong>preço de strike</strong>. Aqui possuiremos menos premissas que o modelo Black&amp;Scholes e premissas mais simples, tal relação poderá ser utilizada para encontrar o valor justo de uma opção. Com a ausência de arbitragem observe que dois portfolios que sempre geram o mesmo payoff em um instante T devem ter o mesmo valor em qualquer instante intermediário.</p>
 <p>Imagine um primeiro portfólio onde o investidor compre uma opção de compra C, a qual possui tempo de maturidade T e preço de strike K, sobre algum ativo subjacente que chamaremos de S e compre um título B que seu valor no período T seja de <span class="tex2jax_ignore">$</span>30. E um segundo portfolio onde tenha o próprio ativo subjacente S que esteja sendo negociado a <span class="tex2jax_ignore">$</span>25 e compre uma put P com um preço de strike K e maturidade T. Estes são porfólios de replicação entre si, eles terão exatamente o mesmo <em>payoff</em> no período T, e na ausência de arbitragem, podemos calcular seus retornos através da precificação neutra ao risco. Teremos uma relação onde os valores dos nossos portfolios serão:</p>
-<p><span class="math display" id="eq:parity">\[
-\begin{equation}
+<span class="math display" id="eq:parity">\[\begin{equation}
 \mathbb{E_Q}[S_t + P_t] = \mathbb{E_Q}[C_t + B_t]; \quad t \leq T
-\tag{2.16}
-\end{equation}
-\]</span></p>
+\tag{2.15}
+\end{equation}\]</span>
 <p>Como estamos em um mundo neutro ao risco, <span class="math inline">\(P_t\)</span> e <span class="math inline">\(C_t\)</span> são os preços da put e da call dados pelo modelo B&amp;S, enquanto <span class="math inline">\(\mathbb{E_Q}[B_t]\)</span> se resume a <span class="math inline">\(Ke^{-r(T-t)}\)</span>, ou seja, a posição atual em ativo livre de risco deve ser o valor presente do strike das opções. O preço do subjacente é o próprio preço atualmente observado.</p>
 <p>Como <span class="math inline">\(S_t\)</span> e <span class="math inline">\(B_t=Ke^{-r(T-t)}\)</span> são conhecidos, se no mercado existir um preço <span class="math inline">\(C_t\)</span> então podemos calcular <span class="math inline">\(P_t\)</span> e vice-versa. Esta é a essência da paridade compra e venda.</p>
 <p>Observe que se essa relação não for mantida, teremos arbitragem: Suponhamos que <span class="math inline">\(S_t &gt; B_t\)</span> e que a put esteja com um premio mais alto que a call no entanto ambos possuem um preço de strike <span class="tex2jax_ignore">$</span>30 e maturidade T, que os prêmios sejam <span class="tex2jax_ignore">$</span>20 e <span class="tex2jax_ignore">$</span>15 respectivamente teremos então: 30 + 20 = 15 + 25, nesse caso teremos 50 <span class="math inline">\(\neq\)</span> 40, então vende-se o que está mais caro, no caso a ação e a put e compraria o título e a call, chegando ao um lucro de 50-40=10, de <span class="tex2jax_ignore">$</span>10 sem risco. Observe que independentemente de a ação subir acima ou cair abaixo do strike, o lucro obtido nesta operação será sempre de <span class="tex2jax_ignore">$</span>10.</p>
@@ -327,12 +298,10 @@ P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
 <div id="delta" class="section level3">
 <h3><span class="header-section-number">2.6.1</span> Delta</h3>
 <p>Já havíamos definido o delta anteriormente ao encontrarmos a EDP de Black&amp;Scholes, isto é:</p>
-<p><span class="math display" id="eq:delta">\[
-\begin{equation}
+<span class="math display" id="eq:delta">\[\begin{equation}
 \Delta = \frac{\partial f}{\partial S}
-\tag{2.6}
-\end{equation}
-\]</span></p>
+\tag{2.5}
+\end{equation}\]</span>
 <p>O delta mede a taxa com que o preço da opção muda conforme o valor do ativo subjacente oscila, seu valor pode variar entre 1 e 0 para call e entre 0 e -1 para put.</p>
 <p>Exemplo: imagine uma opção de compra de 100 ações que possui um delta de 0,72, caso o ativo subjacente aumente <span class="tex2jax_ignore">$</span>1 o valor da opção aumentará <span class="tex2jax_ignore">$</span>72 (pois representa 100 ações), e caso o valor do ativo subjacente diminua o preço da opção diminuirá <span class="tex2jax_ignore">$</span>72.</p>
 <p>O mesmo acontece com opções de venda, só que de uma forma inversamente proporcional pelo seu delta ser negativo. Uma opção de venda de 100 ações que possui um delta de -0,40 vai valer menos <span class="tex2jax_ignore">$</span>40 caso o preço do seu ativo subjacente aumente <span class="tex2jax_ignore">$</span>1, e vai valer mais <span class="tex2jax_ignore">$</span>40 caso o preço do seu ativo subjacente diminua <span class="tex2jax_ignore">$</span>1.</p>
@@ -340,42 +309,34 @@ P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
 </div>
 <div id="gamma" class="section level3">
 <h3><span class="header-section-number">2.6.2</span> Gamma</h3>
-<p><span class="math display" id="eq:gamma">\[
-\begin{equation}
+<span class="math display" id="eq:gamma">\[\begin{equation}
 \Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 f}{\partial S^2}
-\tag{2.17}
-\end{equation}
-\]</span></p>
+\tag{2.16}
+\end{equation}\]</span>
 <p>O gamma mede a taxa com que o delta muda a cada oscilação do preço do ativo subjacente, seu impacto aumenta conforme o valor atual do ativo se aproxima do strike, sendo responsável pela convexidade do valor da opção. Opções de alto gamma são chamadas de explosivas, uma vez que mesmo pequenas variações no preço do ativo se traduzem em grandes oscilações no preço da opção.</p>
 </div>
 <div id="theta" class="section level3">
 <h3><span class="header-section-number">2.6.3</span> Theta</h3>
-<p><span class="math display" id="eq:theta">\[
-\begin{equation}
+<span class="math display" id="eq:theta">\[\begin{equation}
 \Theta = -\frac{\partial f}{\partial \tau}, \quad \tau=T-t
-\tag{2.18}
-\end{equation}
-\]</span></p>
+\tag{2.17}
+\end{equation}\]</span>
 <p>O Theta é uma taxa que mede o efeito do tempo sobre o preço da opção. Como as opções tem um maior valor de acordo com a quantidade de tempo até a data de vencimento, seu valor também diminui conforme o tempo passa, theta é a letra que mede essa variação (que sempre é negativa). O valor de theta representa a quantidade de dinheiro perdida no prêmio da opção a cada dia que passa.</p>
 </div>
 <div id="vega" class="section level3">
 <h3><span class="header-section-number">2.6.4</span> Vega</h3>
-<p><span class="math display" id="eq:vega">\[
-\begin{equation}
+<span class="math display" id="eq:vega">\[\begin{equation}
 \displaystyle {\mathcal {V}}=\frac{\partial f}{\partial \sigma} 
-\tag{2.19}
-\end{equation}
-\]</span></p>
+\tag{2.18}
+\end{equation}\]</span>
 <p>O vega é uma taxa que mede o efeito da mudança da volatilidade no preço da opção. Seu valor é praticamente constante em opções com a mesma data de vencimento, esse valor aumenta em datas de vencimento mais distantes devido ao maior espaço de tempo em que a volatilidade atua, devido ao maior intervalo de tempo que há para ocorrer mudanças nos preços.</p>
 </div>
 <div id="rho" class="section level3">
 <h3><span class="header-section-number">2.6.5</span> Rho</h3>
-<p><span class="math display" id="eq:rho">\[
-\begin{equation}
+<span class="math display" id="eq:rho">\[\begin{equation}
 \displaystyle \rho =\frac{\partial f}{\partial r}
-\tag{2.20}
-\end{equation}
-\]</span></p>
+\tag{2.19}
+\end{equation}\]</span>
 <p>O rho é uma taxa que mede a sensitividade do preço da ação em relação à taxa livre de risco, caso o valor de de rho determinada opção seja 0,7, para cada aumento de 1% da taxa livre de risco o valor da opção aumentará 0,7%. Essa taxa influi principalmente no preço de opções com uma data de vencimento extremamente distante, não afetando muito o preço de opções cuja data de vencimento é próxima.</p>
 
 </div>

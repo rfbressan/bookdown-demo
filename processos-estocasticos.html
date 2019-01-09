@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Capítulo 1 Processos Estocásticos em Finanças | Introdução a Superfície de Volatilidade</title>
+  <meta name="description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Capítulo 1 Processos Estocásticos em Finanças | Introdução a Superfície de Volatilidade" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 1 Processos Estocásticos em Finanças | Introdução a Superfície de Volatilidade" />
+  
+  <meta name="twitter:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  
+
+<meta name="author" content="Rafael Felipe Bressan">
+
+
+<meta name="date" content="2019-01-09">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="sobre-os-autores.html">
+<link rel="next" href="bsm.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introdução a Superfície de Volatilidade</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html"><i class="fa fa-check"></i>Sobre os Autores</a><ul>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html"><i class="fa fa-check"></i><b>1</b> Processos Estocásticos em Finanças</a><ul>
+<li class="chapter" data-level="1.1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#markov"><i class="fa fa-check"></i><b>1.1</b> Processos de Markov</a></li>
+<li class="chapter" data-level="1.2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mb"><i class="fa fa-check"></i><b>1.2</b> Movimento Browniano</a></li>
+<li class="chapter" data-level="1.3" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#definicao"><i class="fa fa-check"></i><b>1.3</b> Definição</a></li>
+<li class="chapter" data-level="1.4" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mbg"><i class="fa fa-check"></i><b>1.4</b> Movimento Browniano Geométrico</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="bsm.html"><a href="bsm.html"><i class="fa fa-check"></i><b>2</b> Modelo Black-Scholes-Merton</a><ul>
+<li class="chapter" data-level="2.1" data-path="bsm.html"><a href="bsm.html#portfolio-de-replicacao"><i class="fa fa-check"></i><b>2.1</b> Portfólio de replicação</a></li>
+<li class="chapter" data-level="2.2" data-path="bsm.html"><a href="bsm.html#precificacao-neutra-ao-risco"><i class="fa fa-check"></i><b>2.2</b> Precificação neutra ao risco</a></li>
+<li class="chapter" data-level="2.3" data-path="bsm.html"><a href="bsm.html#encontrando-a-equacao-de-black-scholes"><i class="fa fa-check"></i><b>2.3</b> Encontrando a equação de Black-Scholes</a></li>
+<li class="chapter" data-level="2.4" data-path="bsm.html"><a href="bsm.html#solucao-analitica"><i class="fa fa-check"></i><b>2.4</b> Solução analítica</a></li>
+<li class="chapter" data-level="2.5" data-path="bsm.html"><a href="bsm.html#putcallparity"><i class="fa fa-check"></i><b>2.5</b> Paridade compra e venda</a></li>
+<li class="chapter" data-level="2.6" data-path="bsm.html"><a href="bsm.html#gregas"><i class="fa fa-check"></i><b>2.6</b> As Gregas</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="bsm.html"><a href="bsm.html#delta"><i class="fa fa-check"></i><b>2.6.1</b> Delta</a></li>
+<li class="chapter" data-level="2.6.2" data-path="bsm.html"><a href="bsm.html#gamma"><i class="fa fa-check"></i><b>2.6.2</b> Gamma</a></li>
+<li class="chapter" data-level="2.6.3" data-path="bsm.html"><a href="bsm.html#theta"><i class="fa fa-check"></i><b>2.6.3</b> Theta</a></li>
+<li class="chapter" data-level="2.6.4" data-path="bsm.html"><a href="bsm.html#vega"><i class="fa fa-check"></i><b>2.6.4</b> Vega</a></li>
+<li class="chapter" data-level="2.6.5" data-path="bsm.html"><a href="bsm.html#rho"><i class="fa fa-check"></i><b>2.6.5</b> Rho</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="smile.html"><a href="smile.html"><i class="fa fa-check"></i><b>3</b> Smile de Volatilidade</a><ul>
+<li class="chapter" data-level="3.1" data-path="smile.html"><a href="smile.html#reparametrizando"><i class="fa fa-check"></i><b>3.1</b> Reparametrizando B&amp;S e definição de moneyness</a></li>
+<li class="chapter" data-level="3.2" data-path="smile.html"><a href="smile.html#caracsmile"><i class="fa fa-check"></i><b>3.2</b> Características de smiles de volatilidade</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="smile.html"><a href="smile.html#mercados-cambiais"><i class="fa fa-check"></i><b>3.2.1</b> Mercados cambiais</a></li>
+<li class="chapter" data-level="3.2.2" data-path="smile.html"><a href="smile.html#mercados-de-equities"><i class="fa fa-check"></i><b>3.2.2</b> Mercados de <em>equities</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="smile.html"><a href="smile.html#smileprecificacao"><i class="fa fa-check"></i><b>3.3</b> Smile como forma de precificação</a></li>
+<li class="chapter" data-level="3.4" data-path="smile.html"><a href="smile.html#estrutura-a-termo"><i class="fa fa-check"></i><b>3.4</b> Estrutura a termo</a></li>
+<li class="chapter" data-level="3.5" data-path="smile.html"><a href="smile.html#arbestatica"><i class="fa fa-check"></i><b>3.5</b> Arbitragem estática</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="smile.html"><a href="smile.html#arbitragem-de-borboleta"><i class="fa fa-check"></i><b>3.5.1</b> Arbitragem de borboleta</a></li>
+<li class="chapter" data-level="3.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>3.5.2</b> Arbitragem de calendário</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>3.6</b> Limites de inclinação</a></li>
+<li class="chapter" data-level="3.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>3.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="3.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>3.8</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introdução a Superfície de Volatilidade</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="processos-estocasticos" class="section level1">
+<h1><span class="header-section-number">Capítulo 1</span> Processos Estocásticos em Finanças</h1>
+<p>Neste artigo abordaremos um assunto técnico, mas muito utilizado e de fudamental importância para a precificação de instrumentos derivativos. Será apresentado o conceito de processos estocásticos - PE, e sua aplicação no mundo das finanças.</p>
+<p>Um processo estocástico é a evolução temporal de uma determinada variável de interesse que pode assumir valores aleatórios em cada ponto no tempo. Em outras palavras, o caminho que a variável segue ao longo do tempo evolui de maneira incerta. Estes processos podem se dar em tempo discreto ou em tempo contínuo. Processo em tempo discreto são aqueles onde o valor da variável pode se alterar somente em intervalos pré-definidos de tempo, por exemplo ao final do dia. Em processos em tempo contínuo, o valor de nossa variável está constantemente em mudança, de forma aleatória seguindo alguma distribuição de probabilidades.</p>
+<p>Estes processos são muito importantes em finanças pois, é amplamente aceito que a evolução do preço de ativos financeiros pode ser modelado por um PE em tempo contínuo, sendo este modelo portanto, a base para a teoria de precificação de ativos e da qual os derivativos fazem extenso uso. Aprender sobre a evolução temporal do preço de uma ação através de um processo estocástico é o primeiro passo para saber como atribuir um preço a uma opção sobre esta ação, por exemplo.</p>
+<p>Deve ser notado também que apesar de o preço dos ativos serem <strong>observados</strong> apenas em intervalos discretos de tempo (apenas quando existe transação) e assumirem valores também discretos (múltiplos de um centavo), o preço e sua evolução estão ocorrendo continuamente, nossas observações que são discretas. Desta forma os processos em tempo contínuos são ideais para este tipo de modelagem.</p>
+<div id="markov" class="section level2">
+<h2><span class="header-section-number">1.1</span> Processos de Markov</h2>
+<p>Uma primeira definição de deve-se fazer para estudar PE aplicados a evolução do preço de ações é o conceito de processo de Markov. Este tipo de processo é tal que o histórico do processo que o levou até seu estado atual, é <strong>irrelevante</strong> para a previsão de seu estado futuro. Ou seja, toda a informação da história do processo já está contida no seu valor atual. Quando consideramos que preços de ativos seguem um processo de Markov, estamos assumindo válida pelo menos a forma fraca de mercados eficientes.</p>
+<p>Uma implicação desta suposição, verificada empiricamente, é que não se pode obter lucros apenas seguindo padrões históricos do preço e extrapolando-os no futuro. Outra, mais importante para nossos processos, é que as distribuições de probabilidade que a variável aleatória segue em cada ponto no tempo são <strong>independentes</strong>.</p>
+</div>
+<div id="mb" class="section level2">
+<h2><span class="header-section-number">1.2</span> Movimento Browniano</h2>
+<p>Suponha um processo de Markov, que para fins de simplificação consideraremos em tempo discretos. Se a distribuição de probabilidade para o próximo incremento no valor do processo for uma Normal com média zero e variância unitária, podemos representar este incremento por <span class="math inline">\(\phi(0, 1)\)</span>. Como este é um processo de Markov, o segundo incremento será independente do primeiro e terá novamente a mesma distribuição de probabilidade. Qual seria então, a partir do período inicial até o segundo período, a distribuição de probabilidade dos possíveis valores de nosso hipotético processo? A reposta é a soma de duas normais <span class="math inline">\(\phi(0, 1)\)</span> que resulta em <span class="math inline">\(\phi(0, 2)\)</span>. Se assim continuarmos a fazer previsões para T períodos a frente, nossa distribuição terá densidade <span class="math inline">\(\phi(0, T)\)</span>.</p>
+<p>Para tempos discretos, <span class="math inline">\(T\in\mathbb{Z}\)</span> este é o processo do passeio aleatório (<em>Random Walk</em>), entretanto para tempo contínuo quando <span class="math inline">\(T\in\mathbb{R}\)</span> com incrementos acontecendo em intervalos de tempo infinitesimalmente pequenos, este é o Movimento Browniano - MB, que também é largamente conhecido como processo de Wiener.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">500</span>
+m &lt;-<span class="st"> </span><span class="dv">5</span> <span class="co"># Numero de simulacoes</span>
+mc_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Sim&quot;</span>, <span class="kw">seq_len</span>(m)) <span class="co"># Nomes das simulacoes</span>
+sigma2 &lt;-<span class="st"> </span><span class="dv">1</span>
+mu &lt;-<span class="st"> </span><span class="dv">0</span>
+brown_t &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="kw">length</span>(t), <span class="dt">ncol =</span> m)
+<span class="co"># MC Simulation</span>
+<span class="kw">set.seed</span>(<span class="dv">543210</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(m)) {
+  increments &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(t) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, mu, <span class="kw">sqrt</span>(sigma2))
+  brown_t[, i] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">cumsum</span>(increments))
+}
+
+<span class="kw">colnames</span>(brown_t) &lt;-<span class="st"> </span>mc_names
+mb &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(<span class="kw">cbind</span>(t, brown_t)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> sim, <span class="dt">value =</span> value, <span class="op">-</span>t)</code></pre></div>
+<pre><code>## Warning: `as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).
+## This warning is displayed once per session.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mb, <span class="kw">aes</span>(<span class="dt">x =</span> t, <span class="dt">y =</span> value, <span class="dt">color =</span> sim)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="co">#  geom_point(data = dens_tbl, aes(x = x, y = y), size = 1) +</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;5 realizações Movimento Browniano&quot;</span>,
+       <span class="dt">x =</span> <span class="st">&quot;Tempo&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Valor&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
+<p><img src="vol_surface_book_files/figure-html/brownian_plot-1.png" width="672" /></p>
+<p>A figura acima mostra 5 realizações de um <em>mesmo</em> processo estocástico com média zero e variância unitária. É importante frisar que o processo que gerou as cinco séries é exatamente o mesmo, sendo elas tão distintas umas das outras ou não. Esta é uma importante característica dos processos estocásticos nas aplicações reais, o que nós observamos é apenas uma realização do processo, dentre as infinitas possíveis.</p>
+</div>
+<div id="definicao" class="section level2">
+<h2><span class="header-section-number">1.3</span> Definição</h2>
+<p>Agora que já foi passada a intuição sobre processos estocásticos, pode-se partir para definições mais formais sobre estes processos. Vamos adotar a notação do cálculo para tanto, e generalizar nosso MB possibilitando-o que tenha média diferente de zero (<span class="math inline">\(\mu\)</span>) e variância qualquer (<span class="math inline">\(\sigma^2\)</span>), mantendo estas constantes ao longo do tempo, entretanto. Desta forma um movimento Browniano com deriva pode ser descrito através da seguinte equação diferencial estocástica - EDE:</p>
+<p><span class="math display">\[dX_t = \mu dt + \sigma dB_t\]</span></p>
+<p>onde <span class="math inline">\(dB_t\)</span> é nosso MB padrão em um intervalo de tempo infinitesimal, <span class="math inline">\(dt\)</span>.</p>
+<p>O processo <span class="math inline">\(X_t\)</span> possui uma taxa de deriva (média instantânea) igual a <span class="math inline">\(\mu\)</span> e volatilidade instantânea igual a <span class="math inline">\(\sigma\)</span>. Quando um PE possui deriva igual a zero, como nosso MB padrão, o valor esperado deste processo para qualquer período futuro será zero. Este fato deixa de ser verdade no processo generalizado, com taxa de deriva diferente de zero. Neste caso o processo evoluirá seguindo uma taxa crescente (se <span class="math inline">\(\mu &gt; 0\)</span>) ou decrescente (se <span class="math inline">\(\mu &lt; 0\)</span>). Assim é possível, a partir de um MB padrão, modelar outros PE que possuam tendência temporal e variâncias diferentes.</p>
+</div>
+<div id="mbg" class="section level2">
+<h2><span class="header-section-number">1.4</span> Movimento Browniano Geométrico</h2>
+<p>Apesar de o processo <span class="math inline">\(X_t\)</span> ser bastante flexível e cobrir uma grande gama de usos, ele ainda não é adequado para modelar o preço de ativos, e isto se dá em função de o processo de Wiener, mesmo com deriva positiva, poder atingir valores negativos com probabilidade maior que zero. Isto implicaria na possibilidade do preço de uma ação ser negativo, algo que obviamente não ocorre. Além desta impossibilidade, existe um outro empecilho para se utilizar o MB para modelar o processo de preços, e este é a deriva constante <span class="math inline">\(\mu\)</span> com relação ao preço da ação.</p>
+<p>A deriva pode ser interpretada como o valor esperado do retorno da ação em um dado período de tempo. Este retorno esperado ele é pode ser constante em termos percentuais (em um modelo simplificado), mas não em termos absolutos! Ou seja, dependendo do preço da ação, R$ 1,00 ou R$ 100,00, a deriva <span class="math inline">\(\mu\)</span> deve ser diferente para que em termos percentuais a relação seja constante.</p>
+<p>A solução para estes dois problemas é modelar o preço como um processo estocástico conhecido como Movimento Browniano Geométrico. Ele difere do MB padrão pois assume que o <strong>logaritmo</strong> da variável aleatória possui distribuição Normal. O MBG é a resolução para a seguinte EDE:</p>
+<p><span class="math display">\[dX_t = \mu X_t dt + \sigma X_t dB_t\]</span></p>
+<p>Veja que este é basicamente o mesmo processo MB, porém a deriva, termo que multiplica <span class="math inline">\(dt\)</span>, varia linearmente com o valor do processo (<span class="math inline">\(\mu X_t\)</span>) assim como a volatilidade instantânea (<span class="math inline">\(\sigma X_t\)</span>).</p>
+<p>A solução para esta EDE, para um valor inicial qualquer de <span class="math inline">\(X\)</span> (<span class="math inline">\(X_0 &gt; 0\)</span>) é dada por:</p>
+<p><span class="math display">\[X_t = X_0\exp\left(\left(\mu-\frac{\sigma^2}{2}\right)t+\sigma B_t\right)\]</span></p>
+<p>A variável aleatória <span class="math inline">\(X\)</span> segue um MB ao longo de uma trajetória exponencial. É fácil verificar que, por ser exponencial, <span class="math inline">\(X_t\)</span> nunca terá valor negativo.</p>
+<p>Esta é uma forma conveniente de representar a evolução de preços de um ativo pois naturalmente surge o conceito de retornos logarítmos. O log-retorno de <span class="math inline">\(X\)</span> é dado por <span class="math inline">\(r_t=\ln(X_t/X_0)\)</span> de onde inferimos que se o processo de formação de preço de um ativo segue um MBG, então seus log-retornos serão normalmente distribuídos com média <span class="math inline">\(\mu-\frac{\sigma^2}{2}\)</span> e volatilidade <span class="math inline">\(\sigma\)</span> em uma unidade de período considerado. Se escalarmos o período de tempo considerado para <span class="math inline">\(T\)</span>, temos então que os retornos logarítmicos do ativo <span class="math inline">\(X\)</span> seguem a seguinte distribuição normal:</p>
+<p><span class="math display">\[r_T \sim\phi\left(\left(\mu-\frac{\sigma^2}{2}\right)T, \sigma^2T\right)\]</span></p>
+<p>Abaixo apresentamos 5 realizações de um MBG com valor de deriva <span class="math inline">\(\mu = 0,6\% a.p.\)</span> e variância <span class="math inline">\(\sigma^2=1\% a.p.\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t &lt;-<span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">500</span>
+m &lt;-<span class="st"> </span><span class="dv">5</span> <span class="co"># Numero de simulacoes</span>
+mc_names &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;Sim&quot;</span>, <span class="kw">seq_len</span>(m)) <span class="co"># Nomes das simulacoes</span>
+sigma2 &lt;-<span class="st"> </span><span class="fl">0.01</span>
+mu &lt;-<span class="st"> </span><span class="fl">0.006</span> <span class="co"># c(0.098, 0.099, 0.1, 0.101, 0.102) / 10</span>
+brown_t &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="kw">length</span>(t), <span class="dt">ncol =</span> m)
+<span class="co"># MC Simulation</span>
+<span class="kw">set.seed</span>(<span class="dv">1234567</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(m)) {
+  log_ret &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="kw">length</span>(t) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, mu <span class="op">-</span><span class="st"> </span>(sigma2 <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="kw">sqrt</span>(sigma2))
+  brown_t[, i] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">cumprod</span>(<span class="kw">exp</span>(log_ret)))
+}
+
+<span class="kw">colnames</span>(brown_t) &lt;-<span class="st"> </span>mc_names
+mb &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(<span class="kw">cbind</span>(t, brown_t)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> sim, <span class="dt">value =</span> value, <span class="op">-</span>t)
+  
+<span class="kw">ggplot</span>(mb, <span class="kw">aes</span>(<span class="dt">x =</span> t, <span class="dt">y =</span> value, <span class="dt">color =</span> sim)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;5 realizações Movimento Browniano Geométrico&quot;</span>,
+       <span class="dt">x =</span> <span class="st">&quot;Tempo&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Valor&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">10</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
+<p><img src="vol_surface_book_files/figure-html/mbg_plot-1.png" width="672" /></p>
+<p>O Movimento Browniano Geométrico aqui demonstrado serve de base para o famoso modelo <strong>Black &amp; Scholes</strong> de precificação de opções, o qual assume que o ativo subjacente à opção (por exemplo, a ação de uma empresa) tem seu preço formado por um processo MBG.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sobre-os-autores.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bsm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/02-processos-estocasticos-em-financas-uma-introducao.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["vol_surface_book.pdf", "vol_surface_book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

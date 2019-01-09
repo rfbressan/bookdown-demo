@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Capítulo 2 Modelo Black-Scholes-Merton | Introdução a Superfície de Volatilidade</title>
+  <meta name="description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Capítulo 2 Modelo Black-Scholes-Merton | Introdução a Superfície de Volatilidade" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Modelo Black-Scholes-Merton | Introdução a Superfície de Volatilidade" />
+  
+  <meta name="twitter:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  
+
+<meta name="author" content="Rafael Felipe Bressan">
+
+
+<meta name="date" content="2019-01-09">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="processos-estocasticos.html">
+<link rel="next" href="smile.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introdução a Superfície de Volatilidade</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html"><i class="fa fa-check"></i>Sobre os Autores</a><ul>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html"><i class="fa fa-check"></i><b>1</b> Processos Estocásticos em Finanças</a><ul>
+<li class="chapter" data-level="1.1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#markov"><i class="fa fa-check"></i><b>1.1</b> Processos de Markov</a></li>
+<li class="chapter" data-level="1.2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mb"><i class="fa fa-check"></i><b>1.2</b> Movimento Browniano</a></li>
+<li class="chapter" data-level="1.3" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#definicao"><i class="fa fa-check"></i><b>1.3</b> Definição</a></li>
+<li class="chapter" data-level="1.4" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mbg"><i class="fa fa-check"></i><b>1.4</b> Movimento Browniano Geométrico</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="bsm.html"><a href="bsm.html"><i class="fa fa-check"></i><b>2</b> Modelo Black-Scholes-Merton</a><ul>
+<li class="chapter" data-level="2.1" data-path="bsm.html"><a href="bsm.html#portfolio-de-replicacao"><i class="fa fa-check"></i><b>2.1</b> Portfólio de replicação</a></li>
+<li class="chapter" data-level="2.2" data-path="bsm.html"><a href="bsm.html#precificacao-neutra-ao-risco"><i class="fa fa-check"></i><b>2.2</b> Precificação neutra ao risco</a></li>
+<li class="chapter" data-level="2.3" data-path="bsm.html"><a href="bsm.html#encontrando-a-equacao-de-black-scholes"><i class="fa fa-check"></i><b>2.3</b> Encontrando a equação de Black-Scholes</a></li>
+<li class="chapter" data-level="2.4" data-path="bsm.html"><a href="bsm.html#solucao-analitica"><i class="fa fa-check"></i><b>2.4</b> Solução analítica</a></li>
+<li class="chapter" data-level="2.5" data-path="bsm.html"><a href="bsm.html#putcallparity"><i class="fa fa-check"></i><b>2.5</b> Paridade compra e venda</a></li>
+<li class="chapter" data-level="2.6" data-path="bsm.html"><a href="bsm.html#gregas"><i class="fa fa-check"></i><b>2.6</b> As Gregas</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="bsm.html"><a href="bsm.html#delta"><i class="fa fa-check"></i><b>2.6.1</b> Delta</a></li>
+<li class="chapter" data-level="2.6.2" data-path="bsm.html"><a href="bsm.html#gamma"><i class="fa fa-check"></i><b>2.6.2</b> Gamma</a></li>
+<li class="chapter" data-level="2.6.3" data-path="bsm.html"><a href="bsm.html#theta"><i class="fa fa-check"></i><b>2.6.3</b> Theta</a></li>
+<li class="chapter" data-level="2.6.4" data-path="bsm.html"><a href="bsm.html#vega"><i class="fa fa-check"></i><b>2.6.4</b> Vega</a></li>
+<li class="chapter" data-level="2.6.5" data-path="bsm.html"><a href="bsm.html#rho"><i class="fa fa-check"></i><b>2.6.5</b> Rho</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="smile.html"><a href="smile.html"><i class="fa fa-check"></i><b>3</b> Smile de Volatilidade</a><ul>
+<li class="chapter" data-level="3.1" data-path="smile.html"><a href="smile.html#reparametrizando"><i class="fa fa-check"></i><b>3.1</b> Reparametrizando B&amp;S e definição de moneyness</a></li>
+<li class="chapter" data-level="3.2" data-path="smile.html"><a href="smile.html#caracsmile"><i class="fa fa-check"></i><b>3.2</b> Características de smiles de volatilidade</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="smile.html"><a href="smile.html#mercados-cambiais"><i class="fa fa-check"></i><b>3.2.1</b> Mercados cambiais</a></li>
+<li class="chapter" data-level="3.2.2" data-path="smile.html"><a href="smile.html#mercados-de-equities"><i class="fa fa-check"></i><b>3.2.2</b> Mercados de <em>equities</em></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="smile.html"><a href="smile.html#smileprecificacao"><i class="fa fa-check"></i><b>3.3</b> Smile como forma de precificação</a></li>
+<li class="chapter" data-level="3.4" data-path="smile.html"><a href="smile.html#estrutura-a-termo"><i class="fa fa-check"></i><b>3.4</b> Estrutura a termo</a></li>
+<li class="chapter" data-level="3.5" data-path="smile.html"><a href="smile.html#arbestatica"><i class="fa fa-check"></i><b>3.5</b> Arbitragem estática</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="smile.html"><a href="smile.html#arbitragem-de-borboleta"><i class="fa fa-check"></i><b>3.5.1</b> Arbitragem de borboleta</a></li>
+<li class="chapter" data-level="3.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>3.5.2</b> Arbitragem de calendário</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>3.6</b> Limites de inclinação</a></li>
+<li class="chapter" data-level="3.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>3.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="3.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>3.8</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introdução a Superfície de Volatilidade</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bsm" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> Modelo Black-Scholes-Merton</h1>
+<p>Neste artigo desenvolveremos o modelo para precificação de opções do tipo europeias proposto <span class="citation">Black and Scholes (<a href="#ref-Black1973">1973</a>)</span> e posteriormente expandido por <span class="citation">Merton (<a href="#ref-Merton1976">1976</a>)</span>. A derivação deste modelo se baseia nos conceitos apresentados sobre processos estocásticos do Capítulo <a href="processos-estocasticos.html#processos-estocasticos">1</a>.</p>
+<p>Antes de entrar na modelagem desenvolvida pelos autores acima citados, iremos tratar de algumas definições essenciais, como por exemplo a precificação de ativos em um mundo neutro ao risco (<em>risk neutral valuation</em>) e portfólio de replicação (<em>replicating portfolio</em>), que são largamente utilizados na precificação de quaisquer derivativos, e não somente opções.</p>
+<div id="portfolio-de-replicacao" class="section level2">
+<h2><span class="header-section-number">2.1</span> Portfólio de replicação</h2>
+<p>Suponha que se deseja precificar uma opção de compra sobre uma ação, vamos denotar o preço desta <em>call</em> de <span class="math inline">\(f_t\)</span>. Sabemos que na data de expiração, <span class="math inline">\(T\)</span>, da opção de compra seu preço será: <span class="math inline">\(f_T=max(S_T - K, 0)\)</span>, onde <span class="math inline">\(S_T\)</span> é o preço da ação subjacente na data <span class="math inline">\(T\)</span> e <span class="math inline">\(K\)</span> é o preço de exercício da opção. Podemos criar um portfólio que envolva um ativo livre de risco, com preço <span class="math inline">\(B_t\)</span> e a ação objeto do derivativo, <span class="math inline">\(S_t\)</span>, que recrie o mesmo valor de pagamento que a opção na data de expiração. Ou seja, criamos o portfólio de replicação <span class="math inline">\(P_t=\Delta S_t + b B_t\)</span>, no qual devemos escolher os valores de <span class="math inline">\(\Delta\)</span> e <span class="math inline">\(b\)</span> de tal forma que <span class="math inline">\(f_T = P_T\)</span>.</p>
+<p>De fato, para apenas um período a frente, podemos tomar emprestado a taxa de juros livre de risco<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>, <span class="math inline">\(r\)</span> um valor igual ao preço corrente da ação, <span class="math inline">\(S_0\)</span> e comprá-la, ao mesmo tempo em que se “trava” (faz <em>hedge</em>) deste portfólio vendendo a opção. O lucro desta operação em <span class="math inline">\(T\)</span> deve ser zero, pois é um portfólio travado. Com estas premissas é possível calcular o preço do prêmio da opção a ser cobrado no período inicial para que o valor esperado da operação como um todo seja zero.</p>
+<p>Este portfólio formado pela venda do ativo livre de risco e compra do ativo objeto é denominado <em>portfólio de replicação</em>, pois, ele fornece um fluxo de caixa igual ao derivativo que buscamos precificar. Ao adicionarmos ao portfólio de replicação a venda (ou seja, o negativo) do derivativo, temos um portfólio <em>hedgeado</em>, onde não existe mais incerteza com relação ao seu retorno esperado.</p>
+</div>
+<div id="precificacao-neutra-ao-risco" class="section level2">
+<h2><span class="header-section-number">2.2</span> Precificação neutra ao risco</h2>
+<p>A metodologia de precificação de derivativos dentro do <em>mundo neutro ao risco</em><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> é o carro-chefe das metodologias para se avaliar estes instrumentos. O princípio de precificação neutra ao risco afirma que um derivativo pode ser valorado através das seguintes suposições:</p>
+<ul>
+<li>o retorno esperado do ativo objeto é a taxa livre de risco, e</li>
+<li>o valor esperado do derivativo na expiração deve ser descontado pela taxa livre de risco para trazê-lo a valor presente.</li>
+</ul>
+<p>É claro que o mundo real não é neutro ao risco, entretanto uma das provas que a metodologia faz é que, ao precificarmos um derivativo de forma relativa ao preço do ativo objeto, a precificação neutra ao risco encontra o mesmo valor para o derivativo que uma metodologia que leve em conta as preferências ao risco dos investidores. Entretanto, precificar um derivativo assumindo neutralidade ao risco é muito mais simples que encarar um modelo baseado no mundo real.</p>
+<p>De fato a neutralidade ao risco soa um tanto quanto estranha a primeira vez. Porém, ela tem uma explicação lógica de sua validade nas circunstâncias em que é desenvolvida. Se os investidores forem avessos ao risco, por exemplo, os retornos esperados para o ativo objeto terão embutidos um prêmio pelo risco. Acontece que este prêmio pelo risco também deverá estar na taxa de desconto do valor esperado de pagamento do derivativo, de forma que este prêmio ao risco é cancelado.</p>
+<p>É comum na literatura de derivativos encontrarmos os termos mundo-P e mundo-Q. O mundo-P se refere ao mundo real, com probabilidades P reais de ocorrência de eventos, equanto que o mundo-Q é o mundo neutro ao risco, onde as probabilidades Q são ajustadas (tecnicamente suas medidas são alteradas) para refletir esta neutralidade. No mundo-Q é comum denotarmos o valor esperado de alguma variável aleatória com a seguinte notação: <span class="math inline">\(\mathbb{E_Q}[\cdot]\)</span>.</p>
+<p>Assim, a precificação de derivativos supondo um mundo neutro ao risco chega no preço correto para todos os mundos.</p>
+</div>
+<div id="encontrando-a-equacao-de-black-scholes" class="section level2">
+<h2><span class="header-section-number">2.3</span> Encontrando a equação de Black-Scholes</h2>
+<p>Vamos partir do princípio que nossa ação, objeto da opção que desejamos precificar, siga um MBG conforme descrito no <a href="processos-estocasticos.html#processos-estocasticos">capítulo anterior</a>. Portanto, o preço de nossa ação no período <span class="math inline">\(t\)</span> deve observar a seguinte equação diferencial estocástica:</p>
+<p><span class="math display" id="eq:ds">\[
+\begin{equation}
+dS_t=\mu S_t+\sigma S_t dW_t 
+\tag{2.1}
+\end{equation}
+\]</span></p>
+<p>onde <span class="math inline">\(dW_t\)</span> é o movimento Browniano, ou processo de Wiener.</p>
+<p>Esta equação resume as principais hipóteses do modelo Black&amp;Scholes de precificação de opções, são elas:</p>
+<ul>
+<li>O preço do ativo objeto é um processo estocástico e segue uma distribuição log-normal;</li>
+<li>O retorno esperado (<span class="math inline">\(\mu\)</span>) e a volatilidade (<span class="math inline">\(\sigma\)</span>) deste ativo são <strong>constantes</strong>, tanto no tempo quanto com relação ao próprio nível de preço do ativo objeto.</li>
+</ul>
+<p>Ademais destas hipóteses, temos aquelas relacionadas a racionalidade dos mercados e ao princípio de ausência de oportunidades de arbitragem. Estas hipóteses nos levam a validade do mundo neutro ao risco e portanto, a resolução do modelo da forma como descreveremos abaixo.</p>
+<p>Nossa opção será descrita por um portfólio de replicação, e se tomarmos seu preço no instante <span class="math inline">\(t\)</span>, então a opção também deve seguir uma equação diferencial estocástica da forma:</p>
+<p><span class="math display" id="eq:df1">\[
+\begin{equation}
+df_t=\Delta dS_t+b\,dB_t 
+\tag{2.2}
+\end{equation}
+\]</span></p>
+<p>aqui <span class="math inline">\(dB_t\)</span> representa a variação do ativo livre de risco (dinheiro) dentro de um período de tempo <span class="math inline">\(dt\)</span>. Sabemos que o valor do ativo livre de risco não envolve incerteza alguma, é determinístico, e seu rendimento é a taxa de juros livre de risco. Assim, para uma taxa continuamente composta <span class="math inline">\(r\)</span> uma unidade de <span class="math inline">\(B\)</span> evolui através de <span class="math inline">\(B_t=e^{rt}\)</span>, logo:</p>
+<p><span class="math display" id="eq:db">\[
+\begin{equation}
+dB_t=rBdt
+\tag{2.3}
+\end{equation}
+\]</span></p>
+<p>De acordo com o <a href="https://pt.wikipedia.org/wiki/Lema_de_It%C5%8D">lema de Ito</a> o diferencial de uma função que dependa do tempo e de um processo estocástico pode ser encontrado da seguinte forma:</p>
+<p><span class="math display" id="eq:df2">\[
+\begin{equation}
+df_t=\frac{\partial f}{\partial t}dt + \frac{\partial f}{\partial S}dS + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}dS^2
+\tag{2.4}
+\end{equation}
+\]</span></p>
+<p>onde <span class="math inline">\(dS^2\)</span> é a variação quadrática de nosso processo <span class="math inline">\(S_t\)</span> que é um movimento browniano geométrico, logo <span class="math inline">\(dS^2=\sigma^2S^2dt\)</span>.</p>
+<p>Igualando as equações <a href="bsm.html#eq:df1">(2.2)</a> e <a href="bsm.html#eq:df2">(2.4)</a>, fazendo as devidas substituições trazidas pelas equações <a href="bsm.html#eq:ds">(2.1)</a> e <a href="bsm.html#eq:db">(2.3)</a> e por fim rearranjando os termos, chegamos na seguinte relação:</p>
+<p><span class="math display" id="eq:nome">\[
+\begin{equation}
+\left( \frac{\partial f}{\partial t} + \frac{\partial f}{\partial S}\mu S + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2 S^2 - \Delta\mu S - rbB \right)dt + \left( \frac{\partial f}{\partial S}\sigma S - \Delta \sigma S \right)dW = 0 
+\tag{2.5}
+\end{equation}
+\]</span></p>
+<p>que para ser válida para todo <span class="math inline">\(t\)</span>, cada termo entre parênteses deve ser igual a zero simultaneamente. Rapidamente chegamos aos valores necessários de nosso portfólio de replicação.</p>
+<p><span class="math display" id="eq:delta">\[
+\begin{equation}
+\Delta = \frac{\partial f}{\partial S} 
+\tag{2.6}
+\end{equation}
+\]</span></p>
+<p><span class="math display" id="eq:rbb1">\[
+\begin{equation}
+rbB = \frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2S^2 
+\tag{2.7}
+\end{equation}
+\]</span></p>
+<p>Através da equação <a href="bsm.html#eq:df1">(2.2)</a>, integrando-a, chegamos na relação <span class="math inline">\(bB = f - \Delta S\)</span> e pré-multiplicando ambos os lados por <span class="math inline">\(r\)</span> temos então que:</p>
+<p><span class="math display" id="eq:rbb2">\[
+\begin{equation}
+rbB = r(f-\Delta S) 
+\tag{2.8}
+\end{equation}
+\]</span></p>
+<p>Finalmente, igualando as equações <a href="bsm.html#eq:rbb1">(2.7)</a> e <a href="bsm.html#eq:rbb2">(2.8)</a> e substituindo o valor de <span class="math inline">\(\Delta\)</span> encontramos a famigerada equação diferencial parcial - EDP - de Black&amp;Scholes:</p>
+<p><span class="math display" id="eq:BS">\[
+\begin{equation}
+\frac{\partial f}{\partial t}+\frac{1}{2}\sigma^2S^2\frac{\partial^2 f}{\partial S^2}+rS\frac{\partial f}{\partial S} - rf = 0
+\tag{2.9}
+\end{equation}
+\]</span></p>
+</div>
+<div id="solucao-analitica" class="section level2">
+<h2><span class="header-section-number">2.4</span> Solução analítica</h2>
+<p>A equação possui diferentes formas de resolução<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>, a precificação do derivativo irá depender da forma que resolvermos a equação <a href="bsm.html#eq:BS">(2.9)</a>. O Modelo Black&amp;Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos <em>payoffs</em>. Para uma call:</p>
+<p><span class="math display" id="eq:cpayoff">\[
+\begin{equation}
+\displaystyle f(S,T)=\max(S-K,0)
+\tag{2.10}
+\end{equation}
+\]</span></p>
+<p>Já no caso de uma put:</p>
+<p><span class="math display" id="eq:ppayoff">\[
+\begin{equation}
+\displaystyle f(S,T)=\max(K-S,0)
+\tag{2.11}
+\end{equation}
+\]</span></p>
+<p>Onde:</p>
+<ul>
+<li>T é a data de vencimento da opção,</li>
+<li>K é o preço de exercício, e</li>
+<li>S é o preço do ativo subjacente.</li>
+</ul>
+<p>Utilizando os <em>payoffs</em> dados nas equações <a href="bsm.html#eq:cpayoff">(2.10)</a> e <a href="bsm.html#eq:ppayoff">(2.11)</a>, e resolvendo a EDP de Black&amp;Scholes <a href="bsm.html#eq:BS">(2.9)</a>, iremos obter o modelo para se precificar os derivativos citados.</p>
+<p>Para uma Call temos que:</p>
+<p><span class="math display" id="eq:call">\[
+\begin{equation}
+C(S,t)=SN(d_{1})-Ke^{-r(T-t)}N(d_{2})
+\tag{2.12}
+\end{equation}
+\]</span></p>
+<p>Já para um Put chegamos a:</p>
+<p><span class="math display" id="eq:put">\[
+\begin{equation}
+P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
+\tag{2.13}
+\end{equation}
+\]</span></p>
+<p>onde:</p>
+<p><span class="math display" id="eq:d1">\[d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
+\tag{2.14}
+\]</span></p>
+<p><span class="math display" id="eq:d2">\[d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
+\tag{2.15}
+\]</span></p>
+<p>É a partir das equações <a href="bsm.html#eq:call">(2.12)</a> e <a href="bsm.html#eq:put">(2.13)</a> que se obtém as chamadas gregas, que são as sensibilidades do preço do derivativo em relação a alterações nos parâmetros do modelo. Explicaremos as gregas em maiores detalhes mais adiante.</p>
+</div>
+<div id="putcallparity" class="section level2">
+<h2><span class="header-section-number">2.5</span> Paridade compra e venda</h2>
+<p>Agora vamos falar um pouco sobre a paridade entre opções de compra e venda, algo que nos ajuda a precificar algum derivativo quando já conhecemos o preço de outro derivativo com especificações semelhantes.</p>
+<p>Assumindo ausência de oportunidade de arbitragem, com um ativo subjacente que tenha liquidez, iremos verificar a paridade Call-Put que define uma relação entre os preços de uma call e put do tipo europeu, desde que possuam o <strong>mesmo tempo de maturidade</strong> e <strong>preço de strike</strong>. Aqui possuiremos menos premissas que o modelo Black&amp;Scholes e premissas mais simples, tal relação poderá ser utilizada para encontrar o valor justo de uma opção. Com a ausência de arbitragem observe que dois portfolios que sempre geram o mesmo payoff em um instante T devem ter o mesmo valor em qualquer instante intermediário.</p>
+<p>Imagine um primeiro portfólio onde o investidor compre uma opção de compra C, a qual possui tempo de maturidade T e preço de strike K, sobre algum ativo subjacente que chamaremos de S e compre um título B que seu valor no período T seja de <span class="tex2jax_ignore">$</span>30. E um segundo portfolio onde tenha o próprio ativo subjacente S que esteja sendo negociado a <span class="tex2jax_ignore">$</span>25 e compre uma put P com um preço de strike K e maturidade T. Estes são porfólios de replicação entre si, eles terão exatamente o mesmo <em>payoff</em> no período T, e na ausência de arbitragem, podemos calcular seus retornos através da precificação neutra ao risco. Teremos uma relação onde os valores dos nossos portfolios serão:</p>
+<p><span class="math display" id="eq:parity">\[
+\begin{equation}
+\mathbb{E_Q}[S_t + P_t] = \mathbb{E_Q}[C_t + B_t]; \quad t \leq T
+\tag{2.16}
+\end{equation}
+\]</span></p>
+<p>Como estamos em um mundo neutro ao risco, <span class="math inline">\(P_t\)</span> e <span class="math inline">\(C_t\)</span> são os preços da put e da call dados pelo modelo B&amp;S, enquanto <span class="math inline">\(\mathbb{E_Q}[B_t]\)</span> se resume a <span class="math inline">\(Ke^{-r(T-t)}\)</span>, ou seja, a posição atual em ativo livre de risco deve ser o valor presente do strike das opções. O preço do subjacente é o próprio preço atualmente observado.</p>
+<p>Como <span class="math inline">\(S_t\)</span> e <span class="math inline">\(B_t=Ke^{-r(T-t)}\)</span> são conhecidos, se no mercado existir um preço <span class="math inline">\(C_t\)</span> então podemos calcular <span class="math inline">\(P_t\)</span> e vice-versa. Esta é a essência da paridade compra e venda.</p>
+<p>Observe que se essa relação não for mantida, teremos arbitragem: Suponhamos que <span class="math inline">\(S_t &gt; B_t\)</span> e que a put esteja com um premio mais alto que a call no entanto ambos possuem um preço de strike <span class="tex2jax_ignore">$</span>30 e maturidade T, que os prêmios sejam <span class="tex2jax_ignore">$</span>20 e <span class="tex2jax_ignore">$</span>15 respectivamente teremos então: 30 + 20 = 15 + 25, nesse caso teremos 50 <span class="math inline">\(\neq\)</span> 40, então vende-se o que está mais caro, no caso a ação e a put e compraria o título e a call, chegando ao um lucro de 50-40=10, de <span class="tex2jax_ignore">$</span>10 sem risco. Observe que independentemente de a ação subir acima ou cair abaixo do strike, o lucro obtido nesta operação será sempre de <span class="tex2jax_ignore">$</span>10.</p>
+</div>
+<div id="gregas" class="section level2">
+<h2><span class="header-section-number">2.6</span> As Gregas</h2>
+<p>As letras gregas utilizadas no mercado de opções são usadas para denotar as sensibilidades do preço da opção com relação a variação de alguma das variáveis do modelo, a seguir entraremos em detalhes sobre as principais gregas usadas para a análise de opções.</p>
+<div id="delta" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Delta</h3>
+<p>Já havíamos definido o delta anteriormente ao encontrarmos a EDP de Black&amp;Scholes, isto é:</p>
+<p><span class="math display" id="eq:delta">\[
+\begin{equation}
+\Delta = \frac{\partial f}{\partial S}
+\tag{2.6}
+\end{equation}
+\]</span></p>
+<p>O delta mede a taxa com que o preço da opção muda conforme o valor do ativo subjacente oscila, seu valor pode variar entre 1 e 0 para call e entre 0 e -1 para put.</p>
+<p>Exemplo: imagine uma opção de compra de 100 ações que possui um delta de 0,72, caso o ativo subjacente aumente <span class="tex2jax_ignore">$</span>1 o valor da opção aumentará <span class="tex2jax_ignore">$</span>72 (pois representa 100 ações), e caso o valor do ativo subjacente diminua o preço da opção diminuirá <span class="tex2jax_ignore">$</span>72.</p>
+<p>O mesmo acontece com opções de venda, só que de uma forma inversamente proporcional pelo seu delta ser negativo. Uma opção de venda de 100 ações que possui um delta de -0,40 vai valer menos <span class="tex2jax_ignore">$</span>40 caso o preço do seu ativo subjacente aumente <span class="tex2jax_ignore">$</span>1, e vai valer mais <span class="tex2jax_ignore">$</span>40 caso o preço do seu ativo subjacente diminua <span class="tex2jax_ignore">$</span>1.</p>
+<p>O strike da opção influência o delta diretamente, quanto mais in-the-money for uma opção, call ou put, maior será o seu delta em valor absoluto, e quanto mais out-the-money, menor será o módulo de seu delta.</p>
+</div>
+<div id="gamma" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Gamma</h3>
+<p><span class="math display" id="eq:gamma">\[
+\begin{equation}
+\Gamma = \frac{\partial \Delta}{\partial S} = \frac{\partial^2 f}{\partial S^2}
+\tag{2.17}
+\end{equation}
+\]</span></p>
+<p>O gamma mede a taxa com que o delta muda a cada oscilação do preço do ativo subjacente, seu impacto aumenta conforme o valor atual do ativo se aproxima do strike, sendo responsável pela convexidade do valor da opção. Opções de alto gamma são chamadas de explosivas, uma vez que mesmo pequenas variações no preço do ativo se traduzem em grandes oscilações no preço da opção.</p>
+</div>
+<div id="theta" class="section level3">
+<h3><span class="header-section-number">2.6.3</span> Theta</h3>
+<p><span class="math display" id="eq:theta">\[
+\begin{equation}
+\Theta = -\frac{\partial f}{\partial \tau}, \quad \tau=T-t
+\tag{2.18}
+\end{equation}
+\]</span></p>
+<p>O Theta é uma taxa que mede o efeito do tempo sobre o preço da opção. Como as opções tem um maior valor de acordo com a quantidade de tempo até a data de vencimento, seu valor também diminui conforme o tempo passa, theta é a letra que mede essa variação (que sempre é negativa). O valor de theta representa a quantidade de dinheiro perdida no prêmio da opção a cada dia que passa.</p>
+</div>
+<div id="vega" class="section level3">
+<h3><span class="header-section-number">2.6.4</span> Vega</h3>
+<p><span class="math display" id="eq:vega">\[
+\begin{equation}
+\displaystyle {\mathcal {V}}=\frac{\partial f}{\partial \sigma} 
+\tag{2.19}
+\end{equation}
+\]</span></p>
+<p>O vega é uma taxa que mede o efeito da mudança da volatilidade no preço da opção. Seu valor é praticamente constante em opções com a mesma data de vencimento, esse valor aumenta em datas de vencimento mais distantes devido ao maior espaço de tempo em que a volatilidade atua, devido ao maior intervalo de tempo que há para ocorrer mudanças nos preços.</p>
+</div>
+<div id="rho" class="section level3">
+<h3><span class="header-section-number">2.6.5</span> Rho</h3>
+<p><span class="math display" id="eq:rho">\[
+\begin{equation}
+\displaystyle \rho =\frac{\partial f}{\partial r}
+\tag{2.20}
+\end{equation}
+\]</span></p>
+<p>O rho é uma taxa que mede a sensitividade do preço da ação em relação à taxa livre de risco, caso o valor de de rho determinada opção seja 0,7, para cada aumento de 1% da taxa livre de risco o valor da opção aumentará 0,7%. Essa taxa influi principalmente no preço de opções com uma data de vencimento extremamente distante, não afetando muito o preço de opções cuja data de vencimento é próxima.</p>
+
+</div>
+</div>
+</div>
+<h3>Bibliografia</h3>
+<div id="refs" class="references">
+<div id="ref-Black1973">
+<p>Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Liabilities.” <em>Journal of Political Economy</em> 81 (3): 637–54. doi:<a href="https://doi.org/10.1086/260062">10.1086/260062</a>.</p>
+</div>
+<div id="ref-Merton1976">
+<p>Merton, Robert C. 1976. “Option Pricing When Underlying Stock Returns Are Discontinuous.” <em>Journal of Financial Economics</em> 3 (1): 125–44. doi:<a href="https://doi.org/https://doi.org/10.1016/0304-405X(76)90022-2">https://doi.org/10.1016/0304-405X(76)90022-2</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.<a href="bsm.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>A precificação dentro do mundo neutro ao risco mereceria um, ou mais, <em>posts</em> por si só. Aqui lançaremos apenas os principais resultados que nos permitem encontrar o modelo de B&amp;S.<a href="bsm.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>Uma demonstração completa de como encontrar a solução para a EDP de Black&amp;Schole pode ser encontrada em <a href="https://planetmath.org/AnalyticSolutionOfBlackScholesPDE" class="uri">https://planetmath.org/AnalyticSolutionOfBlackScholesPDE</a><a href="bsm.html#fnref3">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="processos-estocasticos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="smile.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/03-modelo-black-scholes-merton.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["vol_surface_book.pdf", "vol_surface_book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

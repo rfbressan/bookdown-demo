@@ -34,7 +34,8 @@ knitr::opts_chunk$set(echo = FALSE)
 pkgs_att <- c("tidyverse", 
               "tidyquant",
               "ggridges", 
-              "ggthemes")
+              "ggthemes",
+              "kableExtra")
 new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
 
 # Installs new packages

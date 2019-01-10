@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Capítulo 1 Introdução as opções | Introdução a Superfície de Volatilidade</title>
+  <meta name="description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Capítulo 1 Introdução as opções | Introdução a Superfície de Volatilidade" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 1 Introdução as opções | Introdução a Superfície de Volatilidade" />
+  
+  <meta name="twitter:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  
+
+<meta name="author" content="Rafael Felipe Bressan">
+
+
+<meta name="date" content="2019-01-10">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="sobre-os-autores.html">
+<link rel="next" href="processos-estocasticos.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introdução a Superfície de Volatilidade</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html"><i class="fa fa-check"></i>Sobre os Autores</a><ul>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="opcoes.html"><a href="opcoes.html"><i class="fa fa-check"></i><b>1</b> Introdução as opções</a><ul>
+<li class="chapter" data-level="1.1" data-path="opcoes.html"><a href="opcoes.html#conceitos-in-the-money-at-the-money-e-out-the-money"><i class="fa fa-check"></i><b>1.1</b> Conceitos in the money, at the money e out the money</a></li>
+<li class="chapter" data-level="1.2" data-path="opcoes.html"><a href="opcoes.html#modelos-americano-e-europeu-de-opcoes"><i class="fa fa-check"></i><b>1.2</b> Modelos americano e europeu de opções</a></li>
+<li class="chapter" data-level="1.3" data-path="opcoes.html"><a href="opcoes.html#hedge"><i class="fa fa-check"></i><b>1.3</b> Hedge</a></li>
+<li class="chapter" data-level="1.4" data-path="opcoes.html"><a href="opcoes.html#travas"><i class="fa fa-check"></i><b>1.4</b> Travas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html"><i class="fa fa-check"></i><b>2</b> Processos Estocásticos em Finanças</a><ul>
+<li class="chapter" data-level="2.1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#markov"><i class="fa fa-check"></i><b>2.1</b> Processos de Markov</a></li>
+<li class="chapter" data-level="2.2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mb"><i class="fa fa-check"></i><b>2.2</b> Movimento Browniano</a></li>
+<li class="chapter" data-level="2.3" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#definicao"><i class="fa fa-check"></i><b>2.3</b> Definição</a></li>
+<li class="chapter" data-level="2.4" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mbg"><i class="fa fa-check"></i><b>2.4</b> Movimento Browniano Geométrico</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bsm.html"><a href="bsm.html"><i class="fa fa-check"></i><b>3</b> Modelo Black-Scholes-Merton</a><ul>
+<li class="chapter" data-level="3.1" data-path="bsm.html"><a href="bsm.html#portfolio-de-replicacao"><i class="fa fa-check"></i><b>3.1</b> Portfólio de replicação</a></li>
+<li class="chapter" data-level="3.2" data-path="bsm.html"><a href="bsm.html#precificacao-neutra-ao-risco"><i class="fa fa-check"></i><b>3.2</b> Precificação neutra ao risco</a></li>
+<li class="chapter" data-level="3.3" data-path="bsm.html"><a href="bsm.html#encontrando-a-equacao-de-black-scholes"><i class="fa fa-check"></i><b>3.3</b> Encontrando a equação de Black-Scholes</a></li>
+<li class="chapter" data-level="3.4" data-path="bsm.html"><a href="bsm.html#solucao-analitica"><i class="fa fa-check"></i><b>3.4</b> Solução analítica</a></li>
+<li class="chapter" data-level="3.5" data-path="bsm.html"><a href="bsm.html#putcallparity"><i class="fa fa-check"></i><b>3.5</b> Paridade compra e venda</a></li>
+<li class="chapter" data-level="3.6" data-path="bsm.html"><a href="bsm.html#gregas"><i class="fa fa-check"></i><b>3.6</b> As Gregas</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="bsm.html"><a href="bsm.html#delta"><i class="fa fa-check"></i><b>3.6.1</b> Delta</a></li>
+<li class="chapter" data-level="3.6.2" data-path="bsm.html"><a href="bsm.html#gamma"><i class="fa fa-check"></i><b>3.6.2</b> Gamma</a></li>
+<li class="chapter" data-level="3.6.3" data-path="bsm.html"><a href="bsm.html#theta"><i class="fa fa-check"></i><b>3.6.3</b> Theta</a></li>
+<li class="chapter" data-level="3.6.4" data-path="bsm.html"><a href="bsm.html#vega"><i class="fa fa-check"></i><b>3.6.4</b> Vega</a></li>
+<li class="chapter" data-level="3.6.5" data-path="bsm.html"><a href="bsm.html#rho"><i class="fa fa-check"></i><b>3.6.5</b> Rho</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="smile.html"><a href="smile.html"><i class="fa fa-check"></i><b>4</b> Smile de Volatilidade</a><ul>
+<li class="chapter" data-level="4.1" data-path="smile.html"><a href="smile.html#reparametrizando"><i class="fa fa-check"></i><b>4.1</b> Reparametrizando B&amp;S e definição de moneyness</a></li>
+<li class="chapter" data-level="4.2" data-path="smile.html"><a href="smile.html#caracsmile"><i class="fa fa-check"></i><b>4.2</b> Características de smiles de volatilidade</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="smile.html"><a href="smile.html#mercados-cambiais"><i class="fa fa-check"></i><b>4.2.1</b> Mercados cambiais</a></li>
+<li class="chapter" data-level="4.2.2" data-path="smile.html"><a href="smile.html#mercados-de-equities"><i class="fa fa-check"></i><b>4.2.2</b> Mercados de <em>equities</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="smile.html"><a href="smile.html#smileprecificacao"><i class="fa fa-check"></i><b>4.3</b> Smile como forma de precificação</a></li>
+<li class="chapter" data-level="4.4" data-path="smile.html"><a href="smile.html#estrutura-a-termo"><i class="fa fa-check"></i><b>4.4</b> Estrutura a termo</a></li>
+<li class="chapter" data-level="4.5" data-path="smile.html"><a href="smile.html#arbestatica"><i class="fa fa-check"></i><b>4.5</b> Arbitragem estática</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="smile.html"><a href="smile.html#arbitragem-de-borboleta"><i class="fa fa-check"></i><b>4.5.1</b> Arbitragem de borboleta</a></li>
+<li class="chapter" data-level="4.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>4.5.2</b> Arbitragem de calendário</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>4.6</b> Limites de inclinação</a></li>
+<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introdução a Superfície de Volatilidade</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="opcoes" class="section level1">
+<h1><span class="header-section-number">Capítulo 1</span> Introdução as opções</h1>
+<p>Neste Capítulo<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> iremos apresentar os instrumentos financeiros conhecidos como opções. Existem dois tipos de opção. Uma opção de compra dá ao detentor o direito de comprar o ativo subjacente até uma determinada data por um determinado preço. Uma opção de venda dá ao titular o direito de vender o ativo subjacente até uma determinada data por um determinado preço.</p>
+<p>Alguns termos importantes para o melhor entendimento deste Capítulo são: “Ativo subjacente”, que é o ativo negociado no contrato, “data de vencimento”, no caso do modelo americano é até a data limite para exercer a opção de compra e no modelo europeu é na data final em que a opção de compra pode ou não ser exercida (serão discutidos mais detalhes sobre estas modalidades posteriormente) e “preço de exercício” (strike), é o valor a ser pago pelo ativo de acordo com o contrato. As opções americanas podem ser exercidas a qualquer momento até a data de vencimento. Por sua vez, as opções europeias podem ser exercidas somente na própria data de vencimento.</p>
+<p>As opções europeias são geralmente mais fáceis de analisar do que as opções americanas, e algumas das propriedades de uma opção americana são frequentemente deduzidas daquelas de sua contraparte europeia.</p>
+<p>A opção de compra (call) dá ao comprador da opção o <strong>direito de comprar</strong> o ativo subjacente pelo preço de exercício. A opção de venda (put) dá ao comprador da opção o <strong>direito de vender</strong> o ativo subjacente pelo preço combinado no contrato na data futura.</p>
+<p>O preço de uma opção de compra diminui à medida que o preço de exercício aumenta, enquanto o preço de uma opção de venda aumenta à medida que o preço de exercício aumenta. Ambos os tipos de opção tendem a se tornar mais valiosas à medida que seu tempo até o vencimento aumenta. Na verdade existem seis fatores que afetam o preço de uma opção de ação, por exemplo:</p>
+<ol style="list-style-type: decimal">
+<li>O preço atual da ação, <span class="math inline">\(S_0\)</span></li>
+<li>O preço de exercício, <span class="math inline">\(K\)</span></li>
+<li>O tempo para expiração, <span class="math inline">\(\tau\)</span></li>
+<li>A volatilidade do preço das ações, <span class="math inline">\(\sigma\)</span></li>
+<li>A taxa de juros livre de risco, <span class="math inline">\(r\)</span></li>
+<li>Os dividendos que se espera sejam pagos, <span class="math inline">\(q\)</span></li>
+</ol>
+<p>Observamos que existem quatro tipos de participantes nos mercados de opções:</p>
+<ul>
+<li>Compradores de calls</li>
+<li>Vendedores de calls</li>
+<li>Compradores de puts</li>
+<li>Vendedores de puts</li>
+</ul>
+<p>Os compradores são referidos como tendo posições <em>long</em>, vendedores são referidos como tendo posições <em>short</em>. Vender uma opção também é conhecido como lançar a opção ou subscrever.</p>
+<p>Exemplificando uma operação de compra de call, caso o preço do ativo tenha subido acima do preço de strike o comprador pode exercer sua opção de compra e ele lucrará a partir do momento em que o valor da ação for maior que o strike mais o valor pago pela opção (chamado de prêmio). Caso o preço do ativo tenha caído abaixo do strike, o comprador simplesmente não exerce sua opção, limitando sua perda nessa operação ao prêmio pago.</p>
+<table>
+<caption>
+<span id="tab:opcao">Tabela 1.1: </span>Exemplo: Comprando call de X com o preço de exercício (strike) de R$ 10.000
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Ação
+</th>
+<th style="text-align:right;">
+Prêmio Pago
+</th>
+<th style="text-align:right;">
+Opção no Exercício
+</th>
+<th style="text-align:right;">
+Lucro
+</th>
+<th style="text-align:left;">
+Moneyness
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+9000
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-200
+</td>
+<td style="text-align:left;">
+OTM
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9500
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-200
+</td>
+<td style="text-align:left;">
+OTM
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10000
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-200
+</td>
+<td style="text-align:left;">
+ATM
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10200
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+ITM
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10500
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+500
+</td>
+<td style="text-align:right;">
+300
+</td>
+<td style="text-align:left;">
+ITM
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11000
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:left;">
+ITM
+</td>
+</tr>
+</tbody>
+</table>
+<p>Usando a tabela <a href="opcoes.html#tab:opcao">1.1</a> como exemplo é possível ver que o resultado final será maior que R$ 0 quando o valor do ativo subjacente é maior que R$10.200 (R$10.000 de strike + R$200 de prêmio), e o prejuízo final está limitado ao valor de R$200. A figura <a href="opcoes.html#fig:call">1.1</a> abaixo mostra o perfil de lucro da operação exemplificada, típico de uma compra de call.</p>
+<div class="figure"><span id="fig:call"></span>
+<img src="vol_surface_book_files/figure-html/call-1.png" alt="Perfil de lucro típico de uma compra de call." width="672" />
+<p class="caption">
+Figura 1.1: Perfil de lucro típico de uma compra de call.
+</p>
+</div>
+<p>No caso de uma operação de uma compra de put, caso o preço do ativo tenha subido acima do strike, não faz sentindo o detentor da opção exercer seu direito, assim sua perda será apenas o valor pago pela opção. Caso o preço do ativo tenha descido abaixo do strike, o comprador da put pode realizar a venda e começará a lucrar a partir do momento em que o strike fique acima do valor do ativo somado ao valor do prêmio pago pela opção. Usando a tabela 1.2 como exemplo é possível ver que o resultado final será de no mínimo -R$600 caso o valor do ativo subjacente seja igual ou maior que R$15.000, e o resultado final aumenta conforme o ativo perde o valor, sendo positivo a partir de quando seu valor é de R$14.400.</p>
+<div id="conceitos-in-the-money-at-the-money-e-out-the-money" class="section level2">
+<h2><span class="header-section-number">1.1</span> Conceitos in the money, at the money e out the money</h2>
+<p>Estes termos são usados para se referir a opções que estão com o preço de exercício (strike) do ativo abaixo, acima ou igual ao valor atual do ativo.</p>
+<ul>
+<li>Out the money: Strike do ativo subjacente está abaixo do valor de mercado no caso de calls ou quando o strike do ativo está acima do valor de mercado no caso de puts.<br />
+</li>
+<li>At the money: Strike do ativo subjacente é o igual ao valor de mercado.</li>
+<li>In the money: Strike do ativo subjacente está acima do valor de mercado no caso de calls ou quando o strike do ativo está abaixo do valor de mercado no caso de puts.</li>
+</ul>
+</div>
+<div id="modelos-americano-e-europeu-de-opcoes" class="section level2">
+<h2><span class="header-section-number">1.2</span> Modelos americano e europeu de opções</h2>
+<p>No modelo americano de opções o comprador pode exercer seu direito de compra ou venda do ativo subjacente a qualquer momento entre o início do contrato e o vencimento dele, enquanto isso no modelo europeu a transação só pode ser realizada na data de vencimento.</p>
+</div>
+<div id="hedge" class="section level2">
+<h2><span class="header-section-number">1.3</span> Hedge</h2>
+<p>O mercado de opções pode ser usado tanto para hedge (proteção) quanto para especulação. O hedge é feito para limitar as possíveis perdas que um investidor pode ter ao estar com seu patrimônio atrelado a determinado ativo, por exemplo, para um acionista que possui ações de determinada empresa se proteger contra uma possível queda no valor de suas ações, ele pode comprar opções de venda at the money de suas ações para que seu prejuízo máximo seja o prêmio.</p>
+</div>
+<div id="travas" class="section level2">
+<h2><span class="header-section-number">1.4</span> Travas</h2>
+<p>Devido ao mercado de opções nos oferecer diversas possibilidades entre call e put onde você pode estar comprado e/ou vendido irá surgir várias posições a serem assumidas, para nos adequarmos ao quanto estamos dispostos a encarar o risco parar atingirmos o retorno desejado. Essas posições são conhecidas como “Travas”.</p>
+<p>Entendendo as travas, existem diversas estratégias, como por exemplo: Trava de alta, trava de baixa, Long Straddle, Short Straddle, entre outras. Mas afinal qual é o funcionamento delas? Supondo que o leitor espere uma alta do mercado, no entanto acredite que não irá superar determinado ponto ele poderá realizar uma Trava de alta. Onde comprará uma opção de Call a um preço de strike X e vender outra Call com o preço de strike Y, onde obrigatoriamente Y&gt;X. Nesta operação limitaremos o nosso ganho caso o mercado supere as nossas expectativas, no entanto diminuiremos o custo da operação, o custo será o prêmio pago pela opção X menos o prêmio recebido pela opção Y, para facilitar a compreensão observemos o gráfico a seguir:</p>
+<p>Nesse caso o valor do prêmio da compra foi de R$30,00 enquanto a da venda foi R$10,00, assim limitamos nossa perda em R$20,00, enquanto os preços de strike da compra e da venda da call foram respectivamente R$250,00 e R$300,00, fazendo o retorno máximo ser R$30,00 que é a diferença entre os valores de strike a serem realizados e descontado o valor pago pelo prêmio.</p>
+<p>Agora que o leitor já entendeu melhor o conceito da trava, vamos explorar uma mais complexa a Long Butterfly. Aqui é realizado a compra de uma put e call com preços de strike iguais, vendesse uma put com preço inferior e vende alguma call com preço superior as iniciais. Observe que pelo fato de contar com a venda de duas opções nessa estratégia tem um custo de operação reduzido, no entanto o ideal é utilizar em um mercado de pouca volatilidade, dado que se a volatilidade ser alta perdesse a possibilidade de ter um ganho maior, nesse caso recomenda o uso por exemplo de uma Long Straddle. Enfim vamos ao gráfico para facilitar a compreensão da estratégia:</p>
+<p>Teremos então a compra de uma put e call de strike iguais de R$150,00 a venda de uma put com strike inferior de R$80, e a venda de uma call com preço superior R$220. Os valores exatos dos prêmios não nos interessam no momento, porém é importante entender que teremos dois com saldos positivos referente a nossa venda e dois negativos que advém das compras, o resultado será nosso prejuízo máximo, olhando o gráfico nesse caso é de R$20,00. Pela área de retorno do gráfico podemos ver que nosso risco está reduzido. Onde o pior cenário possível se encontra em o preço do ativo-objeto se aproximar do valor do R$150,00, que é onde os contratos adquiridos não serão vantajosos em nenhuma ponta. No entanto se o preço se aproximar de R$220 poderemos exercer nosso direito da compra da call inicial por R$150,00(você terá o direito de comprar a um preço inferior), o mesmo será valido caso haja uma queda do preço se aproximado do valor de R$80,00 onde a logica será a mesma só que aqui será o usado o direito da compra da put por R$150,00(Você terá o direito de vender a um preço superior). Observe que apesar do nosso risco ser reduzido, limita os nossos ganhos, com a venda da call e da put com preços superior e inferior respectivamente.</p>
+<p>Espero que o leitor tenha despertado interesse no assunto, com esse conteúdo dominado já saberá o básico sobre opções, fique atento a novas postagens em breve iremos mais a afundo explicando por exemplo o modelo Black Scholes, como as opções são precificadas entre outros materiais.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.<a href="opcoes.html#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sobre-os-autores.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="processos-estocasticos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/01-introducao-as-opcoes.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["vol_surface_book.pdf", "vol_surface_book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

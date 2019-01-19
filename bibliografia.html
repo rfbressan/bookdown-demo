@@ -25,14 +25,14 @@
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-10">
+<meta name="date" content="2019-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="smile.html">
+<link rel="prev" href="calibracao.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -150,6 +150,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
 <li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>5</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="5.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>5.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="5.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>5.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="5.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>5.3</b> Suavização</a></li>
+<li class="chapter" data-level="5.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>5.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>5.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="calibracao.html"><a href="calibracao.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
@@ -185,7 +196,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Breeden, Douglas T, and Robert H Litzenberger. 1978. “Prices of State-Contingent Claims Implicit in Option Prices.” <em>Journal of Business</em>. JSTOR, 621–51.</p>
 </div>
 <div>
-<p>Gatheral, Jim. 2011. <em>The Volatility Surface: A Practitioner’s Guide</em>. Vol. 357. John Wiley &amp; Sons.</p>
+<p>Dupire, Bruno. 1994. “Pricing with a Smile.” <em>Risk</em> 7 (1): 18–20.</p>
+</div>
+<div>
+<p>Gatheral, Jim. 2004. “A Parsimonious Arbitrage-Free Implied Volatility Parameterization with Application to the Valuation of Volatility Derivatives.” <em>Presentation at Global Derivatives &amp; Risk Management, Madrid</em>.</p>
+</div>
+<div>
+<p>———. 2011. <em>The Volatility Surface: A Practitioner’s Guide</em>. Vol. 357. John Wiley &amp; Sons.</p>
 </div>
 <div>
 <p>Heston, Steven L. 1993. “A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options.” <em>The Review of Financial Studies</em> 6 (2). Oxford University Press: 327–43.</p>
@@ -206,12 +223,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="smile.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="calibracao.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

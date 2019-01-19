@@ -25,7 +25,7 @@
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-10">
+<meta name="date" content="2019-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -150,6 +150,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
 <li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>5</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="5.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>5.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="5.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>5.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="5.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>5.3</b> Suavização</a></li>
+<li class="chapter" data-level="5.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>5.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>5.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="calibracao.html"><a href="calibracao.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
@@ -213,7 +224,7 @@ mb &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(<span class="
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
-<p><img src="vol_surface_book_files/figure-html/brownian_plot-1.png" width="672" /></p>
+<p><img src="02-processos-estocasticos-em-financas-uma-introducao_files/figure-html/brownian_plot-1.png" width="672" /></p>
 <p>A figura acima mostra 5 realizações de um <em>mesmo</em> processo estocástico com média zero e variância unitária. É importante frisar que o processo que gerou as cinco séries é exatamente o mesmo, sendo elas tão distintas umas das outras ou não. Esta é uma importante característica dos processos estocásticos nas aplicações reais, o que nós observamos é apenas uma realização do processo, dentre as infinitas possíveis.</p>
 </div>
 <div id="definicao" class="section level2">
@@ -274,7 +285,7 @@ mb &lt;-<span class="st"> </span><span class="kw">as.tibble</span>(<span class="
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">10</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
-<p><img src="vol_surface_book_files/figure-html/mbg_plot-1.png" width="672" /></p>
+<p><img src="02-processos-estocasticos-em-financas-uma-introducao_files/figure-html/mbg_plot-1.png" width="672" /></p>
 <p>O Movimento Browniano Geométrico aqui demonstrado serve de base para o famoso modelo <strong>Black &amp; Scholes</strong> de precificação de opções, o qual assume que o ativo subjacente à opção (por exemplo, a ação de uma empresa) tem seu preço formado por um processo MBG.</p>
 
 </div>

@@ -25,7 +25,7 @@
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-10">
+<meta name="date" content="2019-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -150,6 +150,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
 <li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>5</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="5.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>5.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="5.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>5.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="5.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>5.3</b> Suavização</a></li>
+<li class="chapter" data-level="5.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>5.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>5.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="calibracao.html"><a href="calibracao.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
@@ -197,7 +208,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Exemplificando uma operação de compra de call, caso o preço do ativo tenha subido acima do preço de strike o comprador pode exercer sua opção de compra e ele lucrará a partir do momento em que o valor da ação for maior que o strike mais o valor pago pela opção (chamado de prêmio). Caso o preço do ativo tenha caído abaixo do strike, o comprador simplesmente não exerce sua opção, limitando sua perda nessa operação ao prêmio pago.</p>
 <table>
 <caption>
-<span id="tab:opcao">Tabela 1.1: </span>Exemplo: Comprando call de X com o preço de exercício (strike) de R$ 10.000
+<span id="tab:opcao">Tabela 1.1: </span>Exemplo: Comprando call de X com o preço de exercício (strike) de 10.000
 </caption>
 <thead>
 <tr>
@@ -325,7 +336,7 @@ ITM
 </table>
 <p>Usando a tabela <a href="opcoes.html#tab:opcao">1.1</a> como exemplo é possível ver que o resultado final será maior que R$ 0 quando o valor do ativo subjacente é maior que R$10.200 (R$10.000 de strike + R$200 de prêmio), e o prejuízo final está limitado ao valor de R$200. A figura <a href="opcoes.html#fig:call">1.1</a> abaixo mostra o perfil de lucro da operação exemplificada, típico de uma compra de call.</p>
 <div class="figure"><span id="fig:call"></span>
-<img src="vol_surface_book_files/figure-html/call-1.png" alt="Perfil de lucro típico de uma compra de call." width="672" />
+<img src="01-introducao-as-opcoes_files/figure-html/call-1.png" alt="Perfil de lucro típico de uma compra de call." width="672" />
 <p class="caption">
 Figura 1.1: Perfil de lucro típico de uma compra de call.
 </p>
@@ -363,7 +374,7 @@ Figura 1.1: Perfil de lucro típico de uma compra de call.
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.<a href="opcoes.html#fnref1">↩</a></p></li>
+<li id="fn1"><p>Artigo originalmente escrito por Glauber Naue e Erik Kawano, adaptado por Rafael Bressan para este livro.<a href="opcoes.html#fnref1">↩</a></p></li>
 </ol>
 </div>
             </section>

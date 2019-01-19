@@ -25,7 +25,7 @@
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-10">
+<meta name="date" content="2019-01-19">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="bsm.html">
-<link rel="next" href="bibliografia.html">
+<link rel="next" href="calibracao.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -150,6 +150,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
 <li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>5</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="5.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>5.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="5.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>5.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="5.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>5.3</b> Suavização</a></li>
+<li class="chapter" data-level="5.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>5.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>5.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="calibracao.html"><a href="calibracao.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
@@ -239,7 +250,7 @@ C_B=&amp;F\left[N(d1)-e^kN(d2)\right]
 <h3><span class="header-section-number">4.2.1</span> Mercados cambiais</h3>
 <p>Opções sobre moedas possuem tipicamente um smile de volatilidade conforme mostrado na figura <a href="smile.html#fig:smile-cambial">4.1</a> abaixo. A volatilidade implícita é relativamente baixa para opções ATM. Esta torna-se progressivamente maior quando a opção se move para dentro do dinheiro ou para fora.</p>
 <div class="figure"><span id="fig:smile-cambial"></span>
-<img src="img/smile_cambial.png" alt="Smile típico de um mercado cambial."  />
+<img src="images/smile_cambial.png" alt="Smile típico de um mercado cambial."  />
 <p class="caption">
 Figura 4.1: Smile típico de um mercado cambial.
 </p>
@@ -250,7 +261,7 @@ Figura 4.1: Smile típico de um mercado cambial.
 <h3><span class="header-section-number">4.2.2</span> Mercados de <em>equities</em></h3>
 <p>Nos mercados de <em>equities</em>, ações, índices de ações e ETFs, por exemplo, o smile apresenta uma característica de assimetria (skew, em inglês) negativa. A asa esquerda (parte onde as puts estão fora do dinheiro) apresenta valores de volatilidade implícita muito maiores que suas contrapartes no lado das calls. Este comportamento reflete a percepção de mercado de uma maior probabilidade de grandes perdas nas ações que altos ganhos, gerando portanto, uma distribuição de preços assimétrica. Como existe uma maior probabilidade de perdas extremas, o seguro para estas, ou seja, uma put é relativamente mais cara que uma call.</p>
 <div class="figure"><span id="fig:smile-equities"></span>
-<img src="img/smile_equities.png" alt="Smile típico de uma ação ou índice de ações."  />
+<img src="images/smile_equities.png" alt="Smile típico de uma ação ou índice de ações."  />
 <p class="caption">
 Figura 4.2: Smile típico de uma ação ou índice de ações.
 </p>
@@ -272,7 +283,7 @@ Figura 4.2: Smile típico de uma ação ou índice de ações.
 <p>Da mesma forma como a curva de juros em um dado momento é uma descrição concisa dos preços dos títulos negociados naquele mercado, assim, para um ativo subjacente em particular em determinado momento, a superfície de volatilidade implícita fornece uma descrição resumida de seu mercado de opções. Considerando que os rendimentos dos títulos são diferenciados pelo seu tempo até o vencimento, as opções são diferenciadas por seu tempo até a expiração e o <em>strike</em>, logo requerem uma superfície ao invés de uma curva.</p>
 <p>A figura <a href="smile.html#fig:superficie">4.3</a> demonstra uma superfície de volatilidade implícita do <code>SPX</code> em 15/09/2005, conforme apresentado em <span class="citation">Gatheral (<a href="#ref-Gatheral2011">2011</a>)</span>.</p>
 <div class="figure"><span id="fig:superficie"></span>
-<img src="img/spx_vol_surface.png" alt="Superfície de volatilidade implícita."  />
+<img src="images/spx_vol_surface.png" alt="Superfície de volatilidade implícita."  />
 <p class="caption">
 Figura 4.3: Superfície de volatilidade implícita.
 </p>
@@ -284,7 +295,7 @@ Figura 4.3: Superfície de volatilidade implícita.
 <p>O princípio de ausência de arbitragem é dominante na teoria financeira. Este princípio nos informa que não deve existir lucro sem que se incorra em algum tipo de risco, o lucro sempre é a remuneração do investidor que aceitou carregar alguma forma de risco durante o investimento. Portanto, não devem existir perfis de lucro acima da taxa livre de risco (<em>payoffs</em> positivos) com probabilidade de 100%.</p>
 <p>Primeiro consideramos uma trava de alta com opções do tipo call. Excluindo-se os custos de transação, esta operação sempre oferece um retorno positivo ou zero, conforme a figura <a href="smile.html#fig:trava-alta">4.4</a>. Por mais que esta estratégia esteja montada fora do dinheiro, sempre existe uma possibilidade de ela ter lucro, <span class="math inline">\(S_T&gt;K\)</span> e portanto seu preço deve ser sempre maior que zero.</p>
 <div class="figure"><span id="fig:trava-alta"></span>
-<img src="img/trava_alta.png" alt="Perfil de lucro de uma trava de alta."  />
+<img src="images/trava_alta.png" alt="Perfil de lucro de uma trava de alta."  />
 <p class="caption">
 Figura 4.4: Perfil de lucro de uma trava de alta.
 </p>
@@ -302,7 +313,7 @@ Figura 4.4: Perfil de lucro de uma trava de alta.
 <p>Também deve ser imposta uma restrição na segunda derivada do preço das opções em relação ao <em>strike</em>, e esta é conhecida como limite de arbitragem para borboletas. Vejamos porquê.</p>
 <p>Considere uma estratégia do tipo borboleta, onde se compra uma quantia de calls no <em>strike</em> <span class="math inline">\(K-dK\)</span>, vende-se duas vezes esta quantia em <span class="math inline">\(K\)</span> e compra-se novamente um lote em <span class="math inline">\(K+dK\)</span>, o perfil de lucro desta operação no vencimento está representado na figura <a href="smile.html#fig:borboleta">4.5</a>.</p>
 <div class="figure"><span id="fig:borboleta"></span>
-<img src="img/borboleta.png" alt="Borboleta realizada com calls."  />
+<img src="images/borboleta.png" alt="Borboleta realizada com calls."  />
 <p class="caption">
 Figura 4.5: Borboleta realizada com calls.
 </p>
@@ -407,7 +418,7 @@ e^{r\tau}\frac{\partial^2 C}{\partial K^2}=&amp; \ p(K)\\
         </div>
       </div>
 <a href="bsm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="calibracao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

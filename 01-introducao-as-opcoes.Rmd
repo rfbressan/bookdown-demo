@@ -1,6 +1,25 @@
 # Introdução as opções {#opcoes}
 
-Neste Capítulo[^1] iremos apresentar os instrumentos financeiros conhecidos como opções. Existem dois tipos de opção. Uma opção de compra dá ao detentor o direito de comprar o ativo subjacente até uma determinada data por um determinado preço. Uma opção de venda dá ao titular o direito de vender o ativo subjacente até uma determinada data por um determinado preço.
+```{r setup01, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Verifies if needed packages are installed
+pkgs_att <- c("tidyverse", 
+              "ggthemes",
+              "kableExtra")
+new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
+
+# Installs new packages
+if (length(new.pkgs)) install.packages(new.pkgs)
+
+# Loads and attaches all needed packages
+for (s in pkgs_att) {
+  if (!library(s, character.only = TRUE, logical.return = TRUE)) 
+    stop("Error loading packages.")
+}
+```
+
+Neste Capítulo[^11] iremos apresentar os instrumentos financeiros conhecidos como opções. Existem dois tipos de opção. Uma opção de compra dá ao detentor o direito de comprar o ativo subjacente até uma determinada data por um determinado preço. Uma opção de venda dá ao titular o direito de vender o ativo subjacente até uma determinada data por um determinado preço.
 
 Alguns termos importantes para o melhor entendimento deste Capítulo são: “Ativo subjacente”, que é o ativo negociado no contrato, “data de vencimento”, no caso do modelo americano é até a data limite para exercer a opção de compra e no modelo europeu é na data final em que a opção de compra pode ou não ser exercida (serão discutidos mais detalhes sobre estas modalidades posteriormente) e “preço de exercício” (strike), é o valor a ser pago pelo ativo de acordo com o contrato. As opções americanas podem ser exercidas a qualquer momento até a data de vencimento. Por sua vez, as opções europeias podem ser exercidas somente na própria data de vencimento.
 
@@ -31,7 +50,7 @@ como tendo posições _short_. Vender uma opção também é conhecido como lan�
 
 Exemplificando uma operação de compra de call, caso o preço do ativo tenha subido acima do preço de strike o comprador pode exercer sua opção de compra e ele lucrará a partir do momento em que o valor da ação for maior que o strike mais o valor pago pela opção (chamado de prêmio). Caso o preço do ativo tenha caído abaixo do strike, o comprador simplesmente não exerce sua opção, limitando sua perda nessa operação ao prêmio pago. 
 
-```{r opcao, results = "asis", echo=FALSE}
+```{r opcao, results = "asis"}
 s0 <- sort(c(seq(9000, 11000, 500), 10200))
 premio <- rep(200, 6)
 tbl <- tibble(s0, premio) %>% 
@@ -40,12 +59,13 @@ tbl <- tibble(s0, premio) %>%
          moneyness = c("OTM", "OTM", "ATM", "ITM", "ITM", "ITM"))
 kable(tbl,
       col.names = c("Ação", "Prêmio Pago", "Opção no Exercício", "Lucro", "Moneyness"),
-      caption = "Exemplo: Comprando call de X com o preço de exercício (strike) de R$ 10.000")
+      caption = "Exemplo: Comprando call de X com o preço de exercício (strike) de 10.000",
+      booktabs = TRUE)
 ```
 
 Usando a tabela \@ref(tab:opcao) como exemplo é possível ver que o resultado final será maior que R\$ 0 quando o valor do ativo subjacente é maior que R\$10.200 (R\$10.000 de strike + R\$200 de prêmio), e o prejuízo final está limitado ao valor de R\$200. A figura \@ref(fig:call) abaixo mostra o perfil de lucro da operação exemplificada, típico de uma compra de call.
 
-```{r call, fig.cap = "Perfil de lucro típico de uma compra de call.", echo=FALSE}
+```{r call, fig.cap = "Perfil de lucro típico de uma compra de call."}
 ggplot(tbl, aes(x = s0, y = lucro)) +
   geom_line() +
   geom_point(shape = 17, color = "darkgreen", size = 3) +
@@ -86,4 +106,4 @@ Teremos então a compra de uma put e call de strike iguais de R\$150,00 a venda 
 
 Espero que o leitor tenha despertado interesse no assunto, com esse conteúdo dominado já saberá o básico sobre opções, fique atento a novas postagens em breve iremos mais a afundo explicando por exemplo o modelo Black Scholes, como as opções são precificadas entre outros materiais.
 
-[^1]: Artigo originalmente escrito por Glauber Naue e Erik Kawano, adaptado por Rafael Bressan para este livro.
+[^11]: Artigo originalmente escrito por Glauber Naue e Erik Kawano, adaptado por Rafael Bressan para este livro.

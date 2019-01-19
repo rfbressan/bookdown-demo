@@ -1,0 +1,107 @@
+---
+title: "Read Me"
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
+---
+```{r include=FALSE, cache = FALSE}
+library(tidyverse)
+library(ggthemes)
+source('svi_h.R')
+```
+
+Quasi-explicit calibration of the modified SVI model. The optimization method follows Martini & Marco (2009), with some modificiation. 
+
+The modified SVI function is:
+
+$$ v(x) = [a + b(\rho(x-m)+\sqrt{(x-m)^2 + \sigma^2})]^H
+$$
+
+Given that the function has 6 parameters, and many local minimums, two-step quasi-explicit calibration method has some  advantages to find global optimal parameters. 
+
+Read a sample chain (iv.csv, $\tau = 0.12$ ), and fit with the two-step optimization.
+
+```{r, direct, results='asis'}
+raw_data <- read_csv("../static/input/IV_Raw_Delta_surface.csv",
+                     col_types = cols(date = col_date(format = "%m/%d/%Y")))
+
+slice_data <- raw_data %>% 
+  filter(period == 30) %>% 
+  mutate(tau = period / 365) %>% 
+  select(moneyness, iv, tau)
+
+results <- fit_direct_svi(slice_data$moneyness, 
+                          slice_data$iv, 
+                          slice_data$tau)
+vec <- results %>% 
+  select(par, sumse) %>% 
+  unlist()
+names(vec) <- c("a", "b", "rho", "m", "sigma", "SUMSE")
+knitr::kable(as.data.frame(vec))
+```
+
+Let's compare this parameterization with real data.
+
+```{r direct_plot}
+par <- results$par[[1]]
+vol_fit <- tibble(vol_fit = 
+                    sqrt(svi_fun(par, slice_data$moneyness) / slice_data$tau))
+df <- bind_cols(slice_data, vol_fit)
+
+ggplot(df, aes(x = moneyness, y = iv)) + 
+  geom_point() +
+  geom_line(aes(y = vol_fit)) +
+  # guides(color = guide_legend()) +
+  labs(title = "",
+       x = "Forward log-moneyness",
+       y = "Volatility",
+       caption = "") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_color_viridis_d() +
+  theme_economist_white()
+```
+
+```{r ga}
+# measure estimation time
+ptm <- proc.time()
+param_ga <- fit_ga_svi(c$k,c$iv,tau)
+#show how long it takes for estimate the parameters
+print(proc.time()-ptm)
+```
+
+```{r, NM}
+ptm <- proc.time()
+param <- fit_svih(c$k,c$iv,tau, 0.95)
+#show how long it takes for estimate the parameters
+print(proc.time()-ptm)
+
+print(param)
+# SVI parameterized IV estimation
+c$svi <- svi_fun(c$k,as.numeric(param[1,2:7]))/sqrt(tau)
+
+# plot fitting results
+ggplot(c, aes(x = k, y = iv)) + geom_point()  + 
+  geom_line(aes(y = svi), color = 'red')
+```
+
+```{r}
+c$err = c$iv - c$svi
+
+ggplot(c, aes(x = k, y = err)) + geom_point()
+print(sd(c$err))
+```
+Using `par_fit_svi` function, one can fit the whole surface with paralell computation. An example is shown below:
+```{r}
+# read a chain
+library(parallel)
+c2 <- read.csv('chain.csv')
+# suppose now H = 0.65. This can be done by using genetic algo
+ptm <- proc.time()
+para <- par_fit_svi(c2, 0.65)
+print(proc.time()-ptm)
+
+print(para)
+```
+
+

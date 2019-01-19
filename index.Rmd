@@ -30,23 +30,6 @@ Se interessa por finanças quantitativas, modelagem e controle de riscos e desen
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 
-# Verifies if needed packages are installed
-pkgs_att <- c("tidyverse", 
-              "tidyquant",
-              "ggridges", 
-              "ggthemes",
-              "kableExtra")
-new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
-
-# Installs new packages
-if (length(new.pkgs)) install.packages(new.pkgs)
-
-# Loads and attaches all needed packages
-for (s in pkgs_att) {
-  if (!library(s, character.only = TRUE, logical.return = TRUE)) 
-    stop("Error loading packages.")
-}
-
 # Instala o pacote R tinytex se nao estiver instalado
 # Em seguida instala o tinytex Latex com os pacotes discriminados
 if (knitr:::is_latex_output() && 

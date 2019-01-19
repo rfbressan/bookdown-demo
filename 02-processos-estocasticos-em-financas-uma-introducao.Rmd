@@ -1,5 +1,25 @@
 # Processos Estocásticos em Finanças {#processos-estocasticos}
 
+```{r setup02, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Verifies if needed packages are installed
+pkgs_att <- c("tidyverse", 
+              "ggridges",
+              "ggthemes",
+              "kableExtra")
+new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
+
+# Installs new packages
+if (length(new.pkgs)) install.packages(new.pkgs)
+
+# Loads and attaches all needed packages
+for (s in pkgs_att) {
+  if (!library(s, character.only = TRUE, logical.return = TRUE)) 
+    stop("Error loading packages.")
+}
+```
+
 Neste artigo abordaremos um assunto técnico, mas muito utilizado e de fudamental importância para a precificação de instrumentos derivativos. Será apresentado o conceito de processos estocásticos - PE, e sua aplicação no mundo das finanças.
 
 Um processo estocástico é a evolução temporal de uma determinada variável de interesse que pode assumir valores aleatórios em cada ponto no tempo. Em outras palavras, o caminho que a variável segue ao longo do tempo evolui de maneira incerta. Estes processos podem se dar em tempo discreto ou em tempo contínuo. Processo em tempo discreto são aqueles onde o valor da variável pode se alterar somente em intervalos pré-definidos de tempo, por exemplo ao final do dia. Em processos em tempo contínuo, o valor de nossa variável está constantemente em mudança, de forma aleatória seguindo alguma distribuição de probabilidades.

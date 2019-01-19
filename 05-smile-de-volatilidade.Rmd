@@ -1,5 +1,24 @@
 # Smile de Volatilidade {#smile}
 
+```{r setup05, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Verifies if needed packages are installed
+pkgs_att <- c("tidyverse", 
+              "ggthemes",
+              "kableExtra")
+new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
+
+# Installs new packages
+if (length(new.pkgs)) install.packages(new.pkgs)
+
+# Loads and attaches all needed packages
+for (s in pkgs_att) {
+  if (!library(s, character.only = TRUE, logical.return = TRUE)) 
+    stop("Error loading packages.")
+}
+```
+
 A volatilidade instantânea, $\sigma$, do ativo subjacente é a única variável no modelo B&S que não pode ser diretamente observada. De fato, a volatilidade (ou equivalentemente a variância) de um ativo é dita uma variável **latente**. Sabemos que ela existe e possui algum valor no processo gerador, o processo pelo qual os preços são formados, porém não conseguimos observá-la diretamente, apenas estimá-la. Uma das formas de estimação de volatilidade pode ser a partir de dados históricos, mas várias outras formas existem, entre elas processos GARCH, volatilidade realizada, volatilidade estocástica, etc.
 
 Uma vez que a volatilidade não pode ser diretamente observada, a prática comum no mercado é fazer o caminho inverso. Considerar os preços de mercado para as opções como dado, e a partir do modelo [B&S](#bsm) inverter a equação de preço da Call ou Put para encontrar a volatilidade deste modelo que é compatível com os preços de mercado. A esta volatilidade encontrada damos o nome de **volatilidade implícita**.
@@ -89,7 +108,7 @@ Entre as características tipicamente observadas em smiles (e superfícies) de v
 Opções sobre moedas possuem tipicamente um smile de volatilidade conforme mostrado na figura \@ref(fig:smile-cambial) abaixo. A volatilidade implícita é relativamente baixa para opções ATM. Esta torna-se progressivamente maior quando a opção se move para dentro do dinheiro ou para fora.
 
 ```{r smile-cambial, fig.cap = "Smile típico de um mercado cambial.", echo=FALSE}
-knitr::include_graphics("img/smile_cambial.png")
+knitr::include_graphics("./images/smile_cambial.png")
 ```
 
 Caso a distribuição dos preços do ativo subjacente, neste caso uma taxa de câmbio fosse perfeitamente log-normal como no modelo B&S, o smile não teria esta curvatura. Desta forma podemos afirmar que o mercado, ao precificar as opções, acredita que a distribuição deste ativo possui caudas com maior densidade que supõe a log-normal, existem maiores probabilidades de retornos muito baixos ou muito altos.
@@ -99,7 +118,7 @@ Caso a distribuição dos preços do ativo subjacente, neste caso uma taxa de c�
 Nos mercados de _equities_, ações, índices de ações e ETFs, por exemplo, o smile apresenta uma característica de assimetria (skew, em inglês) negativa. A asa esquerda (parte onde as puts estão fora do dinheiro) apresenta valores de volatilidade implícita muito maiores que suas contrapartes no lado das calls. Este comportamento reflete a percepção de mercado de uma maior probabilidade de grandes perdas nas ações que altos ganhos, gerando portanto, uma distribuição de preços assimétrica. Como existe uma maior probabilidade de perdas extremas, o seguro para estas, ou seja, uma put é relativamente mais cara que uma call.
 
 ```{r smile-equities, fig.cap = "Smile típico de uma ação ou índice de ações.", echo=FALSE}
-knitr::include_graphics("img/smile_equities.png")
+knitr::include_graphics("./images/smile_equities.png")
 ```
 
 ## Smile como forma de precificação {#smileprecificacao}
@@ -125,7 +144,7 @@ Da mesma forma como a curva de juros em um dado momento é uma descrição conci
 A figura \@ref(fig:superficie) demonstra uma superfície de volatilidade implícita  do `SPX` em 15/09/2005, conforme apresentado em @Gatheral2011.
 
 ```{r superficie, fig.cap = "Superfície de volatilidade implícita.", echo=FALSE}
-knitr::include_graphics("img/spx_vol_surface.png")
+knitr::include_graphics("./images/spx_vol_surface.png")
 ```
 
 ## Arbitragem estática {#arbestatica}
@@ -137,7 +156,7 @@ O princípio de ausência de arbitragem é dominante na teoria financeira. Este 
 Primeiro consideramos uma trava de alta com opções do tipo call. Excluindo-se os custos de transação, esta operação sempre oferece um retorno positivo ou zero, conforme a figura \@ref(fig:trava-alta). Por mais que esta estratégia esteja montada fora do dinheiro, sempre existe uma possibilidade de ela ter lucro, $S_T>K$ e portanto seu preço deve ser sempre maior que zero. 
 
 ```{r trava-alta, fig.cap="Perfil de lucro de uma trava de alta.", echo=FALSE}
-knitr::include_graphics("img/trava_alta.png")
+knitr::include_graphics("./images/trava_alta.png")
 ```
 
 É claro que quanto mais ITM estejam as opções, maior seu preço e quanto mais fora do dinheiro menor será seu valor até o limite inferior zero. Se levarmos a diferença entre os _strikes_, $dK$ a zero temos que:
@@ -159,7 +178,7 @@ Também deve ser imposta uma restrição na segunda derivada do preço das opç�
 Considere uma estratégia do tipo borboleta, onde se compra uma quantia de calls no _strike_ $K-dK$, vende-se duas vezes esta quantia em $K$ e compra-se novamente um lote em $K+dK$, o perfil de lucro desta operação no vencimento está representado na figura \@ref(fig:borboleta).
 
 ```{r borboleta, fig.cap="Borboleta realizada com calls.", echo=FALSE}
-knitr::include_graphics("img/borboleta.png")
+knitr::include_graphics("./images/borboleta.png")
 ```
 
 Seguindo a mesma linha de raciocínio anterior, como o _payoff_ da borboleta é sempre não negativo também deve ser o seu valor para qualquer período anterior a expiração. Se denotarmos $\pi_B$ o valor da borboleta, então $\pi_B\geq0$.

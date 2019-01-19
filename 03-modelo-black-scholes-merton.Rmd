@@ -1,5 +1,24 @@
 # Modelo Black-Scholes-Merton {#bsm}
 
+```{r setup03, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Verifies if needed packages are installed
+pkgs_att <- c("tidyverse", 
+              "ggthemes",
+              "kableExtra")
+new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
+
+# Installs new packages
+if (length(new.pkgs)) install.packages(new.pkgs)
+
+# Loads and attaches all needed packages
+for (s in pkgs_att) {
+  if (!library(s, character.only = TRUE, logical.return = TRUE)) 
+    stop("Error loading packages.")
+}
+```
+
 Neste artigo desenvolveremos o modelo para precificação de opções do tipo europeias proposto @Black1973 e posteriormente expandido por @Merton1976. A derivação deste modelo se baseia nos conceitos apresentados sobre processos estocásticos do Capítulo \@ref(processos-estocasticos).
 
 Antes de entrar na modelagem desenvolvida pelos autores acima citados, iremos tratar de algumas definições essenciais, como por exemplo a precificação de ativos em um mundo neutro ao risco (_risk neutral valuation_) e portfólio de replicação (_replicating portfolio_), que são largamente utilizados na precificação de quaisquer derivativos, e não somente opções. 

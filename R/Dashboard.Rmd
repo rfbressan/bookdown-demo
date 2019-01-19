@@ -1,0 +1,344 @@
+---
+title: "Análise de Volatilidade Implícita"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+#    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+# Verifies if needed packages are installed
+pkgs_att <- c("akima",
+              "splines",
+              "MBA",
+              "ks",
+              "tidyverse",
+              "ggthemes",
+              "plotly")
+new.pkgs <- pkgs_att[!(pkgs_att %in% installed.packages()[,"Package"])]
+
+# Installs new packages
+if (length(new.pkgs)) install.packages(new.pkgs)
+
+# Loads and attaches all needed packages
+for (s in pkgs_att) {
+  if (!library(s, character.only = TRUE, logical.return = TRUE)) 
+    stop("Error loading packages.")
+}
+
+# source("vol_funcs.R")
+rates <- read_csv("../input/Interest_rates.csv",
+                  col_types = cols(date = col_date(format = "%m/%d/%Y"))) %>% 
+  mutate(log_rate = log(1 + rate / 100)) %>% 
+  select(date, period, log_rate)
+
+vol_data <- read_csv("../input/IVP_Delta_surface.csv",
+                     col_types = cols(date = col_date(format = "%m/%d/%Y"))) %>% 
+  left_join(rates, by = c("date", "period"))
+
+# Listas de selecao das entradas
+symb_names <- unique(vol_data$symbol)
+symb_list <- as.list(symb_names)
+dates_names <- unique(vol_data$date)
+dates_list <- as.list(dates_names)
+methods_list <- list("Akima Bicúbica" = 1, 
+                     "Akima Bilinear" = 2, 
+                     "B-Splines" = 3)
+periods_list <- seq(30, 1080, by = 1)
+deltas_list <- seq(10, 90, by = 1)
+
+# Entradas da Dashboard -----------------------------------------------------
+simb_sel <- reactive({input$simbolo})
+data_sel <- reactive({input$data})
+metodo <- reactive(as.integer(input$metodo))
+deltas <- reactive(input$deltas)
+periodos <- reactive({input$periodos})
+
+vol_selected <- reactive({
+  vol_data %>% 
+  filter(date == data_sel(), symbol == simb_sel()) %>% 
+  select(-c(date, symbol, exchange, moneyness, strike))
+  })
+
+uniq_deltas <- reactive({unique(vol_selected()$delta)})
+uniq_periodos <- reactive({unique(vol_selected()$period)})
+impvol <- reactive({
+  matrix(vol_selected()$iv, ncol = length(uniq_periodos()), byrow = FALSE)
+  })
+#row.names(z()) <- reactive({paste("Delta", x())})
+#colnames(z()) <- reactive({paste("Period", y())})
+
+# Numero de pontos de interpolacao em ambos eixos
+npoints <- reactive({max(uniq_periodos()) - min(uniq_periodos()) + 1})
+# indice para reduzir a granularidade do plot da Superficie de vol
+idx <- reactive({seq(1, npoints(), by = 3)})
+
+# Remove variaveis nao necessarias ----------------------------------------
+
+rm(list = c("rates", "new.pkgs", "pkgs_att", "s"))
+
+# Interpolacao Bicubica de Akima -------------------------------------------
+
+dperiod <- 1 # variacao do periodo na superficie interpolada
+# variacao do delta na superficie interpolada
+ddelta <- reactive({(max(uniq_deltas()) - min(uniq_deltas())) / (npoints() - 1)})  
+
+# superficie retangular
+# akima_cub <- bicubic.grid(x, y, z, nx = npoints, ny = npoints)
+akima_cub <- reactive({
+  bicubic.grid(uniq_deltas(), uniq_periodos(), impvol(), dx = ddelta(), dy = dperiod)
+  })
+
+# Interpolacao Bilinear de Akima ------------------------------------------
+
+akima_bil <- reactive({
+  bilinear.grid(uniq_deltas(), uniq_periodos(), impvol(), dx = ddelta(), dy = dperiod)
+  })
+
+# B-Splines com pacote MBA ------------------------------------------------
+
+xyz_mba <- reactive({
+  vol_selected() %>% 
+  select(delta, period, iv) %>% 
+  rename(x = delta,
+         y = period,
+         z = iv)
+})
+mba_spline <- reactive({
+  mba.surf(xyz_mba(), 
+           no.X = npoints(), 
+           no.Y = npoints(), 
+           sp = FALSE)
+})
+
+# Lista de Metodos ---------------------------------------------------------
+metodos <- reactive({
+  list(akima_cub = akima_cub(),
+       akima_bil = akima_bil(),
+       mba_spline = mba_spline()$xyz.est)
+})
+
+# Lista com a superficie interpolada -------------------------------------
+vol_interp <- reactive({
+  list(x = metodos()[[metodo()]]$x[idx()],
+       y = metodos()[[metodo()]]$y[idx()],
+       z = metodos()[[metodo()]]$z[idx(), idx()])
+})
+
+# Tibble para o ggplot do smile e termo -----------------------------------
+ggp_tbl <- reactive({
+  as_tibble(interp2xyz(metodos()[[metodo()]]))
+})
+
+# Inverter o Delta --------------------------------------------------------
+
+prices <- reactive({
+  vol_selected() %>% 
+  rename(S = stock_price_for_iv) %>% 
+  mutate(delta = delta / 100,
+         tau = period / 360,
+         omega2 = iv^2 * tau,
+         log_mF = sqrt(omega2) * qnorm(delta) - (omega2 / 2),
+         log_m = log_mF - log_rate * tau,
+         K0 = S * exp(-log_mF),
+         K = S * exp(-log_m),
+         d1 = (log_mF + omega2 / 2) / sqrt(omega2),
+         d2 = d1 - sqrt(omega2),
+         C0 = S * delta - K0 * pnorm(d2))
+})
+
+# Criou-se um grid irregular nos strikes que nao eh facilmente
+# interpolavel na superficie diretamente.
+# Interpolar os smiles, fixando os periodos.
+
+# Strikes usados para avaliar a interpolacao
+# Deve ser uma lista de N elementos onde N eh o numero de periodos diferentes
+strikes_eval <- reactive({
+  list(seq(min(prices()$K), 
+           max(prices()$K), 
+           length.out = npoints())) %>% 
+    rep(length(uniq_periodos()))
+})
+
+# interp_dist guarda as interpolacoes de preco da call e a distribuicao
+# implicita desta
+
+interp_dist <- reactive({
+  prices() %>% 
+    nest(-c(period, log_rate)) %>% 
+    mutate(strikes_eval = strikes_eval(),
+           # spline_fun = map(data, ~splinefun(.x$K, .x$C0, 
+           #                                   method = "natural")),
+           # spline_eval = invoke_map(spline_fun, strikes),
+           # strikes = map(strikes, ~.x[[1]]),
+           bspline = map(data, ~interpSpline(.x$K, .x$C0,
+                                             bSpline = TRUE)),
+           bspline_eval = map2(bspline, strikes_eval, ~predict(.x, .y)$y),
+           smooth = map(data, ~smooth.spline(.x$K, .x$C0, spar = 0.5)),
+           smooth_eval = map2(smooth, strikes_eval, 
+                              ~predict(.x, .y)$y),
+           smooth_2deriv = map2(smooth, strikes_eval, 
+                                ~pmax(predict(.x, .y, deriv = 2)$y,
+                                      0))) %>% 
+    select(-c(data, bspline, smooth)) %>% 
+    unnest() %>% 
+    mutate(smooth_2deriv = exp(log_rate * period / 360) * smooth_2deriv) %>% 
+    gather(key = modelo, value = valor, c(bspline_eval, 
+                                          smooth_eval, 
+                                          smooth_2deriv))
+})
+```
+
+# Opções {.sidebar}
+
+```{r}
+selectInput("simbolo", label = h4("Ativo"), 
+            choices = symb_list, 
+            selected = 1)
+
+selectInput("data", label = h4("Data"), 
+            choices = dates_list, 
+            selected = 1)
+
+selectInput("metodo", label = h4("Interpolação"), 
+            choices = methods_list, 
+            selected = 1)
+
+selectInput("periodos", label = h4("Períodos do Smile"),
+            choices = periods_list,
+            selected = min(periods_list),
+            multiple = TRUE)
+
+selectInput("deltas", label = h4("Deltas do Termo"),
+            choices = deltas_list,
+            selected = c(50),
+            multiple = TRUE)
+```
+
+Interpolação da superfície de volatilidade no espaço $\sigma(\Delta, \tau)$ por diversos métodos.
+
+Dados obtidos de [IVolatility.com](http://www.ivolatility.com/data/us-historical-option-data2.html).
+
+<!-- # Debug -->
+
+<!-- ## Coluna -->
+
+<!-- ### Variaveis -->
+
+<!-- ```{r debug} -->
+<!-- renderPrint(paste(substitute(metodo()), ": ", metodo())) -->
+<!-- renderPrint(substitute(akima_bil())) -->
+<!-- renderPrint(akima_bil()) -->
+<!-- #renderPrint(xyz_mba()) -->
+<!-- ``` -->
+
+# Superfície
+
+## Coluna
+
+### Superfície Interativa
+
+```{r superficie}
+renderPlotly({
+  plot_ly(y = vol_interp()$x,
+          x = vol_interp()$y,
+          z = vol_interp()$z) %>%
+    add_surface() %>%
+    layout(scene = list(xaxis = list(title = "Dias"),
+                        yaxis = list(title = "Delta"),
+                        zaxis = list(title = "Vol. Imp."),
+                        camera = list(eye = list(x = -1.55,
+                                                 y = -1.55,
+                                                 z = 0.25))))
+})
+
+```
+
+# Smile
+
+## Coluna
+
+### Smile de Volatilidade
+
+```{r smile}
+renderPlotly({
+  psmile <- ggp_tbl() %>% 
+    filter(y %in% periodos()) %>% 
+    mutate(y = as.factor(y)) %>% 
+    ggplot(aes(x = x, y = z, group = y)) +
+    geom_line(aes(color = y)) +
+    scale_color_viridis_d() +
+    scale_x_reverse() +
+    scale_y_continuous(labels = scales::percent) +
+    labs(x = "Delta",
+         y = "Volatilidade Implícita") +
+    guides(color = guide_legend(title = "Periodo")) +
+    theme_bw()
+  ggplotly(psmile)
+})
+```
+
+### Estrutura a termo
+
+```{r termo}
+renderPlotly({
+  ptermo <- ggp_tbl() %>% 
+    filter(x %in% deltas()) %>% 
+    mutate(x = as.factor(x)) %>% 
+    ggplot(aes(x = y, y = z, group = x)) +
+    geom_line(aes(color = x)) +
+    scale_color_viridis_d() +
+    scale_y_continuous(labels = scales::percent) +
+    labs(x = "Período",
+         y = "Volatilidade Implícita") +
+    guides(color = guide_legend(title = "Delta")) +
+    theme_bw()
+  ggplotly(ptermo)
+})
+```
+
+# Distribuição Implícita
+
+## Coluna
+
+### Curva de Preços - Calls
+
+```{r calls}
+renderPlotly({
+  pprices <- interp_dist() %>% 
+    filter(period %in% periodos(),
+           modelo %in% c("bspline_eval", "smooth_eval")) %>% 
+    mutate(period = as.factor(period)) %>% 
+    ggplot(aes(x = strikes_eval, y = valor, group = period)) +
+    geom_line(aes(color = period)) +
+    facet_wrap(~modelo) +
+    scale_color_viridis_d() +
+    scale_y_continuous(labels = scales::dollar) +
+    labs(x = "Strike",
+         y = "Preço Call") +
+    guides(color = guide_legend(title = "Periodo")) +
+    theme_bw()
+  ggplotly(pprices)
+})
+```
+
+### Distribuição implícita
+
+```{r dist_imp}
+renderPlotly({
+  pdist <- interp_dist() %>% 
+    filter(period %in% periodos(),
+           modelo %in% c("smooth_2deriv")) %>% 
+    mutate(period = as.factor(period)) %>% 
+    ggplot(aes(x = strikes_eval, y = valor, group = period)) +
+    geom_line(aes(color = period)) +
+    scale_color_viridis_d() +
+    labs(x = "Strike",
+         y = "p(x)") +
+    guides(color = guide_legend(title = "Periodo")) +
+    theme_bw()
+  ggplotly(pdist)
+})
+```

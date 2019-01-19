@@ -1,0 +1,135 @@
+---
+title: "SVI Simulação"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+
+k <- seq(-0.8, 0.8, by = 0.01)
+
+# Inputs Raw
+a <- reactive(input$a)
+b <- reactive(input$b)
+rho_raw <- reactive(input$rho_raw)
+m <- reactive(input$m)
+sigma <- reactive(input$sigma)
+
+# Inputs Natural
+delta <- reactive(input$delta)
+omega <- reactive(input$omega)
+zeta <- reactive(input$zeta)
+rho_natural <- reactive(input$rho_natural)
+mi <- reactive(input$mi)
+
+# Parametrizacoes
+w_raw <- reactive({
+  a() + b() * (rho_raw() * (k - m()) + sqrt((k - m())^2 + sigma()^2))
+})
+
+w_natural <- reactive({
+  delta()+(omega()/2)*(1+zeta()*rho_natural()*(k-mi())+sqrt((zeta()*(k-mi())+rho_natural())^2+(1-rho_natural()^2)))
+})
+
+# Tibbles para o ggplot
+raw_tbl <- reactive({
+  tibble(k = k,
+         w = w_raw())
+})
+
+natural_tbl <- reactive({
+  tibble(k = k,
+         w = w_natural())
+})
+```
+
+# Raw Parameterization
+
+## Column {data-width=300}
+
+### Raw Parameters
+
+$$w(k;\chi_R)=a+b\{\rho\left(k-m\right)+\sqrt{\left(k-m\right)^2+\sigma^2}\}$$
+
+```{r raw_par}
+sliderInput("a", label = "a", min = -0.1, max = 0.1, value = 0, step = 0.01)
+sliderInput("b", label = "b", min = 0, max = 2, value = 0.4, step = 0.1)
+sliderInput("rho_raw", label = "rho", min = -1, max = 1, value = -0.5, step = 0.1)
+sliderInput("m", label = "m", min = -0.1, max = 0.1, value = 0, step = 0.01)
+sliderInput("sigma", label = "sigma", min = 0, max = 1, value = 0.05, step = 0.01)
+```
+
+## Column 
+
+### SVI Plot
+
+```{r raw_plot}
+renderPlot(
+  ggplot(raw_tbl(), aes(x = k, y = w)) +
+    geom_line(size = 2) +
+    scale_y_continuous(limits = c(-0.1, 1)) +
+    labs(x = "Forward log-moneynes ln(K/F)",
+         y = "Variância total w(k)")
+    #theme_bw()
+)
+```
+
+# Natural Parameterization
+
+## Column {data-width=300}
+
+### Natural Parameters
+
+$$w(k;\chi_R)=\Delta+\omega/2\left\lbrace 1+\zeta\rho\left(k-\mu\right)+\sqrt{\left(\zeta\left(k-\mu\right)+\rho\right)^2+\left(1-\rho^2\right)}\right\rbrace$$
+
+```{r natural_par}
+sliderInput("delta", label = "Delta", min = -10, max = 10, value = 0)
+sliderInput("omega", label = "omega", min = 0, max = 2, value = 1.7, step = 0.1)
+sliderInput("rho_natural", label = "rho", min = -1, max = 1, value = -0.6, step = 0.1)
+sliderInput("mi", label = "mi", min = -10, max = 10, value = 0)
+sliderInput("zeta", label = "zeta", min = 0, max = 10, value = 1)
+```
+
+## Column
+
+### SVI Plot
+
+```{r natural_plot}
+renderPlot(
+  ggplot(natural_tbl(), aes(x = k, y = w)) +
+    geom_line() +
+    scale_y_continuous(limits = c(-2, 20)) #+
+    #theme_bw()
+)
+```
+
+# Jump-Wings Parameterization
+
+## Column {data-width=300}
+
+### Jump-Wings Parameters
+
+$$w(k;\chi_R)=a+b\{\rho\left(k-m\right)+\sqrt{\left(k-m\right)^2+\sigma^2}\}$$
+
+```{r jump_wings_par}
+
+```
+
+## Column
+
+### SVI Plot
+
+```{r jump_wings_plot}
+renderPlot(
+  ggplot(jump_wings_tbl(), aes(x = k, y = w)) +
+    geom_line() +
+    scale_y_continuous(limits = c(-2, 20)) #+
+    #theme_bw()
+)
+
+```

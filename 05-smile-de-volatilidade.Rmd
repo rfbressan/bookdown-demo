@@ -224,7 +224,7 @@ Se mantivermos a volatilidade implícita constante para todos os _strikes_, os p
 
 Novamente, o mesmo raciocínio pode ser imposto para o lado das puts. A volatilidade implícita não pode se elevar tão rapidamente quando os _strikes_ se reduzem de forma que uma put de _strike_ menor tenha valor mais elevado que outra que esteja mais próxima do dinheiro.
 
-Finalmente, um sumário dos limites impostos a uma superfície de preços de opções (calls no caso apresentado), que implicam em limites para a superfície de volatilidade é apresentado abaixo[^4]:
+Finalmente, um sumário dos limites impostos a uma superfície de preços de opções (calls no caso apresentado), que implicam em limites para a superfície de volatilidade é apresentado abaixo[^54]:
 
 1. $\partial_\tau C \geq 0$
 2. $\lim\limits_{K\rightarrow\infty}C(K, \tau)=0$
@@ -264,7 +264,7 @@ e^{r\tau}\frac{\partial^2 C}{\partial K^2}=& \ p(K)\\
 
 Onde usou-se a notação $C_B$ para denotar a formulação de Black para o preço de uma call. Ou seja, a segunda derivada em relação ao strike do preço não descontado de uma call é a distribuição neutra ao risco do ativo subjacente, e é válida para todos preços de exercício.
 
-Portanto, se desejarmos saber qual a distribuição de probabilidades de preços do ativo subjacente em uma data futura que possua vencimento de opções, basta encontrarmos a convexidade do smile dos preços _forward_ daquele vencimento[^5].
+Portanto, se desejarmos saber qual a distribuição de probabilidades de preços do ativo subjacente em uma data futura que possua vencimento de opções, basta encontrarmos a convexidade do smile dos preços _forward_ daquele vencimento[^55].
 
 ## Conclusão
 
@@ -276,6 +276,6 @@ Este foi um artigo denso, porém com vários conceitos importantes para a compre
 
 Por fim, foi demonstrado como a convexidade do smile de preços fornece a distribuição implícita para os preços do ativo subjacente para a data de expiração das opções.
 
-[^4]: Retirado de @Aurell2014, p. 25.
-[^5]: Simples em teoria, muito mais complicado na prática, com diversos problemas para a extrapolação do smile para _strikes_ extremos.
+[^54]: Retirado de @Aurell2014, p. 25.
+[^55]: Simples em teoria, muito mais complicado na prática, com diversos problemas para a extrapolação do smile para _strikes_ extremos.
 

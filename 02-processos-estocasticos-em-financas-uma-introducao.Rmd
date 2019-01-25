@@ -20,7 +20,7 @@ for (s in pkgs_att) {
 }
 ```
 
-Neste artigo abordaremos um assunto técnico, mas muito utilizado e de fudamental importância para a precificação de instrumentos derivativos. Será apresentado o conceito de processos estocásticos - PE, e sua aplicação no mundo das finanças.
+Neste capítulo abordaremos um assunto técnico, mas muito utilizado e de fudamental importância para a precificação de instrumentos derivativos. Será apresentado o conceito de processos estocásticos - PE, e sua aplicação no mundo das finanças.
 
 Um processo estocástico é a evolução temporal de uma determinada variável de interesse que pode assumir valores aleatórios em cada ponto no tempo. Em outras palavras, o caminho que a variável segue ao longo do tempo evolui de maneira incerta. Estes processos podem se dar em tempo discreto ou em tempo contínuo. Processo em tempo discreto são aqueles onde o valor da variável pode se alterar somente em intervalos pré-definidos de tempo, por exemplo ao final do dia. Em processos em tempo contínuo, o valor de nossa variável está constantemente em mudança, de forma aleatória seguindo alguma distribuição de probabilidades.
 

@@ -19,7 +19,7 @@ for (s in pkgs_att) {
 }
 ```
 
-Neste artigo desenvolveremos o modelo para precificação de opções do tipo europeias proposto @Black1973 e posteriormente expandido por @Merton1976. A derivação deste modelo se baseia nos conceitos apresentados sobre processos estocásticos do Capítulo \@ref(processos-estocasticos).
+Neste capítulo desenvolveremos o modelo para precificação de opções do tipo europeias proposto @Black1973 e posteriormente expandido por @Merton1976. A derivação deste modelo se baseia nos conceitos apresentados sobre processos estocásticos do Capítulo \@ref(processos-estocasticos).
 
 Antes de entrar na modelagem desenvolvida pelos autores acima citados, iremos tratar de algumas definições essenciais, como por exemplo a precificação de ativos em um mundo neutro ao risco (_risk neutral valuation_) e portfólio de replicação (_replicating portfolio_), que são largamente utilizados na precificação de quaisquer derivativos, e não somente opções. 
 
@@ -27,13 +27,13 @@ Antes de entrar na modelagem desenvolvida pelos autores acima citados, iremos tr
 
 Suponha que se deseja precificar uma opção de compra sobre uma ação, vamos denotar o preço desta _call_ de $f_t$. Sabemos que na data de expiração, $T$, da opção de compra seu preço será: $f_T=max(S_T - K, 0)$, onde $S_T$ é o preço da ação subjacente na data $T$ e $K$ é o preço de exercício da opção. Podemos criar um portfólio que envolva um ativo livre de risco, com preço $B_t$ e a ação objeto do derivativo, $S_t$, que recrie o mesmo valor de pagamento que a opção na data de expiração. Ou seja, criamos o portfólio de replicação $P_t=\Delta S_t + b B_t$, no qual devemos escolher os valores de $\Delta$ e $b$ de tal forma que $f_T = P_T$.
 
-De fato, para apenas um período a frente, podemos tomar emprestado a taxa de juros livre de risco[^1], $r$ um valor igual ao preço corrente da ação, $S_0$ e comprá-la, ao mesmo tempo em que se "trava" (faz _hedge_) deste portfólio vendendo a opção. O lucro desta operação em $T$ deve ser zero, pois é um portfólio travado. Com estas premissas é possível calcular o preço do prêmio da opção a ser cobrado no período inicial para que o valor esperado da operação como um todo seja zero.
+De fato, para apenas um período a frente, podemos tomar emprestado a taxa de juros livre de risco[^31], $r$ um valor igual ao preço corrente da ação, $S_0$ e comprá-la, ao mesmo tempo em que se "trava" (faz _hedge_) deste portfólio vendendo a opção. O lucro desta operação em $T$ deve ser zero, pois é um portfólio travado. Com estas premissas é possível calcular o preço do prêmio da opção a ser cobrado no período inicial para que o valor esperado da operação como um todo seja zero.
 
 Este portfólio formado pela venda do ativo livre de risco e compra do ativo objeto é denominado *portfólio de replicação*, pois, ele fornece um fluxo de caixa igual ao derivativo que buscamos precificar. Ao adicionarmos ao portfólio de replicação a venda (ou seja, o negativo) do derivativo, temos um portfólio _hedgeado_, onde não existe mais incerteza com relação ao seu retorno esperado.
 
 ## Precificação neutra ao risco
 
-A metodologia de precificação de derivativos dentro do _mundo neutro ao risco_[^2] é o carro-chefe das metodologias para se avaliar estes instrumentos. O princípio de precificação neutra ao risco afirma que um derivativo pode ser valorado através das seguintes suposições:
+A metodologia de precificação de derivativos dentro do _mundo neutro ao risco_[^32] é o carro-chefe das metodologias para se avaliar estes instrumentos. O princípio de precificação neutra ao risco afirma que um derivativo pode ser valorado através das seguintes suposições:
 
 - o retorno esperado do ativo objeto é a taxa livre de risco, e
 - o valor esperado do derivativo na expiração deve ser descontado pela taxa livre de risco para trazê-lo a valor presente.
@@ -121,7 +121,7 @@ Finalmente, igualando as equações \@ref(eq:rbb1) e \@ref(eq:rbb2) e substituin
 
 ## Solução analítica
 
-A equação possui diferentes formas de resolução[^3], a precificação do derivativo irá depender da forma que resolvermos a equação \@ref(eq:BS). O Modelo Black&Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos _payoffs_. Para uma call:
+A equação possui diferentes formas de resolução[^33], a precificação do derivativo irá depender da forma que resolvermos a equação \@ref(eq:BS). O Modelo Black&Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos _payoffs_. Para uma call:
 
 \begin{equation}
 \displaystyle f(S,T)=\max(S-K,0)
@@ -251,8 +251,8 @@ O vega é uma taxa que mede o efeito da mudança da volatilidade no preço da op
 O rho é uma taxa que mede a sensitividade do preço da ação em relação à taxa livre de risco, caso o valor de de rho determinada opção seja 0,7, para cada aumento de 1% da taxa livre de risco o valor da opção aumentará 0,7%. Essa taxa influi principalmente no preço de opções com uma data de vencimento extremamente distante, não afetando muito o preço de opções cuja data de vencimento é próxima.
 
 
-[^1]: Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.
+[^31]: Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.
 
-[^2]: A precificação dentro do mundo neutro ao risco mereceria um, ou mais, _posts_ por si só. Aqui lançaremos apenas os principais resultados que nos permitem encontrar o modelo de B&S.
+[^32]: A precificação dentro do mundo neutro ao risco mereceria um, ou mais, _posts_ por si só. Aqui lançaremos apenas os principais resultados que nos permitem encontrar o modelo de B&S.
 
-[^3]: Uma demonstração completa de como encontrar a solução para a EDP de Black&Schole pode ser encontrada em [https://planetmath.org/AnalyticSolutionOfBlackScholesPDE](https://planetmath.org/AnalyticSolutionOfBlackScholesPDE)
+[^33]: Uma demonstração completa de como encontrar a solução para a EDP de Black&Schole pode ser encontrada em [https://planetmath.org/AnalyticSolutionOfBlackScholesPDE](https://planetmath.org/AnalyticSolutionOfBlackScholesPDE)

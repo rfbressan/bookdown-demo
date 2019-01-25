@@ -5,8 +5,8 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(ggthemes)
 library(kableExtra)
-source("./R/svi_h.R")
-source("./R/svi_funs.R")
+source("./R/svi.R")
+#source("./R/svi_funs.R")
 ```
 
 Neste post iremos mostrar as diferenças existentes entre "interpolação", "suavização" e "parametrização" de superfícies de volatilidade.
@@ -17,7 +17,7 @@ Como já apresentado em posts anteriores, existem diversas formas de interpolar,
 
 Uma forma simples de gerar um smile de volatilidade a partir de dados observados no mercado é a **interpolação** destes dados. Diversas formas de interpolação existem, sendo talvez a mais conhecida a spline cúbica. Não é a proposta deste artigo detalhar os procedimentos de interpolação, restando saber que em tal procedimento é gerada uma função contínua em partes (piecewise) que **passa** por todos os pontos observados. 
 
-Uma interpolação força a passagem da função interpolada em todos os seus pontos de referência, como se estivesse ligando os pontos em um desenho a mão livre. Portanto, nestes pontos o erro da interpolação é zero por definição, entretanto em pontos intermediários podem surgir erros, inclusive aqueles que possibilitam a existência de arbitragem entre strikes de um mesmo smile[^1].
+Uma interpolação força a passagem da função interpolada em todos os seus pontos de referência, como se estivesse ligando os pontos em um desenho a mão livre. Portanto, nestes pontos o erro da interpolação é zero por definição, entretanto em pontos intermediários podem surgir erros, inclusive aqueles que possibilitam a existência de arbitragem entre strikes de um mesmo smile[^61].
 
 Em contraposição a métodos de interpolação, podem ser derivados métodos de suavização (smoothing) ou então a parametrização do smile de volatilidade. Seja suavização, ou parametrização, estes métodos não forçam a passagem da função que representa o smile pelos pontos de mercado, mas buscam minimizar alguma função perda com relação aos desvios em relação a estes pontos ao mesmo tempo em que buscam "suavizar" o smile, para que este não apresente variações bruscas entre os strikes ou alterações de convexidade na curva de preços, que não são condizentes com a teoria de precificação de derivativos.
 
@@ -72,7 +72,7 @@ Pode-se verificar como os métodos SVI e a suavização não passam sobre todos 
 
 ## Spline cúbica
 
-Este método é possivelmente um dos mais flexíveis e conhecidos de interpolação de dados univariados existente, embora também exista sua versão bi-dimensional. Uma spline nada mais é que "uma curva definida matematicamente por dois ou mais pontos de controle"[^2]. 
+Este método é possivelmente um dos mais flexíveis e conhecidos de interpolação de dados univariados existente, embora também exista sua versão bi-dimensional. Uma spline nada mais é que "uma curva definida matematicamente por dois ou mais pontos de controle"[^62]. 
 
 No caso da spline cúbica, esta é uma função polinomial de grau 3 definida em cada subintervalo demarcados pelos pontos de controle, no caso de interpolação são todos nós. Ou seja, considere um segmento entre dois pontos consecutivos $[c, d]\in S$ a spline é uma função cúbica com seus parâmetros calculados pelo algoritmo de ajuste. Para o próximo intervalo de pontos dentro do domínio da função, um novo polinômio de grau 3 é ajustado, sendo que nos pontos de nós uma restrição de igualdade entre as derivadas nos dois segmentos é aplicada para garantir a suavidade da função interpolada como um todo.
 
@@ -120,7 +120,7 @@ E por fim as técnicas de parametrização. Nesta categoria estão diversos conh
 
 Em comum, estes modelos tentam parametrizar a superfície, e por conseguinte o smile de volatilidade, de acordo com alguma função, em geral não-linear, que possui características condizentes com a teoria de precificão de derivativos e também a observação empírica das superfícies.
 
-Por exemplo, a parametrização _raw_ da SVI possui a seguinte forma para a **variância total**[^3] :
+Por exemplo, a parametrização _raw_ da SVI possui a seguinte forma para a **variância total**[^63] :
 
 $$ w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)$$
 
@@ -172,8 +172,7 @@ Para gerar uma superfície parametrizada, primeiramente é necessário um modelo
 
 Com a superfície de volatilidade calibrada, as aplicações possíveis incluem a precificação de derivativos, gerenciamento de risco, simulações de Monte Carlo, análises de stress, entre outras.
 
-## Referências
 
-[^1]: Veja mais detalhes no artigo anterior: [Smile de volatilidade - parte 2](/2019/01/25/smile-de-volatilidade-parte-2)
-[^2]: Definição retirada de https://pt.wikipedia.org/wiki/Spline
-[^3]: A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, $w=\sigma^2_{imp}\cdot\tau$.
+[^61]: Veja mais detalhes no Capítulo [Smile de Volatilidade](#arbestatica)
+[^62]: Definição retirada de https://pt.wikipedia.org/wiki/Spline
+[^63]: A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, $w=\sigma^2_{imp}\cdot\tau$.

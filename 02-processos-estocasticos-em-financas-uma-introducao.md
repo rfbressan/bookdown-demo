@@ -2,7 +2,7 @@
 
 
 
-Neste artigo abordaremos um assunto técnico, mas muito utilizado e de fudamental importância para a precificação de instrumentos derivativos. Será apresentado o conceito de processos estocásticos - PE, e sua aplicação no mundo das finanças.
+Neste capítulo abordaremos um assunto técnico, mas muito utilizado e de fudamental importância para a precificação de instrumentos derivativos. Será apresentado o conceito de processos estocásticos - PE, e sua aplicação no mundo das finanças.
 
 Um processo estocástico é a evolução temporal de uma determinada variável de interesse que pode assumir valores aleatórios em cada ponto no tempo. Em outras palavras, o caminho que a variável segue ao longo do tempo evolui de maneira incerta. Estes processos podem se dar em tempo discreto ou em tempo contínuo. Processo em tempo discreto são aqueles onde o valor da variável pode se alterar somente em intervalos pré-definidos de tempo, por exemplo ao final do dia. Em processos em tempo contínuo, o valor de nossa variável está constantemente em mudança, de forma aleatória seguindo alguma distribuição de probabilidades.
 
@@ -59,7 +59,7 @@ ggplot(mb, aes(x = t, y = value, color = sim)) +
   theme_economist_white()
 ```
 
-![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-epub3/brownian_plot-1.png)<!-- -->
+![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-latex/brownian_plot-1.pdf)<!-- --> 
 
 
 
@@ -141,6 +141,6 @@ ggplot(mb, aes(x = t, y = value, color = sim)) +
   theme_economist_white()
 ```
 
-![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-epub3/mbg_plot-1.png)<!-- -->
+![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-latex/mbg_plot-1.pdf)<!-- --> 
 
 O Movimento Browniano Geométrico aqui demonstrado serve de base para o famoso modelo **Black \& Scholes** de precificação de opções, o qual assume que o ativo subjacente à opção (por exemplo, a ação de uma empresa) tem seu preço formado por um processo MBG.

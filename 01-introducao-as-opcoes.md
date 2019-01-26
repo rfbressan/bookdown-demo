@@ -33,69 +33,28 @@ como tendo posições _short_. Vender uma opção também é conhecido como lan�
 
 Exemplificando uma operação de compra de call, caso o preço do ativo tenha subido acima do preço de strike o comprador pode exercer sua opção de compra e ele lucrará a partir do momento em que o valor da ação for maior que o strike mais o valor pago pela opção (chamado de prêmio). Caso o preço do ativo tenha caído abaixo do strike, o comprador simplesmente não exerce sua opção, limitando sua perda nessa operação ao prêmio pago. 
 
-<table>
-<caption>(\#tab:opcao)Exemplo: Comprando call de X com o preço de exercício (strike) de 10.000</caption>
- <thead>
-  <tr>
-   <th style="text-align:right;"> Ação </th>
-   <th style="text-align:right;"> Prêmio Pago </th>
-   <th style="text-align:right;"> Opção no Exercício </th>
-   <th style="text-align:right;"> Lucro </th>
-   <th style="text-align:left;"> Moneyness </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 9000 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> -200 </td>
-   <td style="text-align:left;"> OTM </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 9500 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> -200 </td>
-   <td style="text-align:left;"> OTM </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10000 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> -200 </td>
-   <td style="text-align:left;"> ATM </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10200 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:left;"> ITM </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 10500 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 500 </td>
-   <td style="text-align:right;"> 300 </td>
-   <td style="text-align:left;"> ITM </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 11000 </td>
-   <td style="text-align:right;"> 200 </td>
-   <td style="text-align:right;"> 1000 </td>
-   <td style="text-align:right;"> 800 </td>
-   <td style="text-align:left;"> ITM </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[t]
+
+\caption{(\#tab:opcao)Exemplo: Comprando call de X com o preço de exercício (strike) de 10.000}
+\centering
+\begin{tabular}{rrrrl}
+\toprule
+Ação & Prêmio Pago & Opção no Exercício & Lucro & Moneyness\\
+\midrule
+9000 & 200 & 0 & -200 & OTM\\
+9500 & 200 & 0 & -200 & OTM\\
+10000 & 200 & 0 & -200 & ATM\\
+10200 & 200 & 200 & 0 & ITM\\
+10500 & 200 & 500 & 300 & ITM\\
+\addlinespace
+11000 & 200 & 1000 & 800 & ITM\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 Usando a tabela \@ref(tab:opcao) como exemplo é possível ver que o resultado final será maior que R\$ 0 quando o valor do ativo subjacente é maior que R\$10.200 (R\$10.000 de strike + R\$200 de prêmio), e o prejuízo final está limitado ao valor de R\$200. A figura \@ref(fig:call) abaixo mostra o perfil de lucro da operação exemplificada, típico de uma compra de call.
 
-<div class="figure">
-<img src="01-introducao-as-opcoes_files/figure-epub3/call-1.png" alt="Perfil de lucro típico de uma compra de call."  />
-<p class="caption">(\#fig:call)Perfil de lucro típico de uma compra de call.</p>
-</div>
+![(\#fig:call)Perfil de lucro típico de uma compra de call.](01-introducao-as-opcoes_files/figure-latex/call-1.pdf) 
 
 No caso de uma operação de uma compra de put, caso o preço do ativo tenha subido acima do strike, não faz sentindo o detentor da opção exercer seu direito, assim sua perda será apenas o valor pago pela opção. Caso o preço do ativo tenha descido abaixo do strike, o comprador da put pode realizar a venda e começará a lucrar a partir do momento em que o strike fique acima do valor do ativo somado ao valor do prêmio pago pela opção. Usando a tabela 1.2 como exemplo é possível ver que o resultado final será de no mínimo -R\$600 caso o valor do ativo subjacente seja igual ou maior que R\$15.000, e o resultado final aumenta conforme o ativo perde o valor, sendo positivo a partir de quando seu valor é de R\$14.400.
 

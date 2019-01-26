@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Capítulo 5 Métodos de Calibração | Introdução a Superfície de Volatilidade</title>
-  <meta name="description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG.">
+  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
   <meta property="og:title" content="Capítulo 5 Métodos de Calibração | Introdução a Superfície de Volatilidade" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  <meta property="og:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Capítulo 5 Métodos de Calibração | Introdução a Superfície de Volatilidade" />
   
-  <meta name="twitter:description" content="Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   
 
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-19">
+<meta name="date" content="2019-01-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="smile.html">
-<link rel="next" href="bibliografia.html">
+<link rel="next" href="svi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -48,6 +48,8 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -107,6 +109,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html"><i class="fa fa-check"></i>Sobre os Autores</a><ul>
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#erik-naoki-kawano"><i class="fa fa-check"></i>Erik Naoki Kawano</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#glauber-naue"><i class="fa fa-check"></i>Glauber Naue</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="opcoes.html"><a href="opcoes.html"><i class="fa fa-check"></i><b>1</b> Introdução as opções</a><ul>
 <li class="chapter" data-level="1.1" data-path="opcoes.html"><a href="opcoes.html#conceitos-in-the-money-at-the-money-e-out-the-money"><i class="fa fa-check"></i><b>1.1</b> Conceitos in the money, at the money e out the money</a></li>
@@ -159,7 +163,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
-<li class="chapter" data-level="5.6" data-path="calibracao.html"><a href="calibracao.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>6</b> Calibrando uma SVI</a><ul>
+<li class="chapter" data-level="6.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>6.1</b> Modelo SVI</a></li>
+<li class="chapter" data-level="6.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>6.2</b> Restrições de não-arbitragem</a></li>
+<li class="chapter" data-level="6.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>6.3</b> Reparametrização Quasi-explicit</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>6.3.1</b> Solução explícita do problema reduzido</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>6.4</b> Algoritmo</a></li>
+<li class="chapter" data-level="6.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>6.5</b> Resultados</a></li>
+<li class="chapter" data-level="6.6" data-path="svi.html"><a href="svi.html#conclusao-2"><i class="fa fa-check"></i><b>6.6</b> Conclusão</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -266,9 +279,6 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
 <p>Dependendo do objetivo da aplicação, superfícies de volatilidade podem ser interpoladas, suavizadas ou parametrizadas. A parametrização tem recebido especial interesse pois pode, ao mesmo tempo que garante uma superfície livre de arbitragem estática se devidamente construída, ajustar-se muito bem aos dados observados e gerar distribuições neutras ao risco implícitas factíveis.</p>
 <p>Para gerar uma superfície parametrizada, primeiramente é necessário um modelo teórico com propriedades desejáveis e que se ajuste aos dados de mercado quando calibrado. Escolhido este modelo paramétrico, passa-se a calibração do mesmo onde exsitem diversas opções de escolha entre otimizadores. Ao final do processo teremos um modelo de superfície devidamente parametrizado com valores que melhor se ajustam segundo alguma função perda escolhida.</p>
 <p>Com a superfície de volatilidade calibrada, as aplicações possíveis incluem a precificação de derivativos, gerenciamento de risco, simulações de Monte Carlo, análises de stress, entre outras.</p>
-</div>
-<div id="referencias" class="section level2">
-<h2><span class="header-section-number">5.6</span> Referências</h2>
 
 </div>
 </div>
@@ -287,7 +297,7 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
 <div class="footnotes">
 <hr />
 <ol start="7">
-<li id="fn7"><p>Veja mais detalhes no artigo anterior: <a href="/2019/01/25/smile-de-volatilidade-parte-2">Smile de volatilidade - parte 2</a><a href="calibracao.html#fnref7">↩</a></p></li>
+<li id="fn7"><p>Veja mais detalhes no Capítulo <a href="smile.html#arbestatica">Smile de Volatilidade</a><a href="calibracao.html#fnref7">↩</a></p></li>
 <li id="fn8"><p>Definição retirada de <a href="https://pt.wikipedia.org/wiki/Spline" class="uri">https://pt.wikipedia.org/wiki/Spline</a><a href="calibracao.html#fnref8">↩</a></p></li>
 <li id="fn9"><p>A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, <span class="math inline">\(w=\sigma^2_{imp}\cdot\tau\)</span>.<a href="calibracao.html#fnref9">↩</a></p></li>
 </ol>
@@ -298,7 +308,7 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
         </div>
       </div>
 <a href="smile.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="svi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -312,11 +322,11 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
+"github": true,
+"facebook": false,
+"twitter": false,
 "google": false,
-"linkedin": false,
+"linkedin": true,
 "weibo": false,
 "instapaper": false,
 "vk": false,

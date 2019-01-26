@@ -125,7 +125,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2019-01-19}
+    \date{2019-01-26}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -189,6 +189,21 @@ e desenvolveu, durante a elaboração deste livro, grande curiosidade
 sobre precificação de derivativos. Gosta de programar em
 \href{https://cran.r-project.org/}{R}, liguagem com a qual elaborou este
 próprio livro e está aprendendo \href{https://www.python.org/}{Python}.
+
+\section*{Erik Naoki Kawano}\label{erik-naoki-kawano}
+\addcontentsline{toc}{section}{Erik Naoki Kawano}
+
+Aluno de Engenharia de Produção Elétrica na UFSC. Membro do Clube de
+Finanças Esag e participante do núcleo de pesquisa em riscos e
+derivativos. Está atualmente aprendendo a programar em Python e em R.
+
+\section*{Glauber Naue}\label{glauber-naue}
+\addcontentsline{toc}{section}{Glauber Naue}
+
+Aluno de Ciências Econômicas na UDESC/Esag. Membro do Clube de Finanças
+ESAG, participa do núcleo de pesquisa em riscos e derivativos.
+Atualmente realizando um estudo sobre modelo de fatores aplicado ao
+mercado brasileiro.
 
 \chapter{Introdução as opções}\label{opcoes}
 
@@ -420,7 +435,7 @@ Black Scholes, como as opções são precificadas entre outros materiais.
 \hypertarget{processos-estocasticos}{\chapter{Processos Estocásticos em
 Finanças}\label{processos-estocasticos}}
 
-Neste artigo abordaremos um assunto técnico, mas muito utilizado e de
+Neste capítulo abordaremos um assunto técnico, mas muito utilizado e de
 fudamental importância para a precificação de instrumentos derivativos.
 Será apresentado o conceito de processos estocásticos - PE, e sua
 aplicação no mundo das finanças.
@@ -669,7 +684,7 @@ empresa) tem seu preço formado por um processo MBG.
 
 \hypertarget{bsm}{\chapter{Modelo Black-Scholes-Merton}\label{bsm}}
 
-Neste artigo desenvolveremos o modelo para precificação de opções do
+Neste capítulo desenvolveremos o modelo para precificação de opções do
 tipo europeias proposto \citet{Black1973} e posteriormente expandido por
 \citet{Merton1976}. A derivação deste modelo se baseia nos conceitos
 apresentados sobre processos estocásticos do Capítulo
@@ -696,14 +711,17 @@ de replicação \(P_t=\Delta S_t + b B_t\), no qual devemos escolher os
 valores de \(\Delta\) e \(b\) de tal forma que \(f_T = P_T\).
 
 De fato, para apenas um período a frente, podemos tomar emprestado a
-taxa de juros livre de risco\footnote{Veja mais detalhes no artigo
-  anterior: \href{/2019/01/25/smile-de-volatilidade-parte-2}{Smile de
-  volatilidade - parte 2}}, \(r\) um valor igual ao preço corrente da
-ação, \(S_0\) e comprá-la, ao mesmo tempo em que se ``trava'' (faz
-\emph{hedge}) deste portfólio vendendo a opção. O lucro desta operação
-em \(T\) deve ser zero, pois é um portfólio travado. Com estas premissas
-é possível calcular o preço do prêmio da opção a ser cobrado no período
-inicial para que o valor esperado da operação como um todo seja zero.
+taxa de juros livre de risco\footnote{Esta é uma suposição do modelo,
+  pode não ser verdade para algum investidor qualquer mas se for para
+  algum outro investidor representativo, o princípio de ausência de
+  arbitragem passa a valer, uma vez que este segundo investidor
+  explorará o mercado e levará o preço do derivativo para o resultado
+  requerido.}, \(r\) um valor igual ao preço corrente da ação, \(S_0\) e
+comprá-la, ao mesmo tempo em que se ``trava'' (faz \emph{hedge}) deste
+portfólio vendendo a opção. O lucro desta operação em \(T\) deve ser
+zero, pois é um portfólio travado. Com estas premissas é possível
+calcular o preço do prêmio da opção a ser cobrado no período inicial
+para que o valor esperado da operação como um todo seja zero.
 
 Este portfólio formado pela venda do ativo livre de risco e compra do
 ativo objeto é denominado \emph{portfólio de replicação}, pois, ele
@@ -716,11 +734,12 @@ incerteza com relação ao seu retorno esperado.
 risco}\label{precificacao-neutra-ao-risco}
 
 A metodologia de precificação de derivativos dentro do \emph{mundo
-neutro ao risco}\footnote{Definição retirada de
-  \url{https://pt.wikipedia.org/wiki/Spline}} é o carro-chefe das
-metodologias para se avaliar estes instrumentos. O princípio de
-precificação neutra ao risco afirma que um derivativo pode ser valorado
-através das seguintes suposições:
+neutro ao risco}\footnote{A precificação dentro do mundo neutro ao risco
+  mereceria um, ou mais, \emph{posts} por si só. Aqui lançaremos apenas
+  os principais resultados que nos permitem encontrar o modelo de B\&S.}
+é o carro-chefe das metodologias para se avaliar estes instrumentos. O
+princípio de precificação neutra ao risco afirma que um derivativo pode
+ser valorado através das seguintes suposições:
 
 \begin{itemize}
 \tightlist
@@ -869,13 +888,14 @@ diferencial parcial - EDP - de Black\&Scholes:
 
 \section{Solução analítica}\label{solucao-analitica}
 
-A equação possui diferentes formas de resolução\footnote{A variância
-  total é definida pelo produto entre a variância implícita e o tempo
-  para expiração, \(w=\sigma^2_{imp}\cdot\tau\).}, a precificação do
-derivativo irá depender da forma que resolvermos a equação \eqref{eq:BS}.
-O Modelo Black\&Scholes é famoso por conseguir precificar opções call e
-put europeias, onde a resolução da equação fará uso dos \emph{payoffs}.
-Para uma call:
+A equação possui diferentes formas de resolução\footnote{Uma
+  demonstração completa de como encontrar a solução para a EDP de
+  Black\&Schole pode ser encontrada em
+  \url{https://planetmath.org/AnalyticSolutionOfBlackScholesPDE}}, a
+precificação do derivativo irá depender da forma que resolvermos a
+equação \eqref{eq:BS}. O Modelo Black\&Scholes é famoso por conseguir
+precificar opções call e put europeias, onde a resolução da equação fará
+uso dos \emph{payoffs}. Para uma call:
 
 \begin{equation}
 \displaystyle f(S,T)=\max(S-K,0)
@@ -1077,7 +1097,7 @@ aumentará 0,7\%. Essa taxa influi principalmente no preço de opções com
 uma data de vencimento extremamente distante, não afetando muito o preço
 de opções cuja data de vencimento é próxima.
 
-\chapter{Smile de Volatilidade}\label{smile}
+\hypertarget{smile}{\chapter{Smile de Volatilidade}\label{smile}}
 
 A volatilidade instantânea, \(\sigma\), do ativo subjacente é a única
 variável no modelo B\&S que não pode ser diretamente observada. De fato,
@@ -1348,7 +1368,8 @@ implícita do \texttt{SPX} em 15/09/2005, conforme apresentado em
 \caption{\label{fig:superficie}Superfície de volatilidade implícita.}
 \end{figure}
 
-\section{Arbitragem estática}\label{arbestatica}
+\hypertarget{arbestatica}{\section{Arbitragem
+estática}\label{arbestatica}}
 
 Antes de definir o que é arbitragem estática que pode estar presente em
 uma superfície de volatilidade (ou na superfície de preço de opções),
@@ -1606,7 +1627,8 @@ Por fim, foi demonstrado como a convexidade do smile de preços fornece a
 distribuição implícita para os preços do ativo subjacente para a data de
 expiração das opções.
 
-\chapter{Métodos de Calibração}\label{calibracao}
+\hypertarget{calibracao}{\chapter{Métodos de
+Calibração}\label{calibracao}}
 
 Neste post iremos mostrar as diferenças existentes entre
 ``interpolação'', ``suavização'' e ``parametrização'' de superfícies de
@@ -1632,9 +1654,8 @@ pontos de referência, como se estivesse ligando os pontos em um desenho
 a mão livre. Portanto, nestes pontos o erro da interpolação é zero por
 definição, entretanto em pontos intermediários podem surgir erros,
 inclusive aqueles que possibilitam a existência de arbitragem entre
-strikes de um mesmo smile\footnote{Veja mais detalhes no artigo
-  anterior: \href{/2019/01/25/smile-de-volatilidade-parte-2}{Smile de
-  volatilidade - parte 2}}.
+strikes de um mesmo smile\footnote{Veja mais detalhes no Capítulo
+  \protect\hyperlink{arbestatica}{Smile de Volatilidade}}.
 
 Em contraposição a métodos de interpolação, podem ser derivados métodos
 de suavização (smoothing) ou então a parametrização do smile de
@@ -1908,7 +1929,641 @@ Com a superfície de volatilidade calibrada, as aplicações possíveis
 incluem a precificação de derivativos, gerenciamento de risco,
 simulações de Monte Carlo, análises de stress, entre outras.
 
-\section{Referências}\label{referencias}
+\chapter{Calibrando uma SVI}\label{svi}
+
+Neste capítulo iremos mostrar como fazer uma calibração de um smile SVI
+baseado nos trabalhos de \citep{Gatheral2004} e \citep{DeMarco2009}.
+Escolheremos apenas uma fatia da superfície de volatilidade, fixando o
+tempo para expiração (maturidade) e coletando as volatilidades
+implícitas para diversos strikes.
+
+Como já apresentado em posts anteriores, existem diversas formas de
+interpolar, extrapolar, parametrizar e calibrar smiles de volatilidade.
+Exsitem vantagens e desvantagens para cada método. Neste post iremos
+fixar nossa atenção no modelo paramétrico de smile chamado SVI -
+Stochastic Volatility Inspired - uma forma que une a ``simplicidade'' de
+um modelo paramétrico com o poder de adesão aos dados de mercado dos
+modelos de volatilidade estocástica (i.e.~Heston, SABR e afins).
+
+Chamar o modelo SVI de simples é puro eufemismo, ele é um modelo
+poderoso, com fundamento teórico avançado e diversos detalhes para sua
+calibração.
+
+\section{Modelo SVI}\label{modelo-svi}
+
+Este modelo foi apresentado por
+\href{https://mfe.baruch.cuny.edu/jgatheral/}{Jim Gatheral} na
+conferência \emph{Global Derivatives \& Risk Management 2004} e foi bem
+recebido pelos profissionais de mercado interessados em superfícies de
+volatilidade para \emph{equities}, principalmente.
+
+O modelo possui duas propriedades que são as razões para sua
+popularidade. Ele satisfaz a fórmula do momento de \citet{Lee2004}, que
+é um resultado independente de modelo que especifica os limites
+assintóticos para um \emph{smile} de volatilidade implícita. Portanto, o
+modelo SVI é válido para extrapolação além da região central dos dados
+disponíveis. Além disso, afirma-se que o modelo SVI é relativamente
+fácil de calibrar para dados de mercado, de modo que a superfície de
+volatilidade implícita correspondente é livre de arbitragem de
+calendário. As condições que garantem a ausência de arbitragem de
+borboleta forma resolvidas em um segundo artigo por
+\citet{Gatheral2014}.
+
+No SVI é possível se estabelecer condições explícitas em seus
+parâmetros, de modo que o modelo não gere preços onde oportunidades de
+\protect\hyperlink{arbestatica}{arbitragem estáticas} possam ocorrer. A
+calibração para dados reais de mercado requer algoritmos de otimização
+não-linear e pode ser bastante demorada. Mais recentemente, um método
+para calibração que usa a estrutura inerente do modelo para reduzir as
+dimensões do problema de otimização foi desenvolvido em
+\citet{DeMarco2009}.
+
+A parametrização conhecida como \emph{RAW} do SVI é apresentada na
+equação \eqref{eq:rawsvi}, seguindo a notação já introduzida
+\protect\hyperlink{smile}{anteriormente}, portanto, estamos modelando a
+\textbf{variância total} implícita para um determinado prazo. Para
+diferentes maturidades, teremos diferentes conjuntos de parâmetros.
+
+\begin{equation}
+w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)
+\label{eq:rawsvi}
+\end{equation}
+
+onde: \(a \in \mathbb R\), \(b \geq 0\), \(|\rho| < 1\),
+\(m \in \mathbb R\), \(\sigma > 0\), e
+\(a+b \sigma\sqrt{1 − \rho^2} \geq 0\) para garantir que
+\(\min w(k)>0, \, \forall k \in \mathbb R\).
+
+\section{Restrições de
+não-arbitragem}\label{restricoes-de-nao-arbitragem}
+
+Antes de demonstrar a restrição imposta aos parâmetros \(b\) e \(\rho\)
+em função dos limites de inclinação das asas do \emph{smile}, vamos
+derivar as expressões para \(w\prime(k)\) e \(w\prime\prime(k)\) que nos
+serão úteis na demonstração.
+
+A expressão para \(w\prime(k)\) é bastante simples:
+
+\begin{equation}
+w\prime(k) = b \left[\rho + \frac{(k-m)}{\sqrt{(k-m)^2+\sigma^2}}\right]
+\label{eq:wk}
+\end{equation}
+
+Derivando novamente a equação \eqref{eq:wk} em relação a \(k\) teremos uma
+expressão ainda mais simples, mesmo que após alguma manipulação
+algébrica um tanto tediosa\footnote{A resolução desta derivada é uma
+  simples regra da divisão, entretanto a simplificação do resultado pede
+  alguma manipulação algébrica. É possível utilizar sistemas de
+  computação simbólica, o qual recomendamos o
+  \href{https://live.sympy.org/}{SymPy}}, e resulta em:
+
+\begin{equation}
+w\prime\prime(k)=\frac{b\sigma^2}{[(k-m)^2+\sigma^2]^{3/2}}
+\label{eq:wkk}
+\end{equation}
+
+onde, se considerarmos \(b>0\) temos que
+\(w\prime\prime(k)>0, \,\forall k\in \mathbb R\), ou seja, o
+\emph{smile} de volatilidade definido pela equação \eqref{eq:rawsvi} é
+\textbf{estritamente} convexo.
+
+\citet{Rogers2010} definiram os limites possíveis para a inclinação das
+asas em função do tempo para expiração, provando que o \emph{smile}
+tende a ficar mais horizontal a medida que o prazo aumenta. Este limite
+pode ser escrito da seguinte forma e é uma \textbf{condição necessária}
+para a ausência de arbitragem:
+
+\begin{equation}
+|w\prime(k)|\leq \frac{4}{\tau} \qquad \forall k \in \mathbb R, \quad \forall \tau \in (0, \infty)
+\label{eq:rogers}
+\end{equation}
+
+Sendo o \emph{smile} convexo, suas máximas inclinações ocorrem quando
+\(k\rightarrow \pm \infty\). Portanto, deve-se avaliar a restrição dada
+pela equação \eqref{eq:rogers} nestes limites da seguinte maneira:
+
+\begin{align}
+\lim\limits_{k\rightarrow\infty}w\prime(k)&=b(1+\rho)\geq 0\\
+\lim\limits_{k\rightarrow-\infty}w\prime(k)&=-b(1-\rho)\leq 0
+\end{align}
+
+que satisfazendo estas duas relações ao mesmo tempo em que se restringe
+os parâmetros \(b\) e \(\rho\) através da inequalidade de Rogers e
+Tehranchi nos garante o seguinte resultado para um SVI \textbf{livre de
+arbitragem de travas}.
+
+\begin{equation}
+b(1+|\rho|)\leq\frac{4}{\tau}
+\label{eq:trava}
+\end{equation}
+
+Para garantir que a superfície gerada está livre de arbitragem do tipo
+borboleta deve-se primeiramente definir uma função\footnote{Condições
+  para ausência de arbitragem do tipo borboleta em um SVI estão
+  detalhadas na seção 2.2 do artigo de \citet{Gatheral2014}.}
+\(g: \mathbb R\rightarrow \mathbb R\), tal que:
+
+\begin{equation}
+g(k)=\left(1-\frac{kw\prime(k)}{2w(k)}\right)^2-\frac{w\prime(k)^2}{4}\left(\frac{1}{w(k)}+\frac{1}{4}\right)+\frac{w\prime\prime(k)}{2}
+\label{eq:g}
+\end{equation}
+
+e seguir o lema :
+
+\textbf{Lema 1} Uma fatia da superfície de volatilidade está livre de
+arbitragem do tipo borboleta se, e somente se, \(g(k) \geq 0\) para todo
+\(k \in \mathbb R\) e
+\(\lim\limits_{k\rightarrow+\infty}d_1(k)=-\infty\).
+
+Infelizmente, a natureza altamente não-linear da função \(g(k)\)
+impossibilita a derivação de restrições gerais aos parâmetros do SVI. A
+forma mais simples de eliminar arbitragem do tipo borbobleta é incluir a
+restrição \(g(k) \geq 0\) na função perda e proceder com a calibração
+dos parâmetros.
+
+\section{Reparametrização
+Quasi-explicit}\label{reparametrizacao-quasi-explicit}
+
+Um dos problemas mais marcantes com a calibração do SVI dado pela
+equação \eqref{eq:rawsvi} é sua natureza altamente não-linear que gera
+inúmeros pontos de mínimo locais. Mesmo em um ambiente simulado, um
+típico otimizador de \protect\hyperlink{calibracao}{mínimos quadrados}
+como Levenberg-Marquardt não consegue chegar ao mínimo global, onde a
+função perda é igual a zero. A solução encontrada é dependente dos
+valores iniciais inputados ao otimizador e a robustez do conjunto de
+parâmetros encontrados não é garantida.
+
+Uma forma de contornar este problema pode ser a utilização de
+otimizadores globais, como algortimos genéticos, em um primeiro estágio
+e então o refinamento desta solução através de um otimizador local (LM,
+por exemplo).
+
+Outra forma, adotada em \citet{DeMarco2009} é a reparametrização da
+equação \eqref{eq:rawsvi} de forma que esta possa ser tratada como um
+prolema linear. Para tanto, considere a seguinte troca de variáveis:
+
+\begin{equation}
+y = \frac{k-m}{\sigma}
+\end{equation}
+
+então a parametrização \emph{RAW} do SVI se torna.
+
+\begin{equation}
+w(y) = a + b\sigma\left(\rho y + \sqrt{y^2 + 1}\right)
+\end{equation}
+
+Definindo agora as seguintes variáveis reparametrizadas é possível
+reduzir a dimensão de parâmetros de um SVI de 5 para apenas 3:
+
+\begin{align}
+c = &b\sigma\\
+d = &\rho b \sigma
+\end{align}
+
+\begin{equation}
+w(y)=a+dy+c\sqrt{y^2+1}
+\label{eq:quasiexplicit}
+\end{equation}
+
+Portanto, para um par fixo de \((m, \sigma)\) nosso problema reduzido é:
+
+\begin{equation}
+P_{m, \sigma}:=\min\limits_{a, c, d \in D}f_y(a, c, d)
+\label{eq:reduzido}
+\end{equation}
+
+onde \(f_y(\cdot)\) é a função objetivo da reparametrização, e é dada
+pela seguinte equação:
+
+\begin{equation}
+f_y(a, c, d)=\sum_{i=1}^{n}\left[w(y_i)-\tilde w_i\right]^2
+\label{eq:fy}
+\end{equation}
+
+onde \(\tilde w_i\) é a variância total observada correspondente ao
+\emph{moneyness} \(k_i\).
+
+O domínio \(D\) dos parâmetros \(\{a, c, d\}\) é encontrado a partir do
+limite imposto por \eqref{eq:trava}.
+
+\begin{equation}
+    D =  
+    \begin{cases}
+    0 \leq c \leq 4\sigma\\
+    |d| \leq c \quad \text{e}\quad |d| \leq 4\sigma - c\\
+    0 \leq a \leq \max\{\tilde w_i\}\\
+    \end{cases}
+    \label{eq:D}
+\end{equation}
+
+O problema reduzido dado pela equação \eqref{eq:reduzido}, é um típico
+problema de \textbf{mínimos quadrados} com restrições lineares. Este
+problema, por ser convexo, admite uma única solução interior (se
+existente) que será o mínimo global para este problema e é encontrada
+através do gradiente da função objetivo igualando-o a zero,
+\(\nabla f_y = 0\). Esta equação gera um sistema linear nos parâmetros
+\(a, c, d\) que pode ser explicitamente resolvido. Caso a solução
+encontrada para este problema esteja contida no domínio \(D\), esta
+solução é interior e é o mínimo desejado, caso contrário, deve-se
+percorrer o perímetro do domínio e encontrar o menor valor da função
+objetivo que será uma solução de canto.
+
+Seja \((a^*, c^*, d^*)\) a solução de \eqref{eq:reduzido} e
+\((a^*, b^*, \rho^*)\) os correspondentes parâmetros originais
+recuperados, então o problema completo de calibração é:
+
+\begin{equation}
+P:=\min\limits_{m, \sigma}\sum_{i=1}^n (w_*(k_i)-\tilde w_i)^2
+\label{eq:completo}
+\end{equation}
+
+onde
+\(w_*(k)=a^*+b^*\left(\rho^*(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)\).
+
+O problema completo, \eqref{eq:completo} é um problema em apenas duas
+dimensões, \((m, \sigma)\) e não-linear, que deve ser abordado através
+de algum tipo de otimizador global.
+
+\subsection{Solução explícita do problema reduzido}\label{pq}
+
+Nesta seção apresentaremos a solução, sem considerar as restrições
+impostas em \eqref{eq:D} para o problema reduzido em \eqref{eq:reduzido},
+algo omitido em \citet{DeMarco2009}. Esta seção é opcional para o leitor
+atento que já percebeu a semelhança entre o problema reduzido e um
+típico problema de regressão linear múltipla.
+
+Para encontrar o conjunto de parâmetros \((a^*, c^*, d^*)\) que
+representam os valores ótimos na equação \eqref{eq:reduzido}, devemos
+resolver o seguinte sistema de equações:
+
+\begin{equation}
+\nabla f_y = \left[
+    \begin{array}{c}
+        \partial f_y / \partial a\\ 
+        \partial f_y / \partial d\\
+        \partial f_y / \partial c
+    \end{array} 
+\right] = \boldsymbol{0}
+\label{eq:gradiente}
+\end{equation}
+
+Cada uma das derivadas parciais da equação acima quando igualadas a zero
+dão origem ao sistema linear apresentado abaixo:
+
+\begin{equation}
+\scriptsize
+\begin{bmatrix}
+&n &\sum y_i &\sum\sqrt{y_i^2+1}\\
+&\sum y_i &\sum y_i^2 &\sum(y_i\sqrt{y_i^2+1})\\
+&\sum\sqrt{y_i^2+1} &\sum(y_i\sqrt{y_i^2+1}) &\sum(y_i^2+1)\\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+a \\
+d \\
+c
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum\tilde w_i \\
+\sum \tilde w_i y_i \\
+\sum(\tilde w_i\sqrt{y_i^2+1})
+\end{bmatrix}
+\label{eq:linear}
+\end{equation}
+
+Portanto, o problema reduzido pode ser resolvido através de um sistema
+linear de ordem 3 sob restrições também lineares.
+
+\section{Algoritmo}\label{algoritmo}
+
+A otimização para encontrar os parâmetros ótimos de um SVI dadas
+observações de mercado e a técnica de calibração \textbf{Quasi-explicit}
+de \citet{DeMarco2009} pode ser resumida nos seguintes passos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Definir valores iniciais para os parâmetros \((m, \sigma)\),
+\item
+  Iniciar algum otimizador global com estes parâmetros e resolver o
+  problema completo \eqref{eq:completo}
+
+  2.1 Dentro da otimização global, resolver o problema reduzido
+  \eqref{eq:reduzido} para os parâmetros \((m, \sigma)\) dados,
+\item
+  Na convergência do problema completo do passo 2, otimizar uma última
+  vez o problema reduzido,
+\item
+  Recuperar os parâmetros \((a, b, \rho, m, \sigma)\)
+\end{enumerate}
+
+A escolha dos otimizadores fica a cargo pessoal, sendo sugerido testar
+vários para o mesmo problema. Eventualmente, para um determinado
+\emph{smile} um otimizador pode se mostrar melhor que outro que vinha
+sendo utilizado em outras ocasiões.
+
+Nos testes realizados pelo \href{http://clubedefinancas.com.br}{Clube de
+Finanças}, entre os otimizadores globais para o problema completo
+utilizamos
+\href{https://cran.r-project.org/package=GA}{\textbf{Algoritmos
+Genéticos}},
+\href{https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/constrOptim}{\textbf{Nelder-Mead
+restrito}} e um
+\href{https://cran.r-project.org/package=Rsolnp}{\textbf{Método
+não-linear generalizado}}. Para o problema reduzido, apesar de ser
+linear, o método de Nelder-Mead restrito se mostrou tão eficiente quanto
+e de mais fácil implementação. Se o objetivo for fazer uma calibração
+direta, dos cinco parâmetros ao mesmo tempo, uma combinação de
+otimizador global em primeiro estágio e o método de Levenberg-Marquardt
+restrito para refinamento da solução é o ideal.
+
+\section{Resultados}\label{resultados}
+
+A seguir apresentamos um \emph{smile} de referência para a calibração,
+obtido de
+\href{http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv}{ivolatility.com}
+e então partimos para diferentes técnicas de calibração de um SVI. Os
+códigos em \href{https://cran.r-project.org/}{R} também estão
+apresentados ao longo do texto para melhor compreensão e estudo do
+leitor.
+
+Os dados utilizados neste exemplo estão apresentados na tabela
+\ref{tab:dados} abaixo. Esta é uma típica apresentação de um
+\emph{slice} de superfície, ou seja, dados para um \emph{smile} apenas.
+As principais variáveis são: a data em que os dados foram coletados
+(date), o preço de fechamento do ativo (stock\_price), o prazo para
+expiração em dias (period), e medidas de moneyness como delta,
+\emph{strike} e o próprio \emph{moneyness}, além é claro da volatilidade
+implícita (iv) retirada do mercado.
+
+\begin{table}[t]
+
+\caption{\label{tab:dados}Dados reais para exemplo de calibração de uma SVI.}
+\centering
+\fontsize{14}{16}\selectfont
+\begin{tabular}{lllrrrrrr}
+\toprule
+date & symbol & exchange & stock\_price\_for\_iv & period & delta & moneyness & strike & iv\\
+\midrule
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 10 & 0.03 & 148.41 & 0.09\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 15 & 0.03 & 147.49 & 0.09\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 20 & 0.02 & 146.80 & 0.09\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 25 & 0.02 & 146.21 & 0.09\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 30 & 0.01 & 145.69 & 0.09\\
+\addlinespace
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 35 & 0.01 & 145.19 & 0.10\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 40 & 0.01 & 144.69 & 0.10\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 45 & 0.00 & 144.18 & 0.10\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 50 & 0.00 & 143.66 & 0.10\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 55 & 0.00 & 143.12 & 0.11\\
+\addlinespace
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 60 & -0.01 & 142.53 & 0.11\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 65 & -0.01 & 141.88 & 0.11\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 70 & -0.02 & 141.13 & 0.12\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 75 & -0.02 & 140.26 & 0.13\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 80 & -0.03 & 139.16 & 0.13\\
+\addlinespace
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 85 & -0.04 & 137.66 & 0.14\\
+2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 90 & -0.06 & 135.32 & 0.16\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Esta tabela poderia conter (de fato contém no arquivo original) outros
+períodos de expiração, e neste caso uma das colunas de \emph{moneyness}
+começa a se repetir, no caso seria o delta pois baixamos uma tabela de
+volatilidades implícitas por delta. Assim, em uma tabela simples em
+formato
+\href{http://vita.had.co.nz/papers/tidy-data.html}{\texttt{tidy}} é
+possível armazenar informações de uma superfície inteira, a qual de
+outra forma necessitaria de um arranjo em 3 dimensões.
+
+Ressaltamos aqui que a unidade de volatilidade implícita está em
+percentuais \textbf{ao ano}, equanto que nosso período é de dias
+corridos. É necessário harmonizar estas medidas de forma que, para
+volatiliades dadas em percentual ao ano, o período também seja dado em
+\textbf{anos}. Logo nosso \(\tau = 30/365\), ou seja, 0.08219.
+
+Demonstraremos aqui os resultados para a calibração de uma \emph{RAW
+SVI} pelos métodos ``Direto'', ``GA'', ``Quasi-NM'' e ``Quasi-PQ'',
+abaixo explicados.
+
+O método ``Direto'' é uma calibração direta através de um algoritmo de
+\textbf{Levenberg-Marquardt} da equação \eqref{eq:rawsvi}, ou seja, não
+existe reparametrização \emph{Quasi-explicit} e o problema resolvido é
+não-linear em 5 dimensões. São realizadas 10 calibrações com estimativas
+iniciais dos parâmetros aleatórias, mas dentro de seus respectivos
+domínios. A melhor solução, aquela com o menor valor para a função
+objetivo, é selecionada. Todos os outros métodos utilizam a
+reparametrização, ocorrendo variações apenas nos algoritmos de
+otimização utilizados nos problemas reduzido e completo.
+
+A calibração ``GA'' faz uso do otimizador global de \textbf{algoritmos
+genéticos} para o problema completo, ou seja, para estimar o par
+\((m, \sigma)\) que corresponde ao mínimo global. Após, o problema
+reduzido é resolvido através do algoritmo de \textbf{Nelder-Mead}. Este
+método é robusto, pois o algoritmo genético tem grande probabilidade de
+encontrar a região onde se encontra o mínimo global e não ficar preso
+localmente. Entretanto a robustez ocorre as expensas do tempo de
+computação.
+
+Os métodos ditos ``Quasi'' diferem entre si na resolução do problema
+reduzido. Enquanto ``PQ'' remete a \textbf{programação quadrática} e faz
+uso da resolução do sistema linear apresentado na equação
+\eqref{eq:linear} com as restrições impostas por \eqref{eq:D}, o método
+``Quasi-NM'' utiliza o método de \textbf{Nelder-Mead} com restrições
+para a resolução deste mesmo problema reduzido. Em ambos os métodos, o
+problema completo é resolvido com um algoritmo de Nelder-Mead com 50
+reinicializações das estimativas iniciais dos parâmetros
+\((m, \sigma)\), o que causa algum impacto no tempo de computação destes
+métodos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smile <-}\StringTok{ }\NormalTok{dados }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tau =}\NormalTok{ period }\OperatorTok{/}\StringTok{ }\DecValTok{365}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(moneyness, iv, tau)}
+
+\NormalTok{par_names <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{rho$"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{sigma$"}\NormalTok{),}
+                    \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{rho$"}\NormalTok{, }\StringTok{"m"}\NormalTok{, }\StringTok{"$}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{sigma$"}\NormalTok{))}
+\NormalTok{k <-}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{moneyness}
+\NormalTok{w <-}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{iv}\OperatorTok{^}\DecValTok{2} \OperatorTok{*}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{tau}
+
+\NormalTok{init_direct <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{par_direct <-}\StringTok{ }\KeywordTok{svi_fit_direct}\NormalTok{(k, w)}
+\NormalTok{end_direct <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{time_direct <-}\StringTok{ }\NormalTok{end_direct }\OperatorTok{-}\StringTok{ }\NormalTok{init_direct }
+
+\NormalTok{init_ga <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{par_ga <-}\StringTok{ }\KeywordTok{svi_fit_ga}\NormalTok{(k, w)}
+\NormalTok{end_ga <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{time_ga <-}\StringTok{ }\NormalTok{end_ga }\OperatorTok{-}\StringTok{ }\NormalTok{init_ga }
+
+\NormalTok{init_quasipq <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{par_quasipq <-}\StringTok{ }\KeywordTok{svi_fit_quasi}\NormalTok{(k, w, }\DataTypeTok{inner =} \StringTok{"quadprog"}\NormalTok{)}
+\NormalTok{end_quasipq <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{time_quasipq <-}\StringTok{ }\NormalTok{end_quasipq }\OperatorTok{-}\StringTok{ }\NormalTok{init_quasipq }
+
+\NormalTok{init_quasinm <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{par_quasinm <-}\StringTok{ }\KeywordTok{svi_fit_quasi}\NormalTok{(k, w)}
+\NormalTok{end_quasinm <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
+\NormalTok{time_quasinm <-}\StringTok{ }\NormalTok{end_quasinm }\OperatorTok{-}\StringTok{ }\NormalTok{init_quasinm }
+
+\NormalTok{iv_direct <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{svi_fun}\NormalTok{(par_direct}\OperatorTok{$}\NormalTok{par[[}\DecValTok{1}\NormalTok{]], k) }\OperatorTok{/}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{tau)}
+\NormalTok{iv_ga <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{svi_fun}\NormalTok{(par_ga}\OperatorTok{$}\NormalTok{par[[}\DecValTok{1}\NormalTok{]], k) }\OperatorTok{/}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{tau)}
+\NormalTok{iv_quasipq <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{svi_fun}\NormalTok{(par_quasipq}\OperatorTok{$}\NormalTok{par[[}\DecValTok{1}\NormalTok{]], k) }\OperatorTok{/}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{tau)}
+\NormalTok{iv_quasinm <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{svi_fun}\NormalTok{(par_quasinm}\OperatorTok{$}\NormalTok{par[[}\DecValTok{1}\NormalTok{]], k) }\OperatorTok{/}\StringTok{ }\NormalTok{smile}\OperatorTok{$}\NormalTok{tau)}
+
+\NormalTok{plot_tbl <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{k =}\NormalTok{ k,}
+              \DataTypeTok{Direct =}\NormalTok{ iv_direct,}
+              \DataTypeTok{GA =}\NormalTok{ iv_ga,}
+              \DataTypeTok{QuasiPQ =}\NormalTok{ iv_quasipq,}
+              \DataTypeTok{QuasiNM =}\NormalTok{ iv_quasinm,}
+              \DataTypeTok{observed =}\NormalTok{ smile}\OperatorTok{$}\NormalTok{iv) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ method, }\DataTypeTok{value =}\NormalTok{ iv, }\OperatorTok{-}\KeywordTok{c}\NormalTok{(k, observed))}
+
+\NormalTok{par_tbl <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(par_direct, par_ga, par_quasipq, par_quasinm) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(method, par) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unnest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{names =} \KeywordTok{rep}\NormalTok{(par_names, }\DecValTok{4}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{spread}\NormalTok{(method, par) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(names, Direct, GA, QuasiPQ, QuasiNM) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{names =} \KeywordTok{as.character}\NormalTok{(names)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(Direct}\OperatorTok{:}\NormalTok{QuasiNM), arred)}
+
+\NormalTok{rmse_tbl <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(par_direct, par_ga, par_quasipq, par_quasinm) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(method, par) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{unnest}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(method) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{RMSE =} \KeywordTok{rmse}\NormalTok{(par, k, w)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{spread}\NormalTok{(method, RMSE) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{names =} \StringTok{"RMSE"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(names, Direct, GA, QuasiPQ, QuasiNM) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(Direct}\OperatorTok{:}\NormalTok{QuasiNM), format, }\DataTypeTok{digits =} \DecValTok{3}\NormalTok{, }\DataTypeTok{scientific =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{time_tbl <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{method =} \KeywordTok{c}\NormalTok{(}\StringTok{"Direct"}\NormalTok{, }\StringTok{"GA"}\NormalTok{, }\StringTok{"QuasiPQ"}\NormalTok{, }\StringTok{"QuasiNM"}\NormalTok{),}
+                   \DataTypeTok{time =} \KeywordTok{rbind}\NormalTok{(time_direct, time_ga, }
+\NormalTok{                                time_quasipq, time_quasinm)[, }\DecValTok{3}\NormalTok{]) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{spread}\NormalTok{(method, time) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{names =} \StringTok{"Tempo"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(names, Direct, GA, QuasiPQ, QuasiNM) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate_at}\NormalTok{(}\KeywordTok{vars}\NormalTok{(Direct}\OperatorTok{:}\NormalTok{QuasiNM), arred)}
+
+\NormalTok{frame_tbl <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(par_tbl, rmse_tbl, time_tbl)}
+\end{Highlighting}
+\end{Shaded}
+
+Abaixo é apresetanda uma tabela com os valores estimados para os
+parâmetros da SVI, o RMSE (root mean square error) e o tempo total em
+segundos para a calibração. Aqui o RMSE é definido como
+\(\sqrt{1/n\sum(w(k_i)-\tilde w_i)^2}\) e nos fornece um valor típico de
+erro \textbf{na variância}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kable}\NormalTok{(frame_tbl,}
+      \DataTypeTok{col.names =} \KeywordTok{c}\NormalTok{(}\StringTok{"Estimativa"}\NormalTok{, }\StringTok{"Direto"}\NormalTok{, }\StringTok{"GA"}\NormalTok{, }
+                    \StringTok{"QuasiPQ"}\NormalTok{, }\StringTok{"QuasiNM"}\NormalTok{),}
+      \DataTypeTok{caption =} \StringTok{"Parâmetros estimados da calibração, RMSE e tempo de computação em segundos."}\NormalTok{,}
+      \DataTypeTok{booktabs =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{kable_styling}\NormalTok{(}\DataTypeTok{bootstrap_options =} \StringTok{"striped"}\NormalTok{,}
+                \DataTypeTok{font_size =} \DecValTok{18}\NormalTok{,}
+                \DataTypeTok{full_width =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[t]
+
+\caption{\label{tab:tabela}Parâmetros estimados da calibração, RMSE e tempo de computação em segundos.}
+\centering
+\fontsize{18}{20}\selectfont
+\begin{tabular}{lllll}
+\toprule
+Estimativa & Direto & GA & QuasiPQ & QuasiNM\\
+\midrule
+a & 0.00000 & 0.00001 & 0.00000 & 0.00000\\
+b & 0.01950 & 0.01954 & 0.01749 & 0.08475\\
+\$\textbackslash{}rho\$ & -0.79529 & -0.80676 & -1.00000 & -0.99999\\
+m & -0.00725 & -0.00807 & -0.01420 & -0.07875\\
+\$\textbackslash{}sigma\$ & 0.05026 & 0.05048 & 0.06985 & 0.04228\\
+\addlinespace
+RMSE & 8.67e-06 & 8.7e-06 & 9.66e-05 & 5.01e-05\\
+Tempo & 0.17200 & 29.88700 & 0.14800 & 5.19600\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+O método Direto, com algoritmo de Levenberg-Marquardt se mostrou muito
+mais rápido que os demais, principalmente com relação ao algoritmo
+genético, e com um bom ajuste dado o baixo valor de RMSE. O algoritmo
+genético é consideravelmente mais lento, entretanto durante as várias
+calibrações realizadas em testes (e que não estão apresentadas na tabela
+\ref{tab:tabela}), este algoritmo sempre se mostrou robusto, com baixo
+RMSE, diferentemente dos outros métodos que por vezes, denpendendo das
+estimativas iniciais, podem convergir para um mínimo local.
+
+O gráfico com os ajustes realizados pode ser observado abaixo.
+
+
+
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(plot_tbl, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ k)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ observed)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ iv, }\DataTypeTok{color =}\NormalTok{ method)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color =} \KeywordTok{guide_legend}\NormalTok{(}\DataTypeTok{title =} \StringTok{""}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{""}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"Forward log-moneyness"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Volatility"}\NormalTok{,}
+       \DataTypeTok{caption =} \StringTok{""}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{labels =}\NormalTok{ scales}\OperatorTok{::}\NormalTok{percent) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_economist_white}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{07-calibrando-uma-svi_files/figure-latex/plot-1.pdf}
+\caption{\label{fig:plot}Comparação entre diferentes métodos de calibração de uma
+SVI.}
+\end{figure}
+
+De fato o método direto e o método \emph{Quasi-explicit} com otimizador
+global do tipo algoritmo genético se mostram mais adequados para a
+calibração de um SVI. Enquanto o método direto é muito mais eficiente em
+termos computacionais, o método \emph{Quasi-explicit} com GA é mais
+robusto. Desta forma, deve-se salientar que é necessário que o usuário,
+ao fazer uma calibração de \emph{smile} de volatilidade, deve dispor de
+diferentes métodos de fazê-lo, e a inspeção visual do resultado é
+\textbf{obrigatória} para determinar qual método foi mais eficiente em
+ajustar a curva aos dados.
+
+\section{Conclusão}\label{conclusao-2}
+
+Apesar de neste exemplo ter se mostrado um método efetivo, com bom
+ajuste e baixo tempo de calibração, o método direto é altamente
+dependente dos valores iniciais dos parâmetros. Para tornar este método
+mais robusto, um número maior de reinicializações deve ser feita o que
+penaliza o tempo de calibração. O método \emph{Quasi-explicit} com
+algoritmo genético para encontrar a região de \((m, \sigma)\) onde se
+encontra o mínimo global se mostrou bastante robusta, entretanto, de
+convergência lenta. Para ajustar apenas um \emph{smile} alguns segundos
+a mais não representam problema. Porém, se imaginarmos que em uma grande
+instituição financeira são necessárias calibrações de, talvez, milhares
+de \emph{smiles} representando inúmeras superfícies de diversos
+instrumentos, este método pode se mostrar computacionalmente caro.
+
+Já os métodos \emph{Quasi-explicit} que utilizam um algoritmo de
+Nelder-Mead para a resolução do problema completo se mostraram muito
+sensíveis às estimativas iniciais dos parâmetros. Mesmo utilizando 50
+reinicialzações do método, diversas vezes o ajuste realizado foi
+insatisfatório. A resolução através de programação quadrática é rápida,
+se comparada com NM, entretanto, quando as restrições impostas pela
+equação \eqref{eq:D} se tornam ativas, este método parece sofrer com algum
+viés em sua solução.
 
 \bibliography{library.bib}
 

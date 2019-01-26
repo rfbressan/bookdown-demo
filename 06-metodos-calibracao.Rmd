@@ -42,7 +42,7 @@ eval_cs <- cs(k)
 scs <- smooth.spline(slice_data$moneyness, slice_data$iv, spar = 0.6)
 eval_scs <- predict(scs, k)$y
 # SVI raw parameterization
-svi_param <- fit_svih(slice_data$moneyness, slice_data$iv, slice_data$tau)
+svi_param <- svi_fit_ga(slice_data$moneyness, slice_data$iv^2 * slice_data$tau)
 eval_svi <- sqrt(svi_fun(svi_param$par[[1]], k)) / sqrt(slice_data$tau[1])
 
 # Put everything together in a data frame

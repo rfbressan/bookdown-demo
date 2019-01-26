@@ -9,7 +9,7 @@ bibliography: [library.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: rfbressan/vol_surface_gitbook
-description: "Projeto de pequeno gitbook sobre superfície de volatilidade para o Clube de Finanças ESAG."
+description: "Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG."
 ---
 
 # Prefácio {-}

@@ -8,6 +8,11 @@ bookdown::gitbook:
         <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
     edit: https://github.com/rfbressan/vol_surface_gitbook/edit/master/%s
     download: ["pdf", "epub"]
+    sharing:
+      linkedin: yes
+      github: yes
+      twitter: no
+      facebook: no
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex

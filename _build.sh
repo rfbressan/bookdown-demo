@@ -3,7 +3,7 @@
 set -ev
 
 # Installs system libraries needed for R packages
-apt-get update && apt-get -y install "^libquantlib*"
+sudo apt-get update && apt-get -y install "^libquantlib*"
 
 Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook')"
 Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book')"

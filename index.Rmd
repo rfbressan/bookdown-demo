@@ -48,4 +48,19 @@ if (knitr:::is_latex_output() &&
                                               "booktabs", 
                                               "indentfirst"))
 }
+
+# Installs all packages needed for this book
+# Verifies if needed packages are installed
+pkgs_att <- c("tidyverse", 
+              "purrr",
+              "ggthemes",
+              "ggridges", 
+              "kableExtra",
+              "tidyquant",
+              "RQuantlib",
+              "plot3D")
+new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
+
+# Installs new packages
+if (length(new.pkgs)) install.packages(new.pkgs)
 ```

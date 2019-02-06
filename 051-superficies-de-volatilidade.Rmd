@@ -1,0 +1,265 @@
+# Superfícies de volatilidade {#superficies}
+
+```{r setup_sup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggthemes)
+```
+
+Já mostramos em artigos anteriores, [processos estocásticos em finanças](#processos-estocasticos), o [modelo de Black&Scholes](#bsm) e, como na realidade dos mercados surgem os [smiles de volatilidade](#smile), uma anomalia não prevista por B&S. Dado que este modelo não pode explicar o surgimento do smile de volatilidade e tampouco sua superfície, o estudo da volatilidade implícita tornou-se uma preocupação central nas finanças. Diversos modelos foram propostos ao longo dos anos, e ainda o são, para buscar conciliar a presença do smile de volatilidade e a natureza estocástica da precificação do ativo subjacente. 
+
+Apresentaremos alguns poucos destes modelos.
+
+## Modelos estocásticos
+
+Volatilidade estocástica apresenta a noção que a volatilidade instantânea do ativo subjacente também é, por si só, um processo estocástico que pode ser correlacionado com o processo de formação do preço do ativo. O resultado destes modelo é um procedimento livre de arbitragem para a interpolação dos dados de mercado a superfície de volatilidade.
+
+### Heston
+
+O modelo de Heston, baseado no trabalho de @Heston1993, assume que o quadrado da volatilidade segue uma equação diferencial estocástica - EDE - do tipo Cox-Ingersoll-Ross - CIR, a qual apresenta características desejáveis do ponto de vista da variância. Abaixo estão as três equações que definem um modelo de Heston:
+
+\begin{equation}
+\begin{aligned}
+dS_t=&\mu S_t dt + \sqrt{v_t}S_t dW_1\\
+dv_t=&-\lambda(v_t-\bar v)dt+\eta\sqrt{v_t}dW_2\\
+d\left\langle W_1, W_2 \right\rangle=&\rho dt
+\end{aligned}
+(\#eq:heston)
+\end{equation}
+
+onde $v_t$ é a variância estocástica, $\lambda$ é o parâmetro que define a velocidade de convergência da volatilidade para seu valor de longo prazo $\bar v$, $\eta$ é a famigerada **volatilidade da volatilidade** e a notação $d\left\langle W_1, W_2 \right\rangle$ indica a covariação entre os movimentos Brownianos padrões $dW_1$ e $dW_2$.
+
+Esta modelagem apresenta uma característica desejável, e até certo ponto, intuitiva para a volatilidade, o retorno a uma média de longo prazo. Empiricamente observamos regimes distintos de volatilidade para os ativos financeiros, em alguns momentos a volatilidade está anormalmente baixa ou durante momentos de estresse no mercado, incrivelmente alta. Porém não faria sentido um modelo onde a volatiliade pudesse estacionar permanentemente no limite inferior ou então divergir para infinito. O modelo de Heston garante que, mesmo sendo estocástica, a volatilidade não é atraída para estes extremos.
+
+Os preços das calls e puts européias possuem fórmula fechada para seu cômputo através da [transformada de Fourier](https://en.wikipedia.org/wiki/Fourier_transform), como apresentado no artigo original. A complexidade destas equações e do método para sua resolução está fora do escopo deste blog, entretanto o leitor aficcionado pode encontrar uma demonstração da forma de resolução em @Gatheral2011.
+
+Basta-nos saber que em um _framework_ geral de precificação de derivativos, o preço de uma call não descontada (preço de Black) pode ser escrita da seguinte forma:
+
+\begin{equation}
+C_B(x, v, \tau)=K\left[e^xP_1(x, v, \tau)-P_0(x, v, \tau)\right]
+(\#eq:callgeral)
+\end{equation}
+
+onde $x:=\ln K/F_t$. $P_1$ e $P_0$ são duas probabilidades na medida neutra ao risco, $\mathbb Q$. Enquanto $e^xP_1$ informa o valor esperado do ativo no vencimento dado que a opção está no dinheiro, $P_0$ representa a probabilidade de ficar dentro do dinheiro na data de expiração.   
+
+As probabilidades $P_j$, $j = 0, 1$ podem ser calculadas através da seguinte equação:
+
+\begin{equation}
+P_j(x, v, \tau)=\frac{1}{2}+\frac{1}{\pi}\int\limits_0^\infty
+	Re\left\lbrace\frac{exp\{C_j(u, \tau)\bar v + D_j(u, \tau)v + iux\}}{iu}\right\rbrace du
+(\#eq:pj)
+\end{equation}
+	
+onde $i$ representa o número imaginário $\sqrt{-1}$ e $Re\{\cdot\}$ é apenas a parte real de seu argumento. 
+
+Primeiramente vamos definir algumas variáveis auxiliares:
+
+$$\alpha_j=-\frac{u^2}{2}-\frac{iu}{2}+jiu$$
+
+$$\beta_j=\lambda-j\rho\eta-\rho\eta i u$$
+
+$$\gamma=\frac{\eta^2}{2}$$
+
+
+$$r_{\pm}=\frac{\beta_j\pm\sqrt{\beta^2-4\alpha\gamma}}{2\gamma}=\frac{\beta\pm d}{\eta^2}$$
+
+$$d=\sqrt{\beta^2-4\alpha\gamma}$$
+
+$$g=\frac{r_-}{r_+}$$
+
+Então:
+
+$$C_j(u, \tau)=\lambda\left\lbrace  r_-\tau-\frac{2}{\eta^2}\ln\left(\frac{1-ge^{-d\tau}}{1-g}\right) \right\rbrace
+(\#eq:cj)$$
+
+$$D_j(u, \tau)=r_-\frac{1-e^{-d\tau}}{1-ge^{-d\tau}}
+(\#eq:dj)$$
+
+### SABR
+
+Este modelo foi apresentado por @Hagan2002 e assume que o preço _forward_, $F_t$ do ativo subjacente e sua volatilidade instantânea, $\alpha_t$, seguem as seguintes EDEs:
+
+$$
+\begin{aligned}
+dF_t=&\alpha_tF_t^\beta dW_1\\
+d\alpha_t=&\nu\alpha_t dW_2\\
+d\left\langle W_1, W_2 \right\rangle =&\rho dt
+\end{aligned}
+(\#eq:sabr)
+$$
+
+onde $\nu > 0$ é a volatilidade da volatilidade e $\beta > 0$ é conhecido como o coeficiente de alavancagem.
+
+A interpretação financeira se dá pela seguinte maneira: $\alpha_t$ determina o nível geral de volatilidade do _forward_ no dinheiro, $\beta$ mede a assimetria do smile sendo as duas escolhas particulares: $\beta = 1$ correspondendo ao modelo log-normal sem smile e $\beta = 0$ correspondendo ao modelo normal com um smile irrealista, $\rho$ também controla a inclinação do smile, quando $\rho < 0$ uma inclinação negativa típica de _equities_ surge e com a opção $\rho = 0$ produzindo um smile de volatilidade simétrico, por fim, $\nu$ é uma medida de convexidade. Também é possível verificar que a volatilidade estocástica, $\alpha_t$ segue uma distribuição log-normal.
+
+Comparado com outros modelos de volatilidade estocástica, o SABR é um dos mais simples e possui aproximações analíticas para o cálculo do preço de opções Europeias. Ele pode ser utilizado para ajustar um smile observado no mercado de forma acurada, entretanto, para ajustar uma superfície completa este modelo sofre com algumas restrições.
+
+### Bates
+
+Em modelos de difusão como B&S e mesmo Heston, o processo de formação de preço do ativo se comporta como um movimento browniano e a probabilidade de que este preço se mova bruscamente em um curto período de tempo é muito pequena. Assim, em tais modelos, os preços das opções OTM mais curtas são muito inferiores ao que se observa nos mercados reais.
+
+Para endereçar esta deficiência, @Bates1996 amplia o modelo de Heston incluindo saltos no processo de preço do ativo subjacente. Estes modelos, com a inclusão de saltos aleatórios na dinâmica de preços são conhecidos como _Jump-Diffusion_. A dinâmica é especificada pelas seguintes equações:
+
+\begin{equation}
+\begin{aligned}
+dS_t=&\mu S_tdt+\sqrt{v_t}S_tdW_1(t)+J_t S_t dN_t\\
+dv_t=&-\lambda(v_t-\bar v)dt+\eta\sqrt{v_t}dW_2(t)\\
+d\left\langle W_1, W_2 \right\rangle =&\rho dt
+\end{aligned}
+(\#eq:bates)
+\end{equation}
+
+Muito semelhante, portanto ao modelo de Heston nas equações \@ref(eq:heston), com a diferença da inclusão de um processo de Poisson, $dN_t$ com intensidade $\theta$ indicando a probabilidade instantânea de um salto de tamanho unitário. $J_t$ é o tamanho do salto aleatório e seu logaritmo segue uma distribuição gaussiana:
+
+\begin{equation}
+\ln{(1+J)}\sim N\left(\ln(1+\beta)-\frac{1}{2}\alpha^2\,\, ,\,\,\alpha^2\right)
+(\#eq:jt)
+\end{equation}
+
+Este modelo possui fórmulas fechadas para os preços de calls e puts, novamente utilizando-se o método da transformada de Fourier, que podem ser encontrados utilizando o método de @Duffie2000.
+
+### Volatilidade local
+
+Conforme visto na [seção anterior](#rnd) sobre o smile de volatilidade, é possível a partir das volatilidades implícitas obter a distribuição neutra ao risco do preço terminal do ativo subjacente. O pesquisador e profissional de mercado Bruno Dupire em seu artigo, @Dupire1994, fez então o seguinte questionamento: dada uma distribuição implícita, existe apenas um processo de difusão[^511] que seja consistente com esta distribuição? A resposta obtida foi sim, e deste processo surge a função de volatilidade local, $\sigma_L(S, t)$, por vezes também conhecida como função de volatilidade implícita.
+
+A equação de Dupire é apresentada abaixo:
+
+$$\frac{\partial C_B}{\partial \tau}=\frac{1}{2}\sigma_L^2K^2\frac{\partial^2C_B}{\partial K^2}
+(\#eq:dupire)$$
+
+da qual todos os termos podem ser obtidos a partir dos dados de mercado de uma superfície de volatilidade, com exceção é claro, da função de volatilidade local $\sigma_L$ que poderá ser calculada. Esta equação pode ser vista como a definição da função de volatiliade local independente do processo que governa a evolução da volatilidade (um processo estocástico, por exemplo).
+
+Uma forma de interpretar a volatilidade, ou mais precisamente a variância local, é na forma de valor esperado dentro da medida neutra ao risco. Resultado devido a trabalho de @Derman1998, onde a equação de Dupire pode ser reescrita da seguinte forma:
+
+$$\frac{\partial C_B}{\partial \tau}=\mathbb E\left[v_T|S_T=K\right]\frac{1}{2}K^2\frac{\partial^2C_B}{\partial K^2}
+(\#eq:derman)$$
+
+Ou seja, a variância local é a expectativa neutra ao risco da variância instantânea condicionada ao preço terminal do ativo, $S_T$ ser igual ao preço de exercício $K$.
+
+Uma das formas mais praticadas para a implementação de uma superfície de volatilidade local é através de árvores binomiais conforme apresentado por @Derman1994. 
+
+## Modelos paramétricos
+
+Diversas representações paramétricas já foram apresentadas para a superfície de volatilidade. Neste tipo de modelo uma função não-linear, dependente de um conjunto de parâmetros é especificada e, a partir dos dados observados no mercado, a parametrização é encontrada através da minimização de alguma função objetivo, método conhecido como **calibração**.
+
+### SVI {#sec:svi}
+
+A parametrização da do tipo SVI _(Stochastic Volatility Inspired)_ para o _smile_ foi introduzida por @Gatheral2004 e é motivada pelo comportamento assintótico para _strikes_ extremos. É baseada no _smile_ gerado por um modelo de @Heston1993. Sua parametrização é dada em termos de _forward log-moneyness_ conforme apresentado [anteriormente](#smile), $k=\ln(K/S)-r\tau=\ln(K/F)$, por:
+
+\begin{equation}
+w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)
+(\#eq:rawsvi)
+\end{equation}
+
+onde $w$ é a variância total e o conjunto de parâmetros $\chi_R = \{a, b, \rho, m, \sigma\}$ definem a forma deste _smile_ que é conhecido como parametrização **_raw_** do SVI. Os limites destes parâmetros são tais que: $a \in \mathbb R$, $b \geq 0$, $|\rho| < 1$, $m \in \mathbb R$, $\sigma > 0$, e a condição "óbivia" segundo @Gatheral2014, $a+b \sigma\sqrt{1 − \rho^2} \geq 0$, que garante $w(k; \chi_R) \geq 0$ para todo $k \in \mathbb R$. Alterações nestes parâmetros têm os seguintes efeitos:
+
+- Aumentar $a$ eleva o nível geral de variância, um deslocamento vertical do _smile_
+- Aumentar $b$ aumenta as inclinações das asas, comprimindo o _smile_
+- Aumentar $\rho$ provoca uma rotação no sentido anti-horário
+- Aumentar $m$ desloca o smile para a direita
+- Aumentar $\sigma$ reduz a curvatura no dinheiro (ATM) do _smile_
+
+(ref:svicap) Duas parametrizações hipotéticas para a SVI.
+
+```{r svi, fig.cap = '(ref:svicap)'}
+k <- seq(-0.8, 0.8, 0.1)
+# chi {a, b, rho, m, sigma}
+chi1 <- c(0, 0.5, -0.6, 0, 0.3)
+chi2 <- c(-0.04, 0.5, -0.9, 0, 0.4)
+
+w <- function(k, chi) {
+  a <- chi[1]
+  b <- chi[2]
+  rho <- chi[3]
+  m <- chi[4]
+  sigma <- chi[5]
+  var <- (a + b * (rho * (k - m) + sqrt((k - m)^2 + sigma^2)))
+  return(var)
+}
+
+w1 <- w(k, chi1)
+w2 <- w(k, chi2)
+
+tbl <- tibble(k, w1, w2) %>% 
+  gather(key = vartot, value = value, -k)
+
+ggplot(tbl, aes(x = k, y = value)) + 
+  geom_line(aes(color = vartot)) +
+  guides(color = guide_legend(title = "")) +
+  labs(title = "",
+       x = "Forwark log-moneyness ln(K/F)",
+       y = "Variância total w(k)",
+       caption = "") +
+  scale_color_viridis_d() +
+  theme_economist_white()
+```
+
+A figura \@ref(fig:svi) acima apresenta duas parametrizações hipotéticas para o modelo. A variância total $w_1$ tem como conjunto de parâmetros, $\chi = \{0, 0.5, -0.6, 0, 0.3\}$ e poderia representar um _smile_ de taxas de câmbio por exemplo. Enquanto que o modelo $w_2$ conta com $\chi = \{-0.04, 0.5, -0.9, 0, 0.4\}$ e se ajusta melhor ao mercado de _equities_.
+
+Existem outras duas parametrizações para o SVI, a natural e a _jump-wings_ que podem ser conferidas no artigo de @Gatheral2014 e serão abordadas em outro artigo a ser publicado futuramente pelo [CF](https://clubedefinancas.com.br).
+
+O SVI tem muitas vantagens, como o baixo tempo computacional, a variância implícita se comporta linearmente nos extremos, conforme prescrito pela fórmula do momento de @Lee2004, e boa aproximação de volatilidades implícitas para _strikes_ muito dentro ou fora do dinheiro. O ajuste do SVI para os mercados de _equities_ é muito melhor do que para outros mercados.
+
+## Modelos não-paramétricos
+
+Se violações de arbitragem na estimativa da superfície não representam um problema de interesse particular, virtualmente qualquer método não-paramétrico pode ser aplicado a dados de volatilidade implícita. Uma escolha específica deve ser feita a partir de considerações práticas.
+
+### Interpolação e suavização spline
+
+As seguintes splines[^512] podem ser empregadas para interpolar _smiles_ de volatilidade: 
+
+- Spline cúbica
+- B-spline cúbica
+
+No caso da spline cúbica, esta é uma função polinomial de grau 3 definida em cada subintervalo demarcados pelos pontos de controle, no caso de interpolação são todos nós. Uma spline cúbica é uma função contínua, suave e diferenciável até a segunda ordem.
+
+Uma B-spline[^513], ou _basis-spline_ é uma função básica para funções spline de mesma ordem, o que significa que todas as funções spline possíveis podem ser construídas a partir de uma combinação linear de B-splines. Estas podem ser preferidas às splines cúbicas, devido à sua robustez a dados ruins e à capacidade de preservar a monotonicidade e a convexidade.
+
+Praticamente qualquer linguagem de programação e até mesmo o Excel[^514] possui funções pré-programadas para implementar interpolações spline, sendo um método de fácil aplicação. Entretanto, estas técnicas de interpolação não são específicas para superfícies de volatilidade e, portanto, não garantem que a superfície interpolada seja livre de oportunidades de arbitragem, mesmo que os dados apresentados o sejam.
+
+### Algoritmos livres de arbitragem
+
+Considerando as limitações das interpolações com relação a presença de arbitragem na superfície gerada, vários artigos propõe algoritmos de interpolação que garantem que oportunidades de [arbitragem estática](#arbestatica) não se apresentem, como em @Kahale2004 e @Wang2004.
+
+Em comum, estes algoritmos possuem como requisito que os dados a serem interpolados sejam livres de arbitragem desde o início, o que nem sempre pode ser obtido. @Kahale2004, por exemplo, propõe um procedimento de interpolação baseado em polinômios convexos por partes que simulam a fórmula de B&S. O resultado da função de preço de calls é livre de arbitragem e, portanto, também a volatilidade implícita calculada a partir dela. Em uma segunda etapa, a variância total implícita é interpolada linearmente ao longo dos _strikes_.
+
+A abordagem de @Fengler2012 é baseada na suavização dos preços das opções por spline cúbica, e não em interpolação. Desta forma, os dados de entrada não precisam ser livres de arbitragem. Restrições especificamente adicionadas ao problema de minimização, a fim de garantir que não haja arbitragem, são impostos ao algoritmo spline. Uma possível desvantagem dessa abordagem é o fato de que a função de preço calls é aproximada por polinômios. Isso pode se mostrar desvantajoso, especialmente se extrapolação for necessária, já que a função de precificação certamente não é um polinômio. A escolha de uma grade suficientemente densa nos _strikes_ pode minimizar este problema.
+
+## Extrapolação do smile
+
+É argumentado em @Benaim2008 que que um método de extrapolação deve resultar em preços livres de arbitragem para as opções europeias (baunilha), ou seja, os preços das opções devem ser funções decrescentes (crescentes) para calls (puts), convexas com relação ao _strike_, e permanecer dentro de certos limites de inclinação. Além disso, o método de extrapolação deve idealmente ter as seguintes propriedades:
+
+1. Deve precificar corretamente todas as opções baunilha observadas
+2. A densidade da distribuição implícita e os preços das opções baunilha devem ser fáceis de calcular
+3. O método não deve gerar caudas irrealistas e, se possível, deve permitir controlá-las
+4. Deve ser robusto e flexível o suficiente para ser usado com uma ampla variedade de superfícies de volatilidade implícita
+5. Deve ser fácil e rápido inicializar para um determinado _smile_
+
+Uma das formas de extrapolação comumente utilizada é fazer a interpolação dos dados dentro da área observada, por exemplo com splines cúbicas, e então fazer a extrapolação na forma de uma linha reta, ou seja, mantendo na região de extrapolação a mesma inclinação observada no último ponto interpolado. Esta forma, segundo os autores não é adequada pois insere uma descontinuidade na densidade e também gera caudas muito curtas, de fato truncadas, a partir do ponto onde se inicia a extrapolação.
+
+É proposto um método de extrapolação através de fórmulas fechadas para a asa esquerda (OTM puts) e direita (OTM call) do _smile_. Estas fórmulas têm as propriedades desejadas para _strikes_ extremos e mantêm a convexidade dos preços. Suponha um intervalo de preços de exercício os quais existem observações de mercado e portanto, é possível fazer interpolação: $K_-\leq K \leq K_+$, os valores das puts, $P(K)$, para $K<K_-$ e das calls, $C(K)$, para $K>K_+$ são dados por:
+
+\begin{equation}
+P(K)=K^\mu \exp\left(a_1+b_1K+c_1K^2\right)
+(\#eq:pk)
+\end{equation}
+
+\begin{equation}
+C(K)=K^{-\nu} \exp\left(a_2+\frac{b_2}{K}+\frac{c_2}{K^2}\right)
+(\#eq:ck)
+\end{equation}
+
+onde se garante $\lim\limits_{K\rightarrow 0} P(K)=0$ e $\lim\limits_{K\rightarrow \infty} C(K)=0$, fazendo $\mu > 1$ e $\nu > 0$. Estes parâmetros também servem para controlar a massa de probabilidade sob as caudas da distribuição. 
+
+As condições para ajustar o preço e suas duas primeiras derivadas em $K_-$ e $K_+$ produz um conjunto de equações lineares para os parâmetros $a_1, b_1, c_1$ e $a_2, b_2, c_2$, respectivamente.
+
+## Conclusão
+
+Repassamos neste artigos, algumas das principais metodologias para a construção da superfície de volatilidade implícita. Modelos de volatilidade estocástica são capazes de gerar _smiles_ compatíveis com aqueles observados nos mercados, sendo dependentes de técnicas de calibração destes modelos. O modelo paramétrico SVI pode ser adequado para mercado de _equities_, entretanto, assim como acontece nas técnicas de interpolação, restrições com relação aos parâmetros devem ser impostas a fim de evitar o surgimento de oportunidades de arbitragem estática. Por fim uma estratégia de como implementar a extrapolação do _smile_ fora da região central foi apresentada.
+
+## Referências
+
+[^511]: Processo de difusão é a solução de uma equação diferencial estocástica com propriedades de Markov. O Movimento Browniano é um exemplo.
+[^512]: [Spline](https://en.wikipedia.org/wiki/Spline_interpolation)
+[^513]: [B-Spline](https://en.wikipedia.org/wiki/B-spline)
+[^514]: [Cubic Spline Function in VBA](https://www.business-spreadsheets.com/forum.asp?t=120)

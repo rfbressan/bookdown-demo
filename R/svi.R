@@ -1,4 +1,10 @@
-# Verifies if needed packages are installed
+#' ---
+#' title: "Functions to fit a SSVI"
+#' author: "Rafael F. Bressan"
+#' --- 
+#' 
+#' # Verifies if needed packages are installed
+#+ echo = TRUE
 pkgs_att <- c("tidyverse",
               "GA",
               "minpack.lm",
@@ -16,7 +22,7 @@ for (s in pkgs_att) {
 }
 
 
-#' Total variance for a given set of SVI RAW parameters.
+#' # Total variance for a given set of SVI RAW parameters.
 #'
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
@@ -25,6 +31,7 @@ for (s in pkgs_att) {
 #' @export
 #'
 #' @examples
+#+ echo = TRUE
 svi_fun <- function(par, k){
   a <- par[1]
   b <- par[2]
@@ -35,7 +42,7 @@ svi_fun <- function(par, k){
   return(ans)
 }
 
-#' First derivative of RAW SVI with respect to moneyness
+#' # First derivative of RAW SVI with respect to moneyness
 #'
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
@@ -44,6 +51,7 @@ svi_fun <- function(par, k){
 #' @export
 #'
 #' @examples
+#+ echo = TRUE
 diff_svi <- function(par, k) {
   a <- par[1]
   b <- par[2]
@@ -54,7 +62,7 @@ diff_svi <- function(par, k) {
   return(ans)
 }
 
-#' Second derivative of RAW SVI with respect to moneyness
+#' # Second derivative of RAW SVI with respect to moneyness
 #'
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
@@ -63,6 +71,7 @@ diff_svi <- function(par, k) {
 #' @export
 #'
 #' @examples
+#+ echo = TRUE
 diff2_svi <- function(par, k) {
   a <- par[1]
   b <- par[2]
@@ -74,14 +83,18 @@ diff2_svi <- function(par, k) {
   return(ans)
 }
 
-#' Computes g(k) function. Auxiliary to retrieve density and essential to test for butterfly arbitrage.
+#' # Computes g(k) function. 
 #'
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
 #'
 #' @return Function g(k) evaluated at k points
+#' 
+#' @details Auxiliary to retrieve density and essential to test for butterfly 
+#'     arbitrage.
 #'
 #' @examples
+#+ echo = TRUE
 gfun <- function(par, k) {
   w <- svi_fun(par, k)
   w1 <- diff_svi(par, k)
@@ -92,41 +105,51 @@ gfun <- function(par, k) {
 }
 
 
-#' Auxiliary function to compute d1 from BSM model, given a set of SVI RAW parameters and a vector of moneynesses.
+#' # Computes d1 given a set of parameters
 #'
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
 #'
-#' @return
+#' @return A vector the same size as k
 #'
+#' @details Auxiliary function to compute d1 from BSM model, given a set of 
+#'     SVI RAW parameters and a vector of moneynesses.
+#' 
 #' @examples
+#+ echo = TRUE
 d1_svi <- function(par, k) {
   v <- sqrt(svi_fun(par, k))
   return(-k/v + v/2)
 }
 
-#' Auxiliary function to compute d2 from BSM model, given a set of SVI RAW parameters and a vector of moneynesses.
-#'
+#' # Computes d2 given a set of parameters
+#' 
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
 #'
-#' @return
+#' @return A vector the same size as k
 #'
+#' @details Auxiliary function to compute d2 from BSM model, given a set of 
+#'     SVI RAW parameters and a vector of moneynesses.
+#'     
 #' @examples
+#+ echo = TRUE
 d2_svi <- function(par, k) {
   v <- sqrt(svi_fun(par, k))
   return(-k/v - v/2)
 }
 
-#' Probability density implied by an SVI.
+#' # Probability density implied by an SVI.
 #'
 #' @param par Set of raw parameters, (a, b, rho, m, sigma)
 #' @param k Moneyness points to evaluate
 #'
 #' @return Implied risk neutral probability density from an SVI
+#' 
 #' @export
 #'
 #' @examples
+#+ echo = TRUE
 svi_density <- function(par, k) {
   g <- gfun(par, k)
   w <- svi_fun(par, k)
@@ -136,32 +159,136 @@ svi_density <- function(par, k) {
   return(ans)
 }
 
-#' Computes RMSE (root mean squared error) of a raw parameterization.
+#' # Computes RMSE (root mean squared error) of a raw parameterization.
+#' 
 #' @param df Data frame
 #' @param param Raw parameters in a vector (a, b, rho, m, sigma)
 #' @param w Observed total variances
 #' 
 #' @return Root mean squared error
+#' 
 #' @export
 #' 
 #' @examples 
+#+ echo = TRUE
 rmse <- function(par, k, w) {
   return(sqrt(mean((svi_fun(par, k) - w)^2)))
 }
 
-#' Inner optimization for parameter: c,d,a
+#' # Fits the complete problem $(m and \sigma)$ from Quasi-explicit
 #'
-#' optimization of the inner parameters
-#' let y(k) = (k - m)/sig
-#' svi w = a + b*sig*(rho*y(k) + sqrt(y(x)^2+1))
-#'        = a + dy(x) + cz(x)
-#' d = roh*b*sig, c = b*sig, z = sqrt(y(x)^2+1)
-#' Constrains:
-#'     0 <= c <= 4sig
-#'     |d| <= c
-#'     |d| <= 4sig -c
-#'     0 <= a <= max_i(w_i)
-#'     
+#' @param k Moneyness
+#' @param w Total variance
+#' @param outter Outter method. One of: "GA", "Nelder-Mead", "LM"
+#' @param inner  Inner method. One of: "Nelder-Mead" or "quadprog"
+#' @param rst_iter Number of restarts of maximum iterations, depending on outter
+#'  method chosen.
+#'
+#' @return Returns the parameters m and sigma in a named vector.
+#'
+#' @examples
+#+ echo = TRUE
+fit_outter <- function(k, w, 
+                       outter = c("GA", "Nelder-Mead", "LM"),
+                       inner = c("Nelder-Mead", "quadprog"),
+                       rst_iter = 20) {
+  out_met <- outter[1]
+  in_met <- inner[1]
+  par_names <- c("m", "sigma")
+  # Box-constraints for m and sigma
+  lower <- c(min(k), 0.0001)
+  upper <- c(max(k), 1)
+  ui <- rbind(c(1,0),
+              c(-1,0), 
+              c(0,1), 
+              c(0,-1))
+  ci <- c( min(k), 
+           -max(k), 
+           0.0001, 
+           -1)
+  
+  if (out_met %in% c("Nelder-Mead", "LM")) {  # Algos that minimize obj function
+    ofitfun <- function(x) { # m, sigma
+      y <- (k - x[1])/x[2] # m, sigma
+      # find inner parameters: a, b, rho
+      par <- fit_inner(y, w, x[2], in_met) # a, b, rho
+      param <- c(par[1],par[2], par[3], x[1], x[2]) #a, b, rho, m, sigma
+      raw <- svi_fun(param, k)
+      if (out_met == "LM")
+        value <- raw - w  # minpack.lm already minimizes sum of squares
+      else
+        value <- mean((raw - w)^2)
+      return(value)
+    }
+    # intial guess of m, sigma
+    mi <- runif(rst_iter, 1.01*lower[1], 0.99*upper[1]) 
+    sigmai <- runif(rst_iter, 1.01*lower[2], 0.99*upper[2])
+    
+    # Holding list of results
+    results <- vector("list", length = rst_iter)
+    
+  } else if (out_met %in% c("GA")) {  # Algos that maximize obj function
+    ofitfun <- function(x) { # m, sigma
+      y <- (k - x[1])/x[2] # m, sigma
+      # find inner parameters: a, b, rho
+      par <- fit_inner(y, w, x[2], in_met) # a, b, rho
+      param <- c(par[1],par[2], par[3], x[1], x[2]) #a, b, rho, m, sigma
+      raw <- svi_fun(param, k)
+      value <- 1/mean((raw - w)^2)
+      return(value)
+    }
+  } else
+    stop(paste("Method for outter optimization is not known. Method =",
+         met, ".\\n"))
+  
+  # Run fit algo, depending on method chosen
+  if (out_met == "GA") {
+    # genetic Algorith, set boxes for m, sigma
+    op <- GA::ga("real-valued", fitness = ofitfun,
+                 lower = lower, upper = upper,
+                 maxiter = rst_iter, run = rst_iter, optim = TRUE,
+                 monitor = FALSE)
+    # possible multiple solutions, only select the first one
+    opar <- op@solution[1,]
+    names(opar) <- par_names
+  } else if (out_met == "Nelder-Mead") {
+    # Proceed to optimizations. # of optmizations = restarts
+    for (i in 1:rst_iter) {
+      results[[i]] <- constrOptim(c(mi[i], sigmai[i]), ofitfun, NULL, ui, ci)
+    }
+    opar <- tibble::enframe(results) %>% 
+      dplyr::mutate(par = purrr::map(value, ~.x$par),
+                    obj = purrr::map_dbl(value, ~.x$value)) %>% 
+      dplyr::filter(obj == min(obj)) %>% 
+      dplyr::pull(par) %>% 
+      unlist()
+    names(opar) <- par_names
+  } else if (out_met == "LM") {
+    # Proceed to optimizations. # of optmizations = restarts
+    for (i in 1:rst_iter) {
+      init_pars <- c(mi[i], sigmai[i])
+      results[[i]] <- minpack.lm::nls.lm(init_pars, 
+                                         lower = lower,
+                                         upper = upper,
+                                         fn = ofitfun,
+                                         control = list(maxiter = 100,
+                                                        ftol = .Machine$double.eps,
+                                                        ptol = .Machine$double.eps))
+    } # end of for loop
+    opar <- tibble::enframe(results) %>% 
+      dplyr::mutate(par = purrr::map(value, ~.x$par),
+                    obj = purrr::map_dbl(value, ~.x$deviance)) %>% 
+      dplyr::filter(obj == min(obj)) %>% 
+      dplyr::pull(par) %>% 
+      unlist()
+    names(opar) <- par_names
+  }
+  
+  return(opar)
+}
+
+#' # Fits reduced problem $(a, b, \rho)$ for Quasi-explicit
+#'
 #' @param y (k-m)/sigma
 #' @param w  Total iv, iv*sqrt(tau)
 #' @param sig Sigma
@@ -169,6 +296,19 @@ rmse <- function(par, k, w) {
 #' 
 #' @return a, b, rho parameters
 #' 
+#' @details 
+#'     optimization of the inner parameters
+#'     let $y(k) = (k - m)/\sigma$
+#'     $svi w = a + b\sigma(\rho*y(k) + \sqrt{y(x)^2+1})$
+#'           $= a + dy(x) + cz(x)$
+#'     $d = \rho b \sigma, c = b\sigma, z = sqrt(y(x)^2+1)$
+#'     Constrains:
+#'         $0 <= c <= 4\sigma$
+#'         $|d| <= c$
+#'         $|d| <= 4\sigma -c$
+#'         $0 <= a <= max_i(w_i)$
+#'     
+#+ echo = TRUE
 fit_inner <- function(y, w, sig, method = c("Nelder-Mead", "quadprog")){
   met = method[1] # If not set, then takes default method
 
@@ -234,26 +374,78 @@ fit_inner <- function(y, w, sig, method = c("Nelder-Mead", "quadprog")){
   return(c(a, b, rho))
 }
 
-
-#' Estimate SVI parameters with GA algorithm
+#' # Fits a SVI with a Quasi-explicit reparametrization. 
 #' 
-#' This require ga package, GA gives robust result, though 
-#' it is relative slow. Alternative, use constOptim
-#' It takes two-step optimization:
-#' 1. obtain inner parameters: a,b, rho
-#' 2. estimate m and sigma, H using GA
+#' @param k Moneyness
+#' @param w Total variance
+#' @param outter Outter method. One of: "GA", "Nelder-Mead", "LM"
+#' @param inner  Inner method. One of: "Nelder-Mead" or "quadprog"
+#' @param rst_iter Number of restarts of maximum iterations, depending on outter
+#'  method chosen.
+#' @param scale Scales the values to improve goodness-of-fit as needed. 
+#' NOT WORKING YET, DO NOT TOUCH THIS!!
+#'
+#' @return A Data Frame containing the following elements: 
+#'     * method: String indicating method of optimization. "outter-inner".
+#'     * par:  List column of named vector of parameters (a, b, rho, m, sigma).
+#'     * objective: Objective function value. Currently set to RMSE.
+#'     * convergence:  An integer code about reasons for optmization ending.
+#'         0 means convergence while 1 you should debug it.
+#'         
+#' @details It is possible to choose 
+#'     methods for solivng the outter problem $(m, \sigma)$ and inner problem 
+#'     $(a, b, rho)$.
+#'
+#' @export
+#'
+#' @examples
+#+ echo = TRUE
+svi_fit_quasi <- function(k, w,
+                          outter = c("GA", "Nelder-Mead", "LM"),
+                          inner = c("Nelder-Mead", "quadprog"),
+                          rst_iter = 20,
+                          scale = 1) {
+  out_met <- outter[1]
+  in_met <- inner[1]
+  k <- k * scale
+  w <- w * scale
+  
+  out_par <- fit_outter(k, w, out_met, in_met, rst_iter) # m, sigma
+  # y = (k-m)/sigma
+  y <- (k - out_par[1])/out_par[2]
+  in_par <- fit_inner(y, w, out_par[2], in_met)
+  # parameters: a, b, rho, m, sigma
+  parameters <- c(in_par[1], in_par[2], in_par[3], out_par[1], out_par[2])
+  names(parameters) <- c("a", "b", "rho", "m", "sigma")
+  ans <- tibble::tibble(method = paste(out_met, in_met, sep = "-"),
+                        par = list(parameters),
+                        objective = rmse(parameters, k/scale, w/scale),
+                        convergence = 0) # always returns converge for now
+  return(ans)
+}
+
+#' # Estimate SVI parameters with GA algorithm
+#' 
 #' @param k Forward log-moneyness
 #' @param w Total implied variance
 #' @param inner Method for inner optimization (i.e Reduced problem)
 #' 
 #' @return A Data Frame containing the following elements: 
-#'     \item{method} String indicating method of optimization. "GA".
-#'     \item{par}  List column of named vector of parameters (a, b, rho, m, sigma).
-#'     \item{objective} Objective function. The inverse of squared errors mean.
-#'     \item{convergence}  An integer code about reasons for optmization ending. 0 means convergence while 1 you should debug it.
+#'     * method: String indicating method of optimization. "GA".
+#'     * par:  List column of named vector of parameters (a, b, rho, m, sigma).
+#'     * objective: Objective function. The inverse of squared errors mean.
+#'     * convergence:  An integer code about reasons for optmization ending.
+#'         0 means convergence while 1 you should debug it.
+#'         
+#' @details This require ga package, GA gives robust result, though 
+#'     it is relative slow. Alternative, use constOptim
+#'     It takes two-step optimization:
+#'     1. obtain inner parameters: a,b, rho
+#'     2. estimate m and sigma, H using GA
 #' @export
 #' 
 #' @examples 
+#+ echo = TRUE
 svi_fit_ga <- function(k, w, inner = c("Nelder-Mead", "quadprog")){
   met = inner[1] # Method for inner optmization
   # Idea: weights can be passed to this function to weight the errors in 
@@ -293,7 +485,7 @@ svi_fit_ga <- function(k, w, inner = c("Nelder-Mead", "quadprog")){
 
 
 
-#' Estimate SVI parameters with through quasi-explicit algorithm.
+#' # Estimate SVI parameters with through quasi-explicit algorithm.
 #'
 #' @param k Forward log-moneyness
 #' @param w Total implied variance
@@ -301,13 +493,14 @@ svi_fit_ga <- function(k, w, inner = c("Nelder-Mead", "quadprog")){
 #' @param inner Method for inner optimization (i.e Reduced problem)
 #' 
 #' @return A Data Frame containing the following elements: 
-#'     \item{method} String indicating method of optimization. "Quasi".
-#'     \item{par}  List column of named vector of parameters (a, b, rho, m, sigma).
-#'     \item{objective} The objective function. Sum of squared residuals.
-#'     \item{convergence}  An integer code about reasons for optmization ending. 0 means convergence while 1 you should debug it. Note: it is complete problem convergence (m, sigma).
+#'     * method: String indicating method of optimization. "Quasi".
+#'     * par:  List column of named vector of parameters (a, b, rho, m, sigma).
+#'     * objective: The objective function. Sum of squared residuals.
+#'     * convergence:  An integer code about reasons for optmization ending. 0 means convergence while 1 you should debug it. Note: it is complete problem convergence (m, sigma).
 #'
 #' @export
-svi_fit_quasi <- function(k, w, n_rst = 50, inner = c("Nelder-Mead", "quadprog")) {
+#+ echo = TRUE
+svi_fit_quasi_explicit <- function(k, w, n_rst = 50, inner = c("Nelder-Mead", "quadprog")) {
   met = inner[1] # Method for inner optmization
   # two-step optimization:
   # 1. obtain inner parametplers: a, b, rho
@@ -321,18 +514,18 @@ svi_fit_quasi <- function(k, w, n_rst = 50, inner = c("Nelder-Mead", "quadprog")
   }
   
   # intial guess of m, sigma
-  mi <- runif(n_rst, 2*min(k), 2*max(k)) 
-  sigmai <- runif(n_rst, 0.00011, 1)
+  mi <- runif(n_rst, 0.99*min(k), 0.99*max(k)) 
+  sigmai <- runif(n_rst, 0.000099, 0.999)
   
   # boundaries for m, sigma
   ui <- rbind(c(1,0),
               c(-1,0), 
               c(0,1), 
               c(0,-1))
-  ci <- c( -999, 
-           -999, 
+  ci <- c( min(k), 
+           -max(k), 
            0.0001, 
-           -999)
+           -1)
   # Holding list of results
   results <- vector("list", length = n_rst)
   
@@ -363,10 +556,12 @@ svi_fit_quasi <- function(k, w, n_rst = 50, inner = c("Nelder-Mead", "quadprog")
   return(ans)
 }
 
-#' parallel computing a surface with a given H
+#' # Parallel computing a surface with a given H
+#' 
 #' @param chain surface table contains date, tau, k, iv
 #' @param H H exponent
 #' 
+#+ echo = TRUE
 par_fit_svi <- function(chain, H){
 
   # use parallel computing
@@ -397,25 +592,31 @@ par_fit_svi <- function(chain, H){
   return(surf)
 }
 
-#' Direct procedure to fit an SVI slice. Uses a constrained Levenberg-Marquardt
+#' # Direct procedure to fit an SVI slice. 
+#' 
+#' @details Uses a constrained Levenberg-Marquardt
 #'     algorithm on the 5-dim problem. The algorithm is restarted a certain
 #'     number of times with random initial guesses. The best round (i.e lower 
 #'     objective function) is returned. Param df must be a data frame with at 
 #'     least these columns: Spot Price (S), Risk-free rate (r), Forward 
 #'     log-moneyness (k), implied volatility (iv) and time to expiration (tau).
 #'     Depends on minpack.lm package
+#'     
 #' @param k Forward log-moneyness
 #' @param w Total implied variance
 #' @param n_rst Number of random restarts
 #' 
 #' @return A Data Frame containing the following elements: 
-#'     \item{method} String indicating method of optimization. "Direct".
-#'     \item{par}  List column of named vector of parameters (a, b, rho, m, sigma).
-#'     \item{objective} Sum of squared residuals. The objective function.
-#'     \item{convergence}  An integer code about reasons for optmization ending. 0 means convergence while 1 you should debug it.
+#'     * method: String indicating method of optimization. "Direct".
+#'     * par:  List column of named vector of parameters (a, b, rho, m, sigma).
+#'     * objective: Sum of squared residuals. The objective function.
+#'     * convergence:  An integer code about reasons for optmization ending.
+#'         0 means convergence while 1 you should debug it.
+#'         
 #' @export
 #' 
 #' @examples 
+#+ echo = TRUE
 svi_fit_direct <- function(k, w, n_rst = 10) {
 
   # Residual (error) function. It returns a vector of residues. The optmization 
@@ -462,12 +663,16 @@ svi_fit_direct <- function(k, w, n_rst = 10) {
   return(ans)
 }
 
-#' Check data frame passed as argument to several functions
-#' Param df must be a data frame with at least these columns:
-#' Spot Price (S), Risk-free rate (r), Forward log-moneyness (k), 
-#' implied volatility (iv) and time to expiration (tau)
+#' # Check data frame passed as argument to several functions
+#' 
 #' @param df Data frame
 #' 
+#' @details Param df must be a data frame with at least these columns:
+#' Spot Price (S), Risk-free rate (r), Forward log-moneyness (k), 
+#' implied volatility (iv) and time to expiration (tau)
+#' 
+#' @return Stop if there is some problem with df
+#+ echo = TRUE
 check_df_argument <- function(df) {
   if (nrow(df) < 5) {
     stop("Data frame must have at least 5 observations (rows).")}

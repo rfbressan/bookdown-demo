@@ -234,7 +234,7 @@ A seguir apresentamos um _smile_ de referência para a calibração, obtido de [
 Os dados utilizados neste exemplo estão apresentados na tabela \@ref(tab:dados) abaixo. Esta é uma típica apresentação de um _slice_ de superfície, ou seja, dados para um _smile_ apenas. As principais variáveis são: a data em que os dados foram coletados (date), o preço de fechamento do ativo (stock_price), o prazo para expiração em dias (period), e medidas de moneyness como delta, _strike_ e o próprio _moneyness_, além é claro da volatilidade implícita (iv) retirada do mercado.
 
 ```{r dados, echo=FALSE, results='asis'}
-options(kableExtra.html.bsTable = T)
+options(kableExtra.html.bsTable = TRUE)
 dados <- read_csv("./R/input/IV_Raw_Delta_surface.csv",
                   col_types = cols(date = col_date(format = "%m/%d/%Y"))) %>% 
   filter(period == 30)
@@ -304,6 +304,7 @@ plot_tbl <- tibble(k = k,
 
 par_tbl <- bind_rows(par_direct, par_ga, par_quasipq, par_quasinm) %>% 
   select(method, par) %>% 
+  mutate(method = c("Direct", "GA", "QuasiPQ", "QuasiNM")) %>% 
   unnest() %>% 
   mutate(names = rep(par_names, 4)) %>% 
   spread(method, par) %>% 
@@ -313,6 +314,7 @@ par_tbl <- bind_rows(par_direct, par_ga, par_quasipq, par_quasinm) %>%
 
 rmse_tbl <- bind_rows(par_direct, par_ga, par_quasipq, par_quasinm) %>% 
   select(method, par) %>% 
+  mutate(method = c("Direct", "GA", "QuasiPQ", "QuasiNM")) %>% 
   unnest() %>% 
   group_by(method) %>% 
   summarise(RMSE = rmse(par, k, w)) %>% 

@@ -232,7 +232,7 @@ Finalmente, um sumário dos limites impostos a uma superfície de preços de op�
 4. $C(K, \tau)$ é convexa em $K$
 5. $C(K, \tau)$ é não-negativa
 
-## Distribuição implícita
+## Distribuição implícita {#rnd}
 
 O modelo B&S é baseado na suposição que o ativo subjacente segue uma distribuição log-normal em seus preços. Caso esta suposição fosse de fato realizada no mercado, o smile de volatilidade seria uma reta completamente horizontal, não haveria variação na volatilidade implícita conforme o preço de exercício. Entretanto, esta não é a realidade dos smiles e podemos fazer a pergunta inversa portanto, qual a distribuição neutra ao risco que está implícita no smile de volatilidade?
 

@@ -276,6 +276,13 @@ w <- smile$iv^2 * smile$tau
 
 init_direct <- proc.time()
 par_direct <- svi_fit_direct(k, w)
+```
+
+```
+## Warning in minpack.lm::nls.lm(init_pars, lower = c(0, 0, -1, -Inf, 0), upper = c(max(w), : lmdif: info = -1. Number of iterations has reached `maxiter' == 100.
+```
+
+```r
 end_direct <- proc.time()
 time_direct <- end_direct - init_direct 
 
@@ -309,6 +316,7 @@ plot_tbl <- tibble(k = k,
 
 par_tbl <- bind_rows(par_direct, par_ga, par_quasipq, par_quasinm) %>% 
   select(method, par) %>% 
+  mutate(method = c("Direct", "GA", "QuasiPQ", "QuasiNM")) %>% 
   unnest() %>% 
   mutate(names = rep(par_names, 4)) %>% 
   spread(method, par) %>% 
@@ -318,6 +326,7 @@ par_tbl <- bind_rows(par_direct, par_ga, par_quasipq, par_quasinm) %>%
 
 rmse_tbl <- bind_rows(par_direct, par_ga, par_quasipq, par_quasinm) %>% 
   select(method, par) %>% 
+  mutate(method = c("Direct", "GA", "QuasiPQ", "QuasiNM")) %>% 
   unnest() %>% 
   group_by(method) %>% 
   summarise(RMSE = rmse(par, k, w)) %>% 
@@ -360,14 +369,14 @@ kable(frame_tbl,
 \toprule
 Estimativa & Direto & GA & QuasiPQ & QuasiNM\\
 \midrule
-a & 0.00000 & 0.00001 & 0.00000 & 0.00000\\
-b & 0.01950 & 0.01954 & 0.01749 & 0.08475\\
-\$\textbackslash{}rho\$ & -0.79529 & -0.80676 & -1.00000 & -0.99999\\
-m & -0.00725 & -0.00807 & -0.01420 & -0.07875\\
-\$\textbackslash{}sigma\$ & 0.05026 & 0.05048 & 0.06985 & 0.04228\\
+a & 0.00000 & 0.00016 & 0.00000 & 0.00000\\
+b & 0.01413 & 0.01825 & 0.01696 & 0.02315\\
+\$\textbackslash{}rho\$ & -0.80724 & -0.84924 & -1.00000 & -0.96729\\
+m & 0.01288 & -0.00720 & -0.01118 & -0.02894\\
+\$\textbackslash{}sigma\$ & 0.05236 & 0.04475 & 0.06905 & 0.05987\\
 \addlinespace
-RMSE & 8.67e-06 & 8.7e-06 & 9.66e-05 & 5.01e-05\\
-Tempo & 0.17200 & 29.88700 & 0.14800 & 5.19600\\
+RMSE & 4.8e-05 & 9.47e-06 & 9.55e-05 & 1.51e-05\\
+Tempo & 0.16100 & 34.76100 & 0.19700 & 8.55600\\
 \bottomrule
 \end{tabular}
 \end{table}

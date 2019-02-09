@@ -1,7 +1,7 @@
 --- 
 title: "Introdução a Superfície de Volatilidade"
 author: "Rafael Felipe Bressan"
-date: "2019-01-26"
+date: "2019-02-09"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book

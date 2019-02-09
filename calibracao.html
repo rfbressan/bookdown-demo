@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Capítulo 5 Métodos de Calibração | Introdução a Superfície de Volatilidade</title>
+  <title>Capítulo 6 Métodos de Calibração | Introdução a Superfície de Volatilidade</title>
   <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Capítulo 5 Métodos de Calibração | Introdução a Superfície de Volatilidade" />
+  <meta property="og:title" content="Capítulo 6 Métodos de Calibração | Introdução a Superfície de Volatilidade" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 5 Métodos de Calibração | Introdução a Superfície de Volatilidade" />
+  <meta name="twitter:title" content="Capítulo 6 Métodos de Calibração | Introdução a Superfície de Volatilidade" />
   
   <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   
@@ -25,14 +25,14 @@
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-26">
+<meta name="date" content="2019-02-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="smile.html">
+<link rel="prev" href="superficies.html">
 <link rel="next" href="svi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -151,28 +151,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>4.5.2</b> Arbitragem de calendário</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>4.6</b> Limites de inclinação</a></li>
-<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#rnd"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
 <li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>5</b> Métodos de Calibração</a><ul>
-<li class="chapter" data-level="5.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>5.1</b> Calibração versus Interpolação</a></li>
-<li class="chapter" data-level="5.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>5.2</b> Spline cúbica</a></li>
-<li class="chapter" data-level="5.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>5.3</b> Suavização</a></li>
-<li class="chapter" data-level="5.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>5.4</b> Parametrização</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>5.4.1</b> Função perda</a></li>
-<li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
+<li class="chapter" data-level="5" data-path="superficies.html"><a href="superficies.html"><i class="fa fa-check"></i><b>5</b> Superfícies de volatilidade</a><ul>
+<li class="chapter" data-level="5.1" data-path="superficies.html"><a href="superficies.html#modelos-estocasticos"><i class="fa fa-check"></i><b>5.1</b> Modelos estocásticos</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="superficies.html"><a href="superficies.html#heston"><i class="fa fa-check"></i><b>5.1.1</b> Heston</a></li>
+<li class="chapter" data-level="5.1.2" data-path="superficies.html"><a href="superficies.html#sabr"><i class="fa fa-check"></i><b>5.1.2</b> SABR</a></li>
+<li class="chapter" data-level="5.1.3" data-path="superficies.html"><a href="superficies.html#bates"><i class="fa fa-check"></i><b>5.1.3</b> Bates</a></li>
+<li class="chapter" data-level="5.1.4" data-path="superficies.html"><a href="superficies.html#volatilidade-local"><i class="fa fa-check"></i><b>5.1.4</b> Volatilidade local</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.2" data-path="superficies.html"><a href="superficies.html#modelos-parametricos"><i class="fa fa-check"></i><b>5.2</b> Modelos paramétricos</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="superficies.html"><a href="superficies.html#sec:svi"><i class="fa fa-check"></i><b>5.2.1</b> SVI</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>6</b> Calibrando uma SVI</a><ul>
-<li class="chapter" data-level="6.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>6.1</b> Modelo SVI</a></li>
-<li class="chapter" data-level="6.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>6.2</b> Restrições de não-arbitragem</a></li>
-<li class="chapter" data-level="6.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>6.3</b> Reparametrização Quasi-explicit</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>6.3.1</b> Solução explícita do problema reduzido</a></li>
+<li class="chapter" data-level="5.3" data-path="superficies.html"><a href="superficies.html#modelos-nao-parametricos"><i class="fa fa-check"></i><b>5.3</b> Modelos não-paramétricos</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="superficies.html"><a href="superficies.html#interpolacao-e-suavizacao-spline"><i class="fa fa-check"></i><b>5.3.1</b> Interpolação e suavização spline</a></li>
+<li class="chapter" data-level="5.3.2" data-path="superficies.html"><a href="superficies.html#algoritmos-livres-de-arbitragem"><i class="fa fa-check"></i><b>5.3.2</b> Algoritmos livres de arbitragem</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>6.4</b> Algoritmo</a></li>
-<li class="chapter" data-level="6.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>6.5</b> Resultados</a></li>
-<li class="chapter" data-level="6.6" data-path="svi.html"><a href="svi.html#conclusao-2"><i class="fa fa-check"></i><b>6.6</b> Conclusão</a></li>
+<li class="chapter" data-level="5.4" data-path="superficies.html"><a href="superficies.html#extrapolacao-do-smile"><i class="fa fa-check"></i><b>5.4</b> Extrapolação do smile</a></li>
+<li class="chapter" data-level="5.5" data-path="superficies.html"><a href="superficies.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="superficies.html"><a href="superficies.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>6</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="6.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>6.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="6.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>6.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="6.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>6.3</b> Suavização</a></li>
+<li class="chapter" data-level="6.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>6.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>6.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="6.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>6.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-2"><i class="fa fa-check"></i><b>6.5</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>7</b> Calibrando uma SVI</a><ul>
+<li class="chapter" data-level="7.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>7.1</b> Modelo SVI</a></li>
+<li class="chapter" data-level="7.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>7.2</b> Restrições de não-arbitragem</a></li>
+<li class="chapter" data-level="7.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>7.3</b> Reparametrização Quasi-explicit</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>7.3.1</b> Solução explícita do problema reduzido</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>7.4</b> Algoritmo</a></li>
+<li class="chapter" data-level="7.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>7.5</b> Resultados</a></li>
+<li class="chapter" data-level="7.6" data-path="svi.html"><a href="svi.html#conclusao-3"><i class="fa fa-check"></i><b>7.6</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ssvi.html"><a href="ssvi.html"><i class="fa fa-check"></i><b>8</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.1" data-path="ssvi.html"><a href="ssvi.html#reparametrizacoes-equivalentes"><i class="fa fa-check"></i><b>8.1</b> Reparametrizações equivalentes</a></li>
+<li class="chapter" data-level="8.2" data-path="ssvi.html"><a href="ssvi.html#superficie-svi"><i class="fa fa-check"></i><b>8.2</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="ssvi.html"><a href="ssvi.html#heston-1"><i class="fa fa-check"></i><b>8.2.1</b> Heston</a></li>
+<li class="chapter" data-level="8.2.2" data-path="ssvi.html"><a href="ssvi.html#lei-de-potencia"><i class="fa fa-check"></i><b>8.2.2</b> Lei de potência</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="ssvi.html"><a href="ssvi.html#condicoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>8.3</b> Condições de não-arbitragem</a></li>
+<li class="chapter" data-level="8.4" data-path="ssvi.html"><a href="ssvi.html#densidade-neutra-ao-risco"><i class="fa fa-check"></i><b>8.4</b> Densidade neutra ao risco</a></li>
+<li class="chapter" data-level="8.5" data-path="ssvi.html"><a href="ssvi.html#superficie-de-volatilidade-local"><i class="fa fa-check"></i><b>8.5</b> Superfície de volatilidade local</a></li>
+<li class="chapter" data-level="8.6" data-path="ssvi.html"><a href="ssvi.html#calibracao-da-ssvi"><i class="fa fa-check"></i><b>8.6</b> Calibração da SSVI</a></li>
+<li class="chapter" data-level="8.7" data-path="ssvi.html"><a href="ssvi.html#conclusao-4"><i class="fa fa-check"></i><b>8.7</b> Conclusão</a></li>
+<li class="chapter" data-level="8.8" data-path="ssvi.html"><a href="ssvi.html#referencias-1"><i class="fa fa-check"></i><b>8.8</b> Referências</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -196,38 +227,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="calibracao" class="section level1">
-<h1><span class="header-section-number">Capítulo 5</span> Métodos de Calibração</h1>
+<h1><span class="header-section-number">Capítulo 6</span> Métodos de Calibração</h1>
 <p>Neste post iremos mostrar as diferenças existentes entre “interpolação”, “suavização” e “parametrização” de superfícies de volatilidade.</p>
 <p>Como já apresentado em posts anteriores, existem diversas formas de interpolar, extrapolar, parametrizar e calibrar smiles de volatilidade. Exsitem vantagens e desvantagens para cada método.</p>
 <div id="calibracao-versus-interpolacao" class="section level2">
-<h2><span class="header-section-number">5.1</span> Calibração versus Interpolação</h2>
+<h2><span class="header-section-number">6.1</span> Calibração versus Interpolação</h2>
 <p>Uma forma simples de gerar um smile de volatilidade a partir de dados observados no mercado é a <strong>interpolação</strong> destes dados. Diversas formas de interpolação existem, sendo talvez a mais conhecida a spline cúbica. Não é a proposta deste artigo detalhar os procedimentos de interpolação, restando saber que em tal procedimento é gerada uma função contínua em partes (piecewise) que <strong>passa</strong> por todos os pontos observados.</p>
-<p>Uma interpolação força a passagem da função interpolada em todos os seus pontos de referência, como se estivesse ligando os pontos em um desenho a mão livre. Portanto, nestes pontos o erro da interpolação é zero por definição, entretanto em pontos intermediários podem surgir erros, inclusive aqueles que possibilitam a existência de arbitragem entre strikes de um mesmo smile<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>.</p>
+<p>Uma interpolação força a passagem da função interpolada em todos os seus pontos de referência, como se estivesse ligando os pontos em um desenho a mão livre. Portanto, nestes pontos o erro da interpolação é zero por definição, entretanto em pontos intermediários podem surgir erros, inclusive aqueles que possibilitam a existência de arbitragem entre strikes de um mesmo smile<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a>.</p>
 <p>Em contraposição a métodos de interpolação, podem ser derivados métodos de suavização (smoothing) ou então a parametrização do smile de volatilidade. Seja suavização, ou parametrização, estes métodos não forçam a passagem da função que representa o smile pelos pontos de mercado, mas buscam minimizar alguma função perda com relação aos desvios em relação a estes pontos ao mesmo tempo em que buscam “suavizar” o smile, para que este não apresente variações bruscas entre os strikes ou alterações de convexidade na curva de preços, que não são condizentes com a teoria de precificação de derivativos.</p>
 <p>Um método paramétrico, como o SVI, Heston, SABR ou Volatilidade Local, busca ajustar às volatilidades implícitas observadas através dos preços das opções sendo praticados no mercado uma determinada função, que possui parâmetros em sua definição que por sua vez determinam a forma desta função. Ao se ajustar os parâmetros, pode-se adequar a função para ficar “o mais próxima possível” dos dados observados, sem necessariamente, no entanto, passar por todos estes pontos.</p>
 <p>A figura abaixo tenta mostrar as diferenças entre uma interpolação spline cúbica, uma suavização e uma parametrização SVI. Enquanto que a interpolação liga todos os pontos marcados, a suavização e a parametrização não necessariamente passam sobre estes pontos mas fornecem uma curva mais “suave”, sem trocas de convexidade, o que gera oportunidades de arbitragem e probabilidades negativas de ocorrência de determinados preços para o ativo subjacente, que ferem os princípios de precificação de opções. Os dados utilizados neste e nos próximos artigos sobre superfícies de volatlidade foram obtidos do site <a href="http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv">ivolatility.com</a> na forma de amostra gratuita fornecida livremente. O ativo subjacente é o ETF <a href="https://www.ishares.com/us/products/239710/ishares-russell-2000-etf"><code>IWM</code></a> para a data de 21/09/2017.</p>
 <div class="figure"><span id="fig:diferencas"></span>
 <img src="06-metodos-calibracao_files/figure-html/diferencas-1.png" alt="Diferentes métodos de ajuste de dados a um smile." width="672" />
 <p class="caption">
-Figura 5.1: Diferentes métodos de ajuste de dados a um smile.
+Figura 6.1: Diferentes métodos de ajuste de dados a um smile.
 </p>
 </div>
 <p>Pode-se verificar como os métodos SVI e a suavização não passam sobre todos os pontos marcados, com a suavização tendo dificuldade com a curvatura nos valores mais altos de <em>moneyness</em> e a SVI possuindo uma inclinação mais branda na asa esquerda do smile.</p>
 </div>
 <div id="spline-cubica" class="section level2">
-<h2><span class="header-section-number">5.2</span> Spline cúbica</h2>
-<p>Este método é possivelmente um dos mais flexíveis e conhecidos de interpolação de dados univariados existente, embora também exista sua versão bi-dimensional. Uma spline nada mais é que “uma curva definida matematicamente por dois ou mais pontos de controle”<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>.</p>
+<h2><span class="header-section-number">6.2</span> Spline cúbica</h2>
+<p>Este método é possivelmente um dos mais flexíveis e conhecidos de interpolação de dados univariados existente, embora também exista sua versão bi-dimensional. Uma spline nada mais é que “uma curva definida matematicamente por dois ou mais pontos de controle”<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>.</p>
 <p>No caso da spline cúbica, esta é uma função polinomial de grau 3 definida em cada subintervalo demarcados pelos pontos de controle, no caso de interpolação são todos nós. Ou seja, considere um segmento entre dois pontos consecutivos <span class="math inline">\([c, d]\in S\)</span> a spline é uma função cúbica com seus parâmetros calculados pelo algoritmo de ajuste. Para o próximo intervalo de pontos dentro do domínio da função, um novo polinômio de grau 3 é ajustado, sendo que nos pontos de nós uma restrição de igualdade entre as derivadas nos dois segmentos é aplicada para garantir a suavidade da função interpolada como um todo.</p>
 <p>Assim, uma spline cúbica é uma função contínua, suave e diferenciável até a segunda ordem. Entretanto, suas derivadas, apesar de contínuas, podem não ser suaves, especialmente aquela de segunda ordem que pode apresentar pontos de “ruptura”. Esta característica de uma spline cúbica a torna pouco atrativa para a inferência de distribuições de probabilidade a partir de dados de volatilidade ou mesmo dos preços de opções.</p>
 <div class="figure"><span id="fig:cubic-spline"></span>
 <img src="images/cubic_spline.png" alt="Cada segmento de uma spline cúbica é um polinômio de grau 3 diferente."  />
 <p class="caption">
-Figura 5.2: Cada segmento de uma spline cúbica é um polinômio de grau 3 diferente.
+Figura 6.2: Cada segmento de uma spline cúbica é um polinômio de grau 3 diferente.
 </p>
 </div>
 </div>
 <div id="suavizacao" class="section level2">
-<h2><span class="header-section-number">5.3</span> Suavização</h2>
+<h2><span class="header-section-number">6.3</span> Suavização</h2>
 <p>A técnica de suavização é muito semelhante a interpolação, inclusive o método spline também é aplicado, com algumas modificações de forma que nem todos os pontos fornecidos serão nós.</p>
 <p>Na spline de suavização (ou aproximação), os pontos fornecidos são separados entre os nós, onde a função deve passar e pontos de controle, que são utilizados para controlar a curvatura da função nestes pontos.</p>
 <p>Estas suavizações são principalmente utilizadas quando se possui muitas observações sujeitas a ruídos, de forma que uma interpolação entre todos os pontos seria tanto impraticável quanto sem sentido. O que se deseja, portanto, é uma função <strong>aproximada</strong> que melhor descreva o processo sob análise.</p>
@@ -235,20 +266,20 @@ Figura 5.2: Cada segmento de uma spline cúbica é um polinômio de grau 3 difer
 <div class="figure"><span id="fig:suavizacao"></span>
 <img src="06-metodos-calibracao_files/figure-html/suavizacao-1.png" alt="Menor parâmetro de suavização gera granularidade na curva." width="672" />
 <p class="caption">
-Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
+Figura 6.3: Menor parâmetro de suavização gera granularidade na curva.
 </p>
 </div>
 </div>
 <div id="parametrizacao" class="section level2">
-<h2><span class="header-section-number">5.4</span> Parametrização</h2>
+<h2><span class="header-section-number">6.4</span> Parametrização</h2>
 <p>E por fim as técnicas de parametrização. Nesta categoria estão diversos conhecidos modelos de superfícies de volatilidade implícita, dentre eles os modelos de <span class="citation">Heston (<a href="#ref-Heston1993">1993</a>)</span>, Volatilidade Local de <span class="citation">Dupire (<a href="#ref-Dupire1994">1994</a>)</span> e SVI de <span class="citation">Gatheral (<a href="#ref-Gatheral2004">2004</a>)</span>.</p>
 <p>Em comum, estes modelos tentam parametrizar a superfície, e por conseguinte o smile de volatilidade, de acordo com alguma função, em geral não-linear, que possui características condizentes com a teoria de precificão de derivativos e também a observação empírica das superfícies.</p>
-<p>Por exemplo, a parametrização <em>raw</em> da SVI possui a seguinte forma para a <strong>variância total</strong><a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a> :</p>
+<p>Por exemplo, a parametrização <em>raw</em> da SVI possui a seguinte forma para a <strong>variância total</strong><a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a> :</p>
 <p><span class="math display">\[ w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)\]</span></p>
 <p>que fornece um espaço de cinco parâmetros <span class="math inline">\(\chi_B=\{a, b, \rho, m, \sigma\}\)</span> que definem o smile e devem, portanto, serem calibrados a partir de dados observados no mercado.</p>
 <p>O procedimento de calibração consiste em encontrar o conjunto de parâmetros que minimizam uma função perda entre a volatilidade prevista pelo modelo e os dados de mercado, enquanto satisfazem algumas restrições adicionais, como “ausência de arbitragem”, suavidade, etc. Trata-se, via de regra, de problemas de otimização não-linear com restrições de inequalidade também não-lineares.</p>
 <div id="funcao-perda" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> Função perda</h3>
+<h3><span class="header-section-number">6.4.1</span> Função perda</h3>
 <p>A função perda, ou função de calibração pode ser definida de diversas maneiras, de forma geral, para uma determinada maturidade, ela toma a forma:</p>
 <p><span class="math display">\[L=\sum\limits_{i=1}^n\lambda_i||\hat w(k_i)-w_{imp}(k_i)||\]</span> onde <span class="math inline">\(||\cdot||\)</span> é alguma medida de norma, sendo a mais conhecida o quadrado das diferenças, dando origem a minimização do erro quadrático médio (RMSE). Para este smile sendo calibrado existem <span class="math inline">\(n\)</span> strikes (<span class="math inline">\(k_i\)</span>) e suas volatilidades implícitas observadas são <span class="math inline">\(w_{imp}(k_i)\)</span>. A resposta do modelo para um determinado strike é <span class="math inline">\(\hat w(k_i)\)</span> e <span class="math inline">\(\lambda_i\)</span> são os pesos dados na função perda para cada um destes strikes.</p>
 <p>Os pesos <span class="math inline">\(\lambda_i\)</span> são utilizados para ponderar as observações das volatilidades mais importantes para o cálculo, onde se deseja que a curva ajustada possua um menor erro. Em geral, estes pesos são calculado como inversamente proporcionais:</p>
@@ -258,7 +289,7 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
 </ul>
 </div>
 <div id="otimizadores" class="section level3">
-<h3><span class="header-section-number">5.4.2</span> Otimizadores</h3>
+<h3><span class="header-section-number">6.4.2</span> Otimizadores</h3>
 <p>Os otimizadores são os algoritmos pelos quais o problema de minimização posto é resolvido. Se a função perda é convexa, e ela deve ser construída de forma a ser, mesmo que não estritamente, então ela possui um ou mais pontos de mínimo onde o gradiente desta função é igual a zero. O que os otimizadores fazem é buscar o conjunto de parâmetros que minimizam a função perda e atendem as restrições impostas simultaneamente. Os otimizadores podem ser classificados em dois grandes grupos, globais e locais.</p>
 <p>Algoritmos locais dependem de uma estimativa inicial dos parâmetros para começarem a busca pelo mínimo. Seguindo uma regra utilizando-se o gradiente da função ou alguma heurística, estes otimizadores caminham em direção ao ponto de mínimo mais próximo da estimativa inicial, daí o nome “local”. Como desvantagem destes otimizadores é a mais evidente é que se a função perda for altamente não-linear, com diversos pontos de mínimo local, este otimizador pode ficar preso em um destes pontos sem nunca, no entanto, encontrar o mínimo global. Eles são, portanto muito sensíveis à estimativa inicial dos parâmetros.</p>
 <p>Por sua vez, otimizadores globais buscam mapear todo o espaço factível para os parâmetros e encontrar o ponto mínimo da função perda dentro deste espaço. Estes algoritmos não dependem de estimativas iniciais, uma vez que tentarão avaliar o espaço completo. São utilizados quando o problema de minimização é não-linear e possui múltiplos pontos de mínimo local. Estes algoritmos usam alguma forma de heurística para encontrar a região onde o mínimo global está localizado, mas são, em geral, ineficientes em apontar rapidamente onde este ponto de mínimo se encontra com precisão. Por esta razão, é frequente a utilização de otimizadores globais com um posterior refinamento de sua solução por algum algoritmo local.</p>
@@ -274,8 +305,8 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
 </ul>
 </div>
 </div>
-<div id="conclusao-1" class="section level2">
-<h2><span class="header-section-number">5.5</span> Conclusão</h2>
+<div id="conclusao-2" class="section level2">
+<h2><span class="header-section-number">6.5</span> Conclusão</h2>
 <p>Dependendo do objetivo da aplicação, superfícies de volatilidade podem ser interpoladas, suavizadas ou parametrizadas. A parametrização tem recebido especial interesse pois pode, ao mesmo tempo que garante uma superfície livre de arbitragem estática se devidamente construída, ajustar-se muito bem aos dados observados e gerar distribuições neutras ao risco implícitas factíveis.</p>
 <p>Para gerar uma superfície parametrizada, primeiramente é necessário um modelo teórico com propriedades desejáveis e que se ajuste aos dados de mercado quando calibrado. Escolhido este modelo paramétrico, passa-se a calibração do mesmo onde exsitem diversas opções de escolha entre otimizadores. Ao final do processo teremos um modelo de superfície devidamente parametrizado com valores que melhor se ajustam segundo alguma função perda escolhida.</p>
 <p>Com a superfície de volatilidade calibrada, as aplicações possíveis incluem a precificação de derivativos, gerenciamento de risco, simulações de Monte Carlo, análises de stress, entre outras.</p>
@@ -296,10 +327,10 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>Veja mais detalhes no Capítulo <a href="smile.html#arbestatica">Smile de Volatilidade</a><a href="calibracao.html#fnref7">↩</a></p></li>
-<li id="fn8"><p>Definição retirada de <a href="https://pt.wikipedia.org/wiki/Spline" class="uri">https://pt.wikipedia.org/wiki/Spline</a><a href="calibracao.html#fnref8">↩</a></p></li>
-<li id="fn9"><p>A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, <span class="math inline">\(w=\sigma^2_{imp}\cdot\tau\)</span>.<a href="calibracao.html#fnref9">↩</a></p></li>
+<ol start="11">
+<li id="fn11"><p>Veja mais detalhes no Capítulo <a href="smile.html#arbestatica">Smile de Volatilidade</a><a href="calibracao.html#fnref11">↩</a></p></li>
+<li id="fn12"><p>Definição retirada de <a href="https://pt.wikipedia.org/wiki/Spline" class="uri">https://pt.wikipedia.org/wiki/Spline</a><a href="calibracao.html#fnref12">↩</a></p></li>
+<li id="fn13"><p>A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, <span class="math inline">\(w=\sigma^2_{imp}\cdot\tau\)</span>.<a href="calibracao.html#fnref13">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -307,7 +338,7 @@ Figura 5.3: Menor parâmetro de suavização gera granularidade na curva.
           </div>
         </div>
       </div>
-<a href="smile.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="superficies.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="svi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

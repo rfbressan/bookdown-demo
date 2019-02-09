@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Capítulo 5 Superfícies de volatilidade | Introdução a Superfície de Volatilidade</title>
+  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Capítulo 5 Superfícies de volatilidade | Introdução a Superfície de Volatilidade" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Superfícies de volatilidade | Introdução a Superfície de Volatilidade" />
+  
+  <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
+  
+
+<meta name="author" content="Rafael Felipe Bressan">
+
+
+<meta name="date" content="2019-02-09">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="smile.html">
+<link rel="next" href="calibracao.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introdução a Superfície de Volatilidade</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html"><i class="fa fa-check"></i>Sobre os Autores</a><ul>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#erik-naoki-kawano"><i class="fa fa-check"></i>Erik Naoki Kawano</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#glauber-naue"><i class="fa fa-check"></i>Glauber Naue</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="opcoes.html"><a href="opcoes.html"><i class="fa fa-check"></i><b>1</b> Introdução as opções</a><ul>
+<li class="chapter" data-level="1.1" data-path="opcoes.html"><a href="opcoes.html#conceitos-in-the-money-at-the-money-e-out-the-money"><i class="fa fa-check"></i><b>1.1</b> Conceitos in the money, at the money e out the money</a></li>
+<li class="chapter" data-level="1.2" data-path="opcoes.html"><a href="opcoes.html#modelos-americano-e-europeu-de-opcoes"><i class="fa fa-check"></i><b>1.2</b> Modelos americano e europeu de opções</a></li>
+<li class="chapter" data-level="1.3" data-path="opcoes.html"><a href="opcoes.html#hedge"><i class="fa fa-check"></i><b>1.3</b> Hedge</a></li>
+<li class="chapter" data-level="1.4" data-path="opcoes.html"><a href="opcoes.html#travas"><i class="fa fa-check"></i><b>1.4</b> Travas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html"><i class="fa fa-check"></i><b>2</b> Processos Estocásticos em Finanças</a><ul>
+<li class="chapter" data-level="2.1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#markov"><i class="fa fa-check"></i><b>2.1</b> Processos de Markov</a></li>
+<li class="chapter" data-level="2.2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mb"><i class="fa fa-check"></i><b>2.2</b> Movimento Browniano</a></li>
+<li class="chapter" data-level="2.3" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#definicao"><i class="fa fa-check"></i><b>2.3</b> Definição</a></li>
+<li class="chapter" data-level="2.4" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mbg"><i class="fa fa-check"></i><b>2.4</b> Movimento Browniano Geométrico</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bsm.html"><a href="bsm.html"><i class="fa fa-check"></i><b>3</b> Modelo Black-Scholes-Merton</a><ul>
+<li class="chapter" data-level="3.1" data-path="bsm.html"><a href="bsm.html#portfolio-de-replicacao"><i class="fa fa-check"></i><b>3.1</b> Portfólio de replicação</a></li>
+<li class="chapter" data-level="3.2" data-path="bsm.html"><a href="bsm.html#precificacao-neutra-ao-risco"><i class="fa fa-check"></i><b>3.2</b> Precificação neutra ao risco</a></li>
+<li class="chapter" data-level="3.3" data-path="bsm.html"><a href="bsm.html#encontrando-a-equacao-de-black-scholes"><i class="fa fa-check"></i><b>3.3</b> Encontrando a equação de Black-Scholes</a></li>
+<li class="chapter" data-level="3.4" data-path="bsm.html"><a href="bsm.html#solucao-analitica"><i class="fa fa-check"></i><b>3.4</b> Solução analítica</a></li>
+<li class="chapter" data-level="3.5" data-path="bsm.html"><a href="bsm.html#putcallparity"><i class="fa fa-check"></i><b>3.5</b> Paridade compra e venda</a></li>
+<li class="chapter" data-level="3.6" data-path="bsm.html"><a href="bsm.html#gregas"><i class="fa fa-check"></i><b>3.6</b> As Gregas</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="bsm.html"><a href="bsm.html#delta"><i class="fa fa-check"></i><b>3.6.1</b> Delta</a></li>
+<li class="chapter" data-level="3.6.2" data-path="bsm.html"><a href="bsm.html#gamma"><i class="fa fa-check"></i><b>3.6.2</b> Gamma</a></li>
+<li class="chapter" data-level="3.6.3" data-path="bsm.html"><a href="bsm.html#theta"><i class="fa fa-check"></i><b>3.6.3</b> Theta</a></li>
+<li class="chapter" data-level="3.6.4" data-path="bsm.html"><a href="bsm.html#vega"><i class="fa fa-check"></i><b>3.6.4</b> Vega</a></li>
+<li class="chapter" data-level="3.6.5" data-path="bsm.html"><a href="bsm.html#rho"><i class="fa fa-check"></i><b>3.6.5</b> Rho</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="smile.html"><a href="smile.html"><i class="fa fa-check"></i><b>4</b> Smile de Volatilidade</a><ul>
+<li class="chapter" data-level="4.1" data-path="smile.html"><a href="smile.html#reparametrizando"><i class="fa fa-check"></i><b>4.1</b> Reparametrizando B&amp;S e definição de moneyness</a></li>
+<li class="chapter" data-level="4.2" data-path="smile.html"><a href="smile.html#caracsmile"><i class="fa fa-check"></i><b>4.2</b> Características de smiles de volatilidade</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="smile.html"><a href="smile.html#mercados-cambiais"><i class="fa fa-check"></i><b>4.2.1</b> Mercados cambiais</a></li>
+<li class="chapter" data-level="4.2.2" data-path="smile.html"><a href="smile.html#mercados-de-equities"><i class="fa fa-check"></i><b>4.2.2</b> Mercados de <em>equities</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="smile.html"><a href="smile.html#smileprecificacao"><i class="fa fa-check"></i><b>4.3</b> Smile como forma de precificação</a></li>
+<li class="chapter" data-level="4.4" data-path="smile.html"><a href="smile.html#estrutura-a-termo"><i class="fa fa-check"></i><b>4.4</b> Estrutura a termo</a></li>
+<li class="chapter" data-level="4.5" data-path="smile.html"><a href="smile.html#arbestatica"><i class="fa fa-check"></i><b>4.5</b> Arbitragem estática</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="smile.html"><a href="smile.html#arbitragem-de-borboleta"><i class="fa fa-check"></i><b>4.5.1</b> Arbitragem de borboleta</a></li>
+<li class="chapter" data-level="4.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>4.5.2</b> Arbitragem de calendário</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>4.6</b> Limites de inclinação</a></li>
+<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#rnd"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="superficies.html"><a href="superficies.html"><i class="fa fa-check"></i><b>5</b> Superfícies de volatilidade</a><ul>
+<li class="chapter" data-level="5.1" data-path="superficies.html"><a href="superficies.html#modelos-estocasticos"><i class="fa fa-check"></i><b>5.1</b> Modelos estocásticos</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="superficies.html"><a href="superficies.html#heston"><i class="fa fa-check"></i><b>5.1.1</b> Heston</a></li>
+<li class="chapter" data-level="5.1.2" data-path="superficies.html"><a href="superficies.html#sabr"><i class="fa fa-check"></i><b>5.1.2</b> SABR</a></li>
+<li class="chapter" data-level="5.1.3" data-path="superficies.html"><a href="superficies.html#bates"><i class="fa fa-check"></i><b>5.1.3</b> Bates</a></li>
+<li class="chapter" data-level="5.1.4" data-path="superficies.html"><a href="superficies.html#volatilidade-local"><i class="fa fa-check"></i><b>5.1.4</b> Volatilidade local</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="superficies.html"><a href="superficies.html#modelos-parametricos"><i class="fa fa-check"></i><b>5.2</b> Modelos paramétricos</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="superficies.html"><a href="superficies.html#sec:svi"><i class="fa fa-check"></i><b>5.2.1</b> SVI</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="superficies.html"><a href="superficies.html#modelos-nao-parametricos"><i class="fa fa-check"></i><b>5.3</b> Modelos não-paramétricos</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="superficies.html"><a href="superficies.html#interpolacao-e-suavizacao-spline"><i class="fa fa-check"></i><b>5.3.1</b> Interpolação e suavização spline</a></li>
+<li class="chapter" data-level="5.3.2" data-path="superficies.html"><a href="superficies.html#algoritmos-livres-de-arbitragem"><i class="fa fa-check"></i><b>5.3.2</b> Algoritmos livres de arbitragem</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="superficies.html"><a href="superficies.html#extrapolacao-do-smile"><i class="fa fa-check"></i><b>5.4</b> Extrapolação do smile</a></li>
+<li class="chapter" data-level="5.5" data-path="superficies.html"><a href="superficies.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="superficies.html"><a href="superficies.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>6</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="6.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>6.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="6.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>6.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="6.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>6.3</b> Suavização</a></li>
+<li class="chapter" data-level="6.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>6.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>6.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="6.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>6.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-2"><i class="fa fa-check"></i><b>6.5</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>7</b> Calibrando uma SVI</a><ul>
+<li class="chapter" data-level="7.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>7.1</b> Modelo SVI</a></li>
+<li class="chapter" data-level="7.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>7.2</b> Restrições de não-arbitragem</a></li>
+<li class="chapter" data-level="7.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>7.3</b> Reparametrização Quasi-explicit</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>7.3.1</b> Solução explícita do problema reduzido</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>7.4</b> Algoritmo</a></li>
+<li class="chapter" data-level="7.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>7.5</b> Resultados</a></li>
+<li class="chapter" data-level="7.6" data-path="svi.html"><a href="svi.html#conclusao-3"><i class="fa fa-check"></i><b>7.6</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ssvi.html"><a href="ssvi.html"><i class="fa fa-check"></i><b>8</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.1" data-path="ssvi.html"><a href="ssvi.html#reparametrizacoes-equivalentes"><i class="fa fa-check"></i><b>8.1</b> Reparametrizações equivalentes</a></li>
+<li class="chapter" data-level="8.2" data-path="ssvi.html"><a href="ssvi.html#superficie-svi"><i class="fa fa-check"></i><b>8.2</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="ssvi.html"><a href="ssvi.html#heston-1"><i class="fa fa-check"></i><b>8.2.1</b> Heston</a></li>
+<li class="chapter" data-level="8.2.2" data-path="ssvi.html"><a href="ssvi.html#lei-de-potencia"><i class="fa fa-check"></i><b>8.2.2</b> Lei de potência</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="ssvi.html"><a href="ssvi.html#condicoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>8.3</b> Condições de não-arbitragem</a></li>
+<li class="chapter" data-level="8.4" data-path="ssvi.html"><a href="ssvi.html#densidade-neutra-ao-risco"><i class="fa fa-check"></i><b>8.4</b> Densidade neutra ao risco</a></li>
+<li class="chapter" data-level="8.5" data-path="ssvi.html"><a href="ssvi.html#superficie-de-volatilidade-local"><i class="fa fa-check"></i><b>8.5</b> Superfície de volatilidade local</a></li>
+<li class="chapter" data-level="8.6" data-path="ssvi.html"><a href="ssvi.html#calibracao-da-ssvi"><i class="fa fa-check"></i><b>8.6</b> Calibração da SSVI</a></li>
+<li class="chapter" data-level="8.7" data-path="ssvi.html"><a href="ssvi.html#conclusao-4"><i class="fa fa-check"></i><b>8.7</b> Conclusão</a></li>
+<li class="chapter" data-level="8.8" data-path="ssvi.html"><a href="ssvi.html#referencias-1"><i class="fa fa-check"></i><b>8.8</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introdução a Superfície de Volatilidade</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="superficies" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Superfícies de volatilidade</h1>
+<p>Já mostramos em artigos anteriores, <a href="processos-estocasticos.html#processos-estocasticos">processos estocásticos em finanças</a>, o <a href="bsm.html#bsm">modelo de Black&amp;Scholes</a> e, como na realidade dos mercados surgem os <a href="smile.html#smile">smiles de volatilidade</a>, uma anomalia não prevista por B&amp;S. Dado que este modelo não pode explicar o surgimento do smile de volatilidade e tampouco sua superfície, o estudo da volatilidade implícita tornou-se uma preocupação central nas finanças. Diversos modelos foram propostos ao longo dos anos, e ainda o são, para buscar conciliar a presença do smile de volatilidade e a natureza estocástica da precificação do ativo subjacente.</p>
+<p>Apresentaremos alguns poucos destes modelos.</p>
+<div id="modelos-estocasticos" class="section level2">
+<h2><span class="header-section-number">5.1</span> Modelos estocásticos</h2>
+<p>Volatilidade estocástica apresenta a noção que a volatilidade instantânea do ativo subjacente também é, por si só, um processo estocástico que pode ser correlacionado com o processo de formação do preço do ativo. O resultado destes modelo é um procedimento livre de arbitragem para a interpolação dos dados de mercado a superfície de volatilidade.</p>
+<div id="heston" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Heston</h3>
+<p>O modelo de Heston, baseado no trabalho de <span class="citation">Heston (<a href="#ref-Heston1993">1993</a>)</span>, assume que o quadrado da volatilidade segue uma equação diferencial estocástica - EDE - do tipo Cox-Ingersoll-Ross - CIR, a qual apresenta características desejáveis do ponto de vista da variância. Abaixo estão as três equações que definem um modelo de Heston:</p>
+<span class="math display" id="eq:heston">\[\begin{equation}
+\begin{aligned}
+dS_t=&amp;\mu S_t dt + \sqrt{v_t}S_t dW_1\\
+dv_t=&amp;-\lambda(v_t-\bar v)dt+\eta\sqrt{v_t}dW_2\\
+d\left\langle W_1, W_2 \right\rangle=&amp;\rho dt
+\end{aligned}
+\tag{5.1}
+\end{equation}\]</span>
+<p>onde <span class="math inline">\(v_t\)</span> é a variância estocástica, <span class="math inline">\(\lambda\)</span> é o parâmetro que define a velocidade de convergência da volatilidade para seu valor de longo prazo <span class="math inline">\(\bar v\)</span>, <span class="math inline">\(\eta\)</span> é a famigerada <strong>volatilidade da volatilidade</strong> e a notação <span class="math inline">\(d\left\langle W_1, W_2 \right\rangle\)</span> indica a covariação entre os movimentos Brownianos padrões <span class="math inline">\(dW_1\)</span> e <span class="math inline">\(dW_2\)</span>.</p>
+<p>Esta modelagem apresenta uma característica desejável, e até certo ponto, intuitiva para a volatilidade, o retorno a uma média de longo prazo. Empiricamente observamos regimes distintos de volatilidade para os ativos financeiros, em alguns momentos a volatilidade está anormalmente baixa ou durante momentos de estresse no mercado, incrivelmente alta. Porém não faria sentido um modelo onde a volatiliade pudesse estacionar permanentemente no limite inferior ou então divergir para infinito. O modelo de Heston garante que, mesmo sendo estocástica, a volatilidade não é atraída para estes extremos.</p>
+<p>Os preços das calls e puts européias possuem fórmula fechada para seu cômputo através da <a href="https://en.wikipedia.org/wiki/Fourier_transform">transformada de Fourier</a>, como apresentado no artigo original. A complexidade destas equações e do método para sua resolução está fora do escopo deste blog, entretanto o leitor aficcionado pode encontrar uma demonstração da forma de resolução em <span class="citation">Gatheral (<a href="#ref-Gatheral2011">2011</a>)</span>.</p>
+<p>Basta-nos saber que em um <em>framework</em> geral de precificação de derivativos, o preço de uma call não descontada (preço de Black) pode ser escrita da seguinte forma:</p>
+<span class="math display" id="eq:callgeral">\[\begin{equation}
+C_B(x, v, \tau)=K\left[e^xP_1(x, v, \tau)-P_0(x, v, \tau)\right]
+\tag{5.2}
+\end{equation}\]</span>
+<p>onde <span class="math inline">\(x:=\ln K/F_t\)</span>. <span class="math inline">\(P_1\)</span> e <span class="math inline">\(P_0\)</span> são duas probabilidades na medida neutra ao risco, <span class="math inline">\(\mathbb Q\)</span>. Enquanto <span class="math inline">\(e^xP_1\)</span> informa o valor esperado do ativo no vencimento dado que a opção está no dinheiro, <span class="math inline">\(P_0\)</span> representa a probabilidade de ficar dentro do dinheiro na data de expiração.</p>
+<p>As probabilidades <span class="math inline">\(P_j\)</span>, <span class="math inline">\(j = 0, 1\)</span> podem ser calculadas através da seguinte equação:</p>
+<span class="math display" id="eq:pj">\[\begin{equation}
+P_j(x, v, \tau)=\frac{1}{2}+\frac{1}{\pi}\int\limits_0^\infty
+    Re\left\lbrace\frac{exp\{C_j(u, \tau)\bar v + D_j(u, \tau)v + iux\}}{iu}\right\rbrace du
+\tag{5.3}
+\end{equation}\]</span>
+<p>onde <span class="math inline">\(i\)</span> representa o número imaginário <span class="math inline">\(\sqrt{-1}\)</span> e <span class="math inline">\(Re\{\cdot\}\)</span> é apenas a parte real de seu argumento.</p>
+<p>Primeiramente vamos definir algumas variáveis auxiliares:</p>
+<p><span class="math display">\[\alpha_j=-\frac{u^2}{2}-\frac{iu}{2}+jiu\]</span></p>
+<p><span class="math display">\[\beta_j=\lambda-j\rho\eta-\rho\eta i u\]</span></p>
+<p><span class="math display">\[\gamma=\frac{\eta^2}{2}\]</span></p>
+<p><span class="math display">\[r_{\pm}=\frac{\beta_j\pm\sqrt{\beta^2-4\alpha\gamma}}{2\gamma}=\frac{\beta\pm d}{\eta^2}\]</span></p>
+<p><span class="math display">\[d=\sqrt{\beta^2-4\alpha\gamma}\]</span></p>
+<p><span class="math display">\[g=\frac{r_-}{r_+}\]</span></p>
+<p>Então:</p>
+<p><span class="math display" id="eq:cj">\[C_j(u, \tau)=\lambda\left\lbrace  r_-\tau-\frac{2}{\eta^2}\ln\left(\frac{1-ge^{-d\tau}}{1-g}\right) \right\rbrace
+\tag{5.4}\]</span></p>
+<p><span class="math display" id="eq:dj">\[D_j(u, \tau)=r_-\frac{1-e^{-d\tau}}{1-ge^{-d\tau}}
+\tag{5.5}\]</span></p>
+</div>
+<div id="sabr" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> SABR</h3>
+<p>Este modelo foi apresentado por <span class="citation">Hagan et al. (<a href="#ref-Hagan2002">2002</a>)</span> e assume que o preço <em>forward</em>, <span class="math inline">\(F_t\)</span> do ativo subjacente e sua volatilidade instantânea, <span class="math inline">\(\alpha_t\)</span>, seguem as seguintes EDEs:</p>
+<p><span class="math display" id="eq:sabr">\[
+\begin{aligned}
+dF_t=&amp;\alpha_tF_t^\beta dW_1\\
+d\alpha_t=&amp;\nu\alpha_t dW_2\\
+d\left\langle W_1, W_2 \right\rangle =&amp;\rho dt
+\end{aligned}
+\tag{5.6}
+\]</span></p>
+<p>onde <span class="math inline">\(\nu &gt; 0\)</span> é a volatilidade da volatilidade e <span class="math inline">\(\beta &gt; 0\)</span> é conhecido como o coeficiente de alavancagem.</p>
+<p>A interpretação financeira se dá pela seguinte maneira: <span class="math inline">\(\alpha_t\)</span> determina o nível geral de volatilidade do <em>forward</em> no dinheiro, <span class="math inline">\(\beta\)</span> mede a assimetria do smile sendo as duas escolhas particulares: <span class="math inline">\(\beta = 1\)</span> correspondendo ao modelo log-normal sem smile e <span class="math inline">\(\beta = 0\)</span> correspondendo ao modelo normal com um smile irrealista, <span class="math inline">\(\rho\)</span> também controla a inclinação do smile, quando <span class="math inline">\(\rho &lt; 0\)</span> uma inclinação negativa típica de <em>equities</em> surge e com a opção <span class="math inline">\(\rho = 0\)</span> produzindo um smile de volatilidade simétrico, por fim, <span class="math inline">\(\nu\)</span> é uma medida de convexidade. Também é possível verificar que a volatilidade estocástica, <span class="math inline">\(\alpha_t\)</span> segue uma distribuição log-normal.</p>
+<p>Comparado com outros modelos de volatilidade estocástica, o SABR é um dos mais simples e possui aproximações analíticas para o cálculo do preço de opções Europeias. Ele pode ser utilizado para ajustar um smile observado no mercado de forma acurada, entretanto, para ajustar uma superfície completa este modelo sofre com algumas restrições.</p>
+</div>
+<div id="bates" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Bates</h3>
+<p>Em modelos de difusão como B&amp;S e mesmo Heston, o processo de formação de preço do ativo se comporta como um movimento browniano e a probabilidade de que este preço se mova bruscamente em um curto período de tempo é muito pequena. Assim, em tais modelos, os preços das opções OTM mais curtas são muito inferiores ao que se observa nos mercados reais.</p>
+<p>Para endereçar esta deficiência, <span class="citation">Bates (<a href="#ref-Bates1996">1996</a>)</span> amplia o modelo de Heston incluindo saltos no processo de preço do ativo subjacente. Estes modelos, com a inclusão de saltos aleatórios na dinâmica de preços são conhecidos como <em>Jump-Diffusion</em>. A dinâmica é especificada pelas seguintes equações:</p>
+<span class="math display" id="eq:bates">\[\begin{equation}
+\begin{aligned}
+dS_t=&amp;\mu S_tdt+\sqrt{v_t}S_tdW_1(t)+J_t S_t dN_t\\
+dv_t=&amp;-\lambda(v_t-\bar v)dt+\eta\sqrt{v_t}dW_2(t)\\
+d\left\langle W_1, W_2 \right\rangle =&amp;\rho dt
+\end{aligned}
+\tag{5.7}
+\end{equation}\]</span>
+<p>Muito semelhante, portanto ao modelo de Heston nas equações <a href="superficies.html#eq:heston">(5.1)</a>, com a diferença da inclusão de um processo de Poisson, <span class="math inline">\(dN_t\)</span> com intensidade <span class="math inline">\(\theta\)</span> indicando a probabilidade instantânea de um salto de tamanho unitário. <span class="math inline">\(J_t\)</span> é o tamanho do salto aleatório e seu logaritmo segue uma distribuição gaussiana:</p>
+<span class="math display" id="eq:jt">\[\begin{equation}
+\ln{(1+J)}\sim N\left(\ln(1+\beta)-\frac{1}{2}\alpha^2\,\, ,\,\,\alpha^2\right)
+\tag{5.8}
+\end{equation}\]</span>
+<p>Este modelo possui fórmulas fechadas para os preços de calls e puts, novamente utilizando-se o método da transformada de Fourier, que podem ser encontrados utilizando o método de <span class="citation">Duffie, Pan, and Singleton (<a href="#ref-Duffie2000">2000</a>)</span>.</p>
+</div>
+<div id="volatilidade-local" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Volatilidade local</h3>
+<p>Conforme visto na <a href="smile.html#rnd">seção anterior</a> sobre o smile de volatilidade, é possível a partir das volatilidades implícitas obter a distribuição neutra ao risco do preço terminal do ativo subjacente. O pesquisador e profissional de mercado Bruno Dupire em seu artigo, <span class="citation">Dupire (<a href="#ref-Dupire1994">1994</a>)</span>, fez então o seguinte questionamento: dada uma distribuição implícita, existe apenas um processo de difusão<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> que seja consistente com esta distribuição? A resposta obtida foi sim, e deste processo surge a função de volatilidade local, <span class="math inline">\(\sigma_L(S, t)\)</span>, por vezes também conhecida como função de volatilidade implícita.</p>
+<p>A equação de Dupire é apresentada abaixo:</p>
+<p><span class="math display" id="eq:dupire">\[\frac{\partial C_B}{\partial \tau}=\frac{1}{2}\sigma_L^2K^2\frac{\partial^2C_B}{\partial K^2}
+\tag{5.9}\]</span></p>
+<p>da qual todos os termos podem ser obtidos a partir dos dados de mercado de uma superfície de volatilidade, com exceção é claro, da função de volatilidade local <span class="math inline">\(\sigma_L\)</span> que poderá ser calculada. Esta equação pode ser vista como a definição da função de volatiliade local independente do processo que governa a evolução da volatilidade (um processo estocástico, por exemplo).</p>
+<p>Uma forma de interpretar a volatilidade, ou mais precisamente a variância local, é na forma de valor esperado dentro da medida neutra ao risco. Resultado devido a trabalho de <span class="citation">Derman and Kani (<a href="#ref-Derman1998">1998</a>)</span>, onde a equação de Dupire pode ser reescrita da seguinte forma:</p>
+<p><span class="math display" id="eq:derman">\[\frac{\partial C_B}{\partial \tau}=\mathbb E\left[v_T|S_T=K\right]\frac{1}{2}K^2\frac{\partial^2C_B}{\partial K^2}
+\tag{5.10}\]</span></p>
+<p>Ou seja, a variância local é a expectativa neutra ao risco da variância instantânea condicionada ao preço terminal do ativo, <span class="math inline">\(S_T\)</span> ser igual ao preço de exercício <span class="math inline">\(K\)</span>.</p>
+<p>Uma das formas mais praticadas para a implementação de uma superfície de volatilidade local é através de árvores binomiais conforme apresentado por <span class="citation">Derman and Kani (<a href="#ref-Derman1994">1994</a>)</span>.</p>
+</div>
+</div>
+<div id="modelos-parametricos" class="section level2">
+<h2><span class="header-section-number">5.2</span> Modelos paramétricos</h2>
+<p>Diversas representações paramétricas já foram apresentadas para a superfície de volatilidade. Neste tipo de modelo uma função não-linear, dependente de um conjunto de parâmetros é especificada e, a partir dos dados observados no mercado, a parametrização é encontrada através da minimização de alguma função objetivo, método conhecido como <strong>calibração</strong>.</p>
+<div id="sec:svi" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> SVI</h3>
+<p>A parametrização da do tipo SVI <em>(Stochastic Volatility Inspired)</em> para o <em>smile</em> foi introduzida por <span class="citation">Gatheral (<a href="#ref-Gatheral2004">2004</a>)</span> e é motivada pelo comportamento assintótico para <em>strikes</em> extremos. É baseada no <em>smile</em> gerado por um modelo de <span class="citation">Heston (<a href="#ref-Heston1993">1993</a>)</span>. Sua parametrização é dada em termos de <em>forward log-moneyness</em> conforme apresentado <a href="smile.html#smile">anteriormente</a>, <span class="math inline">\(k=\ln(K/S)-r\tau=\ln(K/F)\)</span>, por:</p>
+<span class="math display" id="eq:rawsvi">\[\begin{equation}
+w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)
+\tag{5.11}
+\end{equation}\]</span>
+<p>onde <span class="math inline">\(w\)</span> é a variância total e o conjunto de parâmetros <span class="math inline">\(\chi_R = \{a, b, \rho, m, \sigma\}\)</span> definem a forma deste <em>smile</em> que é conhecido como parametrização <strong><em>raw</em></strong> do SVI. Os limites destes parâmetros são tais que: <span class="math inline">\(a \in \mathbb R\)</span>, <span class="math inline">\(b \geq 0\)</span>, <span class="math inline">\(|\rho| &lt; 1\)</span>, <span class="math inline">\(m \in \mathbb R\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, e a condição “óbivia” segundo <span class="citation">Gatheral and Jacquier (<a href="#ref-Gatheral2014">2014</a>)</span>, <span class="math inline">\(a+b \sigma\sqrt{1 − \rho^2} \geq 0\)</span>, que garante <span class="math inline">\(w(k; \chi_R) \geq 0\)</span> para todo <span class="math inline">\(k \in \mathbb R\)</span>. Alterações nestes parâmetros têm os seguintes efeitos:</p>
+<ul>
+<li>Aumentar <span class="math inline">\(a\)</span> eleva o nível geral de variância, um deslocamento vertical do <em>smile</em></li>
+<li>Aumentar <span class="math inline">\(b\)</span> aumenta as inclinações das asas, comprimindo o <em>smile</em></li>
+<li>Aumentar <span class="math inline">\(\rho\)</span> provoca uma rotação no sentido anti-horário</li>
+<li>Aumentar <span class="math inline">\(m\)</span> desloca o smile para a direita</li>
+<li>Aumentar <span class="math inline">\(\sigma\)</span> reduz a curvatura no dinheiro (ATM) do <em>smile</em></li>
+</ul>
+
+<div class="figure"><span id="fig:svi"></span>
+<img src="051-superficies-de-volatilidade_files/figure-html/svi-1.png" alt="Duas parametrizações hipotéticas para a SVI." width="672" />
+<p class="caption">
+Figura 5.1: Duas parametrizações hipotéticas para a SVI.
+</p>
+</div>
+<p>A figura <a href="superficies.html#fig:svi">5.1</a> acima apresenta duas parametrizações hipotéticas para o modelo. A variância total <span class="math inline">\(w_1\)</span> tem como conjunto de parâmetros, <span class="math inline">\(\chi = \{0, 0.5, -0.6, 0, 0.3\}\)</span> e poderia representar um <em>smile</em> de taxas de câmbio por exemplo. Enquanto que o modelo <span class="math inline">\(w_2\)</span> conta com <span class="math inline">\(\chi = \{-0.04, 0.5, -0.9, 0, 0.4\}\)</span> e se ajusta melhor ao mercado de <em>equities</em>.</p>
+<p>Existem outras duas parametrizações para o SVI, a natural e a <em>jump-wings</em> que podem ser conferidas no artigo de <span class="citation">Gatheral and Jacquier (<a href="#ref-Gatheral2014">2014</a>)</span> e serão abordadas em outro artigo a ser publicado futuramente pelo <a href="https://clubedefinancas.com.br">CF</a>.</p>
+<p>O SVI tem muitas vantagens, como o baixo tempo computacional, a variância implícita se comporta linearmente nos extremos, conforme prescrito pela fórmula do momento de <span class="citation">Lee (<a href="#ref-Lee2004">2004</a>)</span>, e boa aproximação de volatilidades implícitas para <em>strikes</em> muito dentro ou fora do dinheiro. O ajuste do SVI para os mercados de <em>equities</em> é muito melhor do que para outros mercados.</p>
+</div>
+</div>
+<div id="modelos-nao-parametricos" class="section level2">
+<h2><span class="header-section-number">5.3</span> Modelos não-paramétricos</h2>
+<p>Se violações de arbitragem na estimativa da superfície não representam um problema de interesse particular, virtualmente qualquer método não-paramétrico pode ser aplicado a dados de volatilidade implícita. Uma escolha específica deve ser feita a partir de considerações práticas.</p>
+<div id="interpolacao-e-suavizacao-spline" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Interpolação e suavização spline</h3>
+<p>As seguintes splines<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> podem ser empregadas para interpolar <em>smiles</em> de volatilidade:</p>
+<ul>
+<li>Spline cúbica</li>
+<li>B-spline cúbica</li>
+</ul>
+<p>No caso da spline cúbica, esta é uma função polinomial de grau 3 definida em cada subintervalo demarcados pelos pontos de controle, no caso de interpolação são todos nós. Uma spline cúbica é uma função contínua, suave e diferenciável até a segunda ordem.</p>
+<p>Uma B-spline<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>, ou <em>basis-spline</em> é uma função básica para funções spline de mesma ordem, o que significa que todas as funções spline possíveis podem ser construídas a partir de uma combinação linear de B-splines. Estas podem ser preferidas às splines cúbicas, devido à sua robustez a dados ruins e à capacidade de preservar a monotonicidade e a convexidade.</p>
+<p>Praticamente qualquer linguagem de programação e até mesmo o Excel<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> possui funções pré-programadas para implementar interpolações spline, sendo um método de fácil aplicação. Entretanto, estas técnicas de interpolação não são específicas para superfícies de volatilidade e, portanto, não garantem que a superfície interpolada seja livre de oportunidades de arbitragem, mesmo que os dados apresentados o sejam.</p>
+</div>
+<div id="algoritmos-livres-de-arbitragem" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Algoritmos livres de arbitragem</h3>
+<p>Considerando as limitações das interpolações com relação a presença de arbitragem na superfície gerada, vários artigos propõe algoritmos de interpolação que garantem que oportunidades de <a href="smile.html#arbestatica">arbitragem estática</a> não se apresentem, como em <span class="citation">Kahalé (<a href="#ref-Kahale2004">2004</a>)</span> e <span class="citation">Wang, Yin, and Qi (<a href="#ref-Wang2004">2004</a>)</span>.</p>
+<p>Em comum, estes algoritmos possuem como requisito que os dados a serem interpolados sejam livres de arbitragem desde o início, o que nem sempre pode ser obtido. <span class="citation">Kahalé (<a href="#ref-Kahale2004">2004</a>)</span>, por exemplo, propõe um procedimento de interpolação baseado em polinômios convexos por partes que simulam a fórmula de B&amp;S. O resultado da função de preço de calls é livre de arbitragem e, portanto, também a volatilidade implícita calculada a partir dela. Em uma segunda etapa, a variância total implícita é interpolada linearmente ao longo dos <em>strikes</em>.</p>
+<p>A abordagem de <span class="citation">Fengler (<a href="#ref-Fengler2012">2012</a>)</span> é baseada na suavização dos preços das opções por spline cúbica, e não em interpolação. Desta forma, os dados de entrada não precisam ser livres de arbitragem. Restrições especificamente adicionadas ao problema de minimização, a fim de garantir que não haja arbitragem, são impostos ao algoritmo spline. Uma possível desvantagem dessa abordagem é o fato de que a função de preço calls é aproximada por polinômios. Isso pode se mostrar desvantajoso, especialmente se extrapolação for necessária, já que a função de precificação certamente não é um polinômio. A escolha de uma grade suficientemente densa nos <em>strikes</em> pode minimizar este problema.</p>
+</div>
+</div>
+<div id="extrapolacao-do-smile" class="section level2">
+<h2><span class="header-section-number">5.4</span> Extrapolação do smile</h2>
+<p>É argumentado em <span class="citation">Benaim, Dodgson, and Kainth (<a href="#ref-Benaim2008">2008</a>)</span> que que um método de extrapolação deve resultar em preços livres de arbitragem para as opções europeias (baunilha), ou seja, os preços das opções devem ser funções decrescentes (crescentes) para calls (puts), convexas com relação ao <em>strike</em>, e permanecer dentro de certos limites de inclinação. Além disso, o método de extrapolação deve idealmente ter as seguintes propriedades:</p>
+<ol style="list-style-type: decimal">
+<li>Deve precificar corretamente todas as opções baunilha observadas</li>
+<li>A densidade da distribuição implícita e os preços das opções baunilha devem ser fáceis de calcular</li>
+<li>O método não deve gerar caudas irrealistas e, se possível, deve permitir controlá-las</li>
+<li>Deve ser robusto e flexível o suficiente para ser usado com uma ampla variedade de superfícies de volatilidade implícita</li>
+<li>Deve ser fácil e rápido inicializar para um determinado <em>smile</em></li>
+</ol>
+<p>Uma das formas de extrapolação comumente utilizada é fazer a interpolação dos dados dentro da área observada, por exemplo com splines cúbicas, e então fazer a extrapolação na forma de uma linha reta, ou seja, mantendo na região de extrapolação a mesma inclinação observada no último ponto interpolado. Esta forma, segundo os autores não é adequada pois insere uma descontinuidade na densidade e também gera caudas muito curtas, de fato truncadas, a partir do ponto onde se inicia a extrapolação.</p>
+<p>É proposto um método de extrapolação através de fórmulas fechadas para a asa esquerda (OTM puts) e direita (OTM call) do <em>smile</em>. Estas fórmulas têm as propriedades desejadas para <em>strikes</em> extremos e mantêm a convexidade dos preços. Suponha um intervalo de preços de exercício os quais existem observações de mercado e portanto, é possível fazer interpolação: <span class="math inline">\(K_-\leq K \leq K_+\)</span>, os valores das puts, <span class="math inline">\(P(K)\)</span>, para <span class="math inline">\(K&lt;K_-\)</span> e das calls, <span class="math inline">\(C(K)\)</span>, para <span class="math inline">\(K&gt;K_+\)</span> são dados por:</p>
+<span class="math display" id="eq:pk">\[\begin{equation}
+P(K)=K^\mu \exp\left(a_1+b_1K+c_1K^2\right)
+\tag{5.12}
+\end{equation}\]</span>
+<span class="math display" id="eq:ck">\[\begin{equation}
+C(K)=K^{-\nu} \exp\left(a_2+\frac{b_2}{K}+\frac{c_2}{K^2}\right)
+\tag{5.13}
+\end{equation}\]</span>
+<p>onde se garante <span class="math inline">\(\lim\limits_{K\rightarrow 0} P(K)=0\)</span> e <span class="math inline">\(\lim\limits_{K\rightarrow \infty} C(K)=0\)</span>, fazendo <span class="math inline">\(\mu &gt; 1\)</span> e <span class="math inline">\(\nu &gt; 0\)</span>. Estes parâmetros também servem para controlar a massa de probabilidade sob as caudas da distribuição.</p>
+<p>As condições para ajustar o preço e suas duas primeiras derivadas em <span class="math inline">\(K_-\)</span> e <span class="math inline">\(K_+\)</span> produz um conjunto de equações lineares para os parâmetros <span class="math inline">\(a_1, b_1, c_1\)</span> e <span class="math inline">\(a_2, b_2, c_2\)</span>, respectivamente.</p>
+</div>
+<div id="conclusao-1" class="section level2">
+<h2><span class="header-section-number">5.5</span> Conclusão</h2>
+<p>Repassamos neste artigos, algumas das principais metodologias para a construção da superfície de volatilidade implícita. Modelos de volatilidade estocástica são capazes de gerar <em>smiles</em> compatíveis com aqueles observados nos mercados, sendo dependentes de técnicas de calibração destes modelos. O modelo paramétrico SVI pode ser adequado para mercado de <em>equities</em>, entretanto, assim como acontece nas técnicas de interpolação, restrições com relação aos parâmetros devem ser impostas a fim de evitar o surgimento de oportunidades de arbitragem estática. Por fim uma estratégia de como implementar a extrapolação do <em>smile</em> fora da região central foi apresentada.</p>
+</div>
+<div id="referencias" class="section level2">
+<h2><span class="header-section-number">5.6</span> Referências</h2>
+
+</div>
+</div>
+<h3>Bibliografia</h3>
+<div id="refs" class="references">
+<div id="ref-Heston1993">
+<p>Heston, Steven L. 1993. “A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options.” <em>The Review of Financial Studies</em> 6 (2). Oxford University Press: 327–43.</p>
+</div>
+<div id="ref-Gatheral2011">
+<p>Gatheral, Jim. 2011. <em>The Volatility Surface: A Practitioner’s Guide</em>. Vol. 357. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-Hagan2002">
+<p>Hagan, Patrick S, Deep Kumar, Andrew S Lesniewski, and Diana E Woodward. 2002. “Managing Smile Risk.” <em>The Best of Wilmott</em> 1: 249–96.</p>
+</div>
+<div id="ref-Bates1996">
+<p>Bates, David S. 1996. “Jumps and Stochastic Volatility: Exchange Rate Processes Implicit in Deutsche Mark Options.” <em>The Review of Financial Studies</em> 9 (1). Oxford University Press: 69–107.</p>
+</div>
+<div id="ref-Duffie2000">
+<p>Duffie, Darrell, Jun Pan, and Kenneth Singleton. 2000. “Transform Analysis and Asset Pricing for Affine Jump-Diffusions.” <em>Econometrica</em> 68 (6). Wiley Online Library: 1343–76.</p>
+</div>
+<div id="ref-Dupire1994">
+<p>Dupire, Bruno. 1994. “Pricing with a Smile.” <em>Risk</em> 7 (1): 18–20.</p>
+</div>
+<div id="ref-Derman1998">
+<p>Derman, Emanuel, and Iraj Kani. 1998. “Stochastic Implied Trees: Arbitrage Pricing with Stochastic Term and Strike Structure of Volatility.” <em>International Journal of Theoretical and Applied Finance</em> 01 (01): 61–110. doi:<a href="https://doi.org/10.1142/S0219024998000059">10.1142/S0219024998000059</a>.</p>
+</div>
+<div id="ref-Derman1994">
+<p>Derman, Emanuel, and Iraj Kani. 1994. “The Volatility Smile and Its Implied Tree.” <em>Goldman Sachs Quantitative Strategies Research Notes</em> 7 (January).</p>
+</div>
+<div id="ref-Gatheral2004">
+<p>Gatheral, Jim. 2004. “A Parsimonious Arbitrage-Free Implied Volatility Parameterization with Application to the Valuation of Volatility Derivatives.” <em>Presentation at Global Derivatives &amp; Risk Management, Madrid</em>.</p>
+</div>
+<div id="ref-Gatheral2014">
+<p>Gatheral, Jim, and Antoine Jacquier. 2014. “Arbitrage-Free Svi Volatility Surfaces.” <em>Quantitative Finance</em> 14 (1). Taylor &amp; Francis: 59–71.</p>
+</div>
+<div id="ref-Lee2004">
+<p>Lee, Roger W. 2004. “The Moment Formula for Implied Volatility at Extreme Strikes.” <em>Mathematical Finance: An International Journal of Mathematics, Statistics and Financial Economics</em> 14 (3). Wiley Online Library: 469–80.</p>
+</div>
+<div id="ref-Kahale2004">
+<p>Kahalé, Nabil. 2004. “An Arbitrage-Free Interpolation of Volatilities.” <em>Risk</em> 17 (5): 102–6.</p>
+</div>
+<div id="ref-Wang2004">
+<p>Wang, Y, H Yin, and L Qi. 2004. “No-Arbitrage Interpolation of the Option Price Function and Its Reformulation.” <em>Journal of Optimization Theory and Applications</em> 120 (3). Springer: 627–49.</p>
+</div>
+<div id="ref-Fengler2012">
+<p>Fengler, Matthias R. 2012. “Option Data and Modeling Bsm Implied Volatility.” In <em>Handbook of Computational Finance</em>, 117–42. Springer.</p>
+</div>
+<div id="ref-Benaim2008">
+<p>Benaim, Shalom, Matthew Dodgson, and Dherminder Kainth. 2008. “An Arbitrage-Free Method for Smile Extrapolation.” <em>Royal Bank of Scotland, Technical Report</em>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>Processo de difusão é a solução de uma equação diferencial estocástica com propriedades de Markov. O Movimento Browniano é um exemplo.<a href="superficies.html#fnref7">↩</a></p></li>
+<li id="fn8"><p><a href="https://en.wikipedia.org/wiki/Spline_interpolation">Spline</a><a href="superficies.html#fnref8">↩</a></p></li>
+<li id="fn9"><p><a href="https://en.wikipedia.org/wiki/B-spline">B-Spline</a><a href="superficies.html#fnref9">↩</a></p></li>
+<li id="fn10"><p><a href="https://www.business-spreadsheets.com/forum.asp?t=120">Cubic Spline Function in VBA</a><a href="superficies.html#fnref10">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="smile.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="calibracao.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/051-superficies-de-volatilidade.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["vol_surface_book.pdf", "vol_surface_book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

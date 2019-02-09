@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Capítulo 6 Calibrando uma SVI | Introdução a Superfície de Volatilidade</title>
+  <title>Capítulo 7 Calibrando uma SVI | Introdução a Superfície de Volatilidade</title>
   <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Capítulo 6 Calibrando uma SVI | Introdução a Superfície de Volatilidade" />
+  <meta property="og:title" content="Capítulo 7 Calibrando uma SVI | Introdução a Superfície de Volatilidade" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 6 Calibrando uma SVI | Introdução a Superfície de Volatilidade" />
+  <meta name="twitter:title" content="Capítulo 7 Calibrando uma SVI | Introdução a Superfície de Volatilidade" />
   
   <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Rafael Felipe Bressan">
 
 
-<meta name="date" content="2019-01-26">
+<meta name="date" content="2019-02-09">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="calibracao.html">
-<link rel="next" href="bibliografia.html">
+<link rel="next" href="ssvi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -151,28 +151,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>4.5.2</b> Arbitragem de calendário</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>4.6</b> Limites de inclinação</a></li>
-<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#distribuicao-implicita"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#rnd"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
 <li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>5</b> Métodos de Calibração</a><ul>
-<li class="chapter" data-level="5.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>5.1</b> Calibração versus Interpolação</a></li>
-<li class="chapter" data-level="5.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>5.2</b> Spline cúbica</a></li>
-<li class="chapter" data-level="5.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>5.3</b> Suavização</a></li>
-<li class="chapter" data-level="5.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>5.4</b> Parametrização</a><ul>
-<li class="chapter" data-level="5.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>5.4.1</b> Função perda</a></li>
-<li class="chapter" data-level="5.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>5.4.2</b> Otimizadores</a></li>
+<li class="chapter" data-level="5" data-path="superficies.html"><a href="superficies.html"><i class="fa fa-check"></i><b>5</b> Superfícies de volatilidade</a><ul>
+<li class="chapter" data-level="5.1" data-path="superficies.html"><a href="superficies.html#modelos-estocasticos"><i class="fa fa-check"></i><b>5.1</b> Modelos estocásticos</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="superficies.html"><a href="superficies.html#heston"><i class="fa fa-check"></i><b>5.1.1</b> Heston</a></li>
+<li class="chapter" data-level="5.1.2" data-path="superficies.html"><a href="superficies.html#sabr"><i class="fa fa-check"></i><b>5.1.2</b> SABR</a></li>
+<li class="chapter" data-level="5.1.3" data-path="superficies.html"><a href="superficies.html#bates"><i class="fa fa-check"></i><b>5.1.3</b> Bates</a></li>
+<li class="chapter" data-level="5.1.4" data-path="superficies.html"><a href="superficies.html#volatilidade-local"><i class="fa fa-check"></i><b>5.1.4</b> Volatilidade local</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.2" data-path="superficies.html"><a href="superficies.html#modelos-parametricos"><i class="fa fa-check"></i><b>5.2</b> Modelos paramétricos</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="superficies.html"><a href="superficies.html#sec:svi"><i class="fa fa-check"></i><b>5.2.1</b> SVI</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>6</b> Calibrando uma SVI</a><ul>
-<li class="chapter" data-level="6.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>6.1</b> Modelo SVI</a></li>
-<li class="chapter" data-level="6.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>6.2</b> Restrições de não-arbitragem</a></li>
-<li class="chapter" data-level="6.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>6.3</b> Reparametrização Quasi-explicit</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>6.3.1</b> Solução explícita do problema reduzido</a></li>
+<li class="chapter" data-level="5.3" data-path="superficies.html"><a href="superficies.html#modelos-nao-parametricos"><i class="fa fa-check"></i><b>5.3</b> Modelos não-paramétricos</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="superficies.html"><a href="superficies.html#interpolacao-e-suavizacao-spline"><i class="fa fa-check"></i><b>5.3.1</b> Interpolação e suavização spline</a></li>
+<li class="chapter" data-level="5.3.2" data-path="superficies.html"><a href="superficies.html#algoritmos-livres-de-arbitragem"><i class="fa fa-check"></i><b>5.3.2</b> Algoritmos livres de arbitragem</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>6.4</b> Algoritmo</a></li>
-<li class="chapter" data-level="6.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>6.5</b> Resultados</a></li>
-<li class="chapter" data-level="6.6" data-path="svi.html"><a href="svi.html#conclusao-2"><i class="fa fa-check"></i><b>6.6</b> Conclusão</a></li>
+<li class="chapter" data-level="5.4" data-path="superficies.html"><a href="superficies.html#extrapolacao-do-smile"><i class="fa fa-check"></i><b>5.4</b> Extrapolação do smile</a></li>
+<li class="chapter" data-level="5.5" data-path="superficies.html"><a href="superficies.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="superficies.html"><a href="superficies.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>6</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="6.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>6.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="6.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>6.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="6.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>6.3</b> Suavização</a></li>
+<li class="chapter" data-level="6.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>6.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>6.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="6.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>6.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-2"><i class="fa fa-check"></i><b>6.5</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>7</b> Calibrando uma SVI</a><ul>
+<li class="chapter" data-level="7.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>7.1</b> Modelo SVI</a></li>
+<li class="chapter" data-level="7.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>7.2</b> Restrições de não-arbitragem</a></li>
+<li class="chapter" data-level="7.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>7.3</b> Reparametrização Quasi-explicit</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>7.3.1</b> Solução explícita do problema reduzido</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>7.4</b> Algoritmo</a></li>
+<li class="chapter" data-level="7.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>7.5</b> Resultados</a></li>
+<li class="chapter" data-level="7.6" data-path="svi.html"><a href="svi.html#conclusao-3"><i class="fa fa-check"></i><b>7.6</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ssvi.html"><a href="ssvi.html"><i class="fa fa-check"></i><b>8</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.1" data-path="ssvi.html"><a href="ssvi.html#reparametrizacoes-equivalentes"><i class="fa fa-check"></i><b>8.1</b> Reparametrizações equivalentes</a></li>
+<li class="chapter" data-level="8.2" data-path="ssvi.html"><a href="ssvi.html#superficie-svi"><i class="fa fa-check"></i><b>8.2</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="ssvi.html"><a href="ssvi.html#heston-1"><i class="fa fa-check"></i><b>8.2.1</b> Heston</a></li>
+<li class="chapter" data-level="8.2.2" data-path="ssvi.html"><a href="ssvi.html#lei-de-potencia"><i class="fa fa-check"></i><b>8.2.2</b> Lei de potência</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="ssvi.html"><a href="ssvi.html#condicoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>8.3</b> Condições de não-arbitragem</a></li>
+<li class="chapter" data-level="8.4" data-path="ssvi.html"><a href="ssvi.html#densidade-neutra-ao-risco"><i class="fa fa-check"></i><b>8.4</b> Densidade neutra ao risco</a></li>
+<li class="chapter" data-level="8.5" data-path="ssvi.html"><a href="ssvi.html#superficie-de-volatilidade-local"><i class="fa fa-check"></i><b>8.5</b> Superfície de volatilidade local</a></li>
+<li class="chapter" data-level="8.6" data-path="ssvi.html"><a href="ssvi.html#calibracao-da-ssvi"><i class="fa fa-check"></i><b>8.6</b> Calibração da SSVI</a></li>
+<li class="chapter" data-level="8.7" data-path="ssvi.html"><a href="ssvi.html#conclusao-4"><i class="fa fa-check"></i><b>8.7</b> Conclusão</a></li>
+<li class="chapter" data-level="8.8" data-path="ssvi.html"><a href="ssvi.html#referencias-1"><i class="fa fa-check"></i><b>8.8</b> Referências</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -196,42 +227,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="svi" class="section level1">
-<h1><span class="header-section-number">Capítulo 6</span> Calibrando uma SVI</h1>
+<h1><span class="header-section-number">Capítulo 7</span> Calibrando uma SVI</h1>
 <p>Neste capítulo iremos mostrar como fazer uma calibração de um smile SVI baseado nos trabalhos de <span class="citation">(Gatheral <a href="#ref-Gatheral2004">2004</a>)</span> e <span class="citation">(De Marco and Martini <a href="#ref-DeMarco2009">2009</a>)</span>. Escolheremos apenas uma fatia da superfície de volatilidade, fixando o tempo para expiração (maturidade) e coletando as volatilidades implícitas para diversos strikes.</p>
 <p>Como já apresentado em posts anteriores, existem diversas formas de interpolar, extrapolar, parametrizar e calibrar smiles de volatilidade. Exsitem vantagens e desvantagens para cada método. Neste post iremos fixar nossa atenção no modelo paramétrico de smile chamado SVI - Stochastic Volatility Inspired - uma forma que une a “simplicidade” de um modelo paramétrico com o poder de adesão aos dados de mercado dos modelos de volatilidade estocástica (i.e. Heston, SABR e afins).</p>
 <p>Chamar o modelo SVI de simples é puro eufemismo, ele é um modelo poderoso, com fundamento teórico avançado e diversos detalhes para sua calibração.</p>
 <div id="modelo-svi" class="section level2">
-<h2><span class="header-section-number">6.1</span> Modelo SVI</h2>
+<h2><span class="header-section-number">7.1</span> Modelo SVI</h2>
 <p>Este modelo foi apresentado por <a href="https://mfe.baruch.cuny.edu/jgatheral/">Jim Gatheral</a> na conferência <em>Global Derivatives &amp; Risk Management 2004</em> e foi bem recebido pelos profissionais de mercado interessados em superfícies de volatilidade para <em>equities</em>, principalmente.</p>
 <p>O modelo possui duas propriedades que são as razões para sua popularidade. Ele satisfaz a fórmula do momento de <span class="citation">Lee (<a href="#ref-Lee2004">2004</a>)</span>, que é um resultado independente de modelo que especifica os limites assintóticos para um <em>smile</em> de volatilidade implícita. Portanto, o modelo SVI é válido para extrapolação além da região central dos dados disponíveis. Além disso, afirma-se que o modelo SVI é relativamente fácil de calibrar para dados de mercado, de modo que a superfície de volatilidade implícita correspondente é livre de arbitragem de calendário. As condições que garantem a ausência de arbitragem de borboleta forma resolvidas em um segundo artigo por <span class="citation">Gatheral and Jacquier (<a href="#ref-Gatheral2014">2014</a>)</span>.</p>
 <p>No SVI é possível se estabelecer condições explícitas em seus parâmetros, de modo que o modelo não gere preços onde oportunidades de <a href="smile.html#arbestatica">arbitragem estáticas</a> possam ocorrer. A calibração para dados reais de mercado requer algoritmos de otimização não-linear e pode ser bastante demorada. Mais recentemente, um método para calibração que usa a estrutura inerente do modelo para reduzir as dimensões do problema de otimização foi desenvolvido em <span class="citation">De Marco and Martini (<a href="#ref-DeMarco2009">2009</a>)</span>.</p>
-<p>A parametrização conhecida como <em>RAW</em> do SVI é apresentada na equação <a href="svi.html#eq:rawsvi">(6.1)</a>, seguindo a notação já introduzida <a href="smile.html#smile">anteriormente</a>, portanto, estamos modelando a <strong>variância total</strong> implícita para um determinado prazo. Para diferentes maturidades, teremos diferentes conjuntos de parâmetros.</p>
+<p>A parametrização conhecida como <em>RAW</em> do SVI é apresentada na equação <a href="superficies.html#eq:rawsvi">(5.11)</a>, seguindo a notação já introduzida <a href="smile.html#smile">anteriormente</a>, portanto, estamos modelando a <strong>variância total</strong> implícita para um determinado prazo. Para diferentes maturidades, teremos diferentes conjuntos de parâmetros.</p>
 <span class="math display" id="eq:rawsvi">\[\begin{equation}
 w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)
-\tag{6.1}
+\tag{5.11}
 \end{equation}\]</span>
 <p>onde: <span class="math inline">\(a \in \mathbb R\)</span>, <span class="math inline">\(b \geq 0\)</span>, <span class="math inline">\(|\rho| &lt; 1\)</span>, <span class="math inline">\(m \in \mathbb R\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span>, e <span class="math inline">\(a+b \sigma\sqrt{1 − \rho^2} \geq 0\)</span> para garantir que <span class="math inline">\(\min w(k)&gt;0, \, \forall k \in \mathbb R\)</span>.</p>
 </div>
 <div id="restricoes-de-nao-arbitragem" class="section level2">
-<h2><span class="header-section-number">6.2</span> Restrições de não-arbitragem</h2>
+<h2><span class="header-section-number">7.2</span> Restrições de não-arbitragem</h2>
 <p>Antes de demonstrar a restrição imposta aos parâmetros <span class="math inline">\(b\)</span> e <span class="math inline">\(\rho\)</span> em função dos limites de inclinação das asas do <em>smile</em>, vamos derivar as expressões para <span class="math inline">\(w\prime(k)\)</span> e <span class="math inline">\(w\prime\prime(k)\)</span> que nos serão úteis na demonstração.</p>
 <p>A expressão para <span class="math inline">\(w\prime(k)\)</span> é bastante simples:</p>
 <span class="math display" id="eq:wk">\[\begin{equation}
 w\prime(k) = b \left[\rho + \frac{(k-m)}{\sqrt{(k-m)^2+\sigma^2}}\right]
-\tag{6.2}
+\tag{7.1}
 \end{equation}\]</span>
-<p>Derivando novamente a equação <a href="svi.html#eq:wk">(6.2)</a> em relação a <span class="math inline">\(k\)</span> teremos uma expressão ainda mais simples, mesmo que após alguma manipulação algébrica um tanto tediosa<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>, e resulta em:</p>
+<p>Derivando novamente a equação <a href="svi.html#eq:wk">(7.1)</a> em relação a <span class="math inline">\(k\)</span> teremos uma expressão ainda mais simples, mesmo que após alguma manipulação algébrica um tanto tediosa<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a>, e resulta em:</p>
 <span class="math display" id="eq:wkk">\[\begin{equation}
 w\prime\prime(k)=\frac{b\sigma^2}{[(k-m)^2+\sigma^2]^{3/2}}
-\tag{6.3}
+\tag{7.2}
 \end{equation}\]</span>
-<p>onde, se considerarmos <span class="math inline">\(b&gt;0\)</span> temos que <span class="math inline">\(w\prime\prime(k)&gt;0, \,\forall k\in \mathbb R\)</span>, ou seja, o <em>smile</em> de volatilidade definido pela equação <a href="svi.html#eq:rawsvi">(6.1)</a> é <strong>estritamente</strong> convexo.</p>
+<p>onde, se considerarmos <span class="math inline">\(b&gt;0\)</span> temos que <span class="math inline">\(w\prime\prime(k)&gt;0, \,\forall k\in \mathbb R\)</span>, ou seja, o <em>smile</em> de volatilidade definido pela equação <a href="superficies.html#eq:rawsvi">(5.11)</a> é <strong>estritamente</strong> convexo.</p>
 <p><span class="citation">Rogers and Tehranchi (<a href="#ref-Rogers2010">2010</a>)</span> definiram os limites possíveis para a inclinação das asas em função do tempo para expiração, provando que o <em>smile</em> tende a ficar mais horizontal a medida que o prazo aumenta. Este limite pode ser escrito da seguinte forma e é uma <strong>condição necessária</strong> para a ausência de arbitragem:</p>
 <span class="math display" id="eq:rogers">\[\begin{equation}
 |w\prime(k)|\leq \frac{4}{\tau} \qquad \forall k \in \mathbb R, \quad \forall \tau \in (0, \infty)
-\tag{6.4}
+\tag{7.3}
 \end{equation}\]</span>
-<p>Sendo o <em>smile</em> convexo, suas máximas inclinações ocorrem quando <span class="math inline">\(k\rightarrow \pm \infty\)</span>. Portanto, deve-se avaliar a restrição dada pela equação <a href="svi.html#eq:rogers">(6.4)</a> nestes limites da seguinte maneira:</p>
+<p>Sendo o <em>smile</em> convexo, suas máximas inclinações ocorrem quando <span class="math inline">\(k\rightarrow \pm \infty\)</span>. Portanto, deve-se avaliar a restrição dada pela equação <a href="svi.html#eq:rogers">(7.3)</a> nestes limites da seguinte maneira:</p>
 <span class="math display">\[\begin{align}
 \lim\limits_{k\rightarrow\infty}w\prime(k)&amp;=b(1+\rho)\geq 0\\
 \lim\limits_{k\rightarrow-\infty}w\prime(k)&amp;=-b(1-\rho)\leq 0
@@ -239,22 +270,22 @@ w\prime\prime(k)=\frac{b\sigma^2}{[(k-m)^2+\sigma^2]^{3/2}}
 <p>que satisfazendo estas duas relações ao mesmo tempo em que se restringe os parâmetros <span class="math inline">\(b\)</span> e <span class="math inline">\(\rho\)</span> através da inequalidade de Rogers e Tehranchi nos garante o seguinte resultado para um SVI <strong>livre de arbitragem de travas</strong>.</p>
 <span class="math display" id="eq:trava">\[\begin{equation}
 b(1+|\rho|)\leq\frac{4}{\tau}
-\tag{6.5}
+\tag{7.4}
 \end{equation}\]</span>
-<p>Para garantir que a superfície gerada está livre de arbitragem do tipo borboleta deve-se primeiramente definir uma função<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> <span class="math inline">\(g: \mathbb R\rightarrow \mathbb R\)</span>, tal que:</p>
+<p>Para garantir que a superfície gerada está livre de arbitragem do tipo borboleta deve-se primeiramente definir uma função<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a> <span class="math inline">\(g: \mathbb R\rightarrow \mathbb R\)</span>, tal que:</p>
 <span class="math display" id="eq:g">\[\begin{equation}
 g(k)=\left(1-\frac{kw\prime(k)}{2w(k)}\right)^2-\frac{w\prime(k)^2}{4}\left(\frac{1}{w(k)}+\frac{1}{4}\right)+\frac{w\prime\prime(k)}{2}
-\tag{6.6}
+\tag{7.5}
 \end{equation}\]</span>
 <p>e seguir o lema :</p>
 <p><strong>Lema 1</strong> Uma fatia da superfície de volatilidade está livre de arbitragem do tipo borboleta se, e somente se, <span class="math inline">\(g(k) \geq 0\)</span> para todo <span class="math inline">\(k \in \mathbb R\)</span> e <span class="math inline">\(\lim\limits_{k\rightarrow+\infty}d_1(k)=-\infty\)</span>.</p>
 <p>Infelizmente, a natureza altamente não-linear da função <span class="math inline">\(g(k)\)</span> impossibilita a derivação de restrições gerais aos parâmetros do SVI. A forma mais simples de eliminar arbitragem do tipo borbobleta é incluir a restrição <span class="math inline">\(g(k) \geq 0\)</span> na função perda e proceder com a calibração dos parâmetros.</p>
 </div>
 <div id="reparametrizacao-quasi-explicit" class="section level2">
-<h2><span class="header-section-number">6.3</span> Reparametrização Quasi-explicit</h2>
-<p>Um dos problemas mais marcantes com a calibração do SVI dado pela equação <a href="svi.html#eq:rawsvi">(6.1)</a> é sua natureza altamente não-linear que gera inúmeros pontos de mínimo locais. Mesmo em um ambiente simulado, um típico otimizador de <a href="calibracao.html#calibracao">mínimos quadrados</a> como Levenberg-Marquardt não consegue chegar ao mínimo global, onde a função perda é igual a zero. A solução encontrada é dependente dos valores iniciais inputados ao otimizador e a robustez do conjunto de parâmetros encontrados não é garantida.</p>
+<h2><span class="header-section-number">7.3</span> Reparametrização Quasi-explicit</h2>
+<p>Um dos problemas mais marcantes com a calibração do SVI dado pela equação <a href="superficies.html#eq:rawsvi">(5.11)</a> é sua natureza altamente não-linear que gera inúmeros pontos de mínimo locais. Mesmo em um ambiente simulado, um típico otimizador de <a href="calibracao.html#calibracao">mínimos quadrados</a> como Levenberg-Marquardt não consegue chegar ao mínimo global, onde a função perda é igual a zero. A solução encontrada é dependente dos valores iniciais inputados ao otimizador e a robustez do conjunto de parâmetros encontrados não é garantida.</p>
 <p>Uma forma de contornar este problema pode ser a utilização de otimizadores globais, como algortimos genéticos, em um primeiro estágio e então o refinamento desta solução através de um otimizador local (LM, por exemplo).</p>
-<p>Outra forma, adotada em <span class="citation">De Marco and Martini (<a href="#ref-DeMarco2009">2009</a>)</span> é a reparametrização da equação <a href="svi.html#eq:rawsvi">(6.1)</a> de forma que esta possa ser tratada como um prolema linear. Para tanto, considere a seguinte troca de variáveis:</p>
+<p>Outra forma, adotada em <span class="citation">De Marco and Martini (<a href="#ref-DeMarco2009">2009</a>)</span> é a reparametrização da equação <a href="superficies.html#eq:rawsvi">(5.11)</a> de forma que esta possa ser tratada como um prolema linear. Para tanto, considere a seguinte troca de variáveis:</p>
 <span class="math display">\[\begin{equation}
 y = \frac{k-m}{\sigma}
 \end{equation}\]</span>
@@ -269,20 +300,20 @@ d = &amp;\rho b \sigma
 \end{align}\]</span>
 <span class="math display" id="eq:quasiexplicit">\[\begin{equation}
 w(y)=a+dy+c\sqrt{y^2+1}
-\tag{6.7}
+\tag{7.6}
 \end{equation}\]</span>
 <p>Portanto, para um par fixo de <span class="math inline">\((m, \sigma)\)</span> nosso problema reduzido é:</p>
 <span class="math display" id="eq:reduzido">\[\begin{equation}
 P_{m, \sigma}:=\min\limits_{a, c, d \in D}f_y(a, c, d)
-\tag{6.8}
+\tag{7.7}
 \end{equation}\]</span>
 <p>onde <span class="math inline">\(f_y(\cdot)\)</span> é a função objetivo da reparametrização, e é dada pela seguinte equação:</p>
 <span class="math display" id="eq:fy">\[\begin{equation}
 f_y(a, c, d)=\sum_{i=1}^{n}\left[w(y_i)-\tilde w_i\right]^2
-\tag{6.9}
+\tag{7.8}
 \end{equation}\]</span>
 <p>onde <span class="math inline">\(\tilde w_i\)</span> é a variância total observada correspondente ao <em>moneyness</em> <span class="math inline">\(k_i\)</span>.</p>
-<p>O domínio <span class="math inline">\(D\)</span> dos parâmetros <span class="math inline">\(\{a, c, d\}\)</span> é encontrado a partir do limite imposto por <a href="svi.html#eq:trava">(6.5)</a>.</p>
+<p>O domínio <span class="math inline">\(D\)</span> dos parâmetros <span class="math inline">\(\{a, c, d\}\)</span> é encontrado a partir do limite imposto por <a href="svi.html#eq:trava">(7.4)</a>.</p>
 <span class="math display" id="eq:D">\[\begin{equation}
     D =  
     \begin{cases}
@@ -290,20 +321,20 @@ f_y(a, c, d)=\sum_{i=1}^{n}\left[w(y_i)-\tilde w_i\right]^2
     |d| \leq c \quad \text{e}\quad |d| \leq 4\sigma - c\\
     0 \leq a \leq \max\{\tilde w_i\}\\
     \end{cases}
-    \tag{6.10}
+    \tag{7.9}
 \end{equation}\]</span>
-<p>O problema reduzido dado pela equação <a href="svi.html#eq:reduzido">(6.8)</a>, é um típico problema de <strong>mínimos quadrados</strong> com restrições lineares. Este problema, por ser convexo, admite uma única solução interior (se existente) que será o mínimo global para este problema e é encontrada através do gradiente da função objetivo igualando-o a zero, <span class="math inline">\(\nabla f_y = 0\)</span>. Esta equação gera um sistema linear nos parâmetros <span class="math inline">\(a, c, d\)</span> que pode ser explicitamente resolvido. Caso a solução encontrada para este problema esteja contida no domínio <span class="math inline">\(D\)</span>, esta solução é interior e é o mínimo desejado, caso contrário, deve-se percorrer o perímetro do domínio e encontrar o menor valor da função objetivo que será uma solução de canto.</p>
-<p>Seja <span class="math inline">\((a^*, c^*, d^*)\)</span> a solução de <a href="svi.html#eq:reduzido">(6.8)</a> e <span class="math inline">\((a^*, b^*, \rho^*)\)</span> os correspondentes parâmetros originais recuperados, então o problema completo de calibração é:</p>
+<p>O problema reduzido dado pela equação <a href="svi.html#eq:reduzido">(7.7)</a>, é um típico problema de <strong>mínimos quadrados</strong> com restrições lineares. Este problema, por ser convexo, admite uma única solução interior (se existente) que será o mínimo global para este problema e é encontrada através do gradiente da função objetivo igualando-o a zero, <span class="math inline">\(\nabla f_y = 0\)</span>. Esta equação gera um sistema linear nos parâmetros <span class="math inline">\(a, c, d\)</span> que pode ser explicitamente resolvido. Caso a solução encontrada para este problema esteja contida no domínio <span class="math inline">\(D\)</span>, esta solução é interior e é o mínimo desejado, caso contrário, deve-se percorrer o perímetro do domínio e encontrar o menor valor da função objetivo que será uma solução de canto.</p>
+<p>Seja <span class="math inline">\((a^*, c^*, d^*)\)</span> a solução de <a href="svi.html#eq:reduzido">(7.7)</a> e <span class="math inline">\((a^*, b^*, \rho^*)\)</span> os correspondentes parâmetros originais recuperados, então o problema completo de calibração é:</p>
 <span class="math display" id="eq:completo">\[\begin{equation}
 P:=\min\limits_{m, \sigma}\sum_{i=1}^n (w_*(k_i)-\tilde w_i)^2
-\tag{6.11}
+\tag{7.10}
 \end{equation}\]</span>
 <p>onde <span class="math inline">\(w_*(k)=a^*+b^*\left(\rho^*(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)\)</span>.</p>
-<p>O problema completo, <a href="svi.html#eq:completo">(6.11)</a> é um problema em apenas duas dimensões, <span class="math inline">\((m, \sigma)\)</span> e não-linear, que deve ser abordado através de algum tipo de otimizador global.</p>
+<p>O problema completo, <a href="svi.html#eq:completo">(7.10)</a> é um problema em apenas duas dimensões, <span class="math inline">\((m, \sigma)\)</span> e não-linear, que deve ser abordado através de algum tipo de otimizador global.</p>
 <div id="pq" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Solução explícita do problema reduzido</h3>
-<p>Nesta seção apresentaremos a solução, sem considerar as restrições impostas em <a href="svi.html#eq:D">(6.10)</a> para o problema reduzido em <a href="svi.html#eq:reduzido">(6.8)</a>, algo omitido em <span class="citation">De Marco and Martini (<a href="#ref-DeMarco2009">2009</a>)</span>. Esta seção é opcional para o leitor atento que já percebeu a semelhança entre o problema reduzido e um típico problema de regressão linear múltipla.</p>
-<p>Para encontrar o conjunto de parâmetros <span class="math inline">\((a^*, c^*, d^*)\)</span> que representam os valores ótimos na equação <a href="svi.html#eq:reduzido">(6.8)</a>, devemos resolver o seguinte sistema de equações:</p>
+<h3><span class="header-section-number">7.3.1</span> Solução explícita do problema reduzido</h3>
+<p>Nesta seção apresentaremos a solução, sem considerar as restrições impostas em <a href="svi.html#eq:D">(7.9)</a> para o problema reduzido em <a href="svi.html#eq:reduzido">(7.7)</a>, algo omitido em <span class="citation">De Marco and Martini (<a href="#ref-DeMarco2009">2009</a>)</span>. Esta seção é opcional para o leitor atento que já percebeu a semelhança entre o problema reduzido e um típico problema de regressão linear múltipla.</p>
+<p>Para encontrar o conjunto de parâmetros <span class="math inline">\((a^*, c^*, d^*)\)</span> que representam os valores ótimos na equação <a href="svi.html#eq:reduzido">(7.7)</a>, devemos resolver o seguinte sistema de equações:</p>
 <span class="math display" id="eq:gradiente">\[\begin{equation}
 \nabla f_y = \left[
     \begin{array}{c}
@@ -312,7 +343,7 @@ P:=\min\limits_{m, \sigma}\sum_{i=1}^n (w_*(k_i)-\tilde w_i)^2
         \partial f_y / \partial c
     \end{array} 
 \right] = \boldsymbol{0}
-\tag{6.12}
+\tag{7.11}
 \end{equation}\]</span>
 <p>Cada uma das derivadas parciais da equação acima quando igualadas a zero dão origem ao sistema linear apresentado abaixo:</p>
 <span class="math display" id="eq:linear">\[\begin{equation}
@@ -334,18 +365,18 @@ c
 \sum \tilde w_i y_i \\
 \sum(\tilde w_i\sqrt{y_i^2+1})
 \end{bmatrix}
-\tag{6.13}
+\tag{7.12}
 \end{equation}\]</span>
 <p>Portanto, o problema reduzido pode ser resolvido através de um sistema linear de ordem 3 sob restrições também lineares.</p>
 </div>
 </div>
 <div id="algoritmo" class="section level2">
-<h2><span class="header-section-number">6.4</span> Algoritmo</h2>
+<h2><span class="header-section-number">7.4</span> Algoritmo</h2>
 <p>A otimização para encontrar os parâmetros ótimos de um SVI dadas observações de mercado e a técnica de calibração <strong>Quasi-explicit</strong> de <span class="citation">De Marco and Martini (<a href="#ref-DeMarco2009">2009</a>)</span> pode ser resumida nos seguintes passos:</p>
 <ol style="list-style-type: decimal">
 <li><p>Definir valores iniciais para os parâmetros <span class="math inline">\((m, \sigma)\)</span>,</p></li>
-<li><p>Iniciar algum otimizador global com estes parâmetros e resolver o problema completo <a href="svi.html#eq:completo">(6.11)</a></p>
-<p>2.1 Dentro da otimização global, resolver o problema reduzido <a href="svi.html#eq:reduzido">(6.8)</a> para os parâmetros <span class="math inline">\((m, \sigma)\)</span> dados,</p></li>
+<li><p>Iniciar algum otimizador global com estes parâmetros e resolver o problema completo <a href="svi.html#eq:completo">(7.10)</a></p>
+<p>2.1 Dentro da otimização global, resolver o problema reduzido <a href="svi.html#eq:reduzido">(7.7)</a> para os parâmetros <span class="math inline">\((m, \sigma)\)</span> dados,</p></li>
 <li><p>Na convergência do problema completo do passo 2, otimizar uma última vez o problema reduzido,</p></li>
 <li><p>Recuperar os parâmetros <span class="math inline">\((a, b, \rho, m, \sigma)\)</span></p></li>
 </ol>
@@ -353,12 +384,12 @@ c
 <p>Nos testes realizados pelo <a href="http://clubedefinancas.com.br">Clube de Finanças</a>, entre os otimizadores globais para o problema completo utilizamos <a href="https://cran.r-project.org/package=GA"><strong>Algoritmos Genéticos</strong></a>, <a href="https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/constrOptim"><strong>Nelder-Mead restrito</strong></a> e um <a href="https://cran.r-project.org/package=Rsolnp"><strong>Método não-linear generalizado</strong></a>. Para o problema reduzido, apesar de ser linear, o método de Nelder-Mead restrito se mostrou tão eficiente quanto e de mais fácil implementação. Se o objetivo for fazer uma calibração direta, dos cinco parâmetros ao mesmo tempo, uma combinação de otimizador global em primeiro estágio e o método de Levenberg-Marquardt restrito para refinamento da solução é o ideal.</p>
 </div>
 <div id="resultados" class="section level2">
-<h2><span class="header-section-number">6.5</span> Resultados</h2>
+<h2><span class="header-section-number">7.5</span> Resultados</h2>
 <p>A seguir apresentamos um <em>smile</em> de referência para a calibração, obtido de <a href="http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv">ivolatility.com</a> e então partimos para diferentes técnicas de calibração de um SVI. Os códigos em <a href="https://cran.r-project.org/">R</a> também estão apresentados ao longo do texto para melhor compreensão e estudo do leitor.</p>
-<p>Os dados utilizados neste exemplo estão apresentados na tabela <a href="svi.html#tab:dados">6.1</a> abaixo. Esta é uma típica apresentação de um <em>slice</em> de superfície, ou seja, dados para um <em>smile</em> apenas. As principais variáveis são: a data em que os dados foram coletados (date), o preço de fechamento do ativo (stock_price), o prazo para expiração em dias (period), e medidas de moneyness como delta, <em>strike</em> e o próprio <em>moneyness</em>, além é claro da volatilidade implícita (iv) retirada do mercado.</p>
+<p>Os dados utilizados neste exemplo estão apresentados na tabela <a href="svi.html#tab:dados">7.1</a> abaixo. Esta é uma típica apresentação de um <em>slice</em> de superfície, ou seja, dados para um <em>smile</em> apenas. As principais variáveis são: a data em que os dados foram coletados (date), o preço de fechamento do ativo (stock_price), o prazo para expiração em dias (period), e medidas de moneyness como delta, <em>strike</em> e o próprio <em>moneyness</em>, além é claro da volatilidade implícita (iv) retirada do mercado.</p>
 <table class="table table-striped" style="font-size: 14px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:dados">Tabela 6.1: </span>Dados reais para exemplo de calibração de uma SVI.
+<span id="tab:dados">Tabela 7.1: </span>Dados reais para exemplo de calibração de uma SVI.
 </caption>
 <thead>
 <tr>
@@ -890,9 +921,9 @@ NYSEArca
 <p>Esta tabela poderia conter (de fato contém no arquivo original) outros períodos de expiração, e neste caso uma das colunas de <em>moneyness</em> começa a se repetir, no caso seria o delta pois baixamos uma tabela de volatilidades implícitas por delta. Assim, em uma tabela simples em formato <a href="http://vita.had.co.nz/papers/tidy-data.html"><code>tidy</code></a> é possível armazenar informações de uma superfície inteira, a qual de outra forma necessitaria de um arranjo em 3 dimensões.</p>
 <p>Ressaltamos aqui que a unidade de volatilidade implícita está em percentuais <strong>ao ano</strong>, equanto que nosso período é de dias corridos. É necessário harmonizar estas medidas de forma que, para volatiliades dadas em percentual ao ano, o período também seja dado em <strong>anos</strong>. Logo nosso <span class="math inline">\(\tau = 30/365\)</span>, ou seja, 0.08219.</p>
 <p>Demonstraremos aqui os resultados para a calibração de uma <em>RAW SVI</em> pelos métodos “Direto”, “GA”, “Quasi-NM” e “Quasi-PQ”, abaixo explicados.</p>
-<p>O método “Direto” é uma calibração direta através de um algoritmo de <strong>Levenberg-Marquardt</strong> da equação <a href="svi.html#eq:rawsvi">(6.1)</a>, ou seja, não existe reparametrização <em>Quasi-explicit</em> e o problema resolvido é não-linear em 5 dimensões. São realizadas 10 calibrações com estimativas iniciais dos parâmetros aleatórias, mas dentro de seus respectivos domínios. A melhor solução, aquela com o menor valor para a função objetivo, é selecionada. Todos os outros métodos utilizam a reparametrização, ocorrendo variações apenas nos algoritmos de otimização utilizados nos problemas reduzido e completo.</p>
+<p>O método “Direto” é uma calibração direta através de um algoritmo de <strong>Levenberg-Marquardt</strong> da equação <a href="superficies.html#eq:rawsvi">(5.11)</a>, ou seja, não existe reparametrização <em>Quasi-explicit</em> e o problema resolvido é não-linear em 5 dimensões. São realizadas 10 calibrações com estimativas iniciais dos parâmetros aleatórias, mas dentro de seus respectivos domínios. A melhor solução, aquela com o menor valor para a função objetivo, é selecionada. Todos os outros métodos utilizam a reparametrização, ocorrendo variações apenas nos algoritmos de otimização utilizados nos problemas reduzido e completo.</p>
 <p>A calibração “GA” faz uso do otimizador global de <strong>algoritmos genéticos</strong> para o problema completo, ou seja, para estimar o par <span class="math inline">\((m, \sigma)\)</span> que corresponde ao mínimo global. Após, o problema reduzido é resolvido através do algoritmo de <strong>Nelder-Mead</strong>. Este método é robusto, pois o algoritmo genético tem grande probabilidade de encontrar a região onde se encontra o mínimo global e não ficar preso localmente. Entretanto a robustez ocorre as expensas do tempo de computação.</p>
-<p>Os métodos ditos “Quasi” diferem entre si na resolução do problema reduzido. Enquanto “PQ” remete a <strong>programação quadrática</strong> e faz uso da resolução do sistema linear apresentado na equação <a href="svi.html#eq:linear">(6.13)</a> com as restrições impostas por <a href="svi.html#eq:D">(6.10)</a>, o método “Quasi-NM” utiliza o método de <strong>Nelder-Mead</strong> com restrições para a resolução deste mesmo problema reduzido. Em ambos os métodos, o problema completo é resolvido com um algoritmo de Nelder-Mead com 50 reinicializações das estimativas iniciais dos parâmetros <span class="math inline">\((m, \sigma)\)</span>, o que causa algum impacto no tempo de computação destes métodos.</p>
+<p>Os métodos ditos “Quasi” diferem entre si na resolução do problema reduzido. Enquanto “PQ” remete a <strong>programação quadrática</strong> e faz uso da resolução do sistema linear apresentado na equação <a href="svi.html#eq:linear">(7.12)</a> com as restrições impostas por <a href="svi.html#eq:D">(7.9)</a>, o método “Quasi-NM” utiliza o método de <strong>Nelder-Mead</strong> com restrições para a resolução deste mesmo problema reduzido. Em ambos os métodos, o problema completo é resolvido com um algoritmo de Nelder-Mead com 50 reinicializações das estimativas iniciais dos parâmetros <span class="math inline">\((m, \sigma)\)</span>, o que causa algum impacto no tempo de computação destes métodos.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smile &lt;-<span class="st"> </span>dados <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tau =</span> period <span class="op">/</span><span class="st"> </span><span class="dv">365</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(moneyness, iv, tau)
@@ -903,8 +934,9 @@ k &lt;-<span class="st"> </span>smile<span class="op">$</span>moneyness
 w &lt;-<span class="st"> </span>smile<span class="op">$</span>iv<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>smile<span class="op">$</span>tau
 
 init_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
-par_direct &lt;-<span class="st"> </span><span class="kw">svi_fit_direct</span>(k, w)
-end_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
+par_direct &lt;-<span class="st"> </span><span class="kw">svi_fit_direct</span>(k, w)</code></pre></div>
+<pre><code>## Warning in minpack.lm::nls.lm(init_pars, lower = c(0, 0, -1, -Inf, 0), upper = c(max(w), : lmdif: info = -1. Number of iterations has reached `maxiter&#39; == 100.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">end_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
 time_direct &lt;-<span class="st"> </span>end_direct <span class="op">-</span><span class="st"> </span>init_direct 
 
 init_ga &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
@@ -937,6 +969,7 @@ plot_tbl &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span clas
 
 par_tbl &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(par_direct, par_ga, par_quasipq, par_quasinm) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(method, par) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;Direct&quot;</span>, <span class="st">&quot;GA&quot;</span>, <span class="st">&quot;QuasiPQ&quot;</span>, <span class="st">&quot;QuasiNM&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">names =</span> <span class="kw">rep</span>(par_names, <span class="dv">4</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">spread</span>(method, par) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -946,6 +979,7 @@ par_tbl &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(par_dire
 
 rmse_tbl &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(par_direct, par_ga, par_quasipq, par_quasinm) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(method, par) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">method =</span> <span class="kw">c</span>(<span class="st">&quot;Direct&quot;</span>, <span class="st">&quot;GA&quot;</span>, <span class="st">&quot;QuasiPQ&quot;</span>, <span class="st">&quot;QuasiNM&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(method) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">RMSE =</span> <span class="kw">rmse</span>(par, k, w)) <span class="op">%&gt;%</span><span class="st"> </span>
@@ -974,7 +1008,7 @@ frame_tbl &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(par_tb
                 <span class="dt">full_width =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <table class="table table-striped" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tabela">Tabela 6.2: </span>Parâmetros estimados da calibração, RMSE e tempo de computação em segundos.
+<span id="tab:tabela">Tabela 7.2: </span>Parâmetros estimados da calibração, RMSE e tempo de computação em segundos.
 </caption>
 <thead>
 <tr>
@@ -1004,13 +1038,13 @@ a
 0.00000
 </td>
 <td style="text-align:left;">
-0.00000
+0.00001
 </td>
 <td style="text-align:left;">
 0.00000
 </td>
 <td style="text-align:left;">
-0.00025
+0.00001
 </td>
 </tr>
 <tr>
@@ -1018,16 +1052,16 @@ a
 b
 </td>
 <td style="text-align:left;">
-0.01948
+0.01953
 </td>
 <td style="text-align:left;">
-0.01959
+0.01950
 </td>
 <td style="text-align:left;">
-0.01425
+0.01695
 </td>
 <td style="text-align:left;">
-0.01869
+0.01944
 </td>
 </tr>
 <tr>
@@ -1035,16 +1069,16 @@ b
 <span class="math inline">\(\rho\)</span>
 </td>
 <td style="text-align:left;">
--0.79239
+-0.79855
 </td>
 <td style="text-align:left;">
--0.80986
+-0.80034
 </td>
 <td style="text-align:left;">
 -1.00000
 </td>
 <td style="text-align:left;">
--0.95582
+-0.79429
 </td>
 </tr>
 <tr>
@@ -1052,16 +1086,16 @@ b
 m
 </td>
 <td style="text-align:left;">
--0.00700
+-0.00751
 </td>
 <td style="text-align:left;">
--0.00837
+-0.00756
 </td>
 <td style="text-align:left;">
--0.01316
+-0.01118
 </td>
 <td style="text-align:left;">
--0.01471
+-0.00701
 </td>
 </tr>
 <tr>
@@ -1069,16 +1103,16 @@ m
 <span class="math inline">\(\sigma\)</span>
 </td>
 <td style="text-align:left;">
-0.05014
+0.05041
 </td>
 <td style="text-align:left;">
-0.05089
+0.05016
 </td>
 <td style="text-align:left;">
-0.08366
+0.06905
 </td>
 <td style="text-align:left;">
-0.04565
+0.04984
 </td>
 </tr>
 <tr>
@@ -1089,13 +1123,13 @@ RMSE
 8.67e-06
 </td>
 <td style="text-align:left;">
-8.7e-06
+8.69e-06
 </td>
 <td style="text-align:left;">
-1.21e-04
+9.55e-05
 </td>
 <td style="text-align:left;">
-1.15e-05
+8.69e-06
 </td>
 </tr>
 <tr>
@@ -1103,21 +1137,21 @@ RMSE
 Tempo
 </td>
 <td style="text-align:left;">
-0.06500
+0.07500
 </td>
 <td style="text-align:left;">
-33.46400
+30.96400
 </td>
 <td style="text-align:left;">
-0.15500
+0.26000
 </td>
 <td style="text-align:left;">
-6.22800
+14.51000
 </td>
 </tr>
 </tbody>
 </table>
-<p>O método Direto, com algoritmo de Levenberg-Marquardt se mostrou muito mais rápido que os demais, principalmente com relação ao algoritmo genético, e com um bom ajuste dado o baixo valor de RMSE. O algoritmo genético é consideravelmente mais lento, entretanto durante as várias calibrações realizadas em testes (e que não estão apresentadas na tabela <a href="svi.html#tab:tabela">6.2</a>), este algoritmo sempre se mostrou robusto, com baixo RMSE, diferentemente dos outros métodos que por vezes, denpendendo das estimativas iniciais, podem convergir para um mínimo local.</p>
+<p>O método Direto, com algoritmo de Levenberg-Marquardt se mostrou muito mais rápido que os demais, principalmente com relação ao algoritmo genético, e com um bom ajuste dado o baixo valor de RMSE. O algoritmo genético é consideravelmente mais lento, entretanto durante as várias calibrações realizadas em testes (e que não estão apresentadas na tabela <a href="svi.html#tab:tabela">7.2</a>), este algoritmo sempre se mostrou robusto, com baixo RMSE, diferentemente dos outros métodos que por vezes, denpendendo das estimativas iniciais, podem convergir para um mínimo local.</p>
 <p>O gráfico com os ajustes realizados pode ser observado abaixo.</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(plot_tbl, <span class="kw">aes</span>(<span class="dt">x =</span> k)) <span class="op">+</span><span class="st"> </span>
@@ -1134,15 +1168,15 @@ Tempo
 <div class="figure"><span id="fig:plot"></span>
 <img src="07-calibrando-uma-svi_files/figure-html/plot-1.png" alt="Comparação entre diferentes métodos de calibração de uma SVI." width="672" />
 <p class="caption">
-Figura 6.1: Comparação entre diferentes métodos de calibração de uma SVI.
+Figura 7.1: Comparação entre diferentes métodos de calibração de uma SVI.
 </p>
 </div>
 <p>De fato o método direto e o método <em>Quasi-explicit</em> com otimizador global do tipo algoritmo genético se mostram mais adequados para a calibração de um SVI. Enquanto o método direto é muito mais eficiente em termos computacionais, o método <em>Quasi-explicit</em> com GA é mais robusto. Desta forma, deve-se salientar que é necessário que o usuário, ao fazer uma calibração de <em>smile</em> de volatilidade, deve dispor de diferentes métodos de fazê-lo, e a inspeção visual do resultado é <strong>obrigatória</strong> para determinar qual método foi mais eficiente em ajustar a curva aos dados.</p>
 </div>
-<div id="conclusao-2" class="section level2">
-<h2><span class="header-section-number">6.6</span> Conclusão</h2>
+<div id="conclusao-3" class="section level2">
+<h2><span class="header-section-number">7.6</span> Conclusão</h2>
 <p>Apesar de neste exemplo ter se mostrado um método efetivo, com bom ajuste e baixo tempo de calibração, o método direto é altamente dependente dos valores iniciais dos parâmetros. Para tornar este método mais robusto, um número maior de reinicializações deve ser feita o que penaliza o tempo de calibração. O método <em>Quasi-explicit</em> com algoritmo genético para encontrar a região de <span class="math inline">\((m, \sigma)\)</span> onde se encontra o mínimo global se mostrou bastante robusta, entretanto, de convergência lenta. Para ajustar apenas um <em>smile</em> alguns segundos a mais não representam problema. Porém, se imaginarmos que em uma grande instituição financeira são necessárias calibrações de, talvez, milhares de <em>smiles</em> representando inúmeras superfícies de diversos instrumentos, este método pode se mostrar computacionalmente caro.</p>
-<p>Já os métodos <em>Quasi-explicit</em> que utilizam um algoritmo de Nelder-Mead para a resolução do problema completo se mostraram muito sensíveis às estimativas iniciais dos parâmetros. Mesmo utilizando 50 reinicialzações do método, diversas vezes o ajuste realizado foi insatisfatório. A resolução através de programação quadrática é rápida, se comparada com NM, entretanto, quando as restrições impostas pela equação <a href="svi.html#eq:D">(6.10)</a> se tornam ativas, este método parece sofrer com algum viés em sua solução.</p>
+<p>Já os métodos <em>Quasi-explicit</em> que utilizam um algoritmo de Nelder-Mead para a resolução do problema completo se mostraram muito sensíveis às estimativas iniciais dos parâmetros. Mesmo utilizando 50 reinicialzações do método, diversas vezes o ajuste realizado foi insatisfatório. A resolução através de programação quadrática é rápida, se comparada com NM, entretanto, quando as restrições impostas pela equação <a href="svi.html#eq:D">(7.9)</a> se tornam ativas, este método parece sofrer com algum viés em sua solução.</p>
 
 </div>
 </div>
@@ -1166,9 +1200,9 @@ Figura 6.1: Comparação entre diferentes métodos de calibração de uma SVI.
 </div>
 <div class="footnotes">
 <hr />
-<ol start="10">
-<li id="fn10"><p>A resolução desta derivada é uma simples regra da divisão, entretanto a simplificação do resultado pede alguma manipulação algébrica. É possível utilizar sistemas de computação simbólica, o qual recomendamos o <a href="https://live.sympy.org/">SymPy</a><a href="svi.html#fnref10">↩</a></p></li>
-<li id="fn11"><p>Condições para ausência de arbitragem do tipo borboleta em um SVI estão detalhadas na seção 2.2 do artigo de <span class="citation">Gatheral and Jacquier (<a href="#ref-Gatheral2014">2014</a>)</span>.<a href="svi.html#fnref11">↩</a></p></li>
+<ol start="14">
+<li id="fn14"><p>A resolução desta derivada é uma simples regra da divisão, entretanto a simplificação do resultado pede alguma manipulação algébrica. É possível utilizar sistemas de computação simbólica, o qual recomendamos o <a href="https://live.sympy.org/">SymPy</a><a href="svi.html#fnref14">↩</a></p></li>
+<li id="fn15"><p>Condições para ausência de arbitragem do tipo borboleta em um SVI estão detalhadas na seção 2.2 do artigo de <span class="citation">Gatheral and Jacquier (<a href="#ref-Gatheral2014">2014</a>)</span>.<a href="svi.html#fnref15">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1177,7 +1211,7 @@ Figura 6.1: Comparação entre diferentes métodos de calibração de uma SVI.
         </div>
       </div>
 <a href="calibracao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ssvi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

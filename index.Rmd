@@ -57,7 +57,7 @@ pkgs_att <- c("tidyverse",
               "ggridges", 
               "kableExtra",
               "tidyquant",
-              "RQuantLib",
+              "ragtop",
               "plot3D")
 new.pkgs <- pkgs_att[!(pkgs_att %in% .packages(all.available = TRUE))]
 

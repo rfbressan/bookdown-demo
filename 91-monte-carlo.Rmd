@@ -46,19 +46,19 @@ Primeiramente, no R, devemos carregar em nossa sessão de trabalho os pacotes qu
 library(tidyverse)
 library(ggthemes)
 library(tidyquant)
-library(RQuantLib)
+library(ragtop)
 ```
 
 ```{r pacotes2, eval=FALSE}
 library(tidyverse)
 library(ggthemes)
 library(tidyquant)
-library(RQuantLib)
+library(ragtop)
 ```
 
-O pacote `RQuantLib`, por exemplo, possui já implementado dentro dele funções para fazer a precificação de opções europeias, sem que se tenha que implementar o modelo manualmente. Como a intenção deste artigo não é explicar o modelo _Black & Scholes_, vamos abstrair esta parte e simplesmente chamar uma função que nos retorna o valor da opção dadas as variáveis de entrada.
+O pacote `ragtop`, por exemplo, possui já implementado dentro dele funções para fazer a precificação de opções europeias, sem que se tenha que implementar o modelo manualmente. Como a intenção deste artigo não é explicar o modelo _Black & Scholes_, vamos abstrair esta parte e simplesmente chamar uma função que nos retorna o valor da opção dadas as variáveis de entrada.
 
-Em seguida iremos definir algumas de nossas variáveis, como o _ticker_ da ação para buscar seus dados históricos através da função `tq_get()` do pacote `tidyquant` e calcular os retornos logarítimicos e tirar sua média, o preço e data de exercício da opção e também iremos relacionar os dias de negócio entre a data de compra e vencimento. 
+Em seguida iremos definir algumas de nossas variáveis, como o _ticker_ da ação para buscar seus dados históricos através da função `tq_get()` do pacote `tidyquant` e calcular os retornos logarítimicos e tirar sua média, o preço e data de exercício da opção e também iremos relacionar os dias entre a data de compra e vencimento. 
 
 ```{r inicio, cache=TRUE}
 acao <- "PETR4.SA"
@@ -66,7 +66,7 @@ p_exer <- 16.92
 d_exer <- as.Date("2018-10-15")
 d_atual <- as.Date("2018-09-21")
 dias <- seq(d_atual, d_exer, by = 1)
-dias <- dias[isBusinessDay("Brazil", dias)]
+#dias <- dias[isBusinessDay("Brazil", dias)]
 nsims <- 1000
 ndias <- length(dias) - 1
 sim_nomes <- paste0("sim", 1:nsims)
@@ -87,13 +87,13 @@ div <- 0
 S0 <- last(ret_hist$adjusted)
 P0 <- 0.12
 mi <- 252 * mean(ret_hist$log_ret) # retorno medio em termos anuais
-sigma <- EuropeanOptionImpliedVolatility("put", P0, S0, p_exer, div, rf, 
-                                         (ndias + 1) / 252, 0.30)
+sigma <- implied_volatility(P0, -1, S0, p_exer, rf, (ndias + 1) / 365, 
+                            divrate = div)
 ```
 
 Com o código acima obtemos basicamente todos os dados com os quais poderemos implementar a simulação de Monte Carlo. Entretanto, para realizar as simulações, necessitamos especificar mais algumas funções customizadas para nossas necessidades. 
 
-Primeiro iremos especificar uma função que retorna uma única simulação de log-retornos acumulados em uma coluna de dados, esta função é chamada de `mc_sim_fun`. A segunda função necessária é a função de precificação da opção europeia. Por padrão, a função do pacote `RQuantLib` `EuropeanOption()` retorna uma lista com o valor da opção, mas também todas as suas gregas. Também de forma um tanto quanto estranha, esta função retorna o valor zero na data de exercício, mesmo que a opção esteja [In-The-Money](#opcoes), portanto é necessário modificar este comportamento.
+Primeiro iremos especificar uma função que retorna uma única simulação de log-retornos acumulados em uma coluna de dados, esta função é chamada de `mc_sim_fun`. A segunda função necessária é a função de precificação da opção europeia. Por padrão, a função `blackscholes()` do pacote `ragtop` retorna uma lista com o valor da opção, mas também suas gregas $\Delta$ e $\nu$. 
 
 ```{r funcoes}
 # Funcao para realizar uma simulacao
@@ -109,22 +109,10 @@ mc_sim_fun <- function(valor_i, N, media, volat){
 }
 
 # Funcao para precificar uma opcao europeia
-eur_option <- function(type, underlying, strike, dividendYield, riskFreeRate, 
-                       maturity, volatility) {
-  if (maturity == 0.0) {
-    ans <- switch(type,
-                  put = max(strike - underlying, 0),
-                  call = max(underlying - strike, 0))
-    return(ans)
-  }
+eur_option <- function(type, S0, K, r, time, vola, div) {
+  callput <- ifelse(type == "call", 1, -1)
   
-  ans <- EuropeanOption(type = type,
-                        underlying = underlying,
-                        strike = strike,
-                        dividendYield = dividendYield,
-                        riskFreeRate = riskFreeRate,
-                        maturity = maturity,
-                        volatility = volatility)$value
+  ans <- blackscholes(callput, S0, K, r, time, vola, divrate = div)$Price
   return(ans)
 }
 ```
@@ -153,12 +141,12 @@ precos_acao <- (S0 * exp(ret_ac_mc)) %>%
 port_mc <- precos_acao %>% 
   mutate(Pt = map2_dbl(St, anos_exp, 
                        ~eur_option(type = "put",
-                                   underlying = .x,
-                                   strike = p_exer,
-                                   dividendYield = div,
-                                   riskFreeRate = rf,
-                                   maturity = .y,
-                                   volatility = sigma)),
+                                   S0 = .x,
+                                   K = p_exer,
+                                   r = rf,
+                                   time = .y,
+                                   vola = sigma,
+                                   div = div)),
          port_valor = Pt + St,
          data = rep(dias, nsims))
 head(port_mc)

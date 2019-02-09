@@ -1,16 +1,16 @@
-# language: r
-os: linux
-dist: trusty
-sudo: required
-services: docker
+language: r
+# os: linux
+# dist: trusty
+# sudo: required
+# services: docker
 cache: packages
 pandoc_version: 1.19.2.1
 
-before_install:
+# before_install:
 # Installs system libraries needed for R packages 
 #  - sudo apt-get -y install libquantlib0-dev libquantlib0v5
-  - docker pull rocker/tidyverse
-  - sudo apt-get -y install "^libquantlib*"
+#  - docker pull rocker/tidyverse
+#  - sudo apt-get -y install "^libquantlib*"
 before_script:
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh

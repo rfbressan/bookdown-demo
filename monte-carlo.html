@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Capítulo 9 Simulação de Monte Carlo | Introdução a Superfície de Volatilidade</title>
+  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Capítulo 9 Simulação de Monte Carlo | Introdução a Superfície de Volatilidade" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 9 Simulação de Monte Carlo | Introdução a Superfície de Volatilidade" />
+  
+  <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
+  
+
+<meta name="author" content="Rafael Felipe Bressan">
+
+
+<meta name="date" content="2019-02-09">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ssvi.html">
+<link rel="next" href="bibliografia.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introdução a Superfície de Volatilidade</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prefácio</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html"><i class="fa fa-check"></i>Sobre os Autores</a><ul>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#erik-naoki-kawano"><i class="fa fa-check"></i>Erik Naoki Kawano</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#glauber-naue"><i class="fa fa-check"></i>Glauber Naue</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="opcoes.html"><a href="opcoes.html"><i class="fa fa-check"></i><b>1</b> Introdução as opções</a><ul>
+<li class="chapter" data-level="1.1" data-path="opcoes.html"><a href="opcoes.html#conceitos-in-the-money-at-the-money-e-out-the-money"><i class="fa fa-check"></i><b>1.1</b> Conceitos in the money, at the money e out the money</a></li>
+<li class="chapter" data-level="1.2" data-path="opcoes.html"><a href="opcoes.html#modelos-americano-e-europeu-de-opcoes"><i class="fa fa-check"></i><b>1.2</b> Modelos americano e europeu de opções</a></li>
+<li class="chapter" data-level="1.3" data-path="opcoes.html"><a href="opcoes.html#hedge"><i class="fa fa-check"></i><b>1.3</b> Hedge</a></li>
+<li class="chapter" data-level="1.4" data-path="opcoes.html"><a href="opcoes.html#travas"><i class="fa fa-check"></i><b>1.4</b> Travas</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html"><i class="fa fa-check"></i><b>2</b> Processos Estocásticos em Finanças</a><ul>
+<li class="chapter" data-level="2.1" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#markov"><i class="fa fa-check"></i><b>2.1</b> Processos de Markov</a></li>
+<li class="chapter" data-level="2.2" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mb"><i class="fa fa-check"></i><b>2.2</b> Movimento Browniano</a></li>
+<li class="chapter" data-level="2.3" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#definicao"><i class="fa fa-check"></i><b>2.3</b> Definição</a></li>
+<li class="chapter" data-level="2.4" data-path="processos-estocasticos.html"><a href="processos-estocasticos.html#mbg"><i class="fa fa-check"></i><b>2.4</b> Movimento Browniano Geométrico</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bsm.html"><a href="bsm.html"><i class="fa fa-check"></i><b>3</b> Modelo Black-Scholes-Merton</a><ul>
+<li class="chapter" data-level="3.1" data-path="bsm.html"><a href="bsm.html#portfolio-de-replicacao"><i class="fa fa-check"></i><b>3.1</b> Portfólio de replicação</a></li>
+<li class="chapter" data-level="3.2" data-path="bsm.html"><a href="bsm.html#precificacao-neutra-ao-risco"><i class="fa fa-check"></i><b>3.2</b> Precificação neutra ao risco</a></li>
+<li class="chapter" data-level="3.3" data-path="bsm.html"><a href="bsm.html#encontrando-a-equacao-de-black-scholes"><i class="fa fa-check"></i><b>3.3</b> Encontrando a equação de Black-Scholes</a></li>
+<li class="chapter" data-level="3.4" data-path="bsm.html"><a href="bsm.html#solucao-analitica"><i class="fa fa-check"></i><b>3.4</b> Solução analítica</a></li>
+<li class="chapter" data-level="3.5" data-path="bsm.html"><a href="bsm.html#putcallparity"><i class="fa fa-check"></i><b>3.5</b> Paridade compra e venda</a></li>
+<li class="chapter" data-level="3.6" data-path="bsm.html"><a href="bsm.html#gregas"><i class="fa fa-check"></i><b>3.6</b> As Gregas</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="bsm.html"><a href="bsm.html#delta"><i class="fa fa-check"></i><b>3.6.1</b> Delta</a></li>
+<li class="chapter" data-level="3.6.2" data-path="bsm.html"><a href="bsm.html#gamma"><i class="fa fa-check"></i><b>3.6.2</b> Gamma</a></li>
+<li class="chapter" data-level="3.6.3" data-path="bsm.html"><a href="bsm.html#theta"><i class="fa fa-check"></i><b>3.6.3</b> Theta</a></li>
+<li class="chapter" data-level="3.6.4" data-path="bsm.html"><a href="bsm.html#vega"><i class="fa fa-check"></i><b>3.6.4</b> Vega</a></li>
+<li class="chapter" data-level="3.6.5" data-path="bsm.html"><a href="bsm.html#rho"><i class="fa fa-check"></i><b>3.6.5</b> Rho</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="smile.html"><a href="smile.html"><i class="fa fa-check"></i><b>4</b> Smile de Volatilidade</a><ul>
+<li class="chapter" data-level="4.1" data-path="smile.html"><a href="smile.html#reparametrizando"><i class="fa fa-check"></i><b>4.1</b> Reparametrizando B&amp;S e definição de moneyness</a></li>
+<li class="chapter" data-level="4.2" data-path="smile.html"><a href="smile.html#caracsmile"><i class="fa fa-check"></i><b>4.2</b> Características de smiles de volatilidade</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="smile.html"><a href="smile.html#mercados-cambiais"><i class="fa fa-check"></i><b>4.2.1</b> Mercados cambiais</a></li>
+<li class="chapter" data-level="4.2.2" data-path="smile.html"><a href="smile.html#mercados-de-equities"><i class="fa fa-check"></i><b>4.2.2</b> Mercados de <em>equities</em></a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="smile.html"><a href="smile.html#smileprecificacao"><i class="fa fa-check"></i><b>4.3</b> Smile como forma de precificação</a></li>
+<li class="chapter" data-level="4.4" data-path="smile.html"><a href="smile.html#estrutura-a-termo"><i class="fa fa-check"></i><b>4.4</b> Estrutura a termo</a></li>
+<li class="chapter" data-level="4.5" data-path="smile.html"><a href="smile.html#arbestatica"><i class="fa fa-check"></i><b>4.5</b> Arbitragem estática</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="smile.html"><a href="smile.html#arbitragem-de-borboleta"><i class="fa fa-check"></i><b>4.5.1</b> Arbitragem de borboleta</a></li>
+<li class="chapter" data-level="4.5.2" data-path="smile.html"><a href="smile.html#arbitragem-de-calendario"><i class="fa fa-check"></i><b>4.5.2</b> Arbitragem de calendário</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="smile.html"><a href="smile.html#limites-de-inclinacao"><i class="fa fa-check"></i><b>4.6</b> Limites de inclinação</a></li>
+<li class="chapter" data-level="4.7" data-path="smile.html"><a href="smile.html#rnd"><i class="fa fa-check"></i><b>4.7</b> Distribuição implícita</a></li>
+<li class="chapter" data-level="4.8" data-path="smile.html"><a href="smile.html#conclusao"><i class="fa fa-check"></i><b>4.8</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="superficies.html"><a href="superficies.html"><i class="fa fa-check"></i><b>5</b> Superfícies de volatilidade</a><ul>
+<li class="chapter" data-level="5.1" data-path="superficies.html"><a href="superficies.html#modelos-estocasticos"><i class="fa fa-check"></i><b>5.1</b> Modelos estocásticos</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="superficies.html"><a href="superficies.html#heston"><i class="fa fa-check"></i><b>5.1.1</b> Heston</a></li>
+<li class="chapter" data-level="5.1.2" data-path="superficies.html"><a href="superficies.html#sabr"><i class="fa fa-check"></i><b>5.1.2</b> SABR</a></li>
+<li class="chapter" data-level="5.1.3" data-path="superficies.html"><a href="superficies.html#bates"><i class="fa fa-check"></i><b>5.1.3</b> Bates</a></li>
+<li class="chapter" data-level="5.1.4" data-path="superficies.html"><a href="superficies.html#volatilidade-local"><i class="fa fa-check"></i><b>5.1.4</b> Volatilidade local</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="superficies.html"><a href="superficies.html#modelos-parametricos"><i class="fa fa-check"></i><b>5.2</b> Modelos paramétricos</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="superficies.html"><a href="superficies.html#sec:svi"><i class="fa fa-check"></i><b>5.2.1</b> SVI</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="superficies.html"><a href="superficies.html#modelos-nao-parametricos"><i class="fa fa-check"></i><b>5.3</b> Modelos não-paramétricos</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="superficies.html"><a href="superficies.html#interpolacao-e-suavizacao-spline"><i class="fa fa-check"></i><b>5.3.1</b> Interpolação e suavização spline</a></li>
+<li class="chapter" data-level="5.3.2" data-path="superficies.html"><a href="superficies.html#algoritmos-livres-de-arbitragem"><i class="fa fa-check"></i><b>5.3.2</b> Algoritmos livres de arbitragem</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="superficies.html"><a href="superficies.html#extrapolacao-do-smile"><i class="fa fa-check"></i><b>5.4</b> Extrapolação do smile</a></li>
+<li class="chapter" data-level="5.5" data-path="superficies.html"><a href="superficies.html#conclusao-1"><i class="fa fa-check"></i><b>5.5</b> Conclusão</a></li>
+<li class="chapter" data-level="5.6" data-path="superficies.html"><a href="superficies.html#referencias"><i class="fa fa-check"></i><b>5.6</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="calibracao.html"><a href="calibracao.html"><i class="fa fa-check"></i><b>6</b> Métodos de Calibração</a><ul>
+<li class="chapter" data-level="6.1" data-path="calibracao.html"><a href="calibracao.html#calibracao-versus-interpolacao"><i class="fa fa-check"></i><b>6.1</b> Calibração versus Interpolação</a></li>
+<li class="chapter" data-level="6.2" data-path="calibracao.html"><a href="calibracao.html#spline-cubica"><i class="fa fa-check"></i><b>6.2</b> Spline cúbica</a></li>
+<li class="chapter" data-level="6.3" data-path="calibracao.html"><a href="calibracao.html#suavizacao"><i class="fa fa-check"></i><b>6.3</b> Suavização</a></li>
+<li class="chapter" data-level="6.4" data-path="calibracao.html"><a href="calibracao.html#parametrizacao"><i class="fa fa-check"></i><b>6.4</b> Parametrização</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="calibracao.html"><a href="calibracao.html#funcao-perda"><i class="fa fa-check"></i><b>6.4.1</b> Função perda</a></li>
+<li class="chapter" data-level="6.4.2" data-path="calibracao.html"><a href="calibracao.html#otimizadores"><i class="fa fa-check"></i><b>6.4.2</b> Otimizadores</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="calibracao.html"><a href="calibracao.html#conclusao-2"><i class="fa fa-check"></i><b>6.5</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="svi.html"><a href="svi.html"><i class="fa fa-check"></i><b>7</b> Calibrando uma SVI</a><ul>
+<li class="chapter" data-level="7.1" data-path="svi.html"><a href="svi.html#modelo-svi"><i class="fa fa-check"></i><b>7.1</b> Modelo SVI</a></li>
+<li class="chapter" data-level="7.2" data-path="svi.html"><a href="svi.html#restricoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>7.2</b> Restrições de não-arbitragem</a></li>
+<li class="chapter" data-level="7.3" data-path="svi.html"><a href="svi.html#reparametrizacao-quasi-explicit"><i class="fa fa-check"></i><b>7.3</b> Reparametrização Quasi-explicit</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="svi.html"><a href="svi.html#pq"><i class="fa fa-check"></i><b>7.3.1</b> Solução explícita do problema reduzido</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="svi.html"><a href="svi.html#algoritmo"><i class="fa fa-check"></i><b>7.4</b> Algoritmo</a></li>
+<li class="chapter" data-level="7.5" data-path="svi.html"><a href="svi.html#resultados"><i class="fa fa-check"></i><b>7.5</b> Resultados</a></li>
+<li class="chapter" data-level="7.6" data-path="svi.html"><a href="svi.html#conclusao-3"><i class="fa fa-check"></i><b>7.6</b> Conclusão</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="ssvi.html"><a href="ssvi.html"><i class="fa fa-check"></i><b>8</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.1" data-path="ssvi.html"><a href="ssvi.html#reparametrizacoes-equivalentes"><i class="fa fa-check"></i><b>8.1</b> Reparametrizações equivalentes</a></li>
+<li class="chapter" data-level="8.2" data-path="ssvi.html"><a href="ssvi.html#superficie-svi"><i class="fa fa-check"></i><b>8.2</b> Superfície SVI</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="ssvi.html"><a href="ssvi.html#heston-1"><i class="fa fa-check"></i><b>8.2.1</b> Heston</a></li>
+<li class="chapter" data-level="8.2.2" data-path="ssvi.html"><a href="ssvi.html#lei-de-potencia"><i class="fa fa-check"></i><b>8.2.2</b> Lei de potência</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="ssvi.html"><a href="ssvi.html#condicoes-de-nao-arbitragem"><i class="fa fa-check"></i><b>8.3</b> Condições de não-arbitragem</a></li>
+<li class="chapter" data-level="8.4" data-path="ssvi.html"><a href="ssvi.html#densidade-neutra-ao-risco"><i class="fa fa-check"></i><b>8.4</b> Densidade neutra ao risco</a></li>
+<li class="chapter" data-level="8.5" data-path="ssvi.html"><a href="ssvi.html#superficie-de-volatilidade-local"><i class="fa fa-check"></i><b>8.5</b> Superfície de volatilidade local</a></li>
+<li class="chapter" data-level="8.6" data-path="ssvi.html"><a href="ssvi.html#calibracao-da-ssvi"><i class="fa fa-check"></i><b>8.6</b> Calibração da SSVI</a></li>
+<li class="chapter" data-level="8.7" data-path="ssvi.html"><a href="ssvi.html#conclusao-4"><i class="fa fa-check"></i><b>8.7</b> Conclusão</a></li>
+<li class="chapter" data-level="8.8" data-path="ssvi.html"><a href="ssvi.html#referencias-1"><i class="fa fa-check"></i><b>8.8</b> Referências</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Simulação de Monte Carlo</a><ul>
+<li class="chapter" data-level="9.1" data-path="monte-carlo.html"><a href="monte-carlo.html#simulacao-de-monte-carlo"><i class="fa fa-check"></i><b>9.1</b> Simulação de Monte Carlo</a></li>
+<li class="chapter" data-level="9.2" data-path="monte-carlo.html"><a href="monte-carlo.html#implementacao-em-r"><i class="fa fa-check"></i><b>9.2</b> Implementação em R</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introdução a Superfície de Volatilidade</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="monte-carlo" class="section level1">
+<h1><span class="header-section-number">Capítulo 9</span> Simulação de Monte Carlo</h1>
+<p>Em capítulo anterior, sobre <a href="processos-estocasticos.html#processos-estocasticos">processos estocásticos</a>, fizemos uso de uma poderosa ferramenta computacional, frequentemente utilizada em finanças para fazer simulações. Naquele artigo simulamos cinco realizações de caminhos de um processo estocástico, cada um com 500 passos a frente. Esta técnica é conhecida como Simulação de Monte Carlo - SMC e será abordada no presente artigo.</p>
+<p>Neste artigo também iremos introduzir, no corpo do texto, os códigos em linguagem <a href="https://cran.r-project.org/">R</a> utilizados para fazer as simulações, aumentando a didática de nossos artigos. A linguagem R é uma das preferidas para a modelagem estatística, é uma das linguagens de ciência de dados que vem ganhando muitos adeptos e, por conseguinte, é amplamente utilizada pelo mercado financeiro. E claro, é uma das preferidas aqui do CF também.</p>
+<p>Nosso problema será simular a posição de um portfólio composto por uma posição comprada em uma ação <code>PETR4</code> e uma <em>put</em> <code>PETRV17</code>. A opção de venda (<em>put</em>) tem preço de exercício em R$ 16,92, data de expiração em 15/10/2018 e é do tipo europeia. Ao final do pregão do dia 21/09/2018 a ação <code>PETR4</code> fechou cotada a R$ 20,14 e a <em>put</em> em R$ 0,12. A partir desta data até o dia da expiração da opção haverão 16 dias de pregão, que será nosso horizonte de simulação.</p>
+<p>Para melhoria da didática do texto e também para simplificação do problema, manteremos algumas variáveis necessárias para a precificação de opções constantes ao longo do período de análise, são elas:</p>
+<ul>
+<li><p>Volatilidade: Será calculada a volatilidade implícita da opção da data de compra do portfólio, 21/09/2018, e será mantida constante a partir daí para fins de precificação na SMC;</p></li>
+<li><p>Taxa de juros: constante no valor de 6,5 %a.a. tem termos contínuos;</p></li>
+<li><p>Taxa de dividendos: suposto igual a zero.</p></li>
+</ul>
+<div id="simulacao-de-monte-carlo" class="section level2">
+<h2><span class="header-section-number">9.1</span> Simulação de Monte Carlo</h2>
+<p>Para realizar uma SMC de um ativo financeiro deve-se primeiramente estabelecer uma distribuição de probabilidades que os retornos deste ativo deve seguir. Em nosso exemplo, utilizaremos a distrbuição normal para os retornos logarítimicos da ação <code>PETR4</code>, em linha com o clássico modelo <em>Black &amp; Scholes</em>, certamente existem diversas variantes que se ajustam melhor a realidade dos mercados, entretanto este é o modelo mais conhecido e base de todos os demais.</p>
+<p>Uma vez escolhida a distribuição dos (log) retornos, tem-se de escolher valores para a média e variância desta distribuição. A média dos retornos iremos tirar do histórico da ação, o retorno médio diário dos último ano. A variância da distribuição será encontrada a partir da volatilidade implícita da opção na data de compra do portfólio. A função utilizada para encontrar esta volatilidade retorna um valor em termos anuais, portanto, conforme visto no capítulo sobre <a href="processos-estocasticos.html#processos-estocasticos">processos estocásticos</a> devemos reescalar uma volatilidade anual para diária, e isto é obtido fazendo a divisão por <span class="math inline">\(\sqrt{252}\)</span>, onde temos 252 dias úteis em 1 ano.</p>
+<p>Desta forma é possível fazer a simulação dos log-retornos da ação para cada um dos dias a frente, até a data de exercício da opção, 15/10/2018. Estes retornos são acumulados e o preço <strong>simulado</strong> da ação <code>PETR4</code> em uma data intermediária é o preço de compra vezes o retorno acumulado até então.</p>
+<p>Faremos 1.000 simulações destas, gerando caminhos possíveis de preços para a ação. É necessário fazer muitas simulações para termos uma boa ideia da distribuição dos preços na data final, não é raro serem feitas mais de mil simulações, as vezes até dez mil podem ser necessárias.</p>
+<p>Uma vez gerados todos os caminhos simulados do preço do ativo objeto, podemos então precificar a <em>put</em> com base nestes preços simulados e as outras variáveis necessárias para se precificar uma opção europeia. Assim teremos também todos os caminhos de preço para a opção até sua data de exercício.</p>
+<p>O valor de nosso portfólio, em qualquer ponto do intervalo de tempo em análise, será a soma do preço da ação com o preço da opção e será possível verificar o efeito de proteção contra quedas do preço do ativo objeto a compra da <em>put</em> tem no portfólio.</p>
+<p>Cabe ressaltar aqui que o preço da opção <strong>não</strong> é simulado, não diretamente. Como a opção é um instrumento derivativo o seu preço “deriva” do preço do ativo objeto, este sim que é simulado. Uma vez que tenhamos o preço da ação, dadas nossas premissas de precificação, podemos calcular o prêmio da opção com base no modelo <em>Black &amp; Scholes</em>.</p>
+</div>
+<div id="implementacao-em-r" class="section level2">
+<h2><span class="header-section-number">9.2</span> Implementação em R</h2>
+<p>Conforme comentado, utilizamos aqui no CF a linguagem de programação <a href="https://cran.r-project.org/">R</a> para realizar nossas atividades que envolvam métodos quantitativos em finanças. Abaixo irei apresentar o código utilizado, trecho a trecho e o resultado obtido ao final.</p>
+<p>Primeiramente, no R, devemos carregar em nossa sessão de trabalho os pacotes que serão utilizados ao longo do código. Os pacotes funcionam como extensões ao R base, nestes pacotes encontramos diversas funções já programadas por outras pessoas que facilitam (e muito!) a nossa codificação.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(ggthemes)
+<span class="kw">library</span>(tidyquant)
+<span class="kw">library</span>(ragtop)</code></pre></div>
+<p>O pacote <code>ragtop</code>, por exemplo, possui já implementado dentro dele funções para fazer a precificação de opções europeias, sem que se tenha que implementar o modelo manualmente. Como a intenção deste artigo não é explicar o modelo <em>Black &amp; Scholes</em>, vamos abstrair esta parte e simplesmente chamar uma função que nos retorna o valor da opção dadas as variáveis de entrada.</p>
+<p>Em seguida iremos definir algumas de nossas variáveis, como o <em>ticker</em> da ação para buscar seus dados históricos através da função <code>tq_get()</code> do pacote <code>tidyquant</code> e calcular os retornos logarítimicos e tirar sua média, o preço e data de exercício da opção e também iremos relacionar os dias entre a data de compra e vencimento.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acao &lt;-<span class="st"> &quot;PETR4.SA&quot;</span>
+p_exer &lt;-<span class="st"> </span><span class="fl">16.92</span>
+d_exer &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2018-10-15&quot;</span>)
+d_atual &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2018-09-21&quot;</span>)
+dias &lt;-<span class="st"> </span><span class="kw">seq</span>(d_atual, d_exer, <span class="dt">by =</span> <span class="dv">1</span>)
+<span class="co">#dias &lt;- dias[isBusinessDay(&quot;Brazil&quot;, dias)]</span>
+nsims &lt;-<span class="st"> </span><span class="dv">1000</span>
+ndias &lt;-<span class="st"> </span><span class="kw">length</span>(dias) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+sim_nomes &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;sim&quot;</span>, <span class="dv">1</span><span class="op">:</span>nsims)
+
+<span class="co"># Carregar os precos historicos da acao</span>
+p_hist &lt;-<span class="st"> </span><span class="kw">tq_get</span>(acao, <span class="dt">from =</span> d_atual <span class="op">-</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>), <span class="dt">to =</span> d_atual <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(volume <span class="op">!=</span><span class="st"> </span><span class="fl">0.0</span>)
+ret_hist &lt;-<span class="st"> </span>p_hist <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">tq_mutate</span>(<span class="dt">select =</span> adjusted,
+            <span class="dt">mutate_fun =</span> periodReturn,
+            <span class="dt">period =</span> <span class="st">&quot;daily&quot;</span>,
+            <span class="dt">type =</span> <span class="st">&quot;log&quot;</span>,
+            <span class="dt">leading =</span> <span class="ot">FALSE</span>,
+            <span class="dt">col_rename =</span> <span class="st">&quot;log_ret&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">na.omit</span>()
+rf &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.065</span>)
+div &lt;-<span class="st"> </span><span class="dv">0</span>
+S0 &lt;-<span class="st"> </span><span class="kw">last</span>(ret_hist<span class="op">$</span>adjusted)
+P0 &lt;-<span class="st"> </span><span class="fl">0.12</span>
+mi &lt;-<span class="st"> </span><span class="dv">252</span> <span class="op">*</span><span class="st"> </span><span class="kw">mean</span>(ret_hist<span class="op">$</span>log_ret) <span class="co"># retorno medio em termos anuais</span>
+sigma &lt;-<span class="st"> </span><span class="kw">implied_volatility</span>(P0, <span class="op">-</span><span class="dv">1</span>, S0, p_exer, rf, (ndias <span class="op">+</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="dv">365</span>, 
+                            <span class="dt">divrate =</span> div)</code></pre></div>
+<p>Com o código acima obtemos basicamente todos os dados com os quais poderemos implementar a simulação de Monte Carlo. Entretanto, para realizar as simulações, necessitamos especificar mais algumas funções customizadas para nossas necessidades.</p>
+<p>Primeiro iremos especificar uma função que retorna uma única simulação de log-retornos acumulados em uma coluna de dados, esta função é chamada de <code>mc_sim_fun</code>. A segunda função necessária é a função de precificação da opção europeia. Por padrão, a função <code>blackscholes()</code> do pacote <code>ragtop</code> retorna uma lista com o valor da opção, mas também suas gregas <span class="math inline">\(\Delta\)</span> e <span class="math inline">\(\nu\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Funcao para realizar uma simulacao</span>
+mc_sim_fun &lt;-<span class="st"> </span><span class="cf">function</span>(valor_i, N, media, volat){
+  med_d &lt;-<span class="st"> </span>media <span class="op">/</span><span class="st"> </span><span class="dv">252</span>
+  volat_d &lt;-<span class="st"> </span>volat <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">252</span>)
+  ans &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="kw">c</span>(valor_i, <span class="kw">rnorm</span>(N, med_d <span class="op">-</span><span class="st"> </span>(volat_d<span class="op">^</span><span class="dv">2</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), volat_d))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    `</span><span class="dt">colnames&lt;-</span><span class="st">`</span>(<span class="st">&quot;log_ret&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">ret_ac =</span> <span class="kw">cumsum</span>(log_ret)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(ret_ac)
+  
+  <span class="kw">return</span>(ans)
+}
+
+<span class="co"># Funcao para precificar uma opcao europeia</span>
+eur_option &lt;-<span class="st"> </span><span class="cf">function</span>(type, S0, K, r, time, vola, div) {
+  callput &lt;-<span class="st"> </span><span class="kw">ifelse</span>(type <span class="op">==</span><span class="st"> &quot;call&quot;</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)
+  
+  ans &lt;-<span class="st"> </span><span class="kw">blackscholes</span>(callput, S0, K, r, time, vola, <span class="dt">divrate =</span> div)<span class="op">$</span>Price
+  <span class="kw">return</span>(ans)
+}</code></pre></div>
+<p>Uma vez com os dados obtidos e as funções auxiliares programadas, podemos passar a SMC propriamente dita. Aqui vamos estabelecer o número de simulações (1.000), calcular um <em>data frame</em> com os log-retornos acumulados e então calcular o preço da ação para cada dia e simulação realizados. O preço da ação na data <span class="math inline">\(t\)</span> será <span class="math inline">\(S_t=S_0 e^{r_t}\)</span>, onde <span class="math inline">\(r_t\)</span> é o log-retorno acumulado até a data <span class="math inline">\(t\)</span>.</p>
+<p>Após termos todos os preços do ativo objeto, passamos a computar qual seria o preço da opção, <span class="math inline">\(P_t\)</span>, naquelas condições. O valor do portfólio é dado pela soma destes dois preços (lembre-se, nosso portfólio é composto por <strong>uma</strong> ação e uma opção de venda).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Simulacao de Monte Carlo</span>
+<span class="co"># Valores Iniciais</span>
+inic &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, nsims) 
+<span class="kw">set.seed</span>(<span class="dv">12345</span>)
+ret_ac_mc &lt;-<span class="st"> </span><span class="kw">map_dfc</span>(inic,
+                     mc_sim_fun,
+                     <span class="dt">N =</span> ndias,
+                     <span class="dt">media =</span> mi,
+                     <span class="dt">volat =</span> sigma)
+
+precos_acao &lt;-<span class="st"> </span>(S0 <span class="op">*</span><span class="st"> </span><span class="kw">exp</span>(ret_ac_mc)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">set_names</span>(sim_nomes) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">anos_exp =</span> (ndias<span class="op">:</span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="dv">252</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> sims, <span class="dt">value =</span> St, <span class="op">-</span>anos_exp)
+
+<span class="co"># Evolucao do Portfolio</span>
+port_mc &lt;-<span class="st"> </span>precos_acao <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Pt =</span> <span class="kw">map2_dbl</span>(St, anos_exp, 
+                       <span class="op">~</span><span class="kw">eur_option</span>(<span class="dt">type =</span> <span class="st">&quot;put&quot;</span>,
+                                   <span class="dt">S0 =</span> .x,
+                                   <span class="dt">K =</span> p_exer,
+                                   <span class="dt">r =</span> rf,
+                                   <span class="dt">time =</span> .y,
+                                   <span class="dt">vola =</span> sigma,
+                                   <span class="dt">div =</span> div)),
+         <span class="dt">port_valor =</span> Pt <span class="op">+</span><span class="st"> </span>St,
+         <span class="dt">data =</span> <span class="kw">rep</span>(dias, nsims))
+<span class="kw">head</span>(port_mc)</code></pre></div>
+<pre><code>##     anos_exp sims       St         Pt port_valor       data
+## 1 0.09523810 sim1 19.40838 0.19814037   19.60652 2018-09-21
+## 2 0.09126984 sim1 19.74659 0.14627994   19.89287 2018-09-22
+## 3 0.08730159 sim1 20.16159 0.09894207   20.26053 2018-09-23
+## 4 0.08333333 sim1 20.11181 0.09428249   20.20610 2018-09-24
+## 5 0.07936508 sim1 19.86686 0.10511830   19.97198 2018-09-25
+## 6 0.07539683 sim1 20.22476 0.07026524   20.29503 2018-09-26</code></pre>
+<p>O <em>data frame</em> <code>port_mc</code> contém todas as informações da SMC de nosso portfólio. Contém as datas desde o dia da compra até a data de vencimento da opção e contém <strong>todos</strong> os caminhos de <span class="math inline">\(S_t\)</span>, <span class="math inline">\(P_t\)</span> e do portfólio. Vamos plotar os resultados obtidos para a evolução apenas da ação, primeiramente.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brk &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sort</span>(<span class="kw">c</span>(p_exer, <span class="kw">seq</span>(<span class="kw">min</span>(port_mc<span class="op">$</span>St),
+                                <span class="kw">max</span>(port_mc<span class="op">$</span>St),
+                                <span class="dt">length.out =</span> <span class="dv">5</span>))),
+             <span class="dt">digits =</span> <span class="dv">2</span>)
+<span class="kw">ggplot</span>(port_mc, <span class="kw">aes</span>(<span class="dt">x =</span> data, <span class="dt">y =</span> St)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> sims)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> p_exer, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Simulações do Valor da Ação&quot;</span>,
+       <span class="dt">x =</span> <span class="st">&quot;data&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Valor (R$)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> brk) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;2 days&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%d&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
+<p><img src="91-monte-carlo_files/figure-html/gr_acao-1.png" width="1056" /></p>
+<p>Podemos verificar pela figura acima que a ação, pela nossa SMC, deve fechar na maioria dos caminhos simulados acima do preço de exercício da <em>put</em> (linha vermelha). Entretanto existe uma menor probabilidade de, até a data de vencimento, o preço da ação cair abaixo do <em>strike</em> desta opção.</p>
+<p>Podemos inferir esta probabilidade através do número de caminhos que terminaram em preço da ação abaixo do valor de referência. O custo de proteção contra este risco é o prêmio por nós ao comprarmos a <em>put</em>. O código para esta inferência está abaixo.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_baixo &lt;-<span class="st"> </span>port_mc <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(data <span class="op">==</span><span class="st"> </span>d_exer) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num_baixo =</span> <span class="kw">sum</span>(St <span class="op">&lt;</span><span class="st"> </span>p_exer)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.double</span>()
+prob &lt;-<span class="st"> </span>p_baixo <span class="op">/</span><span class="st"> </span>nsims</code></pre></div>
+<p>Este cálculo nos mostra que em 134 caminhos simulados do preço de <code>PETR4</code>, este terminou abaixo do preço de exercío da opção <code>PETRV17</code>, ou seja, uma probabilidade de 13.4%.</p>
+<p>Para nos precavermos desta possível queda de preço e garantir um valor mínimo de nosso portfólio até a data de 15/10/2018, podemos comprar uma opção de venda, com preço de exercício no valor que desejamos e então o portfólio passa a ser composto pela ação e também pela opção. Caso na data de vencimento o preço da ação seja menor que o preço de exercício da <em>put</em>, esta opção estará ITM e pode ser exercida pelo valor da diferença entre os preços, ou seja, nos garantindo que nosso portfólio estará avaliado em R$ 16,92.</p>
+<p>Esta dinâmica pode ser verificada pela figura abaixo, que agora apresenta o valor do portfólio completo, ação mais opção. Verificamos que, de fato, no dia 15/10/2018 nosso investimento não estará em situação pior que o preço garantido pela compra da <em>put</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brk &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sort</span>(<span class="kw">c</span>(p_exer, <span class="kw">seq</span>(<span class="kw">min</span>(port_mc<span class="op">$</span>port_valor),
+                                <span class="kw">max</span>(port_mc<span class="op">$</span>port_valor),
+                                <span class="dt">length.out =</span> <span class="dv">5</span>)[<span class="op">-</span><span class="dv">1</span>])),
+             <span class="dt">digits =</span> <span class="dv">2</span>)
+<span class="kw">ggplot</span>(port_mc, <span class="kw">aes</span>(<span class="dt">x =</span> data, <span class="dt">y =</span> port_valor)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> sims)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> p_exer, <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Simulações do Valor do Portfolio&quot;</span>,
+       <span class="dt">x =</span> <span class="st">&quot;data&quot;</span>,
+       <span class="dt">y =</span> <span class="st">&quot;Valor (R$)&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks =</span> brk) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;2 days&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%d&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
+<p><img src="91-monte-carlo_files/figure-html/gr_port-1.png" width="1056" /></p>
+<p>Ou seja, ao custo de 0.62% do preço da ação, compramos uma proteção contra uma queda de preços com probabilidade de 13.4%.</p>
+<p>Esta é apenas uma (simples) aplicação das inúmeras possíveis que a Simulação de Monte Carlo possui no mundo das finanças. A SMC é uma poderosa ferramenta para avaliação e controle de risco de grandes portfólios, com centenas ou milhares de ativos, onde nem sempre consegue-se aferir medidas de retorno esperado ou de risco de mercado de forma analítica.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ssvi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"google": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/91-monte-carlo.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["vol_surface_book.pdf", "vol_surface_book.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

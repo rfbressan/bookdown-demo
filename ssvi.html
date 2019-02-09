@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="svi.html">
-<link rel="next" href="bibliografia.html">
+<link rel="next" href="monte-carlo.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -205,6 +205,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.7" data-path="ssvi.html"><a href="ssvi.html#conclusao-4"><i class="fa fa-check"></i><b>8.7</b> Conclusão</a></li>
 <li class="chapter" data-level="8.8" data-path="ssvi.html"><a href="ssvi.html#referencias-1"><i class="fa fa-check"></i><b>8.8</b> Referências</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Simulação de Monte Carlo</a><ul>
+<li class="chapter" data-level="9.1" data-path="monte-carlo.html"><a href="monte-carlo.html#simulacao-de-monte-carlo"><i class="fa fa-check"></i><b>9.1</b> Simulação de Monte Carlo</a></li>
+<li class="chapter" data-level="9.2" data-path="monte-carlo.html"><a href="monte-carlo.html#implementacao-em-r"><i class="fa fa-check"></i><b>9.2</b> Implementação em R</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
@@ -359,7 +363,7 @@ g(k)=\left(1-\frac{kw\prime(k)}{2w(k)}\right)^2-\frac{w\prime(k)^2}{4}\left(\fra
 \tag{8.9}
 \end{equation}\]</span>
 <p>De forma bastante simplista, a superfície de volatilidade local pode ser entendida como aquela superfície de volatilidades instantâneas para o ativo subjacente, <span class="math inline">\(\sigma(S, t)\)</span> que depende tanto do nível de preço deste ativo quanto do tempo, e fornece a previsão do mercado para a volatilidade instantânea de <span class="math inline">\(S\)</span> dado que este ativo hoje está precificado em <span class="math inline">\(S_0\)</span> e no tempo futuro <span class="math inline">\(\tau\)</span> estará em <span class="math inline">\(K\)</span>. Fazendo uma analogia com o mercado de juros, a superfície local está para a curva <em>forward</em> assim como a superfície implícita está para a curva de juros, numa aproximação.</p>
-<p>A superfície local é muito utilizada para precificar opções exóticas, aquelas que possuem perfil de <em>payoff</em> distinto das opções europeias e podem ou não terem seus resultados atrelados ao caminho seguido pelo preço do ativo objeto durante a vida da opção. Nestes casos, a precificação se dá através da incorporação da superfície local estipulando um valor de volatilidade instantânea para cada possível combinação <span class="math inline">\((S_t, t)\)</span> em geral em um ambiente de simulação de <a href="#monte-carlo">Monte Carlo</a>.</p>
+<p>A superfície local é muito utilizada para precificar opções exóticas, aquelas que possuem perfil de <em>payoff</em> distinto das opções europeias e podem ou não terem seus resultados atrelados ao caminho seguido pelo preço do ativo objeto durante a vida da opção. Nestes casos, a precificação se dá através da incorporação da superfície local estipulando um valor de volatilidade instantânea para cada possível combinação <span class="math inline">\((S_t, t)\)</span> em geral em um ambiente de simulação de <a href="monte-carlo.html#monte-carlo">Monte Carlo</a>.</p>
 <p>No caso da equação <a href="ssvi.html#eq:var-local">(8.9)</a> temos uma nova derivada a ser computada, <span class="math inline">\(\partial_\tau w(k, \theta_\tau)\)</span>, que só poderia ser feita de forma analítica caso <span class="math inline">\(\theta_\tau\)</span> fosse parametrizada explicitamente. Nem sempre este é o caso, já que <span class="math inline">\(\theta_\tau\)</span> são os valores de variância total ATM implícitas, ou seja, observa-se no mercado apenas alguns <strong>pontos</strong> de <span class="math inline">\(\theta_\tau\)</span>, pontos estes que podem estar espaçados em intervalos diferentes de tempo. A solução para esta derivação é interpolar estes pontos, nem que seja uma simples interpolação linear, e então fazer a derivação de forma numérica através de um método de diferenças finitas. Note que na interpolação deve-se garantir a condição de não arbitragem de calendário, <span class="math inline">\(\partial_\tau\theta_\tau\geq 0\)</span>.</p>
 </div>
 <div id="calibracao-da-ssvi" class="section level2">
@@ -553,7 +557,7 @@ M &lt;-<span class="st"> </span><span class="kw">mesh</span>(kloc, utau)
         </div>
       </div>
 <a href="svi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="monte-carlo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

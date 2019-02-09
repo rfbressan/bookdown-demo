@@ -205,6 +205,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.7" data-path="ssvi.html"><a href="ssvi.html#conclusao-4"><i class="fa fa-check"></i><b>8.7</b> Conclusão</a></li>
 <li class="chapter" data-level="8.8" data-path="ssvi.html"><a href="ssvi.html#referencias-1"><i class="fa fa-check"></i><b>8.8</b> Referências</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Simulação de Monte Carlo</a><ul>
+<li class="chapter" data-level="9.1" data-path="monte-carlo.html"><a href="monte-carlo.html#simulacao-de-monte-carlo"><i class="fa fa-check"></i><b>9.1</b> Simulação de Monte Carlo</a></li>
+<li class="chapter" data-level="9.2" data-path="monte-carlo.html"><a href="monte-carlo.html#implementacao-em-r"><i class="fa fa-check"></i><b>9.2</b> Implementação em R</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/" target="blank">Published with bookdown</a></li>
@@ -934,9 +938,8 @@ k &lt;-<span class="st"> </span>smile<span class="op">$</span>moneyness
 w &lt;-<span class="st"> </span>smile<span class="op">$</span>iv<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>smile<span class="op">$</span>tau
 
 init_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
-par_direct &lt;-<span class="st"> </span><span class="kw">svi_fit_direct</span>(k, w)</code></pre></div>
-<pre><code>## Warning in minpack.lm::nls.lm(init_pars, lower = c(0, 0, -1, -Inf, 0), upper = c(max(w), : lmdif: info = -1. Number of iterations has reached `maxiter&#39; == 100.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">end_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
+par_direct &lt;-<span class="st"> </span><span class="kw">svi_fit_direct</span>(k, w)
+end_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
 time_direct &lt;-<span class="st"> </span>end_direct <span class="op">-</span><span class="st"> </span>init_direct 
 
 init_ga &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
@@ -1038,13 +1041,13 @@ a
 0.00000
 </td>
 <td style="text-align:left;">
-0.00001
+0.00000
 </td>
 <td style="text-align:left;">
 0.00000
 </td>
 <td style="text-align:left;">
-0.00001
+0.00000
 </td>
 </tr>
 <tr>
@@ -1052,16 +1055,16 @@ a
 b
 </td>
 <td style="text-align:left;">
-0.01953
+0.01951
 </td>
 <td style="text-align:left;">
-0.01950
+0.01960
 </td>
 <td style="text-align:left;">
 0.01695
 </td>
 <td style="text-align:left;">
-0.01944
+0.01961
 </td>
 </tr>
 <tr>
@@ -1069,16 +1072,16 @@ b
 <span class="math inline">\(\rho\)</span>
 </td>
 <td style="text-align:left;">
--0.79855
+-0.79645
 </td>
 <td style="text-align:left;">
--0.80034
+-0.80018
 </td>
 <td style="text-align:left;">
 -1.00000
 </td>
 <td style="text-align:left;">
--0.79429
+-0.80995
 </td>
 </tr>
 <tr>
@@ -1086,16 +1089,16 @@ b
 m
 </td>
 <td style="text-align:left;">
--0.00751
+-0.00734
 </td>
 <td style="text-align:left;">
--0.00756
+-0.00780
 </td>
 <td style="text-align:left;">
 -0.01118
 </td>
 <td style="text-align:left;">
--0.00701
+-0.00842
 </td>
 </tr>
 <tr>
@@ -1103,16 +1106,16 @@ m
 <span class="math inline">\(\sigma\)</span>
 </td>
 <td style="text-align:left;">
-0.05041
+0.05031
 </td>
 <td style="text-align:left;">
-0.05016
+0.05036
 </td>
 <td style="text-align:left;">
 0.06905
 </td>
 <td style="text-align:left;">
-0.04984
+0.05089
 </td>
 </tr>
 <tr>
@@ -1129,7 +1132,7 @@ RMSE
 9.55e-05
 </td>
 <td style="text-align:left;">
-8.69e-06
+8.71e-06
 </td>
 </tr>
 <tr>
@@ -1137,16 +1140,16 @@ RMSE
 Tempo
 </td>
 <td style="text-align:left;">
-0.07500
+0.06500
 </td>
 <td style="text-align:left;">
-30.96400
+28.99700
 </td>
 <td style="text-align:left;">
-0.26000
+0.17700
 </td>
 <td style="text-align:left;">
-14.51000
+6.07300
 </td>
 </tr>
 </tbody>

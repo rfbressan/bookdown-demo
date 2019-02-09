@@ -2870,15 +2870,6 @@ métodos.
 
 \NormalTok{init_direct <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
 \NormalTok{par_direct <-}\StringTok{ }\KeywordTok{svi_fit_direct}\NormalTok{(k, w)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning in minpack.lm::nls.lm(init_pars, lower = c(0, 0, -1, -Inf, 0), upper = c(max(w), : lmdif: info = -1. Number of iterations has reached `maxiter' == 100.
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{end_direct <-}\StringTok{ }\KeywordTok{proc.time}\NormalTok{()}
 \NormalTok{time_direct <-}\StringTok{ }\NormalTok{end_direct }\OperatorTok{-}\StringTok{ }\NormalTok{init_direct }
 
@@ -2971,14 +2962,14 @@ erro \textbf{na variância}.
 \toprule
 Estimativa & Direto & GA & QuasiPQ & QuasiNM\\
 \midrule
-a & 0.00000 & 0.00016 & 0.00000 & 0.00000\\
-b & 0.01413 & 0.01825 & 0.01696 & 0.02315\\
-\$\textbackslash{}rho\$ & -0.80724 & -0.84924 & -1.00000 & -0.96729\\
-m & 0.01288 & -0.00720 & -0.01118 & -0.02894\\
-\$\textbackslash{}sigma\$ & 0.05236 & 0.04475 & 0.06905 & 0.05987\\
+a & 0.00000 & 0.00001 & 0.00000 & 0.00001\\
+b & 0.03538 & 0.01950 & 0.01695 & 0.01944\\
+\$\textbackslash{}rho\$ & -1.00000 & -0.80534 & -1.00000 & -0.79609\\
+m & -0.06418 & -0.00786 & -0.01118 & -0.00714\\
+\$\textbackslash{}sigma\$ & 0.06516 & 0.05041 & 0.06905 & 0.04996\\
 \addlinespace
-RMSE & 4.8e-05 & 9.47e-06 & 9.55e-05 & 1.51e-05\\
-Tempo & 0.16100 & 34.76100 & 0.19700 & 8.55600\\
+RMSE & 7.87e-05 & 8.69e-06 & 9.55e-05 & 8.69e-06\\
+Tempo & 0.16000 & 30.15000 & 0.18200 & 9.90700\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3666,6 +3657,359 @@ neutra ao risco implícita no preços das opções, como da superfície de
 volatilidade local através da equação de Dupire.
 
 \section{Referências}\label{referencias-1}
+
+\hypertarget{monte-carlo}{\chapter{Simulação de Monte
+Carlo}\label{monte-carlo}}
+
+Em capítulo anterior, sobre
+\protect\hyperlink{processos-estocasticos}{processos estocásticos},
+fizemos uso de uma poderosa ferramenta computacional, frequentemente
+utilizada em finanças para fazer simulações. Naquele artigo simulamos
+cinco realizações de caminhos de um processo estocástico, cada um com
+500 passos a frente. Esta técnica é conhecida como Simulação de Monte
+Carlo - SMC e será abordada no presente artigo.
+
+Neste artigo também iremos introduzir, no corpo do texto, os códigos em
+linguagem \href{https://cran.r-project.org/}{R} utilizados para fazer as
+simulações, aumentando a didática de nossos artigos. A linguagem R é uma
+das preferidas para a modelagem estatística, é uma das linguagens de
+ciência de dados que vem ganhando muitos adeptos e, por conseguinte, é
+amplamente utilizada pelo mercado financeiro. E claro, é uma das
+preferidas aqui do CF também.
+
+Nosso problema será simular a posição de um portfólio composto por uma
+posição comprada em uma ação \texttt{PETR4} e uma \emph{put}
+\texttt{PETRV17}. A opção de venda (\emph{put}) tem preço de exercício
+em R\$ 16,92, data de expiração em 15/10/2018 e é do tipo europeia. Ao
+final do pregão do dia 21/09/2018 a ação \texttt{PETR4} fechou cotada a
+R\$ 20,14 e a \emph{put} em R\$ 0,12. A partir desta data até o dia da
+expiração da opção haverão 16 dias de pregão, que será nosso horizonte
+de simulação.
+
+Para melhoria da didática do texto e também para simplificação do
+problema, manteremos algumas variáveis necessárias para a precificação
+de opções constantes ao longo do período de análise, são elas:
+
+\begin{itemize}
+\item
+  Volatilidade: Será calculada a volatilidade implícita da opção da data
+  de compra do portfólio, 21/09/2018, e será mantida constante a partir
+  daí para fins de precificação na SMC;
+\item
+  Taxa de juros: constante no valor de 6,5 \%a.a. tem termos contínuos;
+\item
+  Taxa de dividendos: suposto igual a zero.
+\end{itemize}
+
+\section{Simulação de Monte Carlo}\label{simulacao-de-monte-carlo}
+
+Para realizar uma SMC de um ativo financeiro deve-se primeiramente
+estabelecer uma distribuição de probabilidades que os retornos deste
+ativo deve seguir. Em nosso exemplo, utilizaremos a distrbuição normal
+para os retornos logarítimicos da ação \texttt{PETR4}, em linha com o
+clássico modelo \emph{Black \& Scholes}, certamente existem diversas
+variantes que se ajustam melhor a realidade dos mercados, entretanto
+este é o modelo mais conhecido e base de todos os demais.
+
+Uma vez escolhida a distribuição dos (log) retornos, tem-se de escolher
+valores para a média e variância desta distribuição. A média dos
+retornos iremos tirar do histórico da ação, o retorno médio diário dos
+último ano. A variância da distribuição será encontrada a partir da
+volatilidade implícita da opção na data de compra do portfólio. A função
+utilizada para encontrar esta volatilidade retorna um valor em termos
+anuais, portanto, conforme visto no capítulo sobre
+\protect\hyperlink{processos-estocasticos}{processos estocásticos}
+devemos reescalar uma volatilidade anual para diária, e isto é obtido
+fazendo a divisão por \(\sqrt{252}\), onde temos 252 dias úteis em 1
+ano.
+
+Desta forma é possível fazer a simulação dos log-retornos da ação para
+cada um dos dias a frente, até a data de exercício da opção, 15/10/2018.
+Estes retornos são acumulados e o preço \textbf{simulado} da ação
+\texttt{PETR4} em uma data intermediária é o preço de compra vezes o
+retorno acumulado até então.
+
+Faremos 1.000 simulações destas, gerando caminhos possíveis de preços
+para a ação. É necessário fazer muitas simulações para termos uma boa
+ideia da distribuição dos preços na data final, não é raro serem feitas
+mais de mil simulações, as vezes até dez mil podem ser necessárias.
+
+Uma vez gerados todos os caminhos simulados do preço do ativo objeto,
+podemos então precificar a \emph{put} com base nestes preços simulados e
+as outras variáveis necessárias para se precificar uma opção europeia.
+Assim teremos também todos os caminhos de preço para a opção até sua
+data de exercício.
+
+O valor de nosso portfólio, em qualquer ponto do intervalo de tempo em
+análise, será a soma do preço da ação com o preço da opção e será
+possível verificar o efeito de proteção contra quedas do preço do ativo
+objeto a compra da \emph{put} tem no portfólio.
+
+Cabe ressaltar aqui que o preço da opção \textbf{não} é simulado, não
+diretamente. Como a opção é um instrumento derivativo o seu preço
+``deriva'' do preço do ativo objeto, este sim que é simulado. Uma vez
+que tenhamos o preço da ação, dadas nossas premissas de precificação,
+podemos calcular o prêmio da opção com base no modelo \emph{Black \&
+Scholes}.
+
+\section{Implementação em R}\label{implementacao-em-r}
+
+Conforme comentado, utilizamos aqui no CF a linguagem de programação
+\href{https://cran.r-project.org/}{R} para realizar nossas atividades
+que envolvam métodos quantitativos em finanças. Abaixo irei apresentar o
+código utilizado, trecho a trecho e o resultado obtido ao final.
+
+Primeiramente, no R, devemos carregar em nossa sessão de trabalho os
+pacotes que serão utilizados ao longo do código. Os pacotes funcionam
+como extensões ao R base, nestes pacotes encontramos diversas funções já
+programadas por outras pessoas que facilitam (e muito!) a nossa
+codificação.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(ggthemes)}
+\KeywordTok{library}\NormalTok{(tidyquant)}
+\KeywordTok{library}\NormalTok{(ragtop)}
+\end{Highlighting}
+\end{Shaded}
+
+O pacote \texttt{ragtop}, por exemplo, possui já implementado dentro
+dele funções para fazer a precificação de opções europeias, sem que se
+tenha que implementar o modelo manualmente. Como a intenção deste artigo
+não é explicar o modelo \emph{Black \& Scholes}, vamos abstrair esta
+parte e simplesmente chamar uma função que nos retorna o valor da opção
+dadas as variáveis de entrada.
+
+Em seguida iremos definir algumas de nossas variáveis, como o
+\emph{ticker} da ação para buscar seus dados históricos através da
+função \texttt{tq\_get()} do pacote \texttt{tidyquant} e calcular os
+retornos logarítimicos e tirar sua média, o preço e data de exercício da
+opção e também iremos relacionar os dias entre a data de compra e
+vencimento.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{acao <-}\StringTok{ "PETR4.SA"}
+\NormalTok{p_exer <-}\StringTok{ }\FloatTok{16.92}
+\NormalTok{d_exer <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2018-10-15"}\NormalTok{)}
+\NormalTok{d_atual <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2018-09-21"}\NormalTok{)}
+\NormalTok{dias <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(d_atual, d_exer, }\DataTypeTok{by =} \DecValTok{1}\NormalTok{)}
+\CommentTok{#dias <- dias[isBusinessDay("Brazil", dias)]}
+\NormalTok{nsims <-}\StringTok{ }\DecValTok{1000}
+\NormalTok{ndias <-}\StringTok{ }\KeywordTok{length}\NormalTok{(dias) }\OperatorTok{-}\StringTok{ }\DecValTok{1}
+\NormalTok{sim_nomes <-}\StringTok{ }\KeywordTok{paste0}\NormalTok{(}\StringTok{"sim"}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\NormalTok{nsims)}
+
+\CommentTok{# Carregar os precos historicos da acao}
+\NormalTok{p_hist <-}\StringTok{ }\KeywordTok{tq_get}\NormalTok{(acao, }\DataTypeTok{from =}\NormalTok{ d_atual }\OperatorTok{-}\StringTok{ }\KeywordTok{years}\NormalTok{(}\DecValTok{1}\NormalTok{), }\DataTypeTok{to =}\NormalTok{ d_atual }\OperatorTok{+}\StringTok{ }\KeywordTok{days}\NormalTok{(}\DecValTok{1}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(volume }\OperatorTok{!=}\StringTok{ }\FloatTok{0.0}\NormalTok{)}
+\NormalTok{ret_hist <-}\StringTok{ }\NormalTok{p_hist }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tq_mutate}\NormalTok{(}\DataTypeTok{select =}\NormalTok{ adjusted,}
+            \DataTypeTok{mutate_fun =}\NormalTok{ periodReturn,}
+            \DataTypeTok{period =} \StringTok{"daily"}\NormalTok{,}
+            \DataTypeTok{type =} \StringTok{"log"}\NormalTok{,}
+            \DataTypeTok{leading =} \OtherTok{FALSE}\NormalTok{,}
+            \DataTypeTok{col_rename =} \StringTok{"log_ret"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{rf <-}\StringTok{ }\KeywordTok{log}\NormalTok{(}\DecValTok{1} \OperatorTok{+}\StringTok{ }\FloatTok{0.065}\NormalTok{)}
+\NormalTok{div <-}\StringTok{ }\DecValTok{0}
+\NormalTok{S0 <-}\StringTok{ }\KeywordTok{last}\NormalTok{(ret_hist}\OperatorTok{$}\NormalTok{adjusted)}
+\NormalTok{P0 <-}\StringTok{ }\FloatTok{0.12}
+\NormalTok{mi <-}\StringTok{ }\DecValTok{252} \OperatorTok{*}\StringTok{ }\KeywordTok{mean}\NormalTok{(ret_hist}\OperatorTok{$}\NormalTok{log_ret) }\CommentTok{# retorno medio em termos anuais}
+\NormalTok{sigma <-}\StringTok{ }\KeywordTok{implied_volatility}\NormalTok{(P0, }\OperatorTok{-}\DecValTok{1}\NormalTok{, S0, p_exer, rf, (ndias }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{365}\NormalTok{, }
+                            \DataTypeTok{divrate =}\NormalTok{ div)}
+\end{Highlighting}
+\end{Shaded}
+
+Com o código acima obtemos basicamente todos os dados com os quais
+poderemos implementar a simulação de Monte Carlo. Entretanto, para
+realizar as simulações, necessitamos especificar mais algumas funções
+customizadas para nossas necessidades.
+
+Primeiro iremos especificar uma função que retorna uma única simulação
+de log-retornos acumulados em uma coluna de dados, esta função é chamada
+de \texttt{mc\_sim\_fun}. A segunda função necessária é a função de
+precificação da opção europeia. Por padrão, a função
+\texttt{blackscholes()} do pacote \texttt{ragtop} retorna uma lista com
+o valor da opção, mas também suas gregas \(\Delta\) e \(\nu\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Funcao para realizar uma simulacao}
+\NormalTok{mc_sim_fun <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(valor_i, N, media, volat)\{}
+\NormalTok{  med_d <-}\StringTok{ }\NormalTok{media }\OperatorTok{/}\StringTok{ }\DecValTok{252}
+\NormalTok{  volat_d <-}\StringTok{ }\NormalTok{volat }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\DecValTok{252}\NormalTok{)}
+\NormalTok{  ans <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\KeywordTok{c}\NormalTok{(valor_i, }\KeywordTok{rnorm}\NormalTok{(N, med_d }\OperatorTok{-}\StringTok{ }\NormalTok{(volat_d}\OperatorTok{^}\DecValTok{2} \OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{), volat_d))) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    `}\DataTypeTok{colnames<-}\StringTok{`}\NormalTok{(}\StringTok{"log_ret"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{    }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{ret_ac =} \KeywordTok{cumsum}\NormalTok{(log_ret)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{    }\KeywordTok{select}\NormalTok{(ret_ac)}
+  
+  \KeywordTok{return}\NormalTok{(ans)}
+\NormalTok{\}}
+
+\CommentTok{# Funcao para precificar uma opcao europeia}
+\NormalTok{eur_option <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(type, S0, K, r, time, vola, div) \{}
+\NormalTok{  callput <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(type }\OperatorTok{==}\StringTok{ "call"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+  
+\NormalTok{  ans <-}\StringTok{ }\KeywordTok{blackscholes}\NormalTok{(callput, S0, K, r, time, vola, }\DataTypeTok{divrate =}\NormalTok{ div)}\OperatorTok{$}\NormalTok{Price}
+  \KeywordTok{return}\NormalTok{(ans)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Uma vez com os dados obtidos e as funções auxiliares programadas,
+podemos passar a SMC propriamente dita. Aqui vamos estabelecer o número
+de simulações (1.000), calcular um \emph{data frame} com os log-retornos
+acumulados e então calcular o preço da ação para cada dia e simulação
+realizados. O preço da ação na data \(t\) será \(S_t=S_0 e^{r_t}\), onde
+\(r_t\) é o log-retorno acumulado até a data \(t\).
+
+Após termos todos os preços do ativo objeto, passamos a computar qual
+seria o preço da opção, \(P_t\), naquelas condições. O valor do
+portfólio é dado pela soma destes dois preços (lembre-se, nosso
+portfólio é composto por \textbf{uma} ação e uma opção de venda).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Simulacao de Monte Carlo}
+\CommentTok{# Valores Iniciais}
+\NormalTok{inic <-}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, nsims) }
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{12345}\NormalTok{)}
+\NormalTok{ret_ac_mc <-}\StringTok{ }\KeywordTok{map_dfc}\NormalTok{(inic,}
+\NormalTok{                     mc_sim_fun,}
+                     \DataTypeTok{N =}\NormalTok{ ndias,}
+                     \DataTypeTok{media =}\NormalTok{ mi,}
+                     \DataTypeTok{volat =}\NormalTok{ sigma)}
+
+\NormalTok{precos_acao <-}\StringTok{ }\NormalTok{(S0 }\OperatorTok{*}\StringTok{ }\KeywordTok{exp}\NormalTok{(ret_ac_mc)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_names}\NormalTok{(sim_nomes) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{anos_exp =}\NormalTok{ (ndias}\OperatorTok{:}\DecValTok{0}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{252}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{gather}\NormalTok{(}\DataTypeTok{key =}\NormalTok{ sims, }\DataTypeTok{value =}\NormalTok{ St, }\OperatorTok{-}\NormalTok{anos_exp)}
+
+\CommentTok{# Evolucao do Portfolio}
+\NormalTok{port_mc <-}\StringTok{ }\NormalTok{precos_acao }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Pt =} \KeywordTok{map2_dbl}\NormalTok{(St, anos_exp, }
+                       \OperatorTok{~}\KeywordTok{eur_option}\NormalTok{(}\DataTypeTok{type =} \StringTok{"put"}\NormalTok{,}
+                                   \DataTypeTok{S0 =}\NormalTok{ .x,}
+                                   \DataTypeTok{K =}\NormalTok{ p_exer,}
+                                   \DataTypeTok{r =}\NormalTok{ rf,}
+                                   \DataTypeTok{time =}\NormalTok{ .y,}
+                                   \DataTypeTok{vola =}\NormalTok{ sigma,}
+                                   \DataTypeTok{div =}\NormalTok{ div)),}
+         \DataTypeTok{port_valor =}\NormalTok{ Pt }\OperatorTok{+}\StringTok{ }\NormalTok{St,}
+         \DataTypeTok{data =} \KeywordTok{rep}\NormalTok{(dias, nsims))}
+\KeywordTok{head}\NormalTok{(port_mc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     anos_exp sims       St         Pt port_valor       data
+## 1 0.09523810 sim1 19.40838 0.19814037   19.60652 2018-09-21
+## 2 0.09126984 sim1 19.74659 0.14627994   19.89287 2018-09-22
+## 3 0.08730159 sim1 20.16159 0.09894207   20.26053 2018-09-23
+## 4 0.08333333 sim1 20.11181 0.09428249   20.20610 2018-09-24
+## 5 0.07936508 sim1 19.86686 0.10511830   19.97198 2018-09-25
+## 6 0.07539683 sim1 20.22476 0.07026524   20.29503 2018-09-26
+\end{verbatim}
+
+O \emph{data frame} \texttt{port\_mc} contém todas as informações da SMC
+de nosso portfólio. Contém as datas desde o dia da compra até a data de
+vencimento da opção e contém \textbf{todos} os caminhos de \(S_t\),
+\(P_t\) e do portfólio. Vamos plotar os resultados obtidos para a
+evolução apenas da ação, primeiramente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brk <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{c}\NormalTok{(p_exer, }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(port_mc}\OperatorTok{$}\NormalTok{St),}
+                                \KeywordTok{max}\NormalTok{(port_mc}\OperatorTok{$}\NormalTok{St),}
+                                \DataTypeTok{length.out =} \DecValTok{5}\NormalTok{))),}
+             \DataTypeTok{digits =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(port_mc, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ data, }\DataTypeTok{y =}\NormalTok{ St)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ sims)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =}\NormalTok{ p_exer, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Simulações do Valor da Ação"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"data"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Valor (R$)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =}\NormalTok{ brk) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_date}\NormalTok{(}\DataTypeTok{date_breaks =} \StringTok{"2 days"}\NormalTok{, }\DataTypeTok{date_labels =} \StringTok{"%d"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_economist_white}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{91-monte-carlo_files/figure-latex/gr_acao-1.pdf}
+
+Podemos verificar pela figura acima que a ação, pela nossa SMC, deve
+fechar na maioria dos caminhos simulados acima do preço de exercício da
+\emph{put} (linha vermelha). Entretanto existe uma menor probabilidade
+de, até a data de vencimento, o preço da ação cair abaixo do
+\emph{strike} desta opção.
+
+Podemos inferir esta probabilidade através do número de caminhos que
+terminaram em preço da ação abaixo do valor de referência. O custo de
+proteção contra este risco é o prêmio por nós ao comprarmos a
+\emph{put}. O código para esta inferência está abaixo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p_baixo <-}\StringTok{ }\NormalTok{port_mc }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(data }\OperatorTok{==}\StringTok{ }\NormalTok{d_exer) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{num_baixo =} \KeywordTok{sum}\NormalTok{(St }\OperatorTok{<}\StringTok{ }\NormalTok{p_exer)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{as.double}\NormalTok{()}
+\NormalTok{prob <-}\StringTok{ }\NormalTok{p_baixo }\OperatorTok{/}\StringTok{ }\NormalTok{nsims}
+\end{Highlighting}
+\end{Shaded}
+
+Este cálculo nos mostra que em 134 caminhos simulados do preço de
+\texttt{PETR4}, este terminou abaixo do preço de exercío da opção
+\texttt{PETRV17}, ou seja, uma probabilidade de 13.4\%.
+
+Para nos precavermos desta possível queda de preço e garantir um valor
+mínimo de nosso portfólio até a data de 15/10/2018, podemos comprar uma
+opção de venda, com preço de exercício no valor que desejamos e então o
+portfólio passa a ser composto pela ação e também pela opção. Caso na
+data de vencimento o preço da ação seja menor que o preço de exercício
+da \emph{put}, esta opção estará ITM e pode ser exercida pelo valor da
+diferença entre os preços, ou seja, nos garantindo que nosso portfólio
+estará avaliado em R\$ 16,92.
+
+Esta dinâmica pode ser verificada pela figura abaixo, que agora
+apresenta o valor do portfólio completo, ação mais opção. Verificamos
+que, de fato, no dia 15/10/2018 nosso investimento não estará em
+situação pior que o preço garantido pela compra da \emph{put}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{brk <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{sort}\NormalTok{(}\KeywordTok{c}\NormalTok{(p_exer, }\KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(port_mc}\OperatorTok{$}\NormalTok{port_valor),}
+                                \KeywordTok{max}\NormalTok{(port_mc}\OperatorTok{$}\NormalTok{port_valor),}
+                                \DataTypeTok{length.out =} \DecValTok{5}\NormalTok{)[}\OperatorTok{-}\DecValTok{1}\NormalTok{])),}
+             \DataTypeTok{digits =} \DecValTok{2}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(port_mc, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ data, }\DataTypeTok{y =}\NormalTok{ port_valor)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{color =}\NormalTok{ sims)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_hline}\NormalTok{(}\DataTypeTok{yintercept =}\NormalTok{ p_exer, }\DataTypeTok{color =} \StringTok{"red"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Simulações do Valor do Portfolio"}\NormalTok{,}
+       \DataTypeTok{x =} \StringTok{"data"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Valor (R$)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =}\NormalTok{ brk) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_date}\NormalTok{(}\DataTypeTok{date_breaks =} \StringTok{"2 days"}\NormalTok{, }\DataTypeTok{date_labels =} \StringTok{"%d"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_economist_white}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{91-monte-carlo_files/figure-latex/gr_port-1.pdf}
+
+Ou seja, ao custo de 0.62\% do preço da ação, compramos uma proteção
+contra uma queda de preços com probabilidade de 13.4\%.
+
+Esta é apenas uma (simples) aplicação das inúmeras possíveis que a
+Simulação de Monte Carlo possui no mundo das finanças. A SMC é uma
+poderosa ferramenta para avaliação e controle de risco de grandes
+portfólios, com centenas ou milhares de ativos, onde nem sempre
+consegue-se aferir medidas de retorno esperado ou de risco de mercado de
+forma analítica.
 
 \bibliography{library.bib}
 

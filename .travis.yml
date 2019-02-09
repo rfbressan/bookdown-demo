@@ -3,8 +3,10 @@ cache: packages
 pandoc_version: 1.19.2.1
 
 before_install:
-# Installs system libraries needed for R packages (libquantlib0-dev libquantlib0v5)
-  - sudo apt-get -y install r-cran-rquantlib
+# Installs system libraries needed for R packages 
+  - sudo add-apt-repository -y "ppa:edd/r-3.5"
+  - sudo apt-get update
+  - sudo apt-get -y install libquantlib0-dev libquantlib0v5
 before_script:
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh

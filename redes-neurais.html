@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introdução a Superfície de Volatilidade</title>
+  <title>Capítulo 10 Precificação de Opções via Redes Neurais | Introdução a Superfície de Volatilidade</title>
   <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introdução a Superfície de Volatilidade" />
+  <meta property="og:title" content="Capítulo 10 Precificação de Opções via Redes Neurais | Introdução a Superfície de Volatilidade" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rfbressan/vol_surface_gitbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introdução a Superfície de Volatilidade" />
+  <meta name="twitter:title" content="Capítulo 10 Precificação de Opções via Redes Neurais | Introdução a Superfície de Volatilidade" />
   
   <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="sobre-os-autores.html">
+<link rel="prev" href="monte-carlo.html">
+<link rel="next" href="bibliografia.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -238,23 +238,159 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introdução a Superfície de Volatilidade</h1>
-<p class="author"><em>Rafael Felipe Bressan</em></p>
-<p class="date"><em>2019-07-06</em></p>
+<div id="redes-neurais" class="section level1">
+<h1><span class="header-section-number">Capítulo 10</span> Precificação de Opções via Redes Neurais</h1>
+<p>Introduziremos neste capítulo<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> um dos temas mais atuais no mercado financeiro. O uso de técnicas de inteligência artificial e aprendizado de máquina para a precificação de opções.</p>
+<p>Em 1973, Fischer Black, Myron Scholes e Robert Merton publicaram uma maneira analítica para precificar opções, de modo que se pudesse relacionar a dinâmica do preço do ativo subjacente, uma taxa de juros livre de risco, o intervalo de tempo até a data de expiração da opção, o strike da opção e a volatilidade futura deste ativo, sem depender de um retorno esperado (algo muito mais imprevisível).</p>
+<div id="hipoteses-de-black-scholes" class="section level2">
+<h2><span class="header-section-number">10.1</span> Hipóteses de Black &amp; Scholes</h2>
+<p>Como já vimos em artigos anteriores, a fórmula de precificação de Black &amp; Scholes <span class="citation">(Black and Scholes <a href="#ref-Black1973">1973</a>)</span> assumia a hipótese de lognormalidade para os retornos do ativo subjacente, além de que a volatilidade implícita do ativo se manteria constante para opções de um mesmo ativo e de mesmo moneyness. Em relação a hipótese de lognormalidade, isso nos diz que temos um método paramétrico de precificação, o que pode ser ruim (temos que assumir uma distribuição que não se ajusta com o que acontece nos mercados, que apresentam caudas longas), e a volatilidade implícita constante também não se concretiza, dando origem ao fenômeno chamado de “smile de volatilidade”, algo também já tratado nos nossos artigos antigos.</p>
 </div>
-<div id="prefacio" class="section level1 unnumbered">
-<h1>Prefácio</h1>
-<p>Este é um pequeno resumo, elaborado na forma de livro, sobre os estudos realizados pelo núcleo de derivativos e riscos do <a href="https://clubedefinancas.com.br">Clube de finanças ESAG</a>.</p>
-<p>Os estudos realizados pelos membros do núcleo foram sendo apresentados na forma de artigos no blog do Clube. A partir destes artigos foi feita esta coletânea de forma a apresentar todo o conteúdo em local único para facilitar a assimilação dos membros futuros e leitores de nosso blog.</p>
+<div id="ensinando-uma-maquina-a-precificar-opcoes" class="section level2">
+<h2><span class="header-section-number">10.2</span> Ensinando uma máquina a precificar opções</h2>
+<p>Na década de 70, seria muito difícil construir um método prático e data-driven de precificação de opções, já que não se possuía poder computacional suficiente para realizar a mineração necessária; tínhamos que ter uma maneira analítica de precificação, o que começou com a fórmula de Black &amp; Scholes (que garantiu o Prêmio Nobel aos pesquisadores). A partir da década de 90, com o avanço computacional, alguns pesquisadores começaram a se interessar por métodos data-driven de precificação, podendo se desvencilhar das hipóteses pouco realistas.</p>
+<p>Para tanto, podemos pensar em algumas possibilidades: tendo informações sobre as características de uma determinada opção (o seu preço de mercado, uma volatilidade implícita realizada, um determinado intervalo de tempo até a data de expiração, com o moneyness da opção, etc…), teríamos condições de ensinar um algoritmo a precificar esta opção?</p>
+<p>Em <span class="citation">(Hutchinson <a href="#ref-Hutchinson1994">1994</a>)</span>, esta abordagem foi realizada com a utilização do método das redes neurais. A abordagem do pesquisadores do MIT era de ensinar uma máquina a precificar opções de maneira não-paramétrica e que não assumisse as hipóteses tão contestadas por outros pesquisadores. Colocando como input as informações teoricamente determinantes para os preços das opções, o artigo buscou ver o ajuste das previsões realizadas com o que realmente aconteceu nos mercados. Outro bom artigo, aplicando a mesma técnica mas para opções de outro mercado, é o de <span class="citation">(Huynh <a href="#ref-Huynh2018">2018</a>)</span>.</p>
+</div>
+<div id="redes-neurais" class="section level2">
+<h2><span class="header-section-number">10.3</span> Redes Neurais</h2>
+<p>Como um resumo sobre o método das redes neurais, <span class="citation">(Friedman <a href="#ref-Friedman2001">2001</a>, 389)</span> traz que a ideia é extrair combinações lineares entre as variáveis explicativas e então modelar a variável dependente (no nosso caso, o prêmio da opção) como uma função não-linear das variáveis explicativas. O modelo de redes neurais também é chamado de multilayer perceptron, onde o modelo comprime diversas camadas de regressões logísticas com não-linearidades contínuas <span class="citation">(Bishop <a href="#ref-Bishop2006">2006</a>, 226)</span>; assim é formada a função de máxima verossimilhança que é a base das “redes de treino”.</p>
+<p>Ao contrário do que se pensa, a pesquisa sobre métodos de inteligência artificial, e mais especificamente de redes neurais, começou já na década de 40, com <span class="citation">(McCulloch <a href="#ref-Mcculloch1943">1943</a>)</span>, em “A Logical Calculus of The Ideas Immanent in Nervous Activity”. A ideia era de simular as redes neurais do cérebro como forma de computadores estarem aptos a aprenderem e tomarem decisões como um humano.</p>
+<p>Para isso, matematicamente, construímos uma função de ativação <span class="math inline">\(y\)</span>, onde <span class="math inline">\(y\)</span> é uma função de uma função não-linear das combinações lineares entre os inputs dados (<span class="math inline">\(\phi(x)\)</span>), ponderada por pesos que, inicialmente, são aleatórios (<span class="math inline">\(w_j\)</span>), entre 0 e 1.</p>
+<p><span class="math display">\[
+y(\mathbf{x, w})=f\left(\sum_{j=1}^M w_j\phi_j(\mathbf{x})\right)
+\]</span></p>
+<p>Esses pesos, com o método de treino estipulado (backpropagation), será alterado de forma com que se alcance o erro mínimo da função para os dados inseridos. Temos que M é o número de combinações lineares, que, somados, gerarão o primeiro input para o treino da função.</p>
+<div class="figure" style="text-align: center"><span id="fig:rede-neural"></span>
+<img src="images/neural_network.png" alt="Típica Rede Neural com uma camada oculta."  />
+<p class="caption">
+Figura 10.1: Típica Rede Neural com uma camada oculta.
+</p>
+</div>
+</div>
+<div id="feed-forward-network" class="section level2">
+<h2><span class="header-section-number">10.4</span> Feed forward network</h2>
+<p>Agora, derivando o algoritmo para chegarmos em <span class="math inline">\(y(\mathbf{x, w})\)</span>, trazido acima:</p>
+<p>1º - Primeiramente, teremos o somatório da multiplicação do vetor de pesos <span class="math inline">\(\mathbf{w}\)</span> com o vetor de inputs <span class="math inline">\(\mathbf{x}\)</span>. Temos que <span class="math inline">\(w_{ji}\)</span>é um vetor de pesos que serão alterados ao longo do treinamento da rede. Faremos esse mesmo cálculo para todas as nossas variáveis</p>
+<p><span class="math display">\[
+  a_{ji} = \sum_{i = 0}^{D} w_{ji}^{(1)}x_i
+\]</span></p>
+<p>2º - Temos de transformar o vetor de valores ponderados <span class="math inline">\(a_{ji}\)</span> através de uma função de ativação, que já é conhecido de econometristas e estudiosos da estatística: a função sigmoidal, que é a utilizada na regressão logística</p>
+<p><span class="math display">\[
+  \sigma(a) = \frac{1}{1 + exp(-a)}
+\]</span></p>
+<p>Com isso, temos então o que é chamado de “hidden layer”.</p>
+<p>3º - Realizar novamente a ponderação dos valores, porém agora utilizando os hidden layers como input.</p>
+<p>Logo, teremos uma nova ativação dos outputs pela função sigmoidal, dado por um input de uma função sigmoidal anterior. Nesse caso, duas camadas da rede neural foram utilizadas. Desta forma, podemos combinar estas várias etapas e chegar nesta função para a rede neural:</p>
+<p><span class="math display">\[
+y(\mathbf{x, w})= \sigma(\sum_{j=0}^M w_{kj}^{(2)} \sigma(\sum_{i=0}^D w_{ji}^{(1)}x_i))
+\]</span></p>
+</div>
+<div id="backpropagation" class="section level2">
+<h2><span class="header-section-number">10.5</span> Backpropagation</h2>
+<p>Tendo um vetor de outputs, ou seja, valores preditos para o target utilizado, buscamos um vetor de pesos que minimize a seguinte função:</p>
+<p><span class="math display">\[
+E(\mathbf{w})= \frac{1}{2} \sum_{n=1}^N ||\mathbf{y(x_n, w) - t_n}||^2
+\]</span></p>
+<p>Ou seja, sendo <span class="math inline">\(y(\mathbf{x, w})\)</span> um vetor de outputs e <span class="math inline">\(\mathbf{t_n}\)</span> o vetor dos targets iniciais, queremos minimizar a soma dos erros quadrados. Os parâmetros que são alteráveis são os pesos, tanto da primeira camada quanto da segunda utilizada. OBS: O fator (½) é adicionado para ser cancelado junto com o expoente durante a diferenciação</p>
+<p>A partir daqui, temos um problema computacional: simular infinitas possibilidades de vetores de pesos para identificar quais são os vetores que minimizam a soma do erro quadrado é uma tarefa computacionalmente exigente. Será que temos como usar a matemática para facilitar esse processo?</p>
+<p>Para este problema, o método das redes neurais se utiliza do gradient descent, que é uma forma iterativa para se alcançar o mínimo de uma função.</p>
+<div class="figure" style="text-align: center"><span id="fig:backpropagation"></span>
+<img src="images/backpropagation.png" alt="Esquema feed-forward e backpropagation."  />
+<p class="caption">
+Figura 10.2: Esquema feed-forward e backpropagation.
+</p>
+</div>
+<p>Queremos encontrar os vetores de pesos que minimizem a função erro. Assim, aplicamos a regra da cadeia para derivar a função erro:</p>
+<p><span class="math display">\[
+{\frac {\partial E}{\partial w_{ij}}}={\frac {\partial E}{\partial o_{j}}}{\frac {\partial o_{j}}{\partial {\text{net}}_{j}}}{\frac {\partial {\text{net}}_{j}}{\partial w_{ij}}}
+\]</span> Sendo:</p>
+<p><span class="math display">\[
+1)
+{\frac{\partial net_j}{\partial w_{ij}}}={\frac {\partial }{\partial w_{ij}}}\left(\sum _{k=1}^{n}w_{kj}o_{k}\right)
+\]</span></p>
+<p>que será simplesmente <span class="math inline">\(o_k\)</span>, sendo <span class="math inline">\(o_k\)</span> um vetor que se for em relação a primeira camada, o input bruto; se for em relação a segunda layer, será o output da função de ativação.</p>
+<p><span class="math display">\[
+2)
+{\frac{\partial o_j}{\partial net_{j}}}={\frac {\partial }{\partial net_{j}}} \varphi(net_j) = \varphi(net_j)(1 - \varphi(net_j))
+\]</span></p>
+<p>que é a derivada parcial da função de ativação (neste caso, a função sigmoidal), e a função abaixo, que é a derivada parcial da função perda:</p>
+<p><span class="math display">\[
+3)
+{\frac{\partial E}{\partial o_{j}}}={\frac {\partial E }{\partial y}} = {\frac {\partial}{\partial y}} {\frac {1}{2}}(t - y)^2 = y - t
+\]</span></p>
+<p>Assim, atualizaremos os pesos com os resultados obtidos através da otimização, e seguiremos o processo iterativo de encontrar o mínimo da função.</p>
+<p>OBS: Um problema do método do gradient descent é que ele pode encontrar um mínimo local, não um mínimo global, que é o que nos interessaria. Há formas de contornar este problema, como, por exemplo, assumindo uma versão probabilística para a função perda. Dada a sua complexidade, deixaremos para artigos futuros a sua explicação. Além disso, outras formas de se alcançar melhores resultados com redes neurais para opções seria de segmentar as opções em ATM (at the money), OTM (out of the money), podendo captar melhor as características de ambas as situações.</p>
+</div>
+<div id="rede-neural-no-r" class="section level2">
+<h2><span class="header-section-number">10.6</span> Rede neural no R</h2>
+<p>Os dados foram retirados do site <a href="http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv">ivolatility.com</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Importando os dados que serão utilizados
+
+smile_volatilidade &lt;-<span class="st"> </span>
+<span class="st">  </span>rio<span class="op">::</span><span class="kw">import</span>(<span class="st">&quot;R/input/IV_Raw_Delta_surface.csv&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(period, moneyness, iv) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> period<span class="op">/</span><span class="dv">365</span>)
+
+##Executando o algoritmo através do pacote neuralnet
+##Foram escolhidsa duas hidden layers para análise
+
+rede_neural &lt;-<span class="st"> </span><span class="kw">neuralnet</span>(iv <span class="op">~</span><span class="st"> </span>period<span class="op">+</span>moneyness, smile_volatilidade, <span class="dt">hidden =</span> <span class="dv">2</span>)
+iv_predito &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(rede_neural<span class="op">$</span>net.result) 
+
+df_nn &lt;-<span class="st"> </span><span class="kw">cbind</span>(smile_volatilidade<span class="op">$</span>iv, iv_predito)
+
+<span class="kw">colnames</span>(df_nn) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;volatilidade_implicita&quot;</span>, <span class="st">&quot;volatilidade_predita&quot;</span>)
+
+##Criando uma coluna com os erros da predição
+
+df_nn &lt;-<span class="st"> </span>df_nn <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">erro =</span> volatilidade_implicita <span class="op">-</span><span class="st"> </span>volatilidade_predita)
+
+<span class="kw">hist</span>(df_nn<span class="op">$</span>erro,
+     <span class="dt">main =</span> <span class="st">&quot;Distribuição dos erros da volatilidade realizada pela predita&quot;</span>,
+     <span class="dt">xlab =</span> <span class="st">&quot;Erro&quot;</span>,
+     <span class="dt">ylab =</span> <span class="st">&quot;Frequência&quot;,</span>
+<span class="st">     xlim = c(-0.04, 0.04))</span></code></pre></div>
+<p><img src="10-redes-neurais_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(rede_neural, <span class="dt">rep =</span> <span class="st">&quot;best&quot;</span>)</code></pre></div>
+<p><img src="10-redes-neurais_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+
+</div>
+</div>
+<h3>Bibliografia</h3>
+<div id="refs" class="references">
+<div id="ref-Bishop2006">
+<p>Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. springer.</p>
+</div>
+<div id="ref-Black1973">
+<p>Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Liabilities.” <em>Journal of Political Economy</em> 81 (3). The University of Chicago Press: 637–54.</p>
+</div>
+<div id="ref-Friedman2001">
+<p>Friedman, Trevor e Tibshirani, Jerome e Hastie. 2001. <em>The Elements of Statistical Learning</em>. 10. Springer series in statistics New York.</p>
+</div>
+<div id="ref-Hutchinson1994">
+<p>Hutchinson, Andrew W e Poggio, James M e Lo. 1994. “A Nonparametric Approach to Pricing and Hedging Derivative Securities via Learning Networks.” <em>The Journal of Finance</em>, no. 3. Wiley Online Library: 851–89.</p>
+</div>
+<div id="ref-Huynh2018">
+<p>Huynh. 2018. “Modelling and Forecasting Implied Volatility Using Neural Network.” Hanken School of Economics.</p>
+</div>
+<div id="ref-Mcculloch1943">
+<p>McCulloch, Walter, Warren S e Pitts. 1943. “A Logical Calculus of the Ideas Immanent in Nervous Activity.” <em>The Bulletin of Mathematical Biophysics</em> 5 (4). Springer: 115–33.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="17">
+<li id="fn17"><p>Artigo originalmente escrito por Gabriel Dias, adaptado por Rafael F. Bressan para este livro.<a href="redes-neurais.html#fnref17">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="sobre-os-autores.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="monte-carlo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -284,7 +420,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/index.Rmd",
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/10-redes-neurais.Rmd",
 "text": "Edit"
 },
 "history": {

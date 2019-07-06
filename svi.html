@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 7 Calibrando uma SVI | Introdução a Superfície de Volatilidade</title>
-  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 7 Calibrando uma SVI | Introdução a Superfície de Volatilidade" />
   <meta property="og:type" content="book" />
@@ -22,14 +21,14 @@
   <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   
 
-<meta name="author" content="Rafael Felipe Bressan">
+<meta name="author" content="Rafael Felipe Bressan" />
 
 
-<meta name="date" content="2019-02-09">
+<meta name="date" content="2019-07-06" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="calibracao.html">
@@ -111,6 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#erik-naoki-kawano"><i class="fa fa-check"></i>Erik Naoki Kawano</a></li>
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#glauber-naue"><i class="fa fa-check"></i>Glauber Naue</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#gabriel-dias"><i class="fa fa-check"></i>Gabriel Dias</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="opcoes.html"><a href="opcoes.html"><i class="fa fa-check"></i><b>1</b> Introdução as opções</a><ul>
 <li class="chapter" data-level="1.1" data-path="opcoes.html"><a href="opcoes.html#conceitos-in-the-money-at-the-money-e-out-the-money"><i class="fa fa-check"></i><b>1.1</b> Conceitos in the money, at the money e out the money</a></li>
@@ -208,6 +208,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Simulação de Monte Carlo</a><ul>
 <li class="chapter" data-level="9.1" data-path="monte-carlo.html"><a href="monte-carlo.html#simulacao-de-monte-carlo"><i class="fa fa-check"></i><b>9.1</b> Simulação de Monte Carlo</a></li>
 <li class="chapter" data-level="9.2" data-path="monte-carlo.html"><a href="monte-carlo.html#implementacao-em-r"><i class="fa fa-check"></i><b>9.2</b> Implementação em R</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="redes-neurais.html"><a href="redes-neurais.html"><i class="fa fa-check"></i><b>10</b> Precificação de Opções via Redes Neurais</a><ul>
+<li class="chapter" data-level="10.1" data-path="redes-neurais.html"><a href="redes-neurais.html#hipoteses-de-black-scholes"><i class="fa fa-check"></i><b>10.1</b> Hipóteses de Black &amp; Scholes</a></li>
+<li class="chapter" data-level="10.2" data-path="redes-neurais.html"><a href="redes-neurais.html#ensinando-uma-maquina-a-precificar-opcoes"><i class="fa fa-check"></i><b>10.2</b> Ensinando uma máquina a precificar opções</a></li>
+<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
+<li class="chapter" data-level="10.4" data-path="redes-neurais.html"><a href="redes-neurais.html#feed-forward-network"><i class="fa fa-check"></i><b>10.4</b> Feed forward network</a></li>
+<li class="chapter" data-level="10.5" data-path="redes-neurais.html"><a href="redes-neurais.html#backpropagation"><i class="fa fa-check"></i><b>10.5</b> Backpropagation</a></li>
+<li class="chapter" data-level="10.6" data-path="redes-neurais.html"><a href="redes-neurais.html#rede-neural-no-r"><i class="fa fa-check"></i><b>10.6</b> Rede neural no R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -938,8 +946,9 @@ k &lt;-<span class="st"> </span>smile<span class="op">$</span>moneyness
 w &lt;-<span class="st"> </span>smile<span class="op">$</span>iv<span class="op">^</span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>smile<span class="op">$</span>tau
 
 init_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
-par_direct &lt;-<span class="st"> </span><span class="kw">svi_fit_direct</span>(k, w)
-end_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
+par_direct &lt;-<span class="st"> </span><span class="kw">svi_fit_direct</span>(k, w)</code></pre></div>
+<pre><code>## Warning in minpack.lm::nls.lm(init_pars, lower = c(0, 0, -1, -Inf, 0), upper = c(max(w), : lmdif: info = -1. Number of iterations has reached `maxiter&#39; == 100.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">end_direct &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
 time_direct &lt;-<span class="st"> </span>end_direct <span class="op">-</span><span class="st"> </span>init_direct 
 
 init_ga &lt;-<span class="st"> </span><span class="kw">proc.time</span>()
@@ -1055,16 +1064,16 @@ a
 b
 </td>
 <td style="text-align:left;">
-0.01951
+0.02095
 </td>
 <td style="text-align:left;">
-0.01960
+0.01957
 </td>
 <td style="text-align:left;">
 0.01695
 </td>
 <td style="text-align:left;">
-0.01961
+0.01950
 </td>
 </tr>
 <tr>
@@ -1072,16 +1081,16 @@ b
 <span class="math inline">\(\rho\)</span>
 </td>
 <td style="text-align:left;">
--0.79645
+-0.88828
 </td>
 <td style="text-align:left;">
--0.80018
+-0.79938
 </td>
 <td style="text-align:left;">
 -1.00000
 </td>
 <td style="text-align:left;">
--0.80995
+-0.80080
 </td>
 </tr>
 <tr>
@@ -1089,16 +1098,16 @@ b
 m
 </td>
 <td style="text-align:left;">
--0.00734
+-0.01707
 </td>
 <td style="text-align:left;">
--0.00780
+-0.00769
 </td>
 <td style="text-align:left;">
 -0.01118
 </td>
 <td style="text-align:left;">
--0.00842
+-0.00755
 </td>
 </tr>
 <tr>
@@ -1106,16 +1115,16 @@ m
 <span class="math inline">\(\sigma\)</span>
 </td>
 <td style="text-align:left;">
-0.05031
+0.05471
 </td>
 <td style="text-align:left;">
-0.05036
+0.05034
 </td>
 <td style="text-align:left;">
 0.06905
 </td>
 <td style="text-align:left;">
-0.05089
+0.05035
 </td>
 </tr>
 <tr>
@@ -1123,16 +1132,16 @@ m
 RMSE
 </td>
 <td style="text-align:left;">
-8.67e-06
+1.07e-05
 </td>
 <td style="text-align:left;">
-8.69e-06
+8.68e-06
 </td>
 <td style="text-align:left;">
 9.55e-05
 </td>
 <td style="text-align:left;">
-8.71e-06
+8.68e-06
 </td>
 </tr>
 <tr>
@@ -1140,16 +1149,16 @@ RMSE
 Tempo
 </td>
 <td style="text-align:left;">
-0.06500
+0.23100
 </td>
 <td style="text-align:left;">
-28.99700
+33.45900
 </td>
 <td style="text-align:left;">
-0.17700
+0.18100
 </td>
 <td style="text-align:left;">
-6.07300
+7.81400
 </td>
 </tr>
 </tbody>
@@ -1185,17 +1194,17 @@ Figura 7.1: Comparação entre diferentes métodos de calibração de uma SVI.
 </div>
 <h3>Bibliografia</h3>
 <div id="refs" class="references">
-<div id="ref-Gatheral2004">
-<p>Gatheral, Jim. 2004. “A Parsimonious Arbitrage-Free Implied Volatility Parameterization with Application to the Valuation of Volatility Derivatives.” <em>Presentation at Global Derivatives &amp; Risk Management, Madrid</em>.</p>
-</div>
 <div id="ref-DeMarco2009">
 <p>De Marco, S, and C Martini. 2009. “Quasi-Explicit Calibration of Gatheral’s Svi Model’.” <em>Zeliade White Paper</em>, 1–15.</p>
 </div>
-<div id="ref-Lee2004">
-<p>Lee, Roger W. 2004. “The Moment Formula for Implied Volatility at Extreme Strikes.” <em>Mathematical Finance: An International Journal of Mathematics, Statistics and Financial Economics</em> 14 (3). Wiley Online Library: 469–80.</p>
+<div id="ref-Gatheral2004">
+<p>Gatheral, Jim. 2004. “A Parsimonious Arbitrage-Free Implied Volatility Parameterization with Application to the Valuation of Volatility Derivatives.” <em>Presentation at Global Derivatives &amp; Risk Management, Madrid</em>.</p>
 </div>
 <div id="ref-Gatheral2014">
 <p>Gatheral, Jim, and Antoine Jacquier. 2014. “Arbitrage-Free Svi Volatility Surfaces.” <em>Quantitative Finance</em> 14 (1). Taylor &amp; Francis: 59–71.</p>
+</div>
+<div id="ref-Lee2004">
+<p>Lee, Roger W. 2004. “The Moment Formula for Implied Volatility at Extreme Strikes.” <em>Mathematical Finance: An International Journal of Mathematics, Statistics and Financial Economics</em> 14 (3). Wiley Online Library: 469–80.</p>
 </div>
 <div id="ref-Rogers2010">
 <p>Rogers, Leonard CG, and MR Tehranchi. 2010. “Can the Implied Volatility Surface Move by Parallel Shifts?” <em>Finance and Stochastics</em> 14 (2). Springer: 235–48.</p>

@@ -1,7 +1,7 @@
 --- 
 title: "Introdução a Superfície de Volatilidade"
 author: "Rafael Felipe Bressan"
-date: "2019-02-09"
+date: "2019-07-06"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -33,6 +33,10 @@ Aluno de Engenharia de Produção Elétrica na UFSC. Membro do Clube de Finança
 ## Glauber Naue {-}
 
 Aluno de Ciências Econômicas na UDESC/Esag. Membro do Clube de Finanças ESAG, participa do núcleo de pesquisa em riscos e derivativos. Atualmente realizando um estudo sobre modelo de fatores aplicado ao mercado brasileiro.
+
+## Gabriel Dias {-}
+
+
 
 
 

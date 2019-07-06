@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Capítulo 9 Simulação de Monte Carlo | Introdução a Superfície de Volatilidade</title>
-  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Capítulo 9 Simulação de Monte Carlo | Introdução a Superfície de Volatilidade" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="Gitbook sobre superfícies de volatilidade para o Clube de Finanças ESAG." />
   
 
-<meta name="author" content="Rafael Felipe Bressan">
+<meta name="author" content="Rafael Felipe Bressan" />
 
 
-<meta name="date" content="2019-02-09">
+<meta name="date" content="2019-07-06" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="ssvi.html">
-<link rel="next" href="bibliografia.html">
+<link rel="next" href="redes-neurais.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -111,6 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#rafael-felipe-bressan"><i class="fa fa-check"></i>Rafael Felipe Bressan</a></li>
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#erik-naoki-kawano"><i class="fa fa-check"></i>Erik Naoki Kawano</a></li>
 <li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#glauber-naue"><i class="fa fa-check"></i>Glauber Naue</a></li>
+<li class="chapter" data-level="" data-path="sobre-os-autores.html"><a href="sobre-os-autores.html#gabriel-dias"><i class="fa fa-check"></i>Gabriel Dias</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="opcoes.html"><a href="opcoes.html"><i class="fa fa-check"></i><b>1</b> Introdução as opções</a><ul>
 <li class="chapter" data-level="1.1" data-path="opcoes.html"><a href="opcoes.html#conceitos-in-the-money-at-the-money-e-out-the-money"><i class="fa fa-check"></i><b>1.1</b> Conceitos in the money, at the money e out the money</a></li>
@@ -208,6 +208,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9" data-path="monte-carlo.html"><a href="monte-carlo.html"><i class="fa fa-check"></i><b>9</b> Simulação de Monte Carlo</a><ul>
 <li class="chapter" data-level="9.1" data-path="monte-carlo.html"><a href="monte-carlo.html#simulacao-de-monte-carlo"><i class="fa fa-check"></i><b>9.1</b> Simulação de Monte Carlo</a></li>
 <li class="chapter" data-level="9.2" data-path="monte-carlo.html"><a href="monte-carlo.html#implementacao-em-r"><i class="fa fa-check"></i><b>9.2</b> Implementação em R</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="redes-neurais.html"><a href="redes-neurais.html"><i class="fa fa-check"></i><b>10</b> Precificação de Opções via Redes Neurais</a><ul>
+<li class="chapter" data-level="10.1" data-path="redes-neurais.html"><a href="redes-neurais.html#hipoteses-de-black-scholes"><i class="fa fa-check"></i><b>10.1</b> Hipóteses de Black &amp; Scholes</a></li>
+<li class="chapter" data-level="10.2" data-path="redes-neurais.html"><a href="redes-neurais.html#ensinando-uma-maquina-a-precificar-opcoes"><i class="fa fa-check"></i><b>10.2</b> Ensinando uma máquina a precificar opções</a></li>
+<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
+<li class="chapter" data-level="10.4" data-path="redes-neurais.html"><a href="redes-neurais.html#feed-forward-network"><i class="fa fa-check"></i><b>10.4</b> Feed forward network</a></li>
+<li class="chapter" data-level="10.5" data-path="redes-neurais.html"><a href="redes-neurais.html#backpropagation"><i class="fa fa-check"></i><b>10.5</b> Backpropagation</a></li>
+<li class="chapter" data-level="10.6" data-path="redes-neurais.html"><a href="redes-neurais.html#rede-neural-no-r"><i class="fa fa-check"></i><b>10.6</b> Rede neural no R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="bibliografia.html"><a href="bibliografia.html"><i class="fa fa-check"></i>Bibliografia</a></li>
 <li class="divider"></li>
@@ -341,12 +349,12 @@ port_mc &lt;-<span class="st"> </span>precos_acao <span class="op">%&gt;%</span>
          <span class="dt">data =</span> <span class="kw">rep</span>(dias, nsims))
 <span class="kw">head</span>(port_mc)</code></pre></div>
 <pre><code>##     anos_exp sims       St         Pt port_valor       data
-## 1 0.09523810 sim1 19.40838 0.19814037   19.60652 2018-09-21
-## 2 0.09126984 sim1 19.74659 0.14627994   19.89287 2018-09-22
-## 3 0.08730159 sim1 20.16159 0.09894207   20.26053 2018-09-23
-## 4 0.08333333 sim1 20.11181 0.09428249   20.20610 2018-09-24
-## 5 0.07936508 sim1 19.86686 0.10511830   19.97198 2018-09-25
-## 6 0.07539683 sim1 20.22476 0.07026524   20.29503 2018-09-26</code></pre>
+## 1 0.09523810 sim1 19.30621 0.19686672   19.50308 2018-09-21
+## 2 0.09126984 sim1 19.63459 0.14549767   19.78009 2018-09-22
+## 3 0.08730159 sim1 20.03720 0.09854935   20.13575 2018-09-23
+## 4 0.08333333 sim1 19.98975 0.09392868   20.08368 2018-09-24
+## 5 0.07936508 sim1 19.75327 0.10469105   19.85796 2018-09-25
+## 6 0.07539683 sim1 20.10059 0.07008349   20.17067 2018-09-26</code></pre>
 <p>O <em>data frame</em> <code>port_mc</code> contém todas as informações da SMC de nosso portfólio. Contém as datas desde o dia da compra até a data de vencimento da opção e contém <strong>todos</strong> os caminhos de <span class="math inline">\(S_t\)</span>, <span class="math inline">\(P_t\)</span> e do portfólio. Vamos plotar os resultados obtidos para a evolução apenas da ação, primeiramente.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brk &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sort</span>(<span class="kw">c</span>(p_exer, <span class="kw">seq</span>(<span class="kw">min</span>(port_mc<span class="op">$</span>St),
                                 <span class="kw">max</span>(port_mc<span class="op">$</span>St),
@@ -363,7 +371,7 @@ port_mc &lt;-<span class="st"> </span>precos_acao <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;2 days&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%d&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
-<p><img src="91-monte-carlo_files/figure-html/gr_acao-1.png" width="1056" /></p>
+<p><img src="09-monte-carlo_files/figure-html/gr_acao-1.png" width="1056" /></p>
 <p>Podemos verificar pela figura acima que a ação, pela nossa SMC, deve fechar na maioria dos caminhos simulados acima do preço de exercício da <em>put</em> (linha vermelha). Entretanto existe uma menor probabilidade de, até a data de vencimento, o preço da ação cair abaixo do <em>strike</em> desta opção.</p>
 <p>Podemos inferir esta probabilidade através do número de caminhos que terminaram em preço da ação abaixo do valor de referência. O custo de proteção contra este risco é o prêmio por nós ao comprarmos a <em>put</em>. O código para esta inferência está abaixo.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_baixo &lt;-<span class="st"> </span>port_mc <span class="op">%&gt;%</span><span class="st"> </span>
@@ -371,7 +379,7 @@ port_mc &lt;-<span class="st"> </span>precos_acao <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num_baixo =</span> <span class="kw">sum</span>(St <span class="op">&lt;</span><span class="st"> </span>p_exer)) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">as.double</span>()
 prob &lt;-<span class="st"> </span>p_baixo <span class="op">/</span><span class="st"> </span>nsims</code></pre></div>
-<p>Este cálculo nos mostra que em 134 caminhos simulados do preço de <code>PETR4</code>, este terminou abaixo do preço de exercío da opção <code>PETRV17</code>, ou seja, uma probabilidade de 13.4%.</p>
+<p>Este cálculo nos mostra que em 135 caminhos simulados do preço de <code>PETR4</code>, este terminou abaixo do preço de exercío da opção <code>PETRV17</code>, ou seja, uma probabilidade de 13.5%.</p>
 <p>Para nos precavermos desta possível queda de preço e garantir um valor mínimo de nosso portfólio até a data de 15/10/2018, podemos comprar uma opção de venda, com preço de exercício no valor que desejamos e então o portfólio passa a ser composto pela ação e também pela opção. Caso na data de vencimento o preço da ação seja menor que o preço de exercício da <em>put</em>, esta opção estará ITM e pode ser exercida pelo valor da diferença entre os preços, ou seja, nos garantindo que nosso portfólio estará avaliado em R$ 16,92.</p>
 <p>Esta dinâmica pode ser verificada pela figura abaixo, que agora apresenta o valor do portfólio completo, ação mais opção. Verificamos que, de fato, no dia 15/10/2018 nosso investimento não estará em situação pior que o preço garantido pela compra da <em>put</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brk &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">sort</span>(<span class="kw">c</span>(p_exer, <span class="kw">seq</span>(<span class="kw">min</span>(port_mc<span class="op">$</span>port_valor),
@@ -389,8 +397,8 @@ prob &lt;-<span class="st"> </span>p_baixo <span class="op">/</span><span class=
 <span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks =</span> <span class="st">&quot;2 days&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%d&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_color_viridis_d</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_economist_white</span>()</code></pre></div>
-<p><img src="91-monte-carlo_files/figure-html/gr_port-1.png" width="1056" /></p>
-<p>Ou seja, ao custo de 0.62% do preço da ação, compramos uma proteção contra uma queda de preços com probabilidade de 13.4%.</p>
+<p><img src="09-monte-carlo_files/figure-html/gr_port-1.png" width="1056" /></p>
+<p>Ou seja, ao custo de 0.62% do preço da ação, compramos uma proteção contra uma queda de preços com probabilidade de 13.5%.</p>
 <p>Esta é apenas uma (simples) aplicação das inúmeras possíveis que a Simulação de Monte Carlo possui no mundo das finanças. A SMC é uma poderosa ferramenta para avaliação e controle de risco de grandes portfólios, com centenas ou milhares de ativos, onde nem sempre consegue-se aferir medidas de retorno esperado ou de risco de mercado de forma analítica.</p>
 
 </div>
@@ -401,7 +409,7 @@ prob &lt;-<span class="st"> </span>p_baixo <span class="op">/</span><span class=
         </div>
       </div>
 <a href="ssvi.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bibliografia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="redes-neurais.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -431,7 +439,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/91-monte-carlo.Rmd",
+"link": "https://github.com/rfbressan/vol_surface_gitbook/edit/master/09-monte-carlo.Rmd",
 "text": "Edit"
 },
 "history": {

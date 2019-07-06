@@ -217,11 +217,11 @@ kable(powerlaw_par,
 \hline
   & SSVI-PL\\
 \hline
-rho & -0.6479238\\
+rho & 0.1183545\\
 \hline
-gamma & 0.4926757\\
+gamma & 0.0000000\\
 \hline
-eta & 0.8607807\\
+eta & 1.7883417\\
 \hline
 \end{tabular}
 \end{table}
@@ -300,7 +300,7 @@ area <- integrate(function(x) ssvi_density(powerlaw_par, thetadens, x, "powerlaw
 paste("Área sob a curva de densidade é: ", area$value)
 ```
 
-[1] "Área sob a curva de densidade é:  0.999302879362191"
+[1] "Área sob a curva de densidade é:  0.999993065215889"
 
 Chegou o momento de inferirmos a **superfície de volatilidade local** a partir de nossa parametrização SSVI. O método será a aplicação direta da equação \@ref(eq:var-local) pois, com a parametrização realizada, dispomos de todos os dados necessários para seu cômputo. 
 

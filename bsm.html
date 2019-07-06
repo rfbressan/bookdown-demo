@@ -52,41 +52,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -212,7 +240,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10" data-path="redes-neurais.html"><a href="redes-neurais.html"><i class="fa fa-check"></i><b>10</b> Precificação de Opções via Redes Neurais</a><ul>
 <li class="chapter" data-level="10.1" data-path="redes-neurais.html"><a href="redes-neurais.html#hipoteses-de-black-scholes"><i class="fa fa-check"></i><b>10.1</b> Hipóteses de Black &amp; Scholes</a></li>
 <li class="chapter" data-level="10.2" data-path="redes-neurais.html"><a href="redes-neurais.html#ensinando-uma-maquina-a-precificar-opcoes"><i class="fa fa-check"></i><b>10.2</b> Ensinando uma máquina a precificar opções</a></li>
-<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
+<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais-1"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
 <li class="chapter" data-level="10.4" data-path="redes-neurais.html"><a href="redes-neurais.html#feed-forward-network"><i class="fa fa-check"></i><b>10.4</b> Feed forward network</a></li>
 <li class="chapter" data-level="10.5" data-path="redes-neurais.html"><a href="redes-neurais.html#backpropagation"><i class="fa fa-check"></i><b>10.5</b> Backpropagation</a></li>
 <li class="chapter" data-level="10.6" data-path="redes-neurais.html"><a href="redes-neurais.html#rede-neural-no-r"><i class="fa fa-check"></i><b>10.6</b> Rede neural no R</a></li>
@@ -245,12 +273,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="portfolio-de-replicacao" class="section level2">
 <h2><span class="header-section-number">3.1</span> Portfólio de replicação</h2>
 <p>Suponha que se deseja precificar uma opção de compra sobre uma ação, vamos denotar o preço desta <em>call</em> de <span class="math inline">\(f_t\)</span>. Sabemos que na data de expiração, <span class="math inline">\(T\)</span>, da opção de compra seu preço será: <span class="math inline">\(f_T=max(S_T - K, 0)\)</span>, onde <span class="math inline">\(S_T\)</span> é o preço da ação subjacente na data <span class="math inline">\(T\)</span> e <span class="math inline">\(K\)</span> é o preço de exercício da opção. Podemos criar um portfólio que envolva um ativo livre de risco, com preço <span class="math inline">\(B_t\)</span> e a ação objeto do derivativo, <span class="math inline">\(S_t\)</span>, que recrie o mesmo valor de pagamento que a opção na data de expiração. Ou seja, criamos o portfólio de replicação <span class="math inline">\(P_t=\Delta S_t + b B_t\)</span>, no qual devemos escolher os valores de <span class="math inline">\(\Delta\)</span> e <span class="math inline">\(b\)</span> de tal forma que <span class="math inline">\(f_T = P_T\)</span>.</p>
-<p>De fato, para apenas um período a frente, podemos tomar emprestado a taxa de juros livre de risco<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>, <span class="math inline">\(r\)</span> um valor igual ao preço corrente da ação, <span class="math inline">\(S_0\)</span> e comprá-la, ao mesmo tempo em que se “trava” (faz <em>hedge</em>) deste portfólio vendendo a opção. O lucro desta operação em <span class="math inline">\(T\)</span> deve ser zero, pois é um portfólio travado. Com estas premissas é possível calcular o preço do prêmio da opção a ser cobrado no período inicial para que o valor esperado da operação como um todo seja zero.</p>
+<p>De fato, para apenas um período a frente, podemos tomar emprestado a taxa de juros livre de risco<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, <span class="math inline">\(r\)</span> um valor igual ao preço corrente da ação, <span class="math inline">\(S_0\)</span> e comprá-la, ao mesmo tempo em que se “trava” (faz <em>hedge</em>) deste portfólio vendendo a opção. O lucro desta operação em <span class="math inline">\(T\)</span> deve ser zero, pois é um portfólio travado. Com estas premissas é possível calcular o preço do prêmio da opção a ser cobrado no período inicial para que o valor esperado da operação como um todo seja zero.</p>
 <p>Este portfólio formado pela venda do ativo livre de risco e compra do ativo objeto é denominado <em>portfólio de replicação</em>, pois, ele fornece um fluxo de caixa igual ao derivativo que buscamos precificar. Ao adicionarmos ao portfólio de replicação a venda (ou seja, o negativo) do derivativo, temos um portfólio <em>hedgeado</em>, onde não existe mais incerteza com relação ao seu retorno esperado.</p>
 </div>
 <div id="precificacao-neutra-ao-risco" class="section level2">
 <h2><span class="header-section-number">3.2</span> Precificação neutra ao risco</h2>
-<p>A metodologia de precificação de derivativos dentro do <em>mundo neutro ao risco</em><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> é o carro-chefe das metodologias para se avaliar estes instrumentos. O princípio de precificação neutra ao risco afirma que um derivativo pode ser valorado através das seguintes suposições:</p>
+<p>A metodologia de precificação de derivativos dentro do <em>mundo neutro ao risco</em><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> é o carro-chefe das metodologias para se avaliar estes instrumentos. O princípio de precificação neutra ao risco afirma que um derivativo pode ser valorado através das seguintes suposições:</p>
 <ul>
 <li>o retorno esperado do ativo objeto é a taxa livre de risco, e</li>
 <li>o valor esperado do derivativo na expiração deve ser descontado pela taxa livre de risco para trazê-lo a valor presente.</li>
@@ -295,11 +323,12 @@ df_t=\frac{\partial f}{\partial t}dt + \frac{\partial f}{\partial S}dS + \frac{1
 \left( \frac{\partial f}{\partial t} + \frac{\partial f}{\partial S}\mu S + \frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2 S^2 - \Delta\mu S - rbB \right)dt + \left( \frac{\partial f}{\partial S}\sigma S - \Delta \sigma S \right)dW = 0 
 \end{equation}\]</span>
 <p>que para ser válida para todo <span class="math inline">\(t\)</span>, cada termo entre parênteses deve ser igual a zero simultaneamente. Rapidamente chegamos aos valores necessários de nosso portfólio de replicação.</p>
-<span class="math display" id="eq:delta">\[\begin{equation}
+<span class="math display" id="eq:rbb1" id="eq:delta">\[\begin{equation}
 \Delta = \frac{\partial f}{\partial S} 
 \tag{3.5}
-\end{equation}\]</span>
-<span class="math display" id="eq:rbb1">\[\begin{equation}
+\end{equation}
+
+\begin{equation}
 rbB = \frac{\partial f}{\partial t}+\frac{1}{2}\frac{\partial^2 f}{\partial S^2}\sigma^2S^2 
 \tag{3.6}
 \end{equation}\]</span>
@@ -316,7 +345,7 @@ rbB = r(f-\Delta S)
 </div>
 <div id="solucao-analitica" class="section level2">
 <h2><span class="header-section-number">3.4</span> Solução analítica</h2>
-<p>A equação possui diferentes formas de resolução<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>, a precificação do derivativo irá depender da forma que resolvermos a equação <a href="bsm.html#eq:BS">(3.8)</a>. O Modelo Black&amp;Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos <em>payoffs</em>. Para uma call:</p>
+<p>A equação possui diferentes formas de resolução<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, a precificação do derivativo irá depender da forma que resolvermos a equação <a href="bsm.html#eq:BS">(3.8)</a>. O Modelo Black&amp;Scholes é famoso por conseguir precificar opções call e put europeias, onde a resolução da equação fará uso dos <em>payoffs</em>. Para uma call:</p>
 <span class="math display" id="eq:cpayoff">\[\begin{equation}
 \displaystyle f(S,T)=\max(S-K,0)
 \tag{3.9}
@@ -344,10 +373,11 @@ P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
 \tag{3.12}
 \end{equation}\]</span>
 <p>onde:</p>
-<span class="math display" id="eq:d1">\[\begin{equation}d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
+<span class="math display" id="eq:d2" id="eq:d1">\[\begin{equation}d_{1}={\frac {\ln(S/K)+(r+\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}
 \tag{3.13}
-\end{equation}\]</span>
-<span class="math display" id="eq:d2">\[\begin{equation}d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
+\end{equation}
+
+\begin{equation}d_{2}={\frac {\ln(S/K)+(r-\sigma ^{2}/2)(T-t)}{\sigma {\sqrt {T-t}}}}=d_1-\sigma\sqrt{T-t}
 \tag{3.14}
 \end{equation}\]</span>
 <p>É a partir das equações <a href="bsm.html#eq:call">(3.11)</a> e <a href="bsm.html#eq:put">(3.12)</a> que se obtém as chamadas gregas, que são as sensibilidades do preço do derivativo em relação a alterações nos parâmetros do modelo. Explicaremos as gregas em maiores detalhes mais adiante.</p>
@@ -418,18 +448,18 @@ P(S,t)=Ke^{-r(T-t)}N(-d_{2})-SN(-d_{1})
 <h3>Bibliografia</h3>
 <div id="refs" class="references">
 <div id="ref-Black1973">
-<p>Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Liabilities.” <em>Journal of Political Economy</em> 81 (3). The University of Chicago Press: 637–54.</p>
+<p>Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Liabilities.” <em>Journal of Political Economy</em> 81 (3). The University of Chicago Press:637–54.</p>
 </div>
 <div id="ref-Merton1976">
-<p>Merton, Robert C. 1976. “Option Pricing When Underlying Stock Returns Are Discontinuous.” <em>Journal of Financial Economics</em> 3 (1-2). Elsevier: 125–44.</p>
+<p>Merton, Robert C. 1976. “Option Pricing When Underlying Stock Returns Are Discontinuous.” <em>Journal of Financial Economics</em> 3 (1-2). Elsevier:125–44.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.<a href="bsm.html#fnref2">↩</a></p></li>
-<li id="fn3"><p>A precificação dentro do mundo neutro ao risco mereceria um, ou mais, <em>posts</em> por si só. Aqui lançaremos apenas os principais resultados que nos permitem encontrar o modelo de B&amp;S.<a href="bsm.html#fnref3">↩</a></p></li>
-<li id="fn4"><p>Uma demonstração completa de como encontrar a solução para a EDP de Black&amp;Schole pode ser encontrada em <a href="https://planetmath.org/AnalyticSolutionOfBlackScholesPDE" class="uri">https://planetmath.org/AnalyticSolutionOfBlackScholesPDE</a><a href="bsm.html#fnref4">↩</a></p></li>
+<li id="fn2"><p>Esta é uma suposição do modelo, pode não ser verdade para algum investidor qualquer mas se for para algum outro investidor representativo, o princípio de ausência de arbitragem passa a valer, uma vez que este segundo investidor explorará o mercado e levará o preço do derivativo para o resultado requerido.<a href="bsm.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>A precificação dentro do mundo neutro ao risco mereceria um, ou mais, <em>posts</em> por si só. Aqui lançaremos apenas os principais resultados que nos permitem encontrar o modelo de B&amp;S.<a href="bsm.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Uma demonstração completa de como encontrar a solução para a EDP de Black&amp;Schole pode ser encontrada em <a href="https://planetmath.org/AnalyticSolutionOfBlackScholesPDE" class="uri">https://planetmath.org/AnalyticSolutionOfBlackScholesPDE</a><a href="bsm.html#fnref4" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -488,7 +518,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

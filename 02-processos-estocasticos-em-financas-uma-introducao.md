@@ -59,7 +59,7 @@ ggplot(mb, aes(x = t, y = value, color = sim)) +
   theme_economist_white()
 ```
 
-![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-latex/brownian_plot-1.pdf)<!-- --> 
+![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-epub3/brownian_plot-1.png)<!-- -->
 
 
 
@@ -141,6 +141,6 @@ ggplot(mb, aes(x = t, y = value, color = sim)) +
   theme_economist_white()
 ```
 
-![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-latex/mbg_plot-1.pdf)<!-- --> 
+![](02-processos-estocasticos-em-financas-uma-introducao_files/figure-epub3/mbg_plot-1.png)<!-- -->
 
 O Movimento Browniano Geométrico aqui demonstrado serve de base para o famoso modelo **Black \& Scholes** de precificação de opções, o qual assume que o ativo subjacente à opção (por exemplo, a ação de uma empresa) tem seu preço formado por um processo MBG.

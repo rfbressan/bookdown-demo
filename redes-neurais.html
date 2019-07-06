@@ -52,41 +52,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -212,7 +240,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10" data-path="redes-neurais.html"><a href="redes-neurais.html"><i class="fa fa-check"></i><b>10</b> Precificação de Opções via Redes Neurais</a><ul>
 <li class="chapter" data-level="10.1" data-path="redes-neurais.html"><a href="redes-neurais.html#hipoteses-de-black-scholes"><i class="fa fa-check"></i><b>10.1</b> Hipóteses de Black &amp; Scholes</a></li>
 <li class="chapter" data-level="10.2" data-path="redes-neurais.html"><a href="redes-neurais.html#ensinando-uma-maquina-a-precificar-opcoes"><i class="fa fa-check"></i><b>10.2</b> Ensinando uma máquina a precificar opções</a></li>
-<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
+<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais-1"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
 <li class="chapter" data-level="10.4" data-path="redes-neurais.html"><a href="redes-neurais.html#feed-forward-network"><i class="fa fa-check"></i><b>10.4</b> Feed forward network</a></li>
 <li class="chapter" data-level="10.5" data-path="redes-neurais.html"><a href="redes-neurais.html#backpropagation"><i class="fa fa-check"></i><b>10.5</b> Backpropagation</a></li>
 <li class="chapter" data-level="10.6" data-path="redes-neurais.html"><a href="redes-neurais.html#rede-neural-no-r"><i class="fa fa-check"></i><b>10.6</b> Rede neural no R</a></li>
@@ -240,7 +268,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="redes-neurais" class="section level1">
 <h1><span class="header-section-number">Capítulo 10</span> Precificação de Opções via Redes Neurais</h1>
-<p>Introduziremos neste capítulo<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> um dos temas mais atuais no mercado financeiro. O uso de técnicas de inteligência artificial e aprendizado de máquina para a precificação de opções.</p>
+<p>Introduziremos neste capítulo<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> um dos temas mais atuais no mercado financeiro. O uso de técnicas de inteligência artificial e aprendizado de máquina para a precificação de opções.</p>
 <p>Em 1973, Fischer Black, Myron Scholes e Robert Merton publicaram uma maneira analítica para precificar opções, de modo que se pudesse relacionar a dinâmica do preço do ativo subjacente, uma taxa de juros livre de risco, o intervalo de tempo até a data de expiração da opção, o strike da opção e a volatilidade futura deste ativo, sem depender de um retorno esperado (algo muito mais imprevisível).</p>
 <div id="hipoteses-de-black-scholes" class="section level2">
 <h2><span class="header-section-number">10.1</span> Hipóteses de Black &amp; Scholes</h2>
@@ -250,12 +278,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">10.2</span> Ensinando uma máquina a precificar opções</h2>
 <p>Na década de 70, seria muito difícil construir um método prático e data-driven de precificação de opções, já que não se possuía poder computacional suficiente para realizar a mineração necessária; tínhamos que ter uma maneira analítica de precificação, o que começou com a fórmula de Black &amp; Scholes (que garantiu o Prêmio Nobel aos pesquisadores). A partir da década de 90, com o avanço computacional, alguns pesquisadores começaram a se interessar por métodos data-driven de precificação, podendo se desvencilhar das hipóteses pouco realistas.</p>
 <p>Para tanto, podemos pensar em algumas possibilidades: tendo informações sobre as características de uma determinada opção (o seu preço de mercado, uma volatilidade implícita realizada, um determinado intervalo de tempo até a data de expiração, com o moneyness da opção, etc…), teríamos condições de ensinar um algoritmo a precificar esta opção?</p>
-<p>Em <span class="citation">(Hutchinson <a href="#ref-Hutchinson1994">1994</a>)</span>, esta abordagem foi realizada com a utilização do método das redes neurais. A abordagem do pesquisadores do MIT era de ensinar uma máquina a precificar opções de maneira não-paramétrica e que não assumisse as hipóteses tão contestadas por outros pesquisadores. Colocando como input as informações teoricamente determinantes para os preços das opções, o artigo buscou ver o ajuste das previsões realizadas com o que realmente aconteceu nos mercados. Outro bom artigo, aplicando a mesma técnica mas para opções de outro mercado, é o de <span class="citation">(Huynh <a href="#ref-Huynh2018">2018</a>)</span>.</p>
+<p>Em <span class="citation">(Hutchinson, Lo, and Poggio <a href="#ref-Hutchinson1994">1994</a>)</span>, esta abordagem foi realizada com a utilização do método das redes neurais. A abordagem do pesquisadores do MIT era de ensinar uma máquina a precificar opções de maneira não-paramétrica e que não assumisse as hipóteses tão contestadas por outros pesquisadores. Colocando como input as informações teoricamente determinantes para os preços das opções, o artigo buscou ver o ajuste das previsões realizadas com o que realmente aconteceu nos mercados. Outro bom artigo, aplicando a mesma técnica mas para opções de outro mercado, é o de <span class="citation">(Huynh <a href="#ref-Huynh2018">2018</a>)</span>.</p>
 </div>
-<div id="redes-neurais" class="section level2">
+<div id="redes-neurais-1" class="section level2">
 <h2><span class="header-section-number">10.3</span> Redes Neurais</h2>
-<p>Como um resumo sobre o método das redes neurais, <span class="citation">(Friedman <a href="#ref-Friedman2001">2001</a>, 389)</span> traz que a ideia é extrair combinações lineares entre as variáveis explicativas e então modelar a variável dependente (no nosso caso, o prêmio da opção) como uma função não-linear das variáveis explicativas. O modelo de redes neurais também é chamado de multilayer perceptron, onde o modelo comprime diversas camadas de regressões logísticas com não-linearidades contínuas <span class="citation">(Bishop <a href="#ref-Bishop2006">2006</a>, 226)</span>; assim é formada a função de máxima verossimilhança que é a base das “redes de treino”.</p>
-<p>Ao contrário do que se pensa, a pesquisa sobre métodos de inteligência artificial, e mais especificamente de redes neurais, começou já na década de 40, com <span class="citation">(McCulloch <a href="#ref-Mcculloch1943">1943</a>)</span>, em “A Logical Calculus of The Ideas Immanent in Nervous Activity”. A ideia era de simular as redes neurais do cérebro como forma de computadores estarem aptos a aprenderem e tomarem decisões como um humano.</p>
+<p>Como um resumo sobre o método das redes neurais, <span class="citation">(Friedman, Hastie, and Tibshirani <a href="#ref-Friedman2001">2001</a>, 389)</span> traz que a ideia é extrair combinações lineares entre as variáveis explicativas e então modelar a variável dependente (no nosso caso, o prêmio da opção) como uma função não-linear das variáveis explicativas.
+O modelo de redes neurais também é chamado de multilayer perceptron, onde o modelo comprime diversas camadas de regressões logísticas com não-linearidades contínuas <span class="citation">(Bishop <a href="#ref-Bishop2006">2006</a>, 226)</span>; assim é formada a função de máxima verossimilhança que é a base das “redes de treino”.</p>
+<p>Ao contrário do que se pensa, a pesquisa sobre métodos de inteligência artificial, e mais especificamente de redes neurais, começou já na década de 40, com <span class="citation">(McCulloch and Pitts <a href="#ref-Mcculloch1943">1943</a>)</span>, em “A Logical Calculus of The Ideas Immanent in Nervous Activity”. A ideia era de simular as redes neurais do cérebro como forma de computadores estarem aptos a aprenderem e tomarem decisões como um humano.</p>
 <p>Para isso, matematicamente, construímos uma função de ativação <span class="math inline">\(y\)</span>, onde <span class="math inline">\(y\)</span> é uma função de uma função não-linear das combinações lineares entre os inputs dados (<span class="math inline">\(\phi(x)\)</span>), ponderada por pesos que, inicialmente, são aleatórios (<span class="math inline">\(w_j\)</span>), entre 0 e 1.</p>
 <p><span class="math display">\[
 y(\mathbf{x, w})=f\left(\sum_{j=1}^M w_j\phi_j(\mathbf{x})\right)
@@ -304,7 +333,8 @@ Figura 10.2: Esquema feed-forward e backpropagation.
 <p>Queremos encontrar os vetores de pesos que minimizem a função erro. Assim, aplicamos a regra da cadeia para derivar a função erro:</p>
 <p><span class="math display">\[
 {\frac {\partial E}{\partial w_{ij}}}={\frac {\partial E}{\partial o_{j}}}{\frac {\partial o_{j}}{\partial {\text{net}}_{j}}}{\frac {\partial {\text{net}}_{j}}{\partial w_{ij}}}
-\]</span> Sendo:</p>
+\]</span>
+Sendo:</p>
 <p><span class="math display">\[
 1)
 {\frac{\partial net_j}{\partial w_{ij}}}={\frac {\partial }{\partial w_{ij}}}\left(\sum _{k=1}^{n}w_{kj}o_{k}\right)
@@ -325,7 +355,7 @@ Figura 10.2: Esquema feed-forward e backpropagation.
 <div id="rede-neural-no-r" class="section level2">
 <h2><span class="header-section-number">10.6</span> Rede neural no R</h2>
 <p>Os dados foram retirados do site <a href="http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv">ivolatility.com</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Importando os dados que serão utilizados
+<pre class="sourceCode r"><code class="sourceCode r">##Importando os dados que serão utilizados
 
 smile_volatilidade &lt;-<span class="st"> </span>
 <span class="st">  </span>rio<span class="op">::</span><span class="kw">import</span>(<span class="st">&quot;R/input/IV_Raw_Delta_surface.csv&quot;</span>) <span class="op">%&gt;%</span>
@@ -350,9 +380,9 @@ df_nn &lt;-<span class="st"> </span>df_nn <span class="op">%&gt;%</span><span cl
      <span class="dt">main =</span> <span class="st">&quot;Distribuição dos erros da volatilidade realizada pela predita&quot;</span>,
      <span class="dt">xlab =</span> <span class="st">&quot;Erro&quot;</span>,
      <span class="dt">ylab =</span> <span class="st">&quot;Frequência&quot;,</span>
-<span class="st">     xlim = c(-0.04, 0.04))</span></code></pre></div>
+<span class="st">     xlim = c(-0.04, 0.04))</span></code></pre>
 <p><img src="10-redes-neurais_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(rede_neural, <span class="dt">rep =</span> <span class="st">&quot;best&quot;</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(rede_neural, <span class="dt">rep =</span> <span class="st">&quot;best&quot;</span>)</code></pre>
 <p><img src="10-redes-neurais_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
 
 </div>
@@ -363,25 +393,25 @@ df_nn &lt;-<span class="st"> </span>df_nn <span class="op">%&gt;%</span><span cl
 <p>Bishop, Christopher M. 2006. <em>Pattern Recognition and Machine Learning</em>. springer.</p>
 </div>
 <div id="ref-Black1973">
-<p>Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Liabilities.” <em>Journal of Political Economy</em> 81 (3). The University of Chicago Press: 637–54.</p>
+<p>Black, Fischer, and Myron Scholes. 1973. “The Pricing of Options and Corporate Liabilities.” <em>Journal of Political Economy</em> 81 (3). The University of Chicago Press:637–54.</p>
 </div>
 <div id="ref-Friedman2001">
-<p>Friedman, Trevor e Tibshirani, Jerome e Hastie. 2001. <em>The Elements of Statistical Learning</em>. 10. Springer series in statistics New York.</p>
+<p>Friedman, Jerome, Trevor Hastie, and Robert Tibshirani. 2001. <em>The Elements of Statistical Learning</em>. 10. Springer series in statistics New York.</p>
 </div>
 <div id="ref-Hutchinson1994">
-<p>Hutchinson, Andrew W e Poggio, James M e Lo. 1994. “A Nonparametric Approach to Pricing and Hedging Derivative Securities via Learning Networks.” <em>The Journal of Finance</em>, no. 3. Wiley Online Library: 851–89.</p>
+<p>Hutchinson, James M, Andrew W Lo, and Tomaso Poggio. 1994. “A Nonparametric Approach to Pricing and Hedging Derivative Securities via Learning Networks.” <em>The Journal of Finance</em>, no. 3. Wiley Online Library:851–89.</p>
 </div>
 <div id="ref-Huynh2018">
 <p>Huynh. 2018. “Modelling and Forecasting Implied Volatility Using Neural Network.” Hanken School of Economics.</p>
 </div>
 <div id="ref-Mcculloch1943">
-<p>McCulloch, Walter, Warren S e Pitts. 1943. “A Logical Calculus of the Ideas Immanent in Nervous Activity.” <em>The Bulletin of Mathematical Biophysics</em> 5 (4). Springer: 115–33.</p>
+<p>McCulloch, Warren S, and Walter Pitts. 1943. “A Logical Calculus of the Ideas Immanent in Nervous Activity.” <em>The Bulletin of Mathematical Biophysics</em> 5 (4). Springer:115–33.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="17">
-<li id="fn17"><p>Artigo originalmente escrito por Gabriel Dias, adaptado por Rafael F. Bressan para este livro.<a href="redes-neurais.html#fnref17">↩</a></p></li>
+<li id="fn17"><p>Artigo originalmente escrito por Gabriel Dias, adaptado por Rafael F. Bressan para este livro.<a href="redes-neurais.html#fnref17" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -440,7 +470,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

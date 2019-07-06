@@ -90,7 +90,10 @@ Entre as características tipicamente observadas em smiles (e superfícies) de v
 
 Opções sobre moedas possuem tipicamente um smile de volatilidade conforme mostrado na figura \@ref(fig:smile-cambial) abaixo. A volatilidade implícita é relativamente baixa para opções ATM. Esta torna-se progressivamente maior quando a opção se move para dentro do dinheiro ou para fora.
 
-![(\#fig:smile-cambial)Smile típico de um mercado cambial.](./images/smile_cambial.png) 
+<div class="figure">
+<img src="./images/smile_cambial.png" alt="Smile típico de um mercado cambial."  />
+<p class="caption">(\#fig:smile-cambial)Smile típico de um mercado cambial.</p>
+</div>
 
 Caso a distribuição dos preços do ativo subjacente, neste caso uma taxa de câmbio fosse perfeitamente log-normal como no modelo B&S, o smile não teria esta curvatura. Desta forma podemos afirmar que o mercado, ao precificar as opções, acredita que a distribuição deste ativo possui caudas com maior densidade que supõe a log-normal, existem maiores probabilidades de retornos muito baixos ou muito altos.
 
@@ -98,7 +101,10 @@ Caso a distribuição dos preços do ativo subjacente, neste caso uma taxa de c�
 
 Nos mercados de _equities_, ações, índices de ações e ETFs, por exemplo, o smile apresenta uma característica de assimetria (skew, em inglês) negativa. A asa esquerda (parte onde as puts estão fora do dinheiro) apresenta valores de volatilidade implícita muito maiores que suas contrapartes no lado das calls. Este comportamento reflete a percepção de mercado de uma maior probabilidade de grandes perdas nas ações que altos ganhos, gerando portanto, uma distribuição de preços assimétrica. Como existe uma maior probabilidade de perdas extremas, o seguro para estas, ou seja, uma put é relativamente mais cara que uma call.
 
-![(\#fig:smile-equities)Smile típico de uma ação ou índice de ações.](./images/smile_equities.png) 
+<div class="figure">
+<img src="./images/smile_equities.png" alt="Smile típico de uma ação ou índice de ações."  />
+<p class="caption">(\#fig:smile-equities)Smile típico de uma ação ou índice de ações.</p>
+</div>
 
 ## Smile como forma de precificação {#smileprecificacao}
 
@@ -122,7 +128,10 @@ Da mesma forma como a curva de juros em um dado momento é uma descrição conci
 
 A figura \@ref(fig:superficie) demonstra uma superfície de volatilidade implícita  do `SPX` em 15/09/2005, conforme apresentado em @Gatheral2011.
 
-![(\#fig:superficie)Superfície de volatilidade implícita.](./images/spx_vol_surface.png) 
+<div class="figure">
+<img src="./images/spx_vol_surface.png" alt="Superfície de volatilidade implícita."  />
+<p class="caption">(\#fig:superficie)Superfície de volatilidade implícita.</p>
+</div>
 
 ## Arbitragem estática {#arbestatica}
 
@@ -132,7 +141,10 @@ O princípio de ausência de arbitragem é dominante na teoria financeira. Este 
 
 Primeiro consideramos uma trava de alta com opções do tipo call. Excluindo-se os custos de transação, esta operação sempre oferece um retorno positivo ou zero, conforme a figura \@ref(fig:trava-alta). Por mais que esta estratégia esteja montada fora do dinheiro, sempre existe uma possibilidade de ela ter lucro, $S_T>K$ e portanto seu preço deve ser sempre maior que zero. 
 
-![(\#fig:trava-alta)Perfil de lucro de uma trava de alta.](./images/trava_alta.png) 
+<div class="figure">
+<img src="./images/trava_alta.png" alt="Perfil de lucro de uma trava de alta."  />
+<p class="caption">(\#fig:trava-alta)Perfil de lucro de uma trava de alta.</p>
+</div>
 
 É claro que quanto mais ITM estejam as opções, maior seu preço e quanto mais fora do dinheiro menor será seu valor até o limite inferior zero. Se levarmos a diferença entre os _strikes_, $dK$ a zero temos que:
 
@@ -152,7 +164,10 @@ Também deve ser imposta uma restrição na segunda derivada do preço das opç�
 
 Considere uma estratégia do tipo borboleta, onde se compra uma quantia de calls no _strike_ $K-dK$, vende-se duas vezes esta quantia em $K$ e compra-se novamente um lote em $K+dK$, o perfil de lucro desta operação no vencimento está representado na figura \@ref(fig:borboleta).
 
-![(\#fig:borboleta)Borboleta realizada com calls.](./images/borboleta.png) 
+<div class="figure">
+<img src="./images/borboleta.png" alt="Borboleta realizada com calls."  />
+<p class="caption">(\#fig:borboleta)Borboleta realizada com calls.</p>
+</div>
 
 Seguindo a mesma linha de raciocínio anterior, como o _payoff_ da borboleta é sempre não negativo também deve ser o seu valor para qualquer período anterior a expiração. Se denotarmos $\pi_B$ o valor da borboleta, então $\pi_B\geq0$.
 

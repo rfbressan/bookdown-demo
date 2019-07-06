@@ -43,7 +43,10 @@ onde $w_\tau=v_\tau \tau$ relaciona a variância total ATM com a variância ATM.
 
 A figura \@ref(fig:svi-jw) apresenta uma esquematização destes parâmetros sobre um _smile_ fictício para melhor compreensão.
 
-![(\#fig:svi-jw)Interpretação dos parâmetros de um SVI-JW.](./images/svi_jw.png) 
+<div class="figure">
+<img src="./images/svi_jw.png" alt="Interpretação dos parâmetros de um SVI-JW."  />
+<p class="caption">(\#fig:svi-jw)Interpretação dos parâmetros de um SVI-JW.</p>
+</div>
 
 As relações inversas que trazem uma parametrização _JW_ para uma _raw_, assumindo que $m \neq 0$ são:
 
@@ -209,22 +212,29 @@ kable(powerlaw_par,
       col.names = "SSVI-PL")
 ```
 
-\begin{table}[t]
-
-\caption{(\#tab:ssvi-cal)Parâmetros da SSVI-power-law estimados.}
-\centering
-\begin{tabular}{l|r}
-\hline
-  & SSVI-PL\\
-\hline
-rho & 0.1183545\\
-\hline
-gamma & 0.0000000\\
-\hline
-eta & 1.7883417\\
-\hline
-\end{tabular}
-\end{table}
+<table>
+<caption>(\#tab:ssvi-cal)Parâmetros da SSVI-power-law estimados.</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;">   </th>
+   <th style="text-align:right;"> SSVI-PL </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> rho </td>
+   <td style="text-align:right;"> 0.1183545 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> gamma </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> eta </td>
+   <td style="text-align:right;"> 1.7883417 </td>
+  </tr>
+</tbody>
+</table>
 
 Podemos rapidamente checar se estes parâmetros estimados geram uma superfície livre de arbitragem. 
 
@@ -260,7 +270,7 @@ ggplot(plt_df, aes(x = k, y = w_pl)) +
   theme_economist_white()
 ```
 
-![](08-superficie-svi_files/figure-latex/ssvi_plot-1.pdf)<!-- --> 
+![](08-superficie-svi_files/figure-epub3/ssvi_plot-1.png)<!-- -->
 
 Foram retirados os vencimentos mais longos apenas para uma melhor visualização da parte mais curta da superfície, que em geral é a mais complicada de se calibrar através de SVI. O resultado parece interessante, com as variâncias ao redor do dinheiro tendo boa aderência aos dados observados, porém para _puts_ muito fora do dinheiro, a parametrização aparenta **subestimar** o valor da variância total e portanto estaria subprecificando as opções.
 
@@ -286,7 +296,10 @@ ggplot(dens_tbl, aes(x = kdens, y = dens)) +
   theme_economist_white()
 ```
 
-![(\#fig:ssvi-dens)Densidade implícita estimada. Presença de assimetria e leptocurtose a esquerda.](08-superficie-svi_files/figure-latex/ssvi-dens-1.pdf) 
+<div class="figure">
+<img src="08-superficie-svi_files/figure-epub3/ssvi-dens-1.png" alt="Densidade implícita estimada. Presença de assimetria e leptocurtose a esquerda."  />
+<p class="caption">(\#fig:ssvi-dens)Densidade implícita estimada. Presença de assimetria e leptocurtose a esquerda.</p>
+</div>
 
 Este é um gráfico interessante, que nos mostra exatamente o que se espera de um _smile_ típico de _equities_ que possui _skew_ negativo. Percebemos como a densidade de probabilidades é assimétrica, com a cauda esquerda muito mais longa, refletindo o sentimento de mercado de uma maior probabilidade de grandes quedas no preço do ativo objeto que altas equivalentes. Sempre que verificamos um _smile_ com _skew_ negativo, como é o presente caso, a distribuição de probabilidades é assimétrica a esquerda.
 
@@ -339,29 +352,7 @@ surf3D(M$x, M$y, loc_vol_m, colkey = FALSE, bty = "b2",
        zlab = "Volatilidade local \u03c3")
 ```
 
-```
-## Warning in persp.default(plist$xlim, plist$ylim, z = matrix(nrow = 2, ncol
-## = 2, : conversion failure on 'τ' in 'mbcsToSbcs': dot substituted for <cf>
-```
-
-```
-## Warning in persp.default(plist$xlim, plist$ylim, z = matrix(nrow = 2, ncol
-## = 2, : conversion failure on 'τ' in 'mbcsToSbcs': dot substituted for <84>
-```
-
-```
-## Warning in persp.default(plist$xlim, plist$ylim, z = matrix(nrow = 2, ncol
-## = 2, : conversion failure on 'Volatilidade local σ' in 'mbcsToSbcs': dot
-## substituted for <cf>
-```
-
-```
-## Warning in persp.default(plist$xlim, plist$ylim, z = matrix(nrow = 2, ncol
-## = 2, : conversion failure on 'Volatilidade local σ' in 'mbcsToSbcs': dot
-## substituted for <83>
-```
-
-![](08-superficie-svi_files/figure-latex/vol-local-1.pdf)<!-- --> 
+![](08-superficie-svi_files/figure-epub3/vol-local-1.png)<!-- -->
 
 ## Conclusão
 

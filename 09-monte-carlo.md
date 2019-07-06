@@ -178,7 +178,7 @@ ggplot(port_mc, aes(x = data, y = St)) +
   theme_economist_white()
 ```
 
-![](09-monte-carlo_files/figure-latex/gr_acao-1.pdf)<!-- --> 
+![](09-monte-carlo_files/figure-epub3/gr_acao-1.png)<!-- -->
 
 Podemos verificar pela figura acima que a ação, pela nossa SMC, deve fechar na maioria dos caminhos simulados acima do preço de exercício da _put_ (linha vermelha). Entretanto existe uma menor probabilidade de, até a data de vencimento, o preço da ação cair abaixo do _strike_ desta opção.
 
@@ -218,7 +218,7 @@ ggplot(port_mc, aes(x = data, y = port_valor)) +
   theme_economist_white()
 ```
 
-![](09-monte-carlo_files/figure-latex/gr_port-1.pdf)<!-- --> 
+![](09-monte-carlo_files/figure-epub3/gr_port-1.png)<!-- -->
 
 Ou seja, ao custo de 0.62% do preço da ação, compramos uma proteção contra uma queda de preços com probabilidade de 13.5%.
 

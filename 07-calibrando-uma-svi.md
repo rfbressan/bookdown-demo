@@ -218,38 +218,211 @@ A seguir apresentamos um _smile_ de referência para a calibração, obtido de [
 
 Os dados utilizados neste exemplo estão apresentados na tabela \@ref(tab:dados) abaixo. Esta é uma típica apresentação de um _slice_ de superfície, ou seja, dados para um _smile_ apenas. As principais variáveis são: a data em que os dados foram coletados (date), o preço de fechamento do ativo (stock_price), o prazo para expiração em dias (period), e medidas de moneyness como delta, _strike_ e o próprio _moneyness_, além é claro da volatilidade implícita (iv) retirada do mercado.
 
-\begin{table}[t]
-
-\caption{(\#tab:dados)Dados reais para exemplo de calibração de uma SVI.}
-\centering
-\fontsize{14}{16}\selectfont
-\begin{tabular}{lllrrrrrr}
-\toprule
-date & symbol & exchange & stock\_price\_for\_iv & period & delta & moneyness & strike & iv\\
-\midrule
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 10 & 0.03 & 148.41 & 0.09\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 15 & 0.03 & 147.49 & 0.09\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 20 & 0.02 & 146.80 & 0.09\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 25 & 0.02 & 146.21 & 0.09\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 30 & 0.01 & 145.69 & 0.09\\
-\addlinespace
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 35 & 0.01 & 145.19 & 0.10\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 40 & 0.01 & 144.69 & 0.10\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 45 & 0.00 & 144.18 & 0.10\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 50 & 0.00 & 143.66 & 0.10\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 55 & 0.00 & 143.12 & 0.11\\
-\addlinespace
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 60 & -0.01 & 142.53 & 0.11\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 65 & -0.01 & 141.88 & 0.11\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 70 & -0.02 & 141.13 & 0.12\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 75 & -0.02 & 140.26 & 0.13\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 80 & -0.03 & 139.16 & 0.13\\
-\addlinespace
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 85 & -0.04 & 137.66 & 0.14\\
-2017-09-21 & IWM & NYSEArca & 143.73 & 30 & 90 & -0.06 & 135.32 & 0.16\\
-\bottomrule
-\end{tabular}
-\end{table}
+<table class="table table-striped" style="font-size: 14px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">(\#tab:dados)Dados reais para exemplo de calibração de uma SVI.</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> date </th>
+   <th style="text-align:left;"> symbol </th>
+   <th style="text-align:left;"> exchange </th>
+   <th style="text-align:right;"> stock_price_for_iv </th>
+   <th style="text-align:right;"> period </th>
+   <th style="text-align:right;"> delta </th>
+   <th style="text-align:right;"> moneyness </th>
+   <th style="text-align:right;"> strike </th>
+   <th style="text-align:right;"> iv </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 148.41 </td>
+   <td style="text-align:right;"> 0.09 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 0.03 </td>
+   <td style="text-align:right;"> 147.49 </td>
+   <td style="text-align:right;"> 0.09 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 146.80 </td>
+   <td style="text-align:right;"> 0.09 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 0.02 </td>
+   <td style="text-align:right;"> 146.21 </td>
+   <td style="text-align:right;"> 0.09 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 145.69 </td>
+   <td style="text-align:right;"> 0.09 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 145.19 </td>
+   <td style="text-align:right;"> 0.10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 0.01 </td>
+   <td style="text-align:right;"> 144.69 </td>
+   <td style="text-align:right;"> 0.10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 144.18 </td>
+   <td style="text-align:right;"> 0.10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 50 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 143.66 </td>
+   <td style="text-align:right;"> 0.10 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 55 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 143.12 </td>
+   <td style="text-align:right;"> 0.11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 60 </td>
+   <td style="text-align:right;"> -0.01 </td>
+   <td style="text-align:right;"> 142.53 </td>
+   <td style="text-align:right;"> 0.11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 65 </td>
+   <td style="text-align:right;"> -0.01 </td>
+   <td style="text-align:right;"> 141.88 </td>
+   <td style="text-align:right;"> 0.11 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 70 </td>
+   <td style="text-align:right;"> -0.02 </td>
+   <td style="text-align:right;"> 141.13 </td>
+   <td style="text-align:right;"> 0.12 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> -0.02 </td>
+   <td style="text-align:right;"> 140.26 </td>
+   <td style="text-align:right;"> 0.13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 80 </td>
+   <td style="text-align:right;"> -0.03 </td>
+   <td style="text-align:right;"> 139.16 </td>
+   <td style="text-align:right;"> 0.13 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 85 </td>
+   <td style="text-align:right;"> -0.04 </td>
+   <td style="text-align:right;"> 137.66 </td>
+   <td style="text-align:right;"> 0.14 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2017-09-21 </td>
+   <td style="text-align:left;"> IWM </td>
+   <td style="text-align:left;"> NYSEArca </td>
+   <td style="text-align:right;"> 143.73 </td>
+   <td style="text-align:right;"> 30 </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> -0.06 </td>
+   <td style="text-align:right;"> 135.32 </td>
+   <td style="text-align:right;"> 0.16 </td>
+  </tr>
+</tbody>
+</table>
 
 Esta tabela poderia conter (de fato contém no arquivo original) outros períodos de expiração, e neste caso uma das colunas de _moneyness_ começa a se repetir, no caso seria o delta pois baixamos uma tabela de volatilidades implícitas por delta. Assim, em uma tabela simples em formato [`tidy`](http://vita.had.co.nz/papers/tidy-data.html) é possível armazenar informações de uma superfície inteira, a qual de outra forma necessitaria de um arranjo em 3 dimensões.
 
@@ -353,26 +526,69 @@ kable(frame_tbl,
                 full_width = FALSE)
 ```
 
-\begin{table}[t]
-
-\caption{(\#tab:tabela)Parâmetros estimados da calibração, RMSE e tempo de computação em segundos.}
-\centering
-\fontsize{18}{20}\selectfont
-\begin{tabular}{lllll}
-\toprule
-Estimativa & Direto & GA & QuasiPQ & QuasiNM\\
-\midrule
-a & 0.00065 & 0.00000 & 0.00000 & 0.00000\\
-b & 0.00048 & 0.01953 & 0.01695 & 0.02095\\
-\$\textbackslash{}rho\$ & -1.00000 & -0.80204 & -1.00000 & -0.91452\\
-m & 0.18248 & -0.00773 & -0.01118 & -0.01898\\
-\$\textbackslash{}sigma\$ & 0.57386 & 0.05039 & 0.06905 & 0.05658\\
-\addlinespace
-RMSE & 4.06e-04 & 8.68e-06 & 9.55e-05 & 1.16e-05\\
-Tempo & 0.16900 & 31.46700 & 0.20400 & 7.88400\\
-\bottomrule
-\end{tabular}
-\end{table}
+<table class="table table-striped" style="font-size: 18px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">(\#tab:tabela)Parâmetros estimados da calibração, RMSE e tempo de computação em segundos.</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Estimativa </th>
+   <th style="text-align:left;"> Direto </th>
+   <th style="text-align:left;"> GA </th>
+   <th style="text-align:left;"> QuasiPQ </th>
+   <th style="text-align:left;"> QuasiNM </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> a </td>
+   <td style="text-align:left;"> 0.00000 </td>
+   <td style="text-align:left;"> 0.00000 </td>
+   <td style="text-align:left;"> 0.00000 </td>
+   <td style="text-align:left;"> 0.00001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> b </td>
+   <td style="text-align:left;"> 0.01940 </td>
+   <td style="text-align:left;"> 0.01959 </td>
+   <td style="text-align:left;"> 0.01696 </td>
+   <td style="text-align:left;"> 0.01946 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> $\rho$ </td>
+   <td style="text-align:left;"> -0.77790 </td>
+   <td style="text-align:left;"> -0.79978 </td>
+   <td style="text-align:left;"> -1.00000 </td>
+   <td style="text-align:left;"> -0.79674 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:left;"> -0.00595 </td>
+   <td style="text-align:left;"> -0.00777 </td>
+   <td style="text-align:left;"> -0.01118 </td>
+   <td style="text-align:left;"> -0.00723 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> $\sigma$ </td>
+   <td style="text-align:left;"> 0.04947 </td>
+   <td style="text-align:left;"> 0.05034 </td>
+   <td style="text-align:left;"> 0.06904 </td>
+   <td style="text-align:left;"> 0.04998 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> RMSE </td>
+   <td style="text-align:left;"> 8.73e-06 </td>
+   <td style="text-align:left;"> 8.69e-06 </td>
+   <td style="text-align:left;"> 9.55e-05 </td>
+   <td style="text-align:left;"> 8.69e-06 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tempo </td>
+   <td style="text-align:left;"> 0.17000 </td>
+   <td style="text-align:left;"> 30.16900 </td>
+   <td style="text-align:left;"> 0.18400 </td>
+   <td style="text-align:left;"> 13.15000 </td>
+  </tr>
+</tbody>
+</table>
 
 O método Direto, com algoritmo de Levenberg-Marquardt se mostrou muito mais rápido que os demais, principalmente com relação ao algoritmo genético, e com um bom ajuste dado o baixo valor de RMSE. O algoritmo genético é consideravelmente mais lento, entretanto durante as várias calibrações realizadas em testes (e que não estão apresentadas na tabela \@ref(tab:tabela)), este algoritmo sempre se mostrou robusto, com baixo RMSE, diferentemente dos outros métodos que por vezes, denpendendo das estimativas iniciais, podem convergir para um mínimo local.
 
@@ -395,7 +611,10 @@ ggplot(plot_tbl, aes(x = k)) +
   theme_economist_white()
 ```
 
-![(\#fig:plot)(ref:grafico)](07-calibrando-uma-svi_files/figure-latex/plot-1.pdf) 
+<div class="figure">
+<img src="07-calibrando-uma-svi_files/figure-epub3/plot-1.png" alt="(ref:grafico)"  />
+<p class="caption">(\#fig:plot)(ref:grafico)</p>
+</div>
 
 De fato o método direto e o método _Quasi-explicit_ com otimizador global do tipo algoritmo genético se mostram mais adequados para a calibração de um SVI. Enquanto o método direto é muito mais eficiente em termos computacionais, o método _Quasi-explicit_ com GA é mais robusto. Desta forma, deve-se salientar que é necessário que o usuário, ao fazer uma calibração de _smile_ de volatilidade, deve dispor de diferentes métodos de fazê-lo, e a inspeção visual do resultado é **obrigatória** para determinar qual método foi mais eficiente em ajustar a curva aos dados.
 

@@ -18,7 +18,10 @@ Um método paramétrico, como o SVI, Heston, SABR ou Volatilidade Local, busca a
 
 A figura abaixo tenta mostrar as diferenças entre uma interpolação spline cúbica, uma suavização e uma parametrização SVI. Enquanto que a interpolação liga todos os pontos marcados, a suavização e a parametrização não necessariamente passam sobre estes pontos mas fornecem uma curva mais "suave", sem trocas de convexidade, o que gera oportunidades de arbitragem e probabilidades negativas de ocorrência de determinados preços para o ativo subjacente, que ferem os princípios de precificação de opções. Os dados utilizados neste e nos próximos artigos sobre superfícies de volatlidade foram obtidos do site [ivolatility.com](http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv) na forma de amostra gratuita fornecida livremente. O ativo subjacente é o ETF [`IWM`](https://www.ishares.com/us/products/239710/ishares-russell-2000-etf) para a data de 21/09/2017. 
 
-![(\#fig:diferencas)Diferentes métodos de ajuste de dados a um smile.](06-metodos-calibracao_files/figure-latex/diferencas-1.pdf) 
+<div class="figure">
+<img src="06-metodos-calibracao_files/figure-epub3/diferencas-1.png" alt="Diferentes métodos de ajuste de dados a um smile."  />
+<p class="caption">(\#fig:diferencas)Diferentes métodos de ajuste de dados a um smile.</p>
+</div>
 
 Pode-se verificar como os métodos SVI e a suavização não passam sobre todos os pontos marcados, com a suavização tendo dificuldade com a curvatura nos valores mais altos de _moneyness_ e a SVI possuindo uma inclinação mais branda na asa esquerda do smile.
 
@@ -30,7 +33,10 @@ No caso da spline cúbica, esta é uma função polinomial de grau 3 definida em
 
 Assim, uma spline cúbica é uma função contínua, suave e diferenciável até a segunda ordem. Entretanto, suas derivadas, apesar de contínuas, podem não ser suaves, especialmente aquela de segunda ordem que pode apresentar pontos de "ruptura". Esta característica de uma spline cúbica a torna pouco atrativa para a inferência de distribuições de probabilidade a partir de dados de volatilidade ou mesmo dos preços de opções.
 
-![(\#fig:cubic-spline)Cada segmento de uma spline cúbica é um polinômio de grau 3 diferente.](./images/cubic_spline.png) 
+<div class="figure">
+<img src="./images/cubic_spline.png" alt="Cada segmento de uma spline cúbica é um polinômio de grau 3 diferente."  />
+<p class="caption">(\#fig:cubic-spline)Cada segmento de uma spline cúbica é um polinômio de grau 3 diferente.</p>
+</div>
 
 
 ## Suavização
@@ -43,7 +49,10 @@ Estas suavizações são principalmente utilizadas quando se possui muitas obser
 
 Um ponto em comum entre estas técnicas é o parâmetro de suavização, ausente, na interpolação, que controla a "suavidade" da função estimada.
 
-![(\#fig:suavizacao)Menor parâmetro de suavização gera granularidade na curva.](06-metodos-calibracao_files/figure-latex/suavizacao-1.pdf) 
+<div class="figure">
+<img src="06-metodos-calibracao_files/figure-epub3/suavizacao-1.png" alt="Menor parâmetro de suavização gera granularidade na curva."  />
+<p class="caption">(\#fig:suavizacao)Menor parâmetro de suavização gera granularidade na curva.</p>
+</div>
 
 ## Parametrização
 

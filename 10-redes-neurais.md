@@ -39,14 +39,10 @@ $$
   Esses pesos, com o método de treino estipulado (backpropagation), será alterado de forma com que se alcance o erro mínimo da função para os dados inseridos. Temos que M é o número de combinações lineares, que, somados, gerarão o primeiro input para o treino da função.
 
   
-\begin{figure}
-
-{\centering \includegraphics{./images/neural_network} 
-
-}
-
-\caption{Típica Rede Neural com uma camada oculta.}(\#fig:rede-neural)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="./images/neural_network.png" alt="Típica Rede Neural com uma camada oculta."  />
+<p class="caption">(\#fig:rede-neural)Típica Rede Neural com uma camada oculta.</p>
+</div>
   
 
 ## Feed forward network
@@ -91,14 +87,10 @@ $$
   Para este problema, o método das redes neurais se utiliza do gradient descent, que é uma forma iterativa para se alcançar o mínimo de uma função.
 
 
-\begin{figure}
-
-{\centering \includegraphics{./images/backpropagation} 
-
-}
-
-\caption{Esquema feed-forward e backpropagation.}(\#fig:backpropagation)
-\end{figure}
+<div class="figure" style="text-align: center">
+<img src="./images/backpropagation.png" alt="Esquema feed-forward e backpropagation."  />
+<p class="caption">(\#fig:backpropagation)Esquema feed-forward e backpropagation.</p>
+</div>
   Queremos encontrar os vetores de pesos que minimizem a função erro. Assim, aplicamos a regra da cadeia para derivar a função erro:
 
 $$
@@ -163,12 +155,12 @@ hist(df_nn$erro,
      xlim = c(-0.04, 0.04))
 ```
 
-![](10-redes-neurais_files/figure-latex/unnamed-chunk-1-1.pdf)<!-- --> 
+![](10-redes-neurais_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
 
 ```r
 plot(rede_neural, rep = "best")
 ```
 
-![](10-redes-neurais_files/figure-latex/unnamed-chunk-1-2.pdf)<!-- --> 
+![](10-redes-neurais_files/figure-epub3/unnamed-chunk-1-2.png)<!-- -->
 
 [^101]: Artigo originalmente escrito por Gabriel Dias, adaptado por Rafael F. Bressan para este livro.

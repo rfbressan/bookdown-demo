@@ -157,7 +157,10 @@ onde $w$ é a variância total e o conjunto de parâmetros $\chi_R = \{a, b, \rh
 
 (ref:svicap) Duas parametrizações hipotéticas para a SVI.
 
-![(\#fig:svi)(ref:svicap)](051-superficies-de-volatilidade_files/figure-latex/svi-1.pdf) 
+<div class="figure">
+<img src="051-superficies-de-volatilidade_files/figure-epub3/svi-1.png" alt="(ref:svicap)"  />
+<p class="caption">(\#fig:svi)(ref:svicap)</p>
+</div>
 
 A figura \@ref(fig:svi) acima apresenta duas parametrizações hipotéticas para o modelo. A variância total $w_1$ tem como conjunto de parâmetros, $\chi = \{0, 0.5, -0.6, 0, 0.3\}$ e poderia representar um _smile_ de taxas de câmbio por exemplo. Enquanto que o modelo $w_2$ conta com $\chi = \{-0.04, 0.5, -0.9, 0, 0.4\}$ e se ajusta melhor ao mercado de _equities_.
 

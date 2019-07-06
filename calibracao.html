@@ -52,41 +52,69 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -212,7 +240,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10" data-path="redes-neurais.html"><a href="redes-neurais.html"><i class="fa fa-check"></i><b>10</b> Precificação de Opções via Redes Neurais</a><ul>
 <li class="chapter" data-level="10.1" data-path="redes-neurais.html"><a href="redes-neurais.html#hipoteses-de-black-scholes"><i class="fa fa-check"></i><b>10.1</b> Hipóteses de Black &amp; Scholes</a></li>
 <li class="chapter" data-level="10.2" data-path="redes-neurais.html"><a href="redes-neurais.html#ensinando-uma-maquina-a-precificar-opcoes"><i class="fa fa-check"></i><b>10.2</b> Ensinando uma máquina a precificar opções</a></li>
-<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
+<li class="chapter" data-level="10.3" data-path="redes-neurais.html"><a href="redes-neurais.html#redes-neurais-1"><i class="fa fa-check"></i><b>10.3</b> Redes Neurais</a></li>
 <li class="chapter" data-level="10.4" data-path="redes-neurais.html"><a href="redes-neurais.html#feed-forward-network"><i class="fa fa-check"></i><b>10.4</b> Feed forward network</a></li>
 <li class="chapter" data-level="10.5" data-path="redes-neurais.html"><a href="redes-neurais.html#backpropagation"><i class="fa fa-check"></i><b>10.5</b> Backpropagation</a></li>
 <li class="chapter" data-level="10.6" data-path="redes-neurais.html"><a href="redes-neurais.html#rede-neural-no-r"><i class="fa fa-check"></i><b>10.6</b> Rede neural no R</a></li>
@@ -245,7 +273,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="calibracao-versus-interpolacao" class="section level2">
 <h2><span class="header-section-number">6.1</span> Calibração versus Interpolação</h2>
 <p>Uma forma simples de gerar um smile de volatilidade a partir de dados observados no mercado é a <strong>interpolação</strong> destes dados. Diversas formas de interpolação existem, sendo talvez a mais conhecida a spline cúbica. Não é a proposta deste artigo detalhar os procedimentos de interpolação, restando saber que em tal procedimento é gerada uma função contínua em partes (piecewise) que <strong>passa</strong> por todos os pontos observados.</p>
-<p>Uma interpolação força a passagem da função interpolada em todos os seus pontos de referência, como se estivesse ligando os pontos em um desenho a mão livre. Portanto, nestes pontos o erro da interpolação é zero por definição, entretanto em pontos intermediários podem surgir erros, inclusive aqueles que possibilitam a existência de arbitragem entre strikes de um mesmo smile<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a>.</p>
+<p>Uma interpolação força a passagem da função interpolada em todos os seus pontos de referência, como se estivesse ligando os pontos em um desenho a mão livre. Portanto, nestes pontos o erro da interpolação é zero por definição, entretanto em pontos intermediários podem surgir erros, inclusive aqueles que possibilitam a existência de arbitragem entre strikes de um mesmo smile<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a>.</p>
 <p>Em contraposição a métodos de interpolação, podem ser derivados métodos de suavização (smoothing) ou então a parametrização do smile de volatilidade. Seja suavização, ou parametrização, estes métodos não forçam a passagem da função que representa o smile pelos pontos de mercado, mas buscam minimizar alguma função perda com relação aos desvios em relação a estes pontos ao mesmo tempo em que buscam “suavizar” o smile, para que este não apresente variações bruscas entre os strikes ou alterações de convexidade na curva de preços, que não são condizentes com a teoria de precificação de derivativos.</p>
 <p>Um método paramétrico, como o SVI, Heston, SABR ou Volatilidade Local, busca ajustar às volatilidades implícitas observadas através dos preços das opções sendo praticados no mercado uma determinada função, que possui parâmetros em sua definição que por sua vez determinam a forma desta função. Ao se ajustar os parâmetros, pode-se adequar a função para ficar “o mais próxima possível” dos dados observados, sem necessariamente, no entanto, passar por todos estes pontos.</p>
 <p>A figura abaixo tenta mostrar as diferenças entre uma interpolação spline cúbica, uma suavização e uma parametrização SVI. Enquanto que a interpolação liga todos os pontos marcados, a suavização e a parametrização não necessariamente passam sobre estes pontos mas fornecem uma curva mais “suave”, sem trocas de convexidade, o que gera oportunidades de arbitragem e probabilidades negativas de ocorrência de determinados preços para o ativo subjacente, que ferem os princípios de precificação de opções. Os dados utilizados neste e nos próximos artigos sobre superfícies de volatlidade foram obtidos do site <a href="http://www.ivolatility.com/doc/usa/IV_Raw_Delta_surface.csv">ivolatility.com</a> na forma de amostra gratuita fornecida livremente. O ativo subjacente é o ETF <a href="https://www.ishares.com/us/products/239710/ishares-russell-2000-etf"><code>IWM</code></a> para a data de 21/09/2017.</p>
@@ -259,7 +287,7 @@ Figura 6.1: Diferentes métodos de ajuste de dados a um smile.
 </div>
 <div id="spline-cubica" class="section level2">
 <h2><span class="header-section-number">6.2</span> Spline cúbica</h2>
-<p>Este método é possivelmente um dos mais flexíveis e conhecidos de interpolação de dados univariados existente, embora também exista sua versão bi-dimensional. Uma spline nada mais é que “uma curva definida matematicamente por dois ou mais pontos de controle”<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>.</p>
+<p>Este método é possivelmente um dos mais flexíveis e conhecidos de interpolação de dados univariados existente, embora também exista sua versão bi-dimensional. Uma spline nada mais é que “uma curva definida matematicamente por dois ou mais pontos de controle”<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.</p>
 <p>No caso da spline cúbica, esta é uma função polinomial de grau 3 definida em cada subintervalo demarcados pelos pontos de controle, no caso de interpolação são todos nós. Ou seja, considere um segmento entre dois pontos consecutivos <span class="math inline">\([c, d]\in S\)</span> a spline é uma função cúbica com seus parâmetros calculados pelo algoritmo de ajuste. Para o próximo intervalo de pontos dentro do domínio da função, um novo polinômio de grau 3 é ajustado, sendo que nos pontos de nós uma restrição de igualdade entre as derivadas nos dois segmentos é aplicada para garantir a suavidade da função interpolada como um todo.</p>
 <p>Assim, uma spline cúbica é uma função contínua, suave e diferenciável até a segunda ordem. Entretanto, suas derivadas, apesar de contínuas, podem não ser suaves, especialmente aquela de segunda ordem que pode apresentar pontos de “ruptura”. Esta característica de uma spline cúbica a torna pouco atrativa para a inferência de distribuições de probabilidade a partir de dados de volatilidade ou mesmo dos preços de opções.</p>
 <div class="figure"><span id="fig:cubic-spline"></span>
@@ -286,18 +314,21 @@ Figura 6.3: Menor parâmetro de suavização gera granularidade na curva.
 <h2><span class="header-section-number">6.4</span> Parametrização</h2>
 <p>E por fim as técnicas de parametrização. Nesta categoria estão diversos conhecidos modelos de superfícies de volatilidade implícita, dentre eles os modelos de <span class="citation">Heston (<a href="#ref-Heston1993">1993</a>)</span>, Volatilidade Local de <span class="citation">Dupire (<a href="#ref-Dupire1994">1994</a>)</span> e SVI de <span class="citation">Gatheral (<a href="#ref-Gatheral2004">2004</a>)</span>.</p>
 <p>Em comum, estes modelos tentam parametrizar a superfície, e por conseguinte o smile de volatilidade, de acordo com alguma função, em geral não-linear, que possui características condizentes com a teoria de precificão de derivativos e também a observação empírica das superfícies.</p>
-<p>Por exemplo, a parametrização <em>raw</em> da SVI possui a seguinte forma para a <strong>variância total</strong><a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a> :</p>
+<p>Por exemplo, a parametrização <em>raw</em> da SVI possui a seguinte forma para a <strong>variância total</strong><a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> :</p>
 <p><span class="math display">\[ w(k) = a + b\left(\rho(k-m)+\sqrt{(k-m)^2 + \sigma^2}\right)\]</span></p>
 <p>que fornece um espaço de cinco parâmetros <span class="math inline">\(\chi_B=\{a, b, \rho, m, \sigma\}\)</span> que definem o smile e devem, portanto, serem calibrados a partir de dados observados no mercado.</p>
 <p>O procedimento de calibração consiste em encontrar o conjunto de parâmetros que minimizam uma função perda entre a volatilidade prevista pelo modelo e os dados de mercado, enquanto satisfazem algumas restrições adicionais, como “ausência de arbitragem”, suavidade, etc. Trata-se, via de regra, de problemas de otimização não-linear com restrições de inequalidade também não-lineares.</p>
 <div id="funcao-perda" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Função perda</h3>
 <p>A função perda, ou função de calibração pode ser definida de diversas maneiras, de forma geral, para uma determinada maturidade, ela toma a forma:</p>
-<p><span class="math display">\[L=\sum\limits_{i=1}^n\lambda_i||\hat w(k_i)-w_{imp}(k_i)||\]</span> onde <span class="math inline">\(||\cdot||\)</span> é alguma medida de norma, sendo a mais conhecida o quadrado das diferenças, dando origem a minimização do erro quadrático médio (RMSE). Para este smile sendo calibrado existem <span class="math inline">\(n\)</span> strikes (<span class="math inline">\(k_i\)</span>) e suas volatilidades implícitas observadas são <span class="math inline">\(w_{imp}(k_i)\)</span>. A resposta do modelo para um determinado strike é <span class="math inline">\(\hat w(k_i)\)</span> e <span class="math inline">\(\lambda_i\)</span> são os pesos dados na função perda para cada um destes strikes.</p>
+<p><span class="math display">\[L=\sum\limits_{i=1}^n\lambda_i||\hat w(k_i)-w_{imp}(k_i)||\]</span>
+onde <span class="math inline">\(||\cdot||\)</span> é alguma medida de norma, sendo a mais conhecida o quadrado das diferenças, dando origem a minimização do erro quadrático médio (RMSE). Para este smile sendo calibrado existem <span class="math inline">\(n\)</span> strikes (<span class="math inline">\(k_i\)</span>) e suas volatilidades implícitas observadas são <span class="math inline">\(w_{imp}(k_i)\)</span>. A resposta do modelo para um determinado strike é <span class="math inline">\(\hat w(k_i)\)</span> e <span class="math inline">\(\lambda_i\)</span> são os pesos dados na função perda para cada um destes strikes.</p>
 <p>Os pesos <span class="math inline">\(\lambda_i\)</span> são utilizados para ponderar as observações das volatilidades mais importantes para o cálculo, onde se deseja que a curva ajustada possua um menor erro. Em geral, estes pesos são calculado como inversamente proporcionais:</p>
 <ul>
-<li>ao quadrado dos <em>spreads bid-ask</em>, para dar mais importância às opções mais líquidas</li>
+<li>ao quadrado dos <em>spreads bid-ask</em>, para dar mais importância às opções mais líquidas
+<ul>
 <li>ao quadrado da grega vega calculada a partir do modelo BSM</li>
+</ul></li>
 </ul>
 </div>
 <div id="otimizadores" class="section level3">
@@ -328,21 +359,21 @@ Figura 6.3: Menor parâmetro de suavização gera granularidade na curva.
 <h3>Bibliografia</h3>
 <div id="refs" class="references">
 <div id="ref-Dupire1994">
-<p>Dupire, Bruno. 1994. “Pricing with a Smile.” <em>Risk</em> 7 (1): 18–20.</p>
+<p>Dupire, Bruno. 1994. “Pricing with a Smile.” <em>Risk</em> 7 (1):18–20.</p>
 </div>
 <div id="ref-Gatheral2004">
 <p>Gatheral, Jim. 2004. “A Parsimonious Arbitrage-Free Implied Volatility Parameterization with Application to the Valuation of Volatility Derivatives.” <em>Presentation at Global Derivatives &amp; Risk Management, Madrid</em>.</p>
 </div>
 <div id="ref-Heston1993">
-<p>Heston, Steven L. 1993. “A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options.” <em>The Review of Financial Studies</em> 6 (2). Oxford University Press: 327–43.</p>
+<p>Heston, Steven L. 1993. “A Closed-Form Solution for Options with Stochastic Volatility with Applications to Bond and Currency Options.” <em>The Review of Financial Studies</em> 6 (2). Oxford University Press:327–43.</p>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="11">
-<li id="fn11"><p>Veja mais detalhes no Capítulo <a href="smile.html#arbestatica">Smile de Volatilidade</a><a href="calibracao.html#fnref11">↩</a></p></li>
-<li id="fn12"><p>Definição retirada de <a href="https://pt.wikipedia.org/wiki/Spline" class="uri">https://pt.wikipedia.org/wiki/Spline</a><a href="calibracao.html#fnref12">↩</a></p></li>
-<li id="fn13"><p>A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, <span class="math inline">\(w=\sigma^2_{imp}\cdot\tau\)</span>.<a href="calibracao.html#fnref13">↩</a></p></li>
+<li id="fn11"><p>Veja mais detalhes no Capítulo <a href="smile.html#arbestatica">Smile de Volatilidade</a><a href="calibracao.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p>Definição retirada de <a href="https://pt.wikipedia.org/wiki/Spline" class="uri">https://pt.wikipedia.org/wiki/Spline</a><a href="calibracao.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>A variância total é definida pelo produto entre a variância implícita e o tempo para expiração, <span class="math inline">\(w=\sigma^2_{imp}\cdot\tau\)</span>.<a href="calibracao.html#fnref13" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -401,7 +432,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');

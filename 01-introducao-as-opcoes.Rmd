@@ -106,4 +106,4 @@ Teremos então a compra de uma put e call de strike iguais de R\$150,00 a venda 
 
 Espero que o leitor tenha despertado interesse no assunto, com esse conteúdo dominado já saberá o básico sobre opções, fique atento a novas postagens em breve iremos mais a afundo explicando por exemplo o modelo Black Scholes, como as opções são precificadas entre outros materiais.
 
-[^11]: Artigo originalmente escrito por Glauber Naue e Erik Kawano, adaptado por Rafael Bressan para este livro.
+[^11]: Artigo originalmente escrito por Glauber Naue e Erik Kawano, adaptado por Rafael F. Bressan para este livro.

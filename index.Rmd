@@ -34,6 +34,10 @@ Aluno de Engenharia de Produção Elétrica na UFSC. Membro do Clube de Finança
 
 Aluno de Ciências Econômicas na UDESC/Esag. Membro do Clube de Finanças ESAG, participa do núcleo de pesquisa em riscos e derivativos. Atualmente realizando um estudo sobre modelo de fatores aplicado ao mercado brasileiro.
 
+## Gabriel Dias {-}
+
+
+
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = FALSE)

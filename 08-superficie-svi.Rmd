@@ -217,7 +217,7 @@ ssvi_data <- read_csv("./R/input/IV_Raw_Delta_surface.csv",
 
 Para calibrar os parâmetros de uma SSVI, com a função $\varphi$ do tipo **lei de potência**, necessitaremos dos dados de _moneyness_ ($k$), vencimento ($\tau$) e volatilidade implícita ($iv$) que será internamente convertida em variância total implícita ($w$). Dentro da função de ajuste dos parâmetros `fit_ssvi()` a variância total ATM implícita $\theta_\tau$ é calculada através de interpolação _spline_ para cada uma das fatias da superfície, pois, nossos dados não necessariamente possuem esta observação. Cabe ressaltar também que os dados estão organizados de forma `tidy`, sendo portanto, todos os argumentos passados para as funções na forma de vetores, não sendo necessário gerar uma matriz contendo o _grid_ $(k, \tau)$. 
 
-```{r ssvi-cal, results='asis'}
+```{r ssvi-cal, results='asis', cache=TRUE}
 k <- ssvi_data$k
 tau <- ssvi_data$tau
 iv <- ssvi_data$iv
@@ -262,7 +262,7 @@ Foram retirados os vencimentos mais longos apenas para uma melhor visualização
 
 Iremos agora verificar a _densidade da distribuição implícita_ para o período de vencimento de 90 dias. Utiliza-se para tanto a equação \@ref(eq:pk) onde $w(k)$ (e suas derivadas e o próprio $d_2$) será agora calculado com base nos parâmetros da tabela \@ref(tab:ssvi-cal) para um vetor de _moneyness_ mais amplo e denso. O resultado pode ser observado através da figura \@ref(fig:ssvi-dens)
 
-```{r ssvi-dens, fig.cap="Densidade implícita estimada. Presença de assimetria e leptocurtose a esquerda."}
+```{r ssvi-dens, fig.cap="Densidade implícita estimada. Presença de assimetria e leptocurtose a esquerda.", cache=TRUE}
 thetadens <- ssvi_data %>% 
   filter(period == 90) %>% 
   pull(theta) %>% 
@@ -285,7 +285,7 @@ Este é um gráfico interessante, que nos mostra exatamente o que se espera de u
 
 Vamos conferir se a área sob esta curva de densidade integra aproximadamente 1, como deve ser.
 
-```{r dens-area, results = "asis"}
+```{r dens-area, results = "asis", cache=TRUE}
 area <- integrate(function(x) ssvi_density(powerlaw_par, thetadens, x, "powerlaw"),
                   lower = kdens[1],
                   upper = kdens[length(kdens)])
@@ -300,7 +300,7 @@ Para tanto, criaremos uma sequência uniforme de valores de $k$ e tomaremos os v
 
 Feito isso, é apenas questão de aplicar a equação \@ref(eq:var-local) e criar uma matriz (pois assim pede a função `surf3D()`) com os valores da volatilidade local.
 
-```{r vol-local}
+```{r vol-local, cache=TRUE}
 kloc <- seq(-.4, 0.4, length.out = 17)
 utau <- unique(tau)
 utheta <- unique(theta)

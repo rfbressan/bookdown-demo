@@ -36,7 +36,6 @@ Aluno de Ciências Econômicas na UDESC/Esag. Membro do Clube de Finanças ESAG,
 
 ## Gabriel Dias {-}
 
-
-
+Cientista de dados. Realiza pesquisa na área de derivativos/risco para o Clube de Finanças. Presidente da organização no ano de 2018.
 
 
